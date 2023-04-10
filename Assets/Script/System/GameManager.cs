@@ -17,9 +17,14 @@ public class GameManager : MonoBehaviour
     public MainMenuUI mainMenuUI;
     public GameSettings gameSettings;
     public GameObject dontDestroyGameObject;
+    //game
+    public Player player;
+    public Spawn spawn;
+    public SwipeRigthLeftMove swipeRigthLeftMove;
     public int passStageNo;
     //variable
     public bool isStartGame;
+    public bool isPauseGame = true;
 
     //awake
     void Awake()
@@ -43,7 +48,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        isStartGame = false;
         Debug.Log(isStartGame);
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SetMainMenu(bool isInstance)
     {
+        OnMainMenu();
         if (isInstance)
         {
             //set stage if instance != null
@@ -103,9 +108,17 @@ public class GameManager : MonoBehaviour
         //TODO () - update player info
     }
 
+    //TODO - make on main menu
+    public void OnMainMenu()
+    {
+        isStartGame = false;
+
+    }
+
     //TODO - make start game
     public void StartGame()
     {
+        isStartGame = true;
 
     }
 
@@ -189,6 +202,22 @@ public class GameManager : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.Log(e.Message);
+        }
+    }
+
+    //pause game - TODO () - used in button or start game
+    public void PauseGame(bool isPause)
+    {
+        if (isPause)
+        {
+            isPauseGame = isPause;
+            spawn.FreezeAllObjects(true);
+            //TODO () -
+        }
+        else
+        {
+            isPauseGame = isPause;
+            spawn.FreezeAllObjects(false);
         }
     }
 
