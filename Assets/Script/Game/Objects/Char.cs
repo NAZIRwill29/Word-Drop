@@ -11,20 +11,32 @@ public class Char : DropObject
     private Spawn spawn;
     public void OnTriggerEnter2D(Collider2D coll)
     {
+        //if (GameManager.instance.isPauseGame)
+        //return;
         //check if collide with player or ground
         if (coll.tag == "Ground")
         {
-            if (isReverseObj)
-                //send message damage to ground
-                coll.SendMessage("ObjHit", dmg);
-            //put to birth location
-            transform.position = originalPos;
+            if (!isTouched)
+            {
+                //make trigger once only
+                isTouched = true;
+                if (isReverseObj)
+                    //send message damage to ground
+                    coll.SendMessage("ObjHit", dmg);
+                //put to birth location
+                transform.position = originalPos;
+            }
         }
         else if (coll.tag == "Player")
         {
-            coll.SendMessage("ReceiveChar", alphabet);
-            //put to birth location
-            transform.position = originalPos;
+            if (!isTouched)
+            {
+                //make trigger once only
+                isTouched = true;
+                coll.SendMessage("ReceiveChar", alphabet);
+                //put to birth location
+                transform.position = originalPos;
+            }
         }
     }
 

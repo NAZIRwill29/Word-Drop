@@ -18,4 +18,14 @@ public class HitBox : MonoBehaviour
         if (isPlayer)
             player.ReceiveChar(abc);
     }
+    public void Climb(float num)
+    {
+        if (isPlayer)
+            player.Climb(num);
+    }
+    public void Win()
+    {
+        if (isPlayer)
+            player.Win();
+    }
 }

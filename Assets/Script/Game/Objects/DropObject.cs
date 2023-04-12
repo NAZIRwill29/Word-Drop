@@ -13,6 +13,7 @@ public class DropObject : MonoBehaviour
     protected Damage dmg;
     //TODO () - if hit ground will damage ground
     public bool isReverseObj;
+    protected bool isTouched;
     protected virtual void Start()
     {
         dmg = new Damage
@@ -33,5 +34,11 @@ public class DropObject : MonoBehaviour
         {
             dropObjRb.bodyType = RigidbodyType2D.Dynamic;
         }
+    }
+
+    //variable
+    public void ChangeIsTouched(bool isEnable)
+    {
+        isTouched = isEnable;
     }
 }

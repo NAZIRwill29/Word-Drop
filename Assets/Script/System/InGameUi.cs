@@ -27,11 +27,11 @@ public class InGameUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isPauseGame && GameManager.instance.isStartGame)
-            if (isTimeCountDown)
-                TimeCountdown();
-            else if (isTimeScore)
-                TimeScore();
+        //if (!GameManager.instance.isPauseGame && GameManager.instance.isStartGame)
+        if (isTimeCountDown)
+            TimeCountdown();
+        else if (isTimeScore)
+            TimeScore();
     }
 
     //timer----------------------------------

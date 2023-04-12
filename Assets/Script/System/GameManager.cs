@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isStartGame = true;
-
+        player.playerRB.bodyType = RigidbodyType2D.Dynamic;
     }
 
     //ingame data----------------------------------------

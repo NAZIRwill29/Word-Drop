@@ -49,11 +49,11 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
-        {
-            SpawnChar();
-            SpawnObstacle();
-        }
+        // if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
+        // {
+        SpawnChar();
+        SpawnObstacle();
+        // }
     }
 
     public void SpawnChar()
@@ -65,6 +65,7 @@ public class Spawn : MonoBehaviour
             //Debug.Log("Spawn char");
             SpawnObject(charObj[charIndex]);
             charObj[charIndex].GetComponent<Char>().SetAlphabet(alphabets[Random.Range(0, alphabets.Length)]);
+            charObj[charIndex].GetComponent<Char>().ChangeIsTouched(false);
             charIndex++;
             if (charIndex == charObj.Length - 1)
                 charIndex = 0;
@@ -79,6 +80,7 @@ public class Spawn : MonoBehaviour
             lastObsTime = Time.time;
             //Debug.Log("Spawn obs");
             SpawnObject(obstacleObj[obsIndex]);
+            obstacleObj[obsIndex].GetComponent<Obstacle>().ChangeIsTouched(false);
             obsIndex++;
             if (obsIndex == obstacleObj.Length - 1)
                 obsIndex = 0;

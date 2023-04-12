@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Water
+  - LifeLine
   layers:
   - Default
   - TransparentFX
@@ -44,6 +46,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2638497015
+    locked: 0
+  - name: Ladders
+    uniqueID: 3445578189
     locked: 0
   - name: Object
     uniqueID: 1561245377

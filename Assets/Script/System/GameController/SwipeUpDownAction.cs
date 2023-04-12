@@ -12,25 +12,25 @@ public class SwipeUpDownAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
-            if (Input.touchCount > 0)
+        //if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
+        if (Input.touchCount > 0)
+        {
+            //get input
+            touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Moved)
             {
-                //get input
-                touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Moved)
+                swipeForce = touch.deltaPosition.y;
+                if (swipeForce > bound)
                 {
-                    swipeForce = touch.deltaPosition.y;
-                    if (swipeForce > bound)
+                    //make it once only
+                    if (!isActionInvalid)
                     {
-                        //make it once only
-                        if (!isActionInvalid)
-                        {
-                            isActionInvalid = true;
-                            //TODO () - make word menu appear -> make isActionValid = true after close
-                            Debug.Log("word menu appear");
-                        }
+                        isActionInvalid = true;
+                        //TODO () - make word menu appear -> make isActionValid = true after close
+                        Debug.Log("word menu appear");
                     }
                 }
             }
+        }
     }
 }

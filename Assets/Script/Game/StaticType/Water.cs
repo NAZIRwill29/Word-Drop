@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Water : MonoBehaviour
+{
+    [SerializeField]
+    private float speed = 0.05f;
+    public Player player;
+    // Update is called once per frame
+    void Update()
+    {
+        //if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
+        WaterRise();
+    }
+
+    private void WaterRise()
+    {
+        transform.position += new Vector3(0, Time.deltaTime * speed, 0);
+    }
+
+    //water effect when touch player - lifeline 1,2,3
+    public void OnTriggerEnter2D(Collider2D coll)
+    {
+        //check if collide with player or ground
+        if (coll.tag == "LifeLine")
+        {
+            //Debug.Log("LifeLine");
+            //slow speed / death
+            switch (coll.name)
+            {
+                case "LifeLine1":
+                    player.LifeLine(1);
+                    break;
+                case "LifeLine2":
+                    player.LifeLine(2);
+                    break;
+                case "LifeLine3":
+                    player.LifeLine(3);
+                    break;
+                case "LifeLine4":
+                    player.LifeLine(4);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    //variable
+    //use when set difficulty
+    public void ChangeSpeed(float num)
+    {
+        speed = num;
+    }
+}
