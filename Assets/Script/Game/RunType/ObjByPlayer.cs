@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ObjByPlayer : DropObject
 {
-    [SerializeField] BuilderInRun builderInRun;
+    [SerializeField] private float xBound = 1.76f;
+    [SerializeField] private BuilderInRun builderInRun;
     public Collider2D ObjColl;
     public SpriteRenderer ObjSR;
     //TODO () - replace with GameManager
@@ -47,7 +48,13 @@ public class ObjByPlayer : DropObject
     private IEnumerator ShowObjEvent()
     {
         isTouched = false;
-        transform.position = new Vector3(GameManager.instance.player.transform.position.x, posY, 0);
+        float posX = GameManager.instance.player.transform.position.x;
+        //set boundary so the object builded will not out of screen
+        if (posX < -xBound)
+            posX = -xBound;
+        else if (posX > xBound)
+            posX = xBound;
+        transform.position = new Vector3(posX, posY, 0);
         dropObjRb.bodyType = RigidbodyType2D.Dynamic;
         yield return new WaitForSeconds(0.01f);
         ObjColl.enabled = true;

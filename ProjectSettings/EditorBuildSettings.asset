@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageDrowned.unity
     guid: ec10e540bb5b7064d95ca7fc8acdb6e1
+  - enabled: 1
+    path: Assets/Scenes/StageRun.unity
+    guid: 6f95d579bb4165b4493f8f780c424bbe
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3bd4d30f889d7cd4ea87629f0ca5f0d4, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 9a1076ffde8c5884da422859816e9133, type: 2}

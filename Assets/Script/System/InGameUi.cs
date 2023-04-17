@@ -13,7 +13,6 @@ public class InGameUi : MonoBehaviour
     public bool isTimeCountDown, isTimeScore, isRun;
     [SerializeField]
     private float timeLeft = 300;
-    public Player player;
     //Run type
     [SerializeField] private float totalRunLength, currentRunLength, totalTime;
     [SerializeField] private Vector3 prevPlayerLinePos;
@@ -65,7 +64,7 @@ public class InGameUi : MonoBehaviour
         else
         {
             Debug.Log("player die");
-            player.Death("drowning");
+            GameManager.instance.player.Death("drowning");
         }
     }
     private void UpdateTimer(float timeNum)
@@ -94,7 +93,7 @@ public class InGameUi : MonoBehaviour
         }
         else
         {
-            player.Win(false);
+            GameManager.instance.player.Win(false);
         }
     }
     //-----------------------------------------

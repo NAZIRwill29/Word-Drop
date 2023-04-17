@@ -32,11 +32,13 @@ public class GroundManager : MonoBehaviour
             ChangeIsActiveGrounds(currentActiveGroundNo + 1, true);
             RiseGrounds(currentActiveGroundNo + 1);
             currentActiveGroundNo++;
-            GameManager.instance.spawn.gameObject.transform.position += new Vector3(0, riseNum, 0);
+            GameManager.instance.inGame.spawn.gameObject.transform.position += new Vector3(0, riseNum, 0);
             GameManager.instance.player.gameObject.transform.position += new Vector3(0, riseNum, 0);
             //standardized the ladders
-            GameManager.instance.ladders.AddActiveLadders(true);
-            GameManager.instance.ladders.ladderUse.transform.position += new Vector3(0, riseNum, 0);
+            GameManager.instance.inGame.ladders.AddActiveLadders(true);
+            GameManager.instance.inGame.ladders.ladderUse.transform.position += new Vector3(0, riseNum, 0);
+            //heal from water
+            GameManager.instance.player.LifeLine(GameManager.instance.player.lifeLineBuildTrigger);
         }
         else
         {

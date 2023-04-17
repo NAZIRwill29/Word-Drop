@@ -6,7 +6,6 @@ public class Water : MonoBehaviour
 {
     [SerializeField]
     private float speed = 0.05f;
-    public Player player;
     // Update is called once per frame
     void Update()
     {
@@ -25,21 +24,21 @@ public class Water : MonoBehaviour
         //check if collide with player or ground
         if (coll.tag == "LifeLine")
         {
-            //Debug.Log("LifeLine");
+            Debug.Log("LifeLine");
             //slow speed / death
             switch (coll.name)
             {
                 case "LifeLine1":
-                    player.LifeLine(1);
+                    GameManager.instance.player.LifeLine(1);
                     break;
                 case "LifeLine2":
-                    player.LifeLine(2);
+                    GameManager.instance.player.LifeLine(2);
                     break;
                 case "LifeLine3":
-                    player.LifeLine(3);
+                    GameManager.instance.player.LifeLine(3);
                     break;
                 case "LifeLine4":
-                    player.LifeLine(4);
+                    GameManager.instance.player.LifeLine(4);
                     break;
                 default:
                     break;

@@ -19,9 +19,8 @@ public class GameManager : MonoBehaviour
     public GameObject dontDestroyGameObject;
     //game
     public Player player;
-    public Spawn spawn;
-    public Ladders ladders;
     public SwipeRigthLeftMove swipeRigthLeftMove;
+    public InGame inGame;
     public int passStageNo;
     //variable
     public bool isStartGame;
@@ -113,7 +112,8 @@ public class GameManager : MonoBehaviour
     public void OnMainMenu()
     {
         isStartGame = false;
-
+        isPauseGame = true;
+        player.GameMode(2);
     }
 
     //TODO - make start game
@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log(sceneName);
         SceneManager.LoadScene(name);
         isStartGame = true;
+        isPauseGame = false;
         player.GameMode(mode);
     }
 
@@ -208,10 +209,11 @@ public class GameManager : MonoBehaviour
             gameSettings.MusicSystem();
             gameSettings.SoundSystem();
             mainMenuUI.UpdateSoundSetting(gameSettings.musicVolume, gameSettings.soundVolume);
-            if (GameObject.Find("Spawner"))
-                spawn = GameObject.Find("Spawner").GetComponent<Spawn>();
-            if (GameObject.Find("Ladders"))
-                ladders = GameObject.Find("Ladders").GetComponent<Ladders>();
+            if (GameObject.Find("InGame"))
+            {
+                inGame = GameObject.Find("InGame").GetComponent<InGame>();
+            }
+            player.LifeLine(0);
         }
         catch (System.Exception e)
         {
@@ -225,13 +227,13 @@ public class GameManager : MonoBehaviour
         if (isPause)
         {
             isPauseGame = isPause;
-            spawn.FreezeAllObjects(true);
+            inGame.spawn.FreezeAllObjects(true);
             //TODO () -
         }
         else
         {
             isPauseGame = isPause;
-            spawn.FreezeAllObjects(false);
+            inGame.spawn.FreezeAllObjects(false);
         }
     }
 

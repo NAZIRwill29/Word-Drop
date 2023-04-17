@@ -12,8 +12,6 @@ public class HitBox : MonoBehaviour
     [Tooltip("no need if not player")]
     [SerializeField]
     private Player player;
-    [SerializeField]
-    private Monster monster;
 
     //player-----------------------
     public void ReceiveDamage(Damage dmg)
@@ -48,17 +46,17 @@ public class HitBox : MonoBehaviour
     public void ObjHit(Damage dmg)
     {
         if (parentType == 1)
-            monster.ObjHit(dmg);
+            GameManager.instance.inGame.monster.ObjHit(dmg);
     }
     public void ObjRecovery(Damage dmg)
     {
         if (parentType == 1)
-            monster.ObjRecovery(dmg);
+            GameManager.instance.inGame.monster.ObjRecovery(dmg);
     }
     public void SlowObj(float time)
     {
         if (parentType == 1)
-            monster.SlowObj(time);
+            GameManager.instance.inGame.monster.SlowObj(time);
     }
 
 

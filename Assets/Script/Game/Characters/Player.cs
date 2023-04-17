@@ -8,11 +8,11 @@ public class Player : MonoBehaviour
     private Collider2D playerColl, hitBoxColl, lifeLine1Coll, lifeLine2Coll, lifeLine3Coll, lifeLine4Coll;
     public Rigidbody2D playerRB;
     public SwipeRigthLeftMove swipeRigthLeftMove;
-    private GameObject laddersObj;
     public int hp = 3;
     public float speed = 0.01f;
     //LifeLine
-    private int lifeLineTrigger;
+    [SerializeField] private int lifeLineTrigger;
+    public int lifeLineBuildTrigger = -1;
     //climb number
     private float climbNo;
     public List<char> alphabetsStore, alphabetsWord;
@@ -31,8 +31,6 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine2Coll, true);
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine3Coll, true);
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine4Coll, true);
-        if (GameObject.Find("Ladders"))
-            laddersObj = GameObject.Find("Ladders");
         originPos = transform.position;
     }
 
@@ -88,7 +86,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //TODO () - 
+    //TODO () - restrict char 
     public void ReceiveChar(char abc)
     {
         if (isImmune)
@@ -126,37 +124,72 @@ public class Player : MonoBehaviour
             case 0:
                 //TODO () - call when free from water
                 //back to normal
-                ChangeSpeed(0.01f);
                 lifeLineTrigger = 0;
                 break;
             case 1:
                 if (lifeLineTrigger < 1)
-                {
-                    ChangeSpeed(0.008f);
                     lifeLineTrigger = 1;
-                }
+
                 break;
             case 2:
                 if (lifeLineTrigger < 2)
-                {
-                    ChangeSpeed(0.005f);
+
                     lifeLineTrigger = 2;
-                }
+
                 break;
             case 3:
                 if (lifeLineTrigger < 3)
-                {
-                    ChangeSpeed(0.002f);
                     lifeLineTrigger = 3;
-                }
                 break;
             case 4:
                 if (lifeLineTrigger < 4)
-                {
-                    //Debug.Log("death drowned");
                     Death("drowning");
-                    lifeLineTrigger = 4;
+                break;
+            case -1:
+                if (lifeLineTrigger > 0)
+                {
+                    lifeLineTrigger--;
+                    lifeLineBuildTrigger = -2;
                 }
+                break;
+            case -2:
+                if (lifeLineTrigger > 1)
+                {
+                    lifeLineTrigger -= 2;
+                    lifeLineBuildTrigger = -1;
+                }
+                else if (lifeLineTrigger > 0)
+                {
+                    lifeLineTrigger--;
+                    lifeLineBuildTrigger = -1;
+                }
+                break;
+            default:
+                break;
+        }
+        SetSpeed(lifeLineTrigger);
+    }
+    //set player speed based on the water effect
+    private void SetSpeed(int num)
+    {
+        switch (num)
+        {
+            case 0:
+                ChangeSpeed(0.01f);
+                break;
+            case 1:
+                ChangeSpeed(0.008f);
+                break;
+            case 2:
+                ChangeSpeed(0.005f);
+                break;
+            case 3:
+                ChangeSpeed(0.002f);
+                break;
+            case 4:
+                //Debug.Log("death drowned");
+                ChangeSpeed(0.01f);
+                Death("drowning");
                 break;
             default:
                 break;
@@ -169,10 +202,11 @@ public class Player : MonoBehaviour
         //TODO () - 
         Debug.Log("climb");
         climbNo = (num + 1) * 2;
+        LifeLine(0);
     }
     private void ClimbEvent()
     {
-        transform.position = new Vector3(laddersObj.transform.position.x, transform.position.y, transform.position.z);
+        transform.position = new Vector3(GameManager.instance.inGame.laddersObj.transform.position.x, transform.position.y, transform.position.z);
         transform.position += new Vector3(0, 0.444f, 0);
         climbNo--;
     }
@@ -184,6 +218,7 @@ public class Player : MonoBehaviour
             return;
         if (isStaticGameMode)
         {
+            LifeLine(0);
             isHasWin = true;
             //for static game
             //TODO () -
@@ -202,7 +237,6 @@ public class Player : MonoBehaviour
             GameMode(2);
             StartCoroutine(WinRun());
         }
-
     }
     //TODO () -
     private IEnumerator WinStatic()
@@ -225,11 +259,13 @@ public class Player : MonoBehaviour
             case 0:
                 playerRB.bodyType = RigidbodyType2D.Dynamic;
                 transform.position = originPos;
+                isImmune = false;
                 //TODO () - 
                 break;
             case 1:
                 playerRB.bodyType = RigidbodyType2D.Kinematic;
                 transform.position = new Vector3(originPos.x, -2.34f, originPos.z);
+                isImmune = false;
                 break;
             default:
                 playerRB.bodyType = RigidbodyType2D.Static;

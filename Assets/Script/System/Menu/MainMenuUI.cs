@@ -21,7 +21,11 @@ public class MainMenuUI : MonoBehaviour
     public void StartButton(string name)
     {
         GameManager.instance.StartGame(name, 0);
+    }
 
+    public void StartButtonRun(string name)
+    {
+        GameManager.instance.StartGame(name, 1);
     }
 
     //setting - USED IN () = setting button
