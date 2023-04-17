@@ -10,8 +10,8 @@ public class Water : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
-        WaterRise();
+        if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
+            WaterRise();
     }
 
     private void WaterRise()

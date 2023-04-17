@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LadderHalf
       objectReference: {fileID: 0}
+    - target: {fileID: 3675417965707701122, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8465914508321884658, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
       propertyPath: m_Size.x
       value: 0.92

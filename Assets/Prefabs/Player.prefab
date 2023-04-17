@@ -305,8 +305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c1795ab5c411f44bdc1e56b51137d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
+  parentType: 0
   player: {fileID: 6481887011344408261}
+  monster: {fileID: 0}
 --- !u!1 &6481887010907806596
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +613,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1561245377
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -632,7 +633,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6481887011344408284}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -707,7 +708,9 @@ MonoBehaviour:
   lifeLine2Coll: {fileID: 6481887009974159616}
   lifeLine3Coll: {fileID: 6481887010907806602}
   lifeLine4Coll: {fileID: 6481887010042284316}
+  playerRB: {fileID: 6481887011344408259}
   swipeRigthLeftMove: {fileID: 6481887011344408263}
+  hp: 3
   speed: 0.01
   alphabetsStore: 
   alphabetsWord: 

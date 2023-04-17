@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LadderTop
       objectReference: {fileID: 0}
+    - target: {fileID: 3675417965707701122, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8465914508321884658, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -104,7 +108,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0042759776, y: 0.0025336146}

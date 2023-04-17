@@ -11,10 +11,10 @@ public class Char : DropObject
     private Spawn spawn;
     public void OnTriggerEnter2D(Collider2D coll)
     {
-        //if (GameManager.instance.isPauseGame)
-        //return;
+        if (GameManager.instance.isPauseGame)
+            return;
         //check if collide with player or ground
-        if (coll.tag == "Ground")
+        if (coll.tag == "Ground" || coll.tag == "Monster")
         {
             if (!isTouched)
             {

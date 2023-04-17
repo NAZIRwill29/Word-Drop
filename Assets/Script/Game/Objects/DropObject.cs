@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class DropObject : MonoBehaviour
 {
-    [SerializeField]
-    protected Vector3 originalPos;
+    [SerializeField] protected Vector3 originalPos;
     public Rigidbody2D dropObjRb;
     public int damage = 1;
     [Tooltip("char, bomb")]
@@ -13,7 +12,7 @@ public class DropObject : MonoBehaviour
     protected Damage dmg;
     //TODO () - if hit ground will damage ground
     public bool isReverseObj;
-    protected bool isTouched;
+    [SerializeField] protected bool isTouched;
     protected virtual void Start()
     {
         dmg = new Damage

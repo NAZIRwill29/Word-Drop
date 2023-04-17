@@ -5,7 +5,6 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     public GameObject[] charObj, obstacleObj;
-    public SwipeRigthLeftMove swipeRigthLeftMove;
     private int index, charIndex, obsIndex;
     private float posX;
     //char
@@ -14,6 +13,7 @@ public class Spawn : MonoBehaviour
     //min msc for set difficulty - linearDrag = 1-3 / timeCharDuration = 1-1.5
     public float timeCharDuration;
     public float timeObsDuration;
+    public bool isSpawnStop;
     //alphabet list
     private char[] alphabets =
     {
@@ -49,11 +49,14 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
-        // {
-        SpawnChar();
-        SpawnObstacle();
-        // }
+        if (!GameManager.instance.isStartGame && GameManager.instance.isPauseGame)
+            return;
+        if (isSpawnStop)
+            return;
+        if (charObj.Length > 0)
+            SpawnChar();
+        if (obstacleObj.Length > 0)
+            SpawnObstacle();
     }
 
     public void SpawnChar()
@@ -91,7 +94,7 @@ public class Spawn : MonoBehaviour
     private void SpawnObject(GameObject obj)
     {
         index = Random.Range(0, 1);
-        posX = Random.Range(-swipeRigthLeftMove.boundX + 0.5f, swipeRigthLeftMove.boundX - 0.5f);
+        posX = Random.Range(-GameManager.instance.swipeRigthLeftMove.boundX + 0.5f, GameManager.instance.swipeRigthLeftMove.boundX - 0.5f);
         if (index == 0)
         {
             obj.transform.position = new Vector3(posX, transform.position.y, transform.position.z);

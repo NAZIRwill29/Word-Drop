@@ -8,12 +8,12 @@ public class GroundManager : MonoBehaviour
     [SerializeField]
     private Grounds[] arrGrounds;
     //TODO () - replace with gameManager-------
-    public Player player;
-    public Spawn spawn;
-    public Ladders ladders;
+    // public Player player;
+    // public Spawn spawn;
+    // public Ladders ladders;
 
     //------------------------------
-    public float riseNum = 0.5f;
+    public float riseNum = 0.513f;
     public int currentActiveGroundNo;
     // Start is called before the first frame update
     void Start()
@@ -32,10 +32,11 @@ public class GroundManager : MonoBehaviour
             ChangeIsActiveGrounds(currentActiveGroundNo + 1, true);
             RiseGrounds(currentActiveGroundNo + 1);
             currentActiveGroundNo++;
-            spawn.gameObject.transform.position += new Vector3(0, riseNum, 0);
-            player.gameObject.transform.position += new Vector3(0, riseNum, 0);
+            GameManager.instance.spawn.gameObject.transform.position += new Vector3(0, riseNum, 0);
+            GameManager.instance.player.gameObject.transform.position += new Vector3(0, riseNum, 0);
             //standardized the ladders
-            ladders.AddActiveLadders(true);
+            GameManager.instance.ladders.AddActiveLadders(true);
+            GameManager.instance.ladders.ladderUse.transform.position += new Vector3(0, riseNum, 0);
         }
         else
         {

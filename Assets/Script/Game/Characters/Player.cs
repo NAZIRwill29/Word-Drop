@@ -9,12 +9,15 @@ public class Player : MonoBehaviour
     public Rigidbody2D playerRB;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     private GameObject laddersObj;
+    public int hp = 3;
     public float speed = 0.01f;
     //LifeLine
     private int lifeLineTrigger;
     //climb number
     private float climbNo;
     public List<char> alphabetsStore, alphabetsWord;
+    private bool isImmune, isHasWin;
+    private Vector3 originPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine4Coll, true);
         if (GameObject.Find("Ladders"))
             laddersObj = GameObject.Find("Ladders");
+        originPos = transform.position;
     }
 
     // Update is called once per frame
@@ -45,6 +49,8 @@ public class Player : MonoBehaviour
     //TODO () - 
     public void ReceiveDamage(Damage dmg)
     {
+        if (isImmune)
+            return;
         //make damage - delete char in store
         //Debug.Log("damage " + dmg.damageAmount);
         int numDeleteChar = dmg.damageAmount;
@@ -67,8 +73,26 @@ public class Player : MonoBehaviour
     }
 
     //TODO () - 
+    //call when attacked by monster
+    public void ReceiveDamageHp(Damage dmg)
+    {
+        if (isImmune)
+            return;
+        if (hp > 0)
+        {
+            hp--;
+        }
+        else
+        {
+            Death("monster");
+        }
+    }
+
+    //TODO () - 
     public void ReceiveChar(char abc)
     {
+        if (isImmune)
+            return;
         alphabetsStore.Add(abc);
     }
 
@@ -95,6 +119,8 @@ public class Player : MonoBehaviour
     //Lifeline effect - call when water touch lifeline
     public void LifeLine(int num)
     {
+        if (isImmune)
+            return;
         switch (num)
         {
             case 0:
@@ -138,7 +164,7 @@ public class Player : MonoBehaviour
     }
 
     //climb ladder - how many ladder
-    public void Climb(float num)
+    public void Climb(int num)
     {
         //TODO () - 
         Debug.Log("climb");
@@ -152,12 +178,64 @@ public class Player : MonoBehaviour
     }
 
     //win
-    public void Win()
+    public void Win(bool isStaticGameMode)
     {
-        //TODO () - 
-        Debug.Log("win");
-        //freeze all - pause game - off rigidbody player
-        playerRB.bodyType = RigidbodyType2D.Static;
+        if (isHasWin)
+            return;
+        if (isStaticGameMode)
+        {
+            isHasWin = true;
+            //for static game
+            //TODO () -
+            Debug.Log("win");
+            //freeze all - pause game - off rigidbody player
+            GameMode(2);
+            StartCoroutine(WinStatic());
+        }
+        else
+        {
+            isHasWin = true;
+            //for run game
+            //TODO () - add push forward
+            Debug.Log("win");
+            //freeze all - pause game - off rigidbody player
+            GameMode(2);
+            StartCoroutine(WinRun());
+        }
+
+    }
+    //TODO () -
+    private IEnumerator WinStatic()
+    {
+        yield return new WaitForSeconds(1);
+    }
+    //TODO () -
+    private IEnumerator WinRun()
+    {
+        yield return new WaitForSeconds(1);
+    }
+
+    //player game mode - call in gamemanager
+    //      0       1       2
+    //    static   run     pause
+    public void GameMode(int mode)
+    {
+        switch (mode)
+        {
+            case 0:
+                playerRB.bodyType = RigidbodyType2D.Dynamic;
+                transform.position = originPos;
+                //TODO () - 
+                break;
+            case 1:
+                playerRB.bodyType = RigidbodyType2D.Kinematic;
+                transform.position = new Vector3(originPos.x, -2.34f, originPos.z);
+                break;
+            default:
+                playerRB.bodyType = RigidbodyType2D.Static;
+                isImmune = true;
+                break;
+        }
     }
 
     //variable

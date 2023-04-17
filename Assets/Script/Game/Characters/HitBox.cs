@@ -4,28 +4,62 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
+    //  0           1          2      
+    //player      monster   little
+    [Tooltip("player, monster, little")]
     [SerializeField]
-    private bool isPlayer;
+    private int parentType = 0;
+    [Tooltip("no need if not player")]
     [SerializeField]
     private Player player;
+    [SerializeField]
+    private Monster monster;
+
+    //player-----------------------
     public void ReceiveDamage(Damage dmg)
     {
-        if (isPlayer)
+        if (parentType == 0)
             player.ReceiveDamage(dmg);
+    }
+    public void ReceiveDamageHp(Damage dmg)
+    {
+        if (parentType == 0)
+            player.ReceiveDamageHp(dmg);
     }
     public void ReceiveChar(char abc)
     {
-        if (isPlayer)
+        if (parentType == 0)
             player.ReceiveChar(abc);
+
     }
-    public void Climb(float num)
+    public void Climb(int num)
     {
-        if (isPlayer)
+        if (parentType == 0)
             player.Climb(num);
     }
     public void Win()
     {
-        if (isPlayer)
-            player.Win();
+        //only call for drowned game mode
+        if (parentType == 0)
+            player.Win(true);
     }
+
+    //monster------------------------
+    public void ObjHit(Damage dmg)
+    {
+        if (parentType == 1)
+            monster.ObjHit(dmg);
+    }
+    public void ObjRecovery(Damage dmg)
+    {
+        if (parentType == 1)
+            monster.ObjRecovery(dmg);
+    }
+    public void SlowObj(float time)
+    {
+        if (parentType == 1)
+            monster.SlowObj(time);
+    }
+
+
 }

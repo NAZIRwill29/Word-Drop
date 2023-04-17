@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     //game
     public Player player;
     public Spawn spawn;
+    public Ladders ladders;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     public int passStageNo;
     //variable
@@ -116,10 +117,19 @@ public class GameManager : MonoBehaviour
     }
 
     //TODO - make start game
-    public void StartGame()
+    public void StartGame(string name, int mode)
     {
+        StartCoroutine(InStartGame(name, mode));
+    }
+
+    //coroutine inStartGame
+    private IEnumerator InStartGame(string name, int mode)
+    {
+        yield return new WaitForSeconds(0.1f);
+        //Debug.Log(sceneName);
+        SceneManager.LoadScene(name);
         isStartGame = true;
-        player.playerRB.bodyType = RigidbodyType2D.Dynamic;
+        player.GameMode(mode);
     }
 
     //ingame data----------------------------------------
@@ -198,6 +208,10 @@ public class GameManager : MonoBehaviour
             gameSettings.MusicSystem();
             gameSettings.SoundSystem();
             mainMenuUI.UpdateSoundSetting(gameSettings.musicVolume, gameSettings.soundVolume);
+            if (GameObject.Find("Spawner"))
+                spawn = GameObject.Find("Spawner").GetComponent<Spawn>();
+            if (GameObject.Find("Ladders"))
+                ladders = GameObject.Find("Ladders").GetComponent<Ladders>();
         }
         catch (System.Exception e)
         {

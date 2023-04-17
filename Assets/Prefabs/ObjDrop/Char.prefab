@@ -150,7 +150,8 @@ MonoBehaviour:
   dropObjRb: {fileID: 1710927286496433278}
   damage: 1
   objType: char
-  isReverseObj: 1
+  isReverseObj: 0
+  isTouched: 0
   alphabet: 0
   charSR: {fileID: 1710927286496430976}
   spawn: {fileID: 0}

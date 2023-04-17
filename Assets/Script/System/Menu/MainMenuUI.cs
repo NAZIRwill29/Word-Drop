@@ -18,9 +18,9 @@ public class MainMenuUI : MonoBehaviour
     }
 
     //start game - USED IN () = start button
-    public void StartButton()
+    public void StartButton(string name)
     {
-        GameManager.instance.StartGame();
+        GameManager.instance.StartGame(name, 0);
 
     }
 

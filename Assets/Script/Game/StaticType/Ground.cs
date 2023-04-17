@@ -32,11 +32,11 @@ public class Ground : MonoBehaviour
         };
     }
 
-    //ground damage
-    public void ObjHit(Damage dmg)
+    //ground damage by thing
+    public void ObjHit(Damage dmg1)
     {
         //Debug.Log("obj hitted ground" + (hp - dmg.damageAmount));
-        hp -= dmg.damageAmount;
+        hp -= dmg1.damageAmount;
         SetGroundState(hp);
     }
 
@@ -96,8 +96,8 @@ public class Ground : MonoBehaviour
             return;
         if (!isSpike)
             return;
-        //if (GameManager.instance.isPauseGame)
-        //return;
+        if (GameManager.instance.isPauseGame)
+            return;
         if (Time.time - lastSpike > spikeDuration)
             if (coll.collider.tag == "Player")
             {

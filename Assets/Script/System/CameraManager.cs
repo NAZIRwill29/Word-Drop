@@ -9,8 +9,8 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        //if (GameManager.instance.isStartGame)
-        FollowPlayer();
+        if (GameManager.instance.isStartGame)
+            FollowPlayer();
     }
 
     //follow player
