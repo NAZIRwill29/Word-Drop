@@ -7,8 +7,6 @@ public class Char : DropObject
     public char alphabet;
     [SerializeField]
     private SpriteRenderer charSR;
-    [SerializeField]
-    private Spawn spawn;
     public void OnTriggerEnter2D(Collider2D coll)
     {
         if (GameManager.instance.isPauseGame)
@@ -46,9 +44,9 @@ public class Char : DropObject
         //Debug.Log(abc + "char index = " + (int)abc);
         //TODO () - replace with instance --- convert char to ASCii
         if (!isReverseObj)
-            charSR.sprite = spawn.alphabetSprite[(int)abc - 65];
+            charSR.sprite = GameManager.instance.alphabetSprite[(int)abc - 65];
         else
             //for reserve char
-            charSR.sprite = spawn.reverseAlphabetSprite[(int)abc - 65];
+            charSR.sprite = GameManager.instance.reverseAlphabetSprite[(int)abc - 65];
     }
 }

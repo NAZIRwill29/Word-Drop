@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Collider2D playerColl, hitBoxColl, lifeLine1Coll, lifeLine2Coll, lifeLine3Coll, lifeLine4Coll;
     public Rigidbody2D playerRB;
     public SwipeRigthLeftMove swipeRigthLeftMove;
+    [SerializeField] private GameMenuUi gameMenuUi;
     public int hp = 3;
     public float speed = 0.01f;
     //LifeLine
@@ -15,9 +16,11 @@ public class Player : MonoBehaviour
     public int lifeLineBuildTrigger = -1;
     //climb number
     private float climbNo;
-    public List<char> alphabetsStore, alphabetsWord;
+    public List<char> alphabetsStore;
     private bool isImmune, isHasWin;
     private Vector3 originPos;
+    //player info
+    public int levelPlayer = 1, charMaxNo = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +64,7 @@ public class Player : MonoBehaviour
             //delete number of alphabet in store base on damage amount
             for (int i = 0; i < numDeleteChar; i++)
             {
-                alphabetsStore.RemoveAt(Random.Range(0, alphabetsStore.Count));
+                RemoveChar(Random.Range(0, alphabetsStore.Count));
             }
         }
         else
@@ -84,14 +87,25 @@ public class Player : MonoBehaviour
         {
             Death("monster");
         }
+        gameMenuUi.SetHpUI();
     }
 
-    //TODO () - restrict char 
     public void ReceiveChar(char abc)
     {
         if (isImmune)
             return;
         alphabetsStore.Add(abc);
+        //if more than char max ->  remove first char
+        if (alphabetsStore.Count > charMaxNo)
+            alphabetsStore.RemoveAt(0);
+        gameMenuUi.AddCharPlayer(abc);
+    }
+
+    //TODO () - 
+    public void RemoveChar(int charIndex)
+    {
+        alphabetsStore.RemoveAt(charIndex);
+        gameMenuUi.RemoveCharUi(charIndex);
     }
 
     //TODO() - 
@@ -190,6 +204,47 @@ public class Player : MonoBehaviour
                 //Debug.Log("death drowned");
                 ChangeSpeed(0.01f);
                 Death("drowning");
+                break;
+            default:
+                break;
+        }
+    }
+
+    //char container level
+    public void SetPlayerLevel(int lvl)
+    {
+        levelPlayer = lvl;
+        switch (levelPlayer)
+        {
+            case 1:
+                charMaxNo = 10;
+                hp = 3;
+                gameMenuUi.SetPlayerLevelUI(0);
+                break;
+            case 2:
+                charMaxNo = 11;
+                hp = 3;
+                gameMenuUi.SetPlayerLevelUI(1);
+                break;
+            case 3:
+                charMaxNo = 12;
+                hp = 4;
+                gameMenuUi.SetPlayerLevelUI(1);
+                break;
+            case 4:
+                charMaxNo = 14;
+                hp = 3;
+                gameMenuUi.SetPlayerLevelUI(1);
+                break;
+            case 5:
+                charMaxNo = 17;
+                hp = 5;
+                gameMenuUi.SetPlayerLevelUI(1);
+                break;
+            case 6:
+                charMaxNo = 20;
+                hp = 6;
+                gameMenuUi.SetPlayerLevelUI(1);
                 break;
             default:
                 break;

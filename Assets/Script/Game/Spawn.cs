@@ -44,7 +44,6 @@ public class Spawn : MonoBehaviour
         'Y', 'Y', 'Y',
         'Z'
     };
-    public Sprite[] alphabetSprite, reverseAlphabetSprite;
 
     // Update is called once per frame
     void Update()

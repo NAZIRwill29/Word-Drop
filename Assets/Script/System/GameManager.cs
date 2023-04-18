@@ -15,12 +15,15 @@ public class GameManager : MonoBehaviour
     //ads mediate
     public AdsMediate adsMediate;
     public MainMenuUI mainMenuUI;
+    public GameMenuUi gameMenuUi;
     public GameSettings gameSettings;
     public GameObject dontDestroyGameObject;
-    //game
     public Player player;
     public SwipeRigthLeftMove swipeRigthLeftMove;
+    //game
     public InGame inGame;
+    public InGameUi inGameUi;
+    public Sprite[] alphabetSprite, reverseAlphabetSprite;
     public int passStageNo;
     //variable
     public bool isStartGame;
@@ -213,7 +216,12 @@ public class GameManager : MonoBehaviour
             {
                 inGame = GameObject.Find("InGame").GetComponent<InGame>();
             }
+            if (GameObject.Find("InGameUI"))
+            {
+                inGameUi = GameObject.Find("InGameUI").GetComponent<InGameUi>();
+            }
             player.LifeLine(0);
+            gameMenuUi.SetGameMenuUIMode(inGameUi.isRun);
         }
         catch (System.Exception e)
         {
