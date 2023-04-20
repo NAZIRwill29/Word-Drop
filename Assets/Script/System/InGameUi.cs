@@ -9,6 +9,7 @@ public class InGameUi : MonoBehaviour
 {
     public TextMeshProUGUI timer;
     public Image runMap;
+    public CanvasGroup inGameUICG;
     [Tooltip("Tick one only")]
     public bool isTimeCountDown, isTimeScore, isRun;
     [SerializeField]

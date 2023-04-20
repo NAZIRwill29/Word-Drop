@@ -334,4 +334,16 @@ public class Player : MonoBehaviour
     {
         speed = num;
     }
+    public void ChangeImmune(bool isTrue)
+    {
+        isImmune = isTrue;
+    }
+    public void AddAlphabetStore(char abc)
+    {
+        alphabetsStore.Add(abc);
+        //if more than char max ->  remove first char
+        if (alphabetsStore.Count > charMaxNo)
+            alphabetsStore.RemoveAt(0);
+        gameMenuUi.AddCharPlayer(abc);
+    }
 }

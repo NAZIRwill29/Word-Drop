@@ -48,7 +48,9 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isStartGame && GameManager.instance.isPauseGame)
+        if (!GameManager.instance.isStartGame)
+            return;
+        if (GameManager.instance.isPauseGame)
             return;
         if (isSpawnStop)
             return;

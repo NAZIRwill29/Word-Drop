@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 4443392488500488709}
   - component: {fileID: 4443392488500488706}
   - component: {fileID: 4443392488500488708}
+  - component: {fileID: 1523669502929547046}
   m_Layer: 5
   m_Name: InGameUI
   m_TagString: Untagged
@@ -560,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 4443392489956021383}
   runMap: {fileID: 2922182349615910736}
+  inGameUICG: {fileID: 1523669502929547046}
   isTimeCountDown: 0
   isTimeScore: 0
   isRun: 1
@@ -571,6 +573,18 @@ MonoBehaviour:
   startLine: {fileID: 4724466071536048457}
   endLine: {fileID: 2950749135344370833}
   playerLine: {fileID: 5363460740693435188}
+--- !u!225 &1523669502929547046
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443392488500488704}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4443392489956021380
 GameObject:
   m_ObjectHideFlags: 0

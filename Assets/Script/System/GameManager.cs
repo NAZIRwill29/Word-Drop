@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public CanvasGroupFunc canvasGroupFunc;
     public Data gameData = new Data();
     //save
     public CloudSave cloudSave;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject dontDestroyGameObject;
     public Player player;
     public SwipeRigthLeftMove swipeRigthLeftMove;
+    public SwipeUpDownAction swipeUpDownAction;
     //game
     public InGame inGame;
     public InGameUi inGameUi;
@@ -236,12 +238,14 @@ public class GameManager : MonoBehaviour
         {
             isPauseGame = isPause;
             inGame.spawn.FreezeAllObjects(true);
+            player.ChangeImmune(true);
             //TODO () -
         }
         else
         {
             isPauseGame = isPause;
             inGame.spawn.FreezeAllObjects(false);
+            player.ChangeImmune(false);
         }
     }
 

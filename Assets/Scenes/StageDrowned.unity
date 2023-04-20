@@ -8074,6 +8074,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+      propertyPath: inGameUICG
+      value: 
+      objectReference: {fileID: 4443392488367841603}
+    - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: isTimeScore
       value: 1
       objectReference: {fileID: 0}
@@ -8087,6 +8091,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+--- !u!1 &4443392488367841602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4443392488500488704, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+  m_PrefabInstance: {fileID: 4443392488367841601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &4443392488367841603
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443392488367841602}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &4820264706436144394
 PrefabInstance:
   m_ObjectHideFlags: 0
