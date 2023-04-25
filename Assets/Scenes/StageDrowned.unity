@@ -1485,9 +1485,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laddersObj: {fileID: 274012534}
   ladders: {fileID: 274012536}
+  groundManager: {fileID: 1876517265}
+  builderInRun: {fileID: 0}
   monster: {fileID: 0}
   spawn: {fileID: 502309639}
   water: {fileID: 3571373542175992205}
+  isLadder: 1
+  isGround: 1
+  isFence: 0
+  isSlime: 0
+  ladderPt: 2
+  groundPt: 1
+  fencePt: 3
+  slimePt: 4
+  builderSprite:
+  - {fileID: 496012319, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
+  - {fileID: -842442772, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
+  - {fileID: -182603770, guid: 06030f79797c36e4fbccbe267e68ecc3, type: 3}
+  - {fileID: 674795365, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
 --- !u!4 &385399426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2969480161401683158, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
@@ -4988,7 +5003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1590334451
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5354,7 +5369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1702358530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7005,7 +7020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2057241281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7327,7 +7342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2106884866
 RectTransform:
   m_ObjectHideFlags: 0

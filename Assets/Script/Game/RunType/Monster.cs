@@ -14,7 +14,7 @@ public class Monster : MonoBehaviour
     private float speed = 0.07f, fallBackDist = 0.8f;
     private Vector3 originPos;
     private float originSpeed, prevSpeed;
-    private float attackDuration = 2, lastAttack;
+    private float lastAttack;
     //      0       1            2
     //   normal   slower    speedy/rage
     public Sprite[] monsterSprite;

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameMenuUi : MonoBehaviour
 {
     [SerializeField] private Player player;
+    private CanvasGroupFunc canvasGroupFunc;
+    private InGame inGame;
     public List<char> alphabetsPlayerInfo, alphabetsWord;
     public GameObject[] charUIInfoObj;
     public Image[] charUIInfoImg;
@@ -17,12 +20,29 @@ public class GameMenuUi : MonoBehaviour
     public Image hpImg;
     public Sprite[] hpSprite;
     public Animator gameMenuUiAnim;
+    public CanvasGroup[] builBtnCG;
+    public Image[] buildBtnImg;
+    [SerializeField] private TextMeshProUGUI pointText;
+    [SerializeField] private TextMeshProUGUI[] buildText;
+    [SerializeField] private TextAsset wordList;
+    private List<string> words;
+    private string letterCombine;
+    public int wordPoint;
     public bool isRunGame;
     private bool isCharLvl1;
+    void Awake()
+    {
+        //convert word in .txt to string word
+        words = new List<string>(wordList.text.Split(new char[]{
+            ',', ' ', '\n', '\r'},
+            System.StringSplitOptions.RemoveEmptyEntries
+        ));
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
+        canvasGroupFunc = GameManager.instance.canvasGroupFunc;
     }
 
     // Update is called once per frame
@@ -34,6 +54,7 @@ public class GameMenuUi : MonoBehaviour
     //set game menu ui mode base on game mode
     public void SetGameMenuUIMode(bool isRun)
     {
+        inGame = GameManager.instance.inGame;
         isRunGame = isRun;
         if (!isRun)
             gameMenuUiAnim.SetTrigger("info");
@@ -41,6 +62,26 @@ public class GameMenuUi : MonoBehaviour
             gameMenuUiAnim.SetTrigger("infoHp");
         SetCharUIInfo();
         SetCharUIAction();
+        SetCharUiWord();
+        SetBuildBtnsActive();
+        SetBuildBtnsInteracteable();
+    }
+    //set build button active event
+    private void SetBuildBtnsActive()
+    {
+        SetBuildBtnActive(0, inGame.isLadder, inGame.ladderPt);
+        SetBuildBtnActive(1, inGame.isGround, inGame.groundPt);
+        SetBuildBtnActive(2, inGame.isFence, inGame.fencePt);
+        SetBuildBtnActive(3, inGame.isSlime, inGame.fencePt);
+    }
+    private void SetBuildBtnActive(int buildBtnNo, bool isActive, int point)
+    {
+        builBtnCG[buildBtnNo].gameObject.SetActive(isActive);
+        if (isActive)
+        {
+            buildText[buildBtnNo].text = point.ToString();
+            buildBtnImg[buildBtnNo].sprite = inGame.builderSprite[buildBtnNo];
+        }
     }
 
     //add char in player
@@ -70,6 +111,14 @@ public class GameMenuUi : MonoBehaviour
         SetCharUIInfo();
         SetCharUIAction();
     }
+
+    //remove char in word - 
+    public void RemoveCharWord()
+    {
+        alphabetsWord.RemoveRange(0, alphabetsWord.Count);
+        SetCharUiWord();
+    }
+
     //set char UI Info
     public void SetCharUIInfo()
     {
@@ -164,33 +213,49 @@ public class GameMenuUi : MonoBehaviour
     //close action menu - used () - in close btn in action menu
     public void CloseActionMenu()
     {
+        ResetAlphabetWordBtnClick();
         if (!isRunGame)
             gameMenuUiAnim.SetTrigger("info");
         else
             gameMenuUiAnim.SetTrigger("infoHp");
-        GameManager.instance.canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 1, true, true);
+        canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 1, true, true);
         GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         GameManager.instance.PauseGame(false);
     }
 
-    public void AlphabetBtnClick(int indexBtn)
+    //reset alphabet word button
+    private void ResetAlphabetWordBtnClick()
     {
-        if (!isCharLvl1)
+        int limitWord = alphabetsWord.Count;
+        //Debug.Log("alphabetsWord count = " + limitWord);
+        //reset word button
+        for (int i = 0; i < limitWord; i++)
         {
-            // add in word
-            alphabetsWord.Add(player.alphabetsStore[indexBtn]);
-            //remove in store
-            RemoveCharPlayer(indexBtn);
-            SetCharUiWord();
-        }
-        else
-        {
-            alphabetsWord.Add(player.alphabetsStore[indexBtn]);
-            RemoveCharPlayer(indexBtn);
-            SetCharUiWord();
+            AlphabetWordBtnClick(0);
+            //Debug.Log("word reset " + i);
         }
     }
 
+    //USED () - in the alpahbet btn
+    public void AlphabetBtnClick(int indexBtn)
+    {
+        // if (!isCharLvl1)
+        // {
+        // add in word
+        alphabetsWord.Add(player.alphabetsStore[indexBtn]);
+        //remove in store
+        RemoveCharPlayer(indexBtn);
+        SetCharUiWord();
+        // }
+        // else
+        // {
+        //     alphabetsWord.Add(player.alphabetsStore[indexBtn]);
+        //     RemoveCharPlayer(indexBtn);
+        //     SetCharUiWord();
+        // }
+    }
+
+    //USED () - in the alpahbet word btn
     public void AlphabetWordBtnClick(int indexBtn)
     {
         //add in store
@@ -199,4 +264,107 @@ public class GameMenuUi : MonoBehaviour
         alphabetsWord.RemoveAt(indexBtn);
         SetCharUiWord();
     }
+
+    //USED () - in word button
+    //convert char to word for points
+    public void WordCombine()
+    {
+        letterCombine = "";
+        //Debug.Log(alphabetsWord.Length);
+        for (int i = 0; i < alphabetsWord.Count; i++)
+        {
+            //Debug.Log("word combine " + i);
+            //combine letter to be word
+            letterCombine += alphabetsWord[i].ToString();
+        }
+        Debug.Log("Word = " + letterCombine);
+        Debug.Log(CheckWordExist(letterCombine));
+        //reward combine letter to word
+        if (CheckWordExist(letterCombine))
+        {
+            wordPoint += letterCombine.Length;
+            //player.PlaySoundWord();
+            //give point based on number of char in word
+            Debug.Log("give " + wordPoint + " points");
+            //remove char in data
+            RemoveCharWord();
+            //set word pt event
+            SetWordPointEvent();
+        }
+        else
+        {
+            //player.PlaySoundFailed();
+            ResetAlphabetWordBtnClick();
+        }
+    }
+
+    //check word in word txt
+    private bool CheckWordExist(string word)
+    {
+        return words.Contains(word);
+    }
+
+    //set word point event
+    public void SetWordPointEvent()
+    {
+        //set word pt text
+        pointText.text = wordPoint.ToString();
+        //set build button availability
+        SetBuildBtnsInteracteable();
+    }
+
+    //check build button availability - set clickable or not
+    private void SetBuildBtnsInteracteable()
+    {
+        //ladder
+        if (inGame.isLadder)
+            //check if word point more than point needed
+            SetBuildBtninteractable(0, wordPoint >= inGame.ladderPt);
+        //ground
+        if (inGame.isGround)
+            SetBuildBtninteractable(1, wordPoint >= inGame.groundPt);
+        //fence
+        if (inGame.isFence)
+            SetBuildBtninteractable(2, wordPoint >= inGame.fencePt);
+        //slime
+        if (inGame.isSlime)
+            SetBuildBtninteractable(3, wordPoint >= inGame.slimePt);
+    }
+    private void SetBuildBtninteractable(int buildBtnNo, bool isActive)
+    {
+        canvasGroupFunc.ModifyCG(builBtnCG[buildBtnNo], 1, isActive, true);
+    }
+
+    //USED () - in ladder btn
+    public void BuildLadder()
+    {
+        inGame.BuildLadder();
+        //pay with word pt
+        wordPoint -= inGame.ladderPt;
+        //set word point event and builder button interactable
+        SetWordPointEvent();
+    }
+    //USED () - in ground btn
+    public void BuildGround()
+    {
+        inGame.BuildGround();
+        wordPoint -= inGame.groundPt;
+        SetWordPointEvent();
+    }
+    //USED () - in fence btn
+    public void BuildFence()
+    {
+        inGame.BuildFence();
+        wordPoint -= inGame.fencePt;
+        SetWordPointEvent();
+    }
+    //USED () - in slime btn
+    public void BuildSlime()
+    {
+        inGame.BuildSlime();
+        wordPoint -= inGame.slimePt;
+        SetWordPointEvent();
+    }
+
+    //TODO () - FIX ERROR - build in run always fall, win in drowned
 }
