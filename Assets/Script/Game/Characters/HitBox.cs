@@ -37,6 +37,7 @@ public class HitBox : MonoBehaviour
     }
     public void Win()
     {
+        Debug.Log("hit win line");
         //only call for drowned game mode
         if (parentType == 0)
             player.Win(true);

@@ -10,6 +10,7 @@ public class MainMenuUI : MonoBehaviour
     public AudioClip[] mainMenuUIAudioClip;
     public AudioSource mainMenuUIAudioSource;
     public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
+    public GameObject blackScreen;
     public Slider musicSlider, soundSlider;
     // Start is called before the first frame update
     void Start()

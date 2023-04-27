@@ -55,7 +55,6 @@ public class ObjByPlayer : DropObject
         else if (posX > xBound)
             posX = xBound;
         transform.position = new Vector3(posX, posY, 0);
-        dropObjRb.bodyType = RigidbodyType2D.Dynamic;
         yield return new WaitForSeconds(0.01f);
         ObjColl.enabled = true;
         ObjSR.enabled = true;
@@ -67,7 +66,7 @@ public class ObjByPlayer : DropObject
         ObjSR.enabled = false;
         yield return new WaitForSeconds(0.1f);
         transform.position = originalPos;
-        dropObjRb.bodyType = RigidbodyType2D.Kinematic;
+        PauseGame(true);
         builderInRun.ChangeIndexNo(numObjType);
     }
     //use for slime
@@ -77,7 +76,7 @@ public class ObjByPlayer : DropObject
         ObjColl.enabled = false;
         ObjSR.enabled = false;
         transform.position = originalPos;
-        dropObjRb.bodyType = RigidbodyType2D.Kinematic;
+        PauseGame(true);
         builderInRun.ChangeIndexNo(1);
     }
 }

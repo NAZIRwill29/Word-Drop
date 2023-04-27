@@ -123,7 +123,7 @@ public class Spawn : MonoBehaviour
         }
     }
 
-    //TODO () - call when want pause game
+    //call when want pause game
     public void FreezeAllObjects(bool isPause)
     {
         if (isPause)

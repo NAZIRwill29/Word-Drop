@@ -17,7 +17,7 @@ public class Ladders : MonoBehaviour
     }
 
     //TODO () - REQUIRED FIX
-    //add active ladder - call when create ladder in gameUI
+    //USED () - in ladder btn
     public void AddActiveLadders(bool isFromGroundManager)
     {
         if (activeLadderNo < ladderLimit)
@@ -45,6 +45,7 @@ public class Ladders : MonoBehaviour
         else
         {
             //TODO () - make text show can't add ladder anymore
+            Debug.Log("can't add ladder anymore");
         }
     }
 

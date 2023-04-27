@@ -28,6 +28,14 @@ public class InGame : MonoBehaviour
 
     }
 
+    //TODO () - call when pause game
+    public void PauseGame(bool isPause)
+    {
+        if (builderInRun)
+            builderInRun.PauseGame(isPause);
+        spawn.FreezeAllObjects(isPause);
+    }
+
     public void BuildLadder()
     {
         ladders.AddActiveLadders(false);

@@ -62,6 +62,7 @@ public class AdsMediate : MonoBehaviour
 
     }
 
+    //TODO () - 
     //show rewarded
     public void ShowRewarded()
     {
@@ -76,6 +77,7 @@ public class AdsMediate : MonoBehaviour
         }
     }
 
+    //TODO () - 
     //load interstitial
     public void LoadInterstitial()
     {
@@ -83,6 +85,7 @@ public class AdsMediate : MonoBehaviour
         text.text = "Interstitial loaded successfully";
     }
 
+    //TODO () - 
     //show interstitial
     public void ShowInterstitial()
     {

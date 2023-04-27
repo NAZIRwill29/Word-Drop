@@ -19,6 +19,7 @@ public class SwipeUpDownAction : MonoBehaviour
                 touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Moved)
                 {
+                    Debug.Log("swipe up");
                     swipeForce = touch.deltaPosition.y;
                     if (swipeForce > bound)
                     {

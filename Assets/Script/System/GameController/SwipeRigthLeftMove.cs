@@ -12,7 +12,7 @@ public class SwipeRigthLeftMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isStartGame && GameManager.instance.isPauseGame)
+        if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         if (Input.touchCount > 0)
         {

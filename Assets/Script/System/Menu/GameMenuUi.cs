@@ -72,7 +72,7 @@ public class GameMenuUi : MonoBehaviour
         SetBuildBtnActive(0, inGame.isLadder, inGame.ladderPt);
         SetBuildBtnActive(1, inGame.isGround, inGame.groundPt);
         SetBuildBtnActive(2, inGame.isFence, inGame.fencePt);
-        SetBuildBtnActive(3, inGame.isSlime, inGame.fencePt);
+        SetBuildBtnActive(3, inGame.isSlime, inGame.slimePt);
     }
     private void SetBuildBtnActive(int buildBtnNo, bool isActive, int point)
     {
@@ -210,7 +210,7 @@ public class GameMenuUi : MonoBehaviour
         hpImg.sprite = hpSprite[player.hp];
     }
 
-    //close action menu - used () - in close btn in action menu
+    //close action menu - USED () - in close btn in action menu
     public void CloseActionMenu()
     {
         ResetAlphabetWordBtnClick();
@@ -366,5 +366,20 @@ public class GameMenuUi : MonoBehaviour
         SetWordPointEvent();
     }
 
-    //TODO () - FIX ERROR - build in run always fall, win in drowned
+    //USED () - in setting btn
+    //TODO () - stop play controller
+    public void SettingBtn()
+    {
+
+    }
+
+    //USED () - in home btn
+    public void BackToHome()
+    {
+        ResetAlphabetWordBtnClick();
+        GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
+        GameManager.instance.PauseGame(false);
+        GameManager.instance.BackToHome();
+    }
+
 }

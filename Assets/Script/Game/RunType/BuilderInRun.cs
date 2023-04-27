@@ -47,4 +47,16 @@ public class BuilderInRun : MonoBehaviour
         else
             slimeIndex--;
     }
+
+    public void PauseGame(bool isPause)
+    {
+        foreach (var item in fences)
+        {
+            item.PauseGame(isPause);
+        }
+        foreach (var item in slimes)
+        {
+            item.PauseGame(isPause);
+        }
+    }
 }

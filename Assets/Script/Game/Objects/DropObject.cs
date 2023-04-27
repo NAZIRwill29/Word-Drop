@@ -22,8 +22,8 @@ public class DropObject : MonoBehaviour
         };
     }
 
-    //TODO () - set paused game used in GameManager
-    public void PauseGame(bool isPause)
+    // set paused game
+    public virtual void PauseGame(bool isPause)
     {
         if (isPause)
         {

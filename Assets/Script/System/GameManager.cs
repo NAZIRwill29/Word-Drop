@@ -34,15 +34,14 @@ public class GameManager : MonoBehaviour
     //awake
     void Awake()
     {
-        //get current date
-        gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
-        //initialize ads
-        //AdsMediateInitializer.OnInitializeClicked();
-        adsMediate.InitAdsMediate();
-        anonymousAuthenticate.AnonymousAuthenticateEvent();
         //check if have gameObject
         if (GameManager.instance != null)
         {
+            //get current date
+            gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            //initialize ads
+            adsMediate.InitAdsMediate();
+            anonymousAuthenticate.AnonymousAuthenticateEvent();
             StartCoroutine(SetMainMenu(true));
             //set stage based on how many stage passed
             //Debug.Log("awake1");
@@ -80,8 +79,8 @@ public class GameManager : MonoBehaviour
         {
             //set stage if instance != null
             //yield return StartCoroutine(TurnOnStageButton());
-            yield return StartCoroutine(UpdatePlayerInfoInStart());
             yield return StartCoroutine(DestroyGameObject());
+            yield return StartCoroutine(UpdatePlayerInfoInStart());
         }
         else
         {
@@ -96,8 +95,8 @@ public class GameManager : MonoBehaviour
     //coroutine for setStage
     private IEnumerator DestroyGameObject()
     {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(0);
+        //Destroy(gameObject);
         Destroy(dontDestroyGameObject);
     }
     private IEnumerator LoadData()
@@ -119,6 +118,15 @@ public class GameManager : MonoBehaviour
         isStartGame = false;
         isPauseGame = true;
         player.GameMode(2);
+        //SceneManager.LoadScene("MainMenu");
+        mainMenuUI.blackScreen.SetActive(true);
+    }
+
+    public void BackToHome()
+    {
+        //TODO () - FIX ERROR - stop other play
+        SceneManager.LoadScene("MainMenu");
+        OnMainMenu();
     }
 
     //TODO - make start game
@@ -136,6 +144,24 @@ public class GameManager : MonoBehaviour
         isStartGame = true;
         isPauseGame = false;
         player.GameMode(mode);
+        mainMenuUI.blackScreen.SetActive(false);
+    }
+
+    //pause game - TODO () - used in button or start game
+    public void PauseGame(bool isPause)
+    {
+        isPauseGame = isPause;
+        inGame.PauseGame(isPause);
+        player.ChangeImmune(isPause);
+        // if (isPause)
+        // {
+
+        //     //TODO () -
+        // }
+        // else
+        // {
+        //     player.ChangeImmune(false);
+        // }
     }
 
     //ingame data----------------------------------------
@@ -230,25 +256,6 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
-
-    //pause game - TODO () - used in button or start game
-    public void PauseGame(bool isPause)
-    {
-        if (isPause)
-        {
-            isPauseGame = isPause;
-            inGame.spawn.FreezeAllObjects(true);
-            player.ChangeImmune(true);
-            //TODO () -
-        }
-        else
-        {
-            isPauseGame = isPause;
-            inGame.spawn.FreezeAllObjects(false);
-            player.ChangeImmune(false);
-        }
-    }
-
 
     //set variable------------------------------------------
     public void SetSavedDate(string date1)
