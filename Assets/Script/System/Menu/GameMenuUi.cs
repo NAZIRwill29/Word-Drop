@@ -22,6 +22,8 @@ public class GameMenuUi : MonoBehaviour
     public Animator gameMenuUiAnim;
     public CanvasGroup[] builBtnCG;
     public Image[] buildBtnImg;
+    public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
+    public Slider musicSlider, soundSlider;
     [SerializeField] private TextMeshProUGUI pointText;
     [SerializeField] private TextMeshProUGUI[] buildText;
     [SerializeField] private TextAsset wordList;
@@ -89,7 +91,7 @@ public class GameMenuUi : MonoBehaviour
     {
         //show in the player info ui
         alphabetsPlayerInfo.Add(abc);
-        Debug.Log("abc count = " + alphabetsPlayerInfo.Count);
+        //Debug.Log("abc count = " + alphabetsPlayerInfo.Count);
         if (alphabetsPlayerInfo.Count > 10)
             alphabetsPlayerInfo.RemoveAt(0);
         //set char ui
@@ -100,6 +102,13 @@ public class GameMenuUi : MonoBehaviour
     public void RemoveCharUi(int charIndex)
     {
         alphabetsPlayerInfo.RemoveAt(charIndex);
+        SetCharUIInfo();
+        SetCharUIAction();
+    }
+    //remove all char in player ui
+    public void RemoveAllCharUI()
+    {
+        alphabetsPlayerInfo.RemoveRange(0, alphabetsPlayerInfo.Count);
         SetCharUIInfo();
         SetCharUIAction();
     }
@@ -220,7 +229,9 @@ public class GameMenuUi : MonoBehaviour
             gameMenuUiAnim.SetTrigger("infoHp");
         canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 1, true, true);
         GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
+        GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
         GameManager.instance.PauseGame(false);
+        Debug.Log("Game Menu ui info");
     }
 
     //reset alphabet word button
@@ -304,7 +315,7 @@ public class GameMenuUi : MonoBehaviour
         return words.Contains(word);
     }
 
-    //set word point event
+    //set word point event - set word pt text
     public void SetWordPointEvent()
     {
         //set word pt text
@@ -357,6 +368,7 @@ public class GameMenuUi : MonoBehaviour
         inGame.BuildFence();
         wordPoint -= inGame.fencePt;
         SetWordPointEvent();
+        CloseActionMenu();
     }
     //USED () - in slime btn
     public void BuildSlime()
@@ -364,6 +376,7 @@ public class GameMenuUi : MonoBehaviour
         inGame.BuildSlime();
         wordPoint -= inGame.slimePt;
         SetWordPointEvent();
+        CloseActionMenu();
     }
 
     //USED () - in setting btn
@@ -378,8 +391,77 @@ public class GameMenuUi : MonoBehaviour
     {
         ResetAlphabetWordBtnClick();
         GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
+        GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
         GameManager.instance.PauseGame(false);
         GameManager.instance.BackToHome();
+        Debug.Log("game menu ui hide");
+    }
+
+    //USED () - in home btn
+    public void FinishGame()
+    {
+        ResetAlphabetWordBtnClick();
+        GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
+        GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
+        GameManager.instance.PauseGame(false);
+        GameManager.instance.FinishGame();
+    }
+
+    //setting window--------------------------
+    //music
+    public void MusicToggle(bool isWantOn)
+    {
+        if (isWantOn)
+        {
+            musicBtnOn.SetActive(true);
+            musicBtnOff.SetActive(false);
+            //on music
+            GameManager.instance.gameSettings.mainCameraAudioSource.enabled = true;
+        }
+        else
+        {
+            musicBtnOn.SetActive(false);
+            musicBtnOff.SetActive(true);
+            //off music
+            GameManager.instance.gameSettings.mainCameraAudioSource.enabled = false;
+        }
+    }
+
+    //sound effect
+    public void SoundToggle(bool isWantOn)
+    {
+        if (isWantOn)
+        {
+            SoundBtnOn.SetActive(true);
+            SoundBtnOff.SetActive(false);
+            //on sound
+            GameManager.instance.gameSettings.TurnOnOffSoundVolume(true);
+        }
+        else
+        {
+            SoundBtnOn.SetActive(false);
+            SoundBtnOff.SetActive(true);
+            //off sound
+            GameManager.instance.gameSettings.TurnOnOffSoundVolume(false);
+        }
+    }
+
+    //USED IN () - musicSlide
+    public void ChangeMusicVolume()
+    {
+        GameManager.instance.gameSettings.ChangeMusicVolumeSystem(musicSlider.value);
+    }
+    //USED IN () - soundSlide
+    public void ChangeSoundVolume()
+    {
+        GameManager.instance.gameSettings.ChangeSoundVolumeSystem(soundSlider.value);
+    }
+
+    //update sound setting
+    public void UpdateSoundSetting(float musicVolume, float soundVolume)
+    {
+        musicSlider.value = musicVolume;
+        soundSlider.value = soundVolume;
     }
 
 }

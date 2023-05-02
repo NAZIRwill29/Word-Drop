@@ -95,7 +95,7 @@ public class Spawn : MonoBehaviour
     private void SpawnObject(GameObject obj)
     {
         index = Random.Range(0, 1);
-        posX = Random.Range(-GameManager.instance.swipeRigthLeftMove.boundX + 0.5f, GameManager.instance.swipeRigthLeftMove.boundX - 0.5f);
+        posX = Random.Range(-GameManager.instance.boundary.boundX + 0.2f, GameManager.instance.boundary.boundX - 0.2f);
         if (index == 0)
         {
             obj.transform.position = new Vector3(posX, transform.position.y, transform.position.z);

@@ -14,14 +14,14 @@ public class Slime : ObjByPlayer
         {
             Debug.Log("Slow Monster");
             //send message damage to ground
-            coll.SendMessage("SlowObj", timeDelayHide);
+            coll.SendMessage("SlowObj");
             if (!isTouched)
             {
                 //make trigger once only
-                isTouched = true;
+                //isTouched = true;
                 //hide and off coliider
                 ShowObj(false);
-                Debug.Log("hide");
+                // Debug.Log("hide");
             }
         }
     }

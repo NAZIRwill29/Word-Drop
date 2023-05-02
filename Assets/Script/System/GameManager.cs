@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public CanvasGroupFunc canvasGroupFunc;
+    public Boundary boundary;
     public Data gameData = new Data();
     //save
     public CloudSave cloudSave;
@@ -30,18 +31,14 @@ public class GameManager : MonoBehaviour
     //variable
     public bool isStartGame;
     public bool isPauseGame = true;
+    private bool isCanShowAds;
 
     //awake
     void Awake()
     {
-        //check if have gameObject
+        //check if have instance
         if (GameManager.instance != null)
         {
-            //get current date
-            gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
-            //initialize ads
-            adsMediate.InitAdsMediate();
-            anonymousAuthenticate.AnonymousAuthenticateEvent();
             StartCoroutine(SetMainMenu(true));
             //set stage based on how many stage passed
             //Debug.Log("awake1");
@@ -51,12 +48,19 @@ public class GameManager : MonoBehaviour
             //preventSpawnBoss = false;
             return;
         }
-        instance = this;
+        else
+        {
+            //get current date
+            gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            //initialize ads
+            adsMediate.InitAdsMediate();
+            anonymousAuthenticate.AnonymousAuthenticateEvent();
+            instance = this;
+            //Debug.Log("awake2");
+            StartCoroutine(SetMainMenu(false));
+        }
         Debug.Log(isStartGame);
         SceneManager.sceneLoaded += LoadState;
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        //Debug.Log("awake2");
-        StartCoroutine(SetMainMenu(false));
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -98,6 +102,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0);
         //Destroy(gameObject);
         Destroy(dontDestroyGameObject);
+        Debug.Log("destroy game object");
     }
     private IEnumerator LoadData()
     {
@@ -122,9 +127,21 @@ public class GameManager : MonoBehaviour
         mainMenuUI.blackScreen.SetActive(true);
     }
 
+    //back to home
     public void BackToHome()
     {
-        //TODO () - FIX ERROR - stop other play
+        mainMenuUI.blackScreen.SetActive(true);
+        StartCoroutine(InBackToHome());
+        Debug.Log("back to home");
+    }
+    private IEnumerator InBackToHome()
+    {
+        yield return StartCoroutine(mainMenuUI.ShowAnim());
+        yield return StartCoroutine(InBackToHomeEvent());
+    }
+    private IEnumerator InBackToHomeEvent()
+    {
+        yield return new WaitForSeconds(0);
         SceneManager.LoadScene("MainMenu");
         OnMainMenu();
     }
@@ -132,19 +149,26 @@ public class GameManager : MonoBehaviour
     //TODO - make start game
     public void StartGame(string name, int mode)
     {
+        mainMenuUI.blackScreen2.SetActive(true);
+        adsMediate.LoadInterstitial();
         StartCoroutine(InStartGame(name, mode));
+        Debug.Log("start game");
     }
-
-    //coroutine inStartGame
     private IEnumerator InStartGame(string name, int mode)
     {
-        yield return new WaitForSeconds(0.1f);
-        //Debug.Log(sceneName);
+        yield return StartCoroutine(mainMenuUI.HideAnim());
+        yield return StartCoroutine(InStartGameEvent(name, mode));
+    }
+    private IEnumerator InStartGameEvent(string name, int mode)
+    {
         SceneManager.LoadScene(name);
+        gameSettings.UpdateMenuVolumeSetting();
         isStartGame = true;
         isPauseGame = false;
         player.GameMode(mode);
+        yield return new WaitForSeconds(0.1f);
         mainMenuUI.blackScreen.SetActive(false);
+        mainMenuUI.blackScreen2.SetActive(false);
     }
 
     //pause game - TODO () - used in button or start game
@@ -153,15 +177,21 @@ public class GameManager : MonoBehaviour
         isPauseGame = isPause;
         inGame.PauseGame(isPause);
         player.ChangeImmune(isPause);
-        // if (isPause)
-        // {
+    }
 
-        //     //TODO () -
-        // }
-        // else
-        // {
-        //     player.ChangeImmune(false);
-        // }
+    //TODO () - USED () - in finish button after finish game due to win or loss
+    //finish game/ finish stage
+    public void FinishGame()
+    {
+        SaveState();
+        BackToHome();
+        if (isCanShowAds)
+        {
+            adsMediate.ShowInterstitial();
+            isCanShowAds = false;
+        }
+        else
+            isCanShowAds = true;
     }
 
     //ingame data----------------------------------------
@@ -204,12 +234,13 @@ public class GameManager : MonoBehaviour
     //---------------------------------------------------
 
     //cloud--------------------------------------------------------------
-    //TODO - make call when finish stage
     //save game data
     public void SaveGameDataInCloud()
     {
+        //gameData.savedDate = "";
+        Debug.Log("save : dateNow = " + gameData.dateNow + ", savedDate = " + gameData.savedDate);
         //save once a day
-        if (gameData.dateNow != gameData.savedDate)
+        if (gameData.dateNow != gameData.savedDate || gameData.savedDate == "")
         {
             gameData.savedDate = gameData.dateNow;
             cloudSave.SaveComplexDataCloud(gameData);
@@ -220,6 +251,7 @@ public class GameManager : MonoBehaviour
     //load game data
     public void LoadGameDataFromCloud()
     {
+        Debug.Log("load : dateNow = " + gameData.dateNow + ", savedDate = " + gameData.savedDate);
         //load once a day
         if (gameData.dateNow != gameData.savedDate)
         {
@@ -236,6 +268,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            SaveState();
             //Debug.Log("OnSceneLoaded");
             gameSettings.MusicSystem();
             gameSettings.SoundSystem();
@@ -248,8 +281,11 @@ public class GameManager : MonoBehaviour
             {
                 inGameUi = GameObject.Find("InGameUI").GetComponent<InGameUi>();
             }
+            //reset player
+            player.RemoveAllChar();
             player.LifeLine(0);
-            gameMenuUi.SetGameMenuUIMode(inGameUi.isRun);
+            if (isStartGame)
+                gameMenuUi.SetGameMenuUIMode(inGameUi.isRun);
         }
         catch (System.Exception e)
         {

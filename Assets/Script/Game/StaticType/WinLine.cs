@@ -10,7 +10,7 @@ public class WinLine : MonoBehaviour
         if (GameManager.instance.isPauseGame)
             return;
         //check if collide with player or ground
-        if (coll.tag == "Player")
+        if (coll.tag == "Player" && coll.name == "HitBox")
         {
             if (!isTouched)
             {

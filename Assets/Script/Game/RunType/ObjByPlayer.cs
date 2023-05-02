@@ -14,21 +14,13 @@ public class ObjByPlayer : DropObject
     [Tooltip("Only change for slime")]
     public float timeDelayHide = 0.1f;
     [SerializeField] private GameObject monsterObj;
+    [SerializeField] private float hitSlimeNum = 0;
 
     void Update()
     {
-        if (monsterObj.transform.position.y > transform.position.y)
+        if (transform.position.y < monsterObj.transform.position.y)
         {
-            if (!isTouched)
-            {
-                //make trigger once only
-                isTouched = true;
-                Debug.Log("hidex2");
-                if (objType != "slime")
-                    StartCoroutine(HideObjEvent(0));
-                else
-                    StartCoroutine(HideObjEvent(1));
-            }
+            ShowObj(false);
         }
     }
 
@@ -62,6 +54,7 @@ public class ObjByPlayer : DropObject
     //use for fence/slime
     private IEnumerator HideObjEvent(int numObjType)
     {
+        Debug.Log("hide fence");
         ObjColl.enabled = false;
         ObjSR.enabled = false;
         yield return new WaitForSeconds(0.1f);
@@ -72,11 +65,20 @@ public class ObjByPlayer : DropObject
     //use for slime
     private IEnumerator HideObjSlimeEvent()
     {
-        yield return new WaitForSeconds(timeDelayHide);
-        ObjColl.enabled = false;
-        ObjSR.enabled = false;
-        transform.position = originalPos;
-        PauseGame(true);
-        builderInRun.ChangeIndexNo(1);
+        hitSlimeNum++;
+        Debug.Log("slime hit x" + hitSlimeNum);
+        if (hitSlimeNum / 30 > timeDelayHide)
+        {
+            isTouched = true;
+            Debug.Log("hide slime");
+            yield return new WaitForSeconds(0.1f);
+            ObjColl.enabled = false;
+            ObjSR.enabled = false;
+            transform.position = originalPos;
+            PauseGame(true);
+            builderInRun.ChangeIndexNo(1);
+            hitSlimeNum = 0;
+        }
+        yield return new WaitForSeconds(0);
     }
 }

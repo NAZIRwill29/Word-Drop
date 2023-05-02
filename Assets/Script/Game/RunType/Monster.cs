@@ -66,7 +66,7 @@ public class Monster : MonoBehaviour
     {
         if (isImmune)
             return;
-        transform.position -= new Vector3(0, fallBackDist / 4, 0);
+        transform.position -= new Vector3(0, fallBackDist / 4 * dmg1.damageAmount, 0);
         hpChange += 1;
         SetMonsterState();
     }
@@ -82,7 +82,7 @@ public class Monster : MonoBehaviour
     }
 
     //monster slow speed by slime
-    public void SlowObj(float time)
+    public void SlowObj()
     {
         if (isImmune)
             return;

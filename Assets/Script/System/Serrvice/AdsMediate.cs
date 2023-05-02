@@ -73,7 +73,8 @@ public class AdsMediate : MonoBehaviour
         else
         {
             Debug.Log("Rewarded ads not available");
-            text.text = "Rewarded ads not available";
+            if (text)
+                text.text = "Rewarded ads not available";
         }
     }
 
@@ -82,7 +83,8 @@ public class AdsMediate : MonoBehaviour
     public void LoadInterstitial()
     {
         IronSource.Agent.loadInterstitial();
-        text.text = "Interstitial loaded successfully";
+        if (text)
+            text.text = "Interstitial loaded successfully";
     }
 
     //TODO () - 
@@ -96,7 +98,8 @@ public class AdsMediate : MonoBehaviour
         else
         {
             Debug.Log("Interstitial not ready");
-            text.text = "Interstitial not ready";
+            if (text)
+                text.text = "Interstitial not ready";
         }
     }
 
@@ -138,7 +141,8 @@ public class AdsMediate : MonoBehaviour
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
         //reward user
-        text.text = "Rewarded Video completely watch";
+        if (text)
+            text.text = "Rewarded Video completely watch";
     }
     // The rewarded video ad was failed to show.
     void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo)
@@ -189,7 +193,8 @@ public class AdsMediate : MonoBehaviour
     void BannerOnAdLoadedEvent(IronSourceAdInfo adInfo)
     {
         //IronSource.Agent.displayBanner();
-        text.text = "Banner Ads laoded";
+        if (text)
+            text.text = "Banner Ads laoded";
     }
     //Invoked when the banner loading process has failed.
     void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)

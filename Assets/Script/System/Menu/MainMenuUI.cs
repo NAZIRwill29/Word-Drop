@@ -10,8 +10,10 @@ public class MainMenuUI : MonoBehaviour
     public AudioClip[] mainMenuUIAudioClip;
     public AudioSource mainMenuUIAudioSource;
     public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
-    public GameObject blackScreen;
+    public GameObject blackScreen, blackScreen2;
     public Slider musicSlider, soundSlider;
+    [SerializeField]
+    private Animator mainMenuAnim, backgroundAnim;
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +101,23 @@ public class MainMenuUI : MonoBehaviour
         musicSlider.value = musicVolume;
         soundSlider.value = soundVolume;
     }
+
+    //animation-------------------------------------------
+    public IEnumerator ShowAnim()
+    {
+        yield return new WaitForSeconds(0);
+        mainMenuAnim.SetTrigger("show");
+        backgroundAnim.SetTrigger("show");
+        Debug.Log("main menu show");
+    }
+    public IEnumerator HideAnim()
+    {
+        yield return new WaitForSeconds(0);
+        mainMenuAnim.SetTrigger("hide");
+        backgroundAnim.SetTrigger("hide");
+        Debug.Log("main menu hide");
+    }
+    //---------------------------------------------------
 
     //play sound -------------------------------------------
     public void PlaySoundPlay()

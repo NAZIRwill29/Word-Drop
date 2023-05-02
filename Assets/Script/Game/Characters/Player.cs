@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     //climb number
     private float climbNo;
     public List<char> alphabetsStore;
-    private bool isImmune, isHasWin;
+    public bool isImmune, isHasWin, isHasDie;
     private Vector3 originPos;
     //player info
     public int levelPlayer = 1, charMaxNo = 10;
@@ -108,24 +108,46 @@ public class Player : MonoBehaviour
         gameMenuUi.RemoveCharUi(charIndex);
     }
 
+    public void RemoveAllChar()
+    {
+        alphabetsStore.RemoveRange(0, alphabetsStore.Count);
+        gameMenuUi.RemoveAllCharUI();
+    }
+
     //TODO() - 
     public void Death(string scenario)
     {
+        if (isHasDie)
+            return;
         switch (scenario)
         {
             case "alphabet":
                 Debug.Log("DEATH alphabet");
+                if (!GameManager.instance.inGameUi.isRun)
+                    LifeLine(0);
+                DieEvent();
                 //TODO () - die animation
                 break;
             case "drowning":
                 Debug.Log("DEATH drowning");
+                LifeLine(0);
+                DieEvent();
+                //TODO () - die animation
                 break;
             case "monster":
                 Debug.Log("DEATH monster");
+                //DieEvent();
+                //TODO () - die animation
                 break;
             default:
                 break;
         }
+    }
+    private void DieEvent()
+    {
+        isHasDie = true;
+        //freeze all - pause game - off rigidbody player
+        GameMode(2);
     }
 
     //Lifeline effect - call when water touch lifeline
@@ -312,17 +334,20 @@ public class Player : MonoBehaviour
         switch (mode)
         {
             case 0:
+                //drowned mode
                 playerRB.bodyType = RigidbodyType2D.Dynamic;
                 transform.position = originPos;
                 isImmune = false;
                 //TODO () - 
                 break;
             case 1:
+                //run mode
                 playerRB.bodyType = RigidbodyType2D.Kinematic;
-                transform.position = new Vector3(originPos.x, -2.34f, originPos.z);
+                transform.position = new Vector3(originPos.x, -1.538f, originPos.z);
                 isImmune = false;
                 break;
             default:
+                //pause
                 playerRB.bodyType = RigidbodyType2D.Static;
                 isImmune = true;
                 break;

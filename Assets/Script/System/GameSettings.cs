@@ -45,5 +45,6 @@ public class GameSettings : MonoBehaviour
     public void UpdateMenuVolumeSetting()
     {
         GameManager.instance.mainMenuUI.UpdateSoundSetting(musicVolume, soundVolume);
+        GameManager.instance.gameMenuUi.UpdateSoundSetting(musicVolume, soundVolume);
     }
 }

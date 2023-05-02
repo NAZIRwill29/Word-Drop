@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public GameObject playerObj;
+    [SerializeField]
+    private float elevation;
 
     // Update is called once per frame
     void LateUpdate()
@@ -16,7 +18,7 @@ public class CameraManager : MonoBehaviour
     //follow player
     private void FollowPlayer()
     {
-        transform.position = new Vector3(0, playerObj.transform.position.y + 2.807544f, -10);
+        transform.position = new Vector3(0, playerObj.transform.position.y + elevation, -10);
     }
 
     //rise camera follow ground
