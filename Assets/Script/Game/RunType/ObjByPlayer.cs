@@ -15,12 +15,27 @@ public class ObjByPlayer : DropObject
     public float timeDelayHide = 0.1f;
     [SerializeField] private GameObject monsterObj;
     [SerializeField] private float hitSlimeNum = 0;
+    public bool isInDeploy;
 
     void Update()
     {
         if (transform.position.y < monsterObj.transform.position.y)
         {
             ShowObj(false);
+        }
+    }
+
+    // set paused game
+    public override void PauseGame(bool isPause)
+    {
+        if (isPause)
+        {
+            dropObjRb.bodyType = RigidbodyType2D.Static;
+        }
+        else
+        {
+            if (isInDeploy)
+                dropObjRb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
@@ -40,6 +55,7 @@ public class ObjByPlayer : DropObject
     private IEnumerator ShowObjEvent()
     {
         isTouched = false;
+        isInDeploy = true;
         float posX = GameManager.instance.player.transform.position.x;
         //set boundary so the object builded will not out of screen
         if (posX < -xBound)
@@ -54,6 +70,7 @@ public class ObjByPlayer : DropObject
     //use for fence/slime
     private IEnumerator HideObjEvent(int numObjType)
     {
+        isInDeploy = false;
         Debug.Log("hide fence");
         ObjColl.enabled = false;
         ObjSR.enabled = false;
@@ -69,6 +86,7 @@ public class ObjByPlayer : DropObject
         Debug.Log("slime hit x" + hitSlimeNum);
         if (hitSlimeNum / 30 > timeDelayHide)
         {
+            isInDeploy = false;
             isTouched = true;
             Debug.Log("hide slime");
             yield return new WaitForSeconds(0.1f);
@@ -81,4 +99,11 @@ public class ObjByPlayer : DropObject
         }
         yield return new WaitForSeconds(0);
     }
+
+    //variable-----------------------------
+    public void ChangeIsInDeploy(bool isTrue)
+    {
+        isInDeploy = isTrue;
+    }
+    //---------------------------------------------
 }

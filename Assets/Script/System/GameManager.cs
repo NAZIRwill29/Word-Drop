@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
     {
         isStartGame = false;
         isPauseGame = true;
-        player.GameMode(2);
+        player.FinishGame();
         //SceneManager.LoadScene("MainMenu");
         mainMenuUI.blackScreen.SetActive(true);
     }
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
         gameSettings.UpdateMenuVolumeSetting();
         isStartGame = true;
         isPauseGame = false;
-        player.GameMode(mode);
+        player.StartGame(mode);
         yield return new WaitForSeconds(0.1f);
         mainMenuUI.blackScreen.SetActive(false);
         mainMenuUI.blackScreen2.SetActive(false);
@@ -176,15 +176,17 @@ public class GameManager : MonoBehaviour
     {
         isPauseGame = isPause;
         inGame.PauseGame(isPause);
-        player.ChangeImmune(isPause);
+        player.PauseGame(isPause);
     }
 
     //TODO () - USED () - in finish button after finish game due to win or loss
     //finish game/ finish stage
-    public void FinishGame()
+    public void FinishGame(bool isBackToHome)
     {
+        player.FinishGame();
         SaveState();
-        BackToHome();
+        if (isBackToHome)
+            BackToHome();
         if (isCanShowAds)
         {
             adsMediate.ShowInterstitial();
@@ -192,6 +194,40 @@ public class GameManager : MonoBehaviour
         }
         else
             isCanShowAds = true;
+    }
+
+    public void Death(bool isReal)
+    {
+        gameMenuUi.Death(isReal);
+        PauseGame(true);
+    }
+
+    //continue after death
+    public void ContinueAfterDeath(bool isAds)
+    {
+        if (!isAds)
+        {
+            if (player.bookNum > 0)
+            {
+                player.AddBookNum(-1);
+                Revive();
+            }
+            else
+                Debug.Log("book is empty");
+        }
+        else
+        {
+            adsMediate.ShowRewarded();
+        }
+    }
+
+    //revive player
+    public void Revive()
+    {
+        player.Revive();
+        gameMenuUi.Revive();
+        SaveState();
+        PauseGame(false);
     }
 
     //ingame data----------------------------------------

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InGame : MonoBehaviour
 {
+    [SerializeField] private InGameUi inGameUi;
     public GameObject laddersObj;
     public Ladders ladders;
     public GroundManager groundManager;
@@ -13,19 +14,28 @@ public class InGame : MonoBehaviour
     public Water water;
     public bool isLadder, isGround, isFence, isSlime;
     public int ladderPt = 6, groundPt = 3, fencePt = 3, slimePt = 4;
+    public float dangerDist;
+    [SerializeField] private float playerPos, waterPos, monsterPos;
     //  0       1       2       3
     //ladder  ground  fence   slime
     public Sprite[] builderSprite;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
-
+        if (GameManager.instance.isPauseGame)
+            return;
+        playerPos = GameManager.instance.player.transform.position.y - GameManager.instance.player.objHeight / 2;
+        if (water)
+        {
+            waterPos = water.transform.position.y + water.objHeight / 2;
+            dangerDist = playerPos - waterPos;
+        }
+        if (monster)
+        {
+            monsterPos = monster.transform.position.y + monster.objHeight / 2;
+            dangerDist = playerPos - monsterPos;
+        }
+        inGameUi.UpdateDangerIndicator(dangerDist);
     }
 
     //TODO () - call when pause game

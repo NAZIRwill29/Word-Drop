@@ -6,9 +6,11 @@ public class Ladders : MonoBehaviour
 {
     public GameObject[] arrLadder;
     public GameObject ladderUse;
+    [SerializeField] private Animator laddersCompleteAnim;
     public int activeLadderNo, ladderLimit;
     public float ladderToClimb;
     private bool isTouched;
+    public bool isCompleted;
 
     void Start()
     {
@@ -26,20 +28,13 @@ public class Ladders : MonoBehaviour
             {
                 activeLadderNo++;
                 SetActiveLadders();
+                EnableCompleteLadders(true);
             }
             else
             {
                 ladderToClimb -= 0.5f;
                 ladderLimit = Mathf.FloorToInt(ladderToClimb);
-                //activeLadderGroundNo++;
-                //check if equal
-                //     if (ladderToClimb == arrLadder.Length)
-                //         return;
-                //     //if not give 0.5 will make limit
-                //     if (ladderToClimb % 1 == 0)
-                //     {
-                //         ladderLimit++;
-                //     }
+                EnableCompleteLadders(true);
             }
         }
         else
@@ -58,9 +53,26 @@ public class Ladders : MonoBehaviour
         }
     }
 
+    //make it complete if active ladder is full constructed
+    private void EnableCompleteLadders(bool isEnable)
+    {
+        if (!isEnable)
+        {
+            //stop glowing
+            laddersCompleteAnim.SetTrigger("static");
+            return;
+        }
+        if (activeLadderNo == ladderLimit)
+        {
+            isCompleted = true;
+            //start glowing
+            laddersCompleteAnim.SetTrigger("glow");
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D coll)
     {
-        if (activeLadderNo != ladderLimit)
+        if (!isCompleted)
             return;
         if (GameManager.instance.isPauseGame)
             return;
@@ -71,6 +83,7 @@ public class Ladders : MonoBehaviour
             {
                 isTouched = true;
                 coll.SendMessage("Climb", ladderToClimb);
+                EnableCompleteLadders(false);
             }
         }
     }

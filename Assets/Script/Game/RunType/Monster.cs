@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
     //   normal   slower    speedy/rage
     public Sprite[] monsterSprite;
     public SpriteRenderer monsterSR;
+    public float objHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class Monster : MonoBehaviour
             damageAmount = damage,
             objType = objType
         };
+        objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
     // Update is called once per frame
@@ -59,6 +61,15 @@ public class Monster : MonoBehaviour
     private void MonsterChase()
     {
         transform.position += new Vector3(0, Time.deltaTime * speed, 0);
+    }
+
+    //use after player revive
+    public void AfterRevive()
+    {
+        //calm down monster
+        hpChange = 2;
+        SetMonsterState();
+        transform.position -= new Vector3(0, 3, 0);
     }
 
     //monster damage by thing - push backward
@@ -114,6 +125,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
+            //hpChange = 2
             //normal state
             monsterSR.sprite = monsterSprite[0];
             ChangeSpeed(prevSpeed);

@@ -6,24 +6,23 @@ public class BuilderInRun : MonoBehaviour
 {
     [SerializeField] private Fence[] fences;
     [SerializeField] private Slime[] slimes;
-    [SerializeField] private int objBuildInGame;
+    public int objBuildInGame, objBuildInGameLimit;
     [SerializeField] private int fenceIndex, slimeIndex;
-    private float lastTime, timeDuration = 1;
+
+    private void Start()
+    {
+        //set limit
+        objBuildInGameLimit = fences.Length;
+    }
 
     public void BuildObj(int objType)
     {
-        if (Time.time - lastTime < timeDuration)
-        {
-            //TOOD () - in cooldown
-            return;
-        }
-        //check not more than 3
-        if (objBuildInGame > 3)
-        {
-            //TOOD () - builder is busy
-            return;
-        }
-        lastTime = Time.time;
+        //check not more than 5
+        // if (objBuildInGame > 5)
+        // {
+        //     //TOOD () - builder is busy
+        //     return;
+        // }
         if (objType == 0)
         {
             fences[fenceIndex].ShowObj(true);

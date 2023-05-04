@@ -7,6 +7,7 @@ using TMPro;
 public class AdsMediate : MonoBehaviour
 {
     public TextMeshProUGUI text;
+    private string reward;
 
     //init ads mediate
     public void InitAdsMediate()
@@ -79,7 +80,7 @@ public class AdsMediate : MonoBehaviour
     }
 
     //TODO () - 
-    //load interstitial
+    //load interstitial - load in start game
     public void LoadInterstitial()
     {
         IronSource.Agent.loadInterstitial();
@@ -88,7 +89,7 @@ public class AdsMediate : MonoBehaviour
     }
 
     //TODO () - 
-    //show interstitial
+    //show interstitial - show after finish game
     public void ShowInterstitial()
     {
         if (IronSource.Agent.isInterstitialReady())
@@ -143,6 +144,14 @@ public class AdsMediate : MonoBehaviour
         //reward user
         if (text)
             text.text = "Rewarded Video completely watch";
+        switch (reward)
+        {
+            case "revive":
+                GameManager.instance.Revive();
+                break;
+            default:
+                break;
+        }
     }
     // The rewarded video ad was failed to show.
     void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo)

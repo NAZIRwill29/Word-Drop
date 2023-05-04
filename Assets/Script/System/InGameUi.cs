@@ -18,6 +18,7 @@ public class InGameUi : MonoBehaviour
     [SerializeField] private float totalRunLength, currentRunLength, totalTime;
     [SerializeField] private Vector3 prevPlayerLinePos;
     [SerializeField] private GameObject startLine, endLine, playerLine;
+    [SerializeField] private TextMeshProUGUI dangerText;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,14 @@ public class InGameUi : MonoBehaviour
                 TimeScore();
             else if (isRun)
                 UpdateMap();
+    }
+
+    //danger indicator
+    public void UpdateDangerIndicator(float num)
+    {
+        if (num < 0.1f)
+            num = 0.0f;
+        dangerText.text = num.ToString("F1") + "m";
     }
 
     //timer----------------------------------

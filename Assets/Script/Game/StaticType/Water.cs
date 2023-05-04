@@ -6,6 +6,11 @@ public class Water : MonoBehaviour
 {
     [SerializeField]
     private float speed = 0.05f;
+    public float objHeight;
+    void Start()
+    {
+        objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -16,6 +21,12 @@ public class Water : MonoBehaviour
     private void WaterRise()
     {
         transform.position += new Vector3(0, Time.deltaTime * speed, 0);
+    }
+
+    //use after player revive
+    public void AfterRevive()
+    {
+        transform.position -= new Vector3(0, 3, 0);
     }
 
     //water effect when touch player - lifeline 1,2,3

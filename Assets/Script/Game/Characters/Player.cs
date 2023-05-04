@@ -17,10 +17,16 @@ public class Player : MonoBehaviour
     //climb number
     private float climbNo;
     public List<char> alphabetsStore;
-    public bool isImmune, isHasWin, isHasDie;
+    public bool isImmune, isHasWin, isHasDie, isImmuneDamage = true;
+    //immune damage - use for in start game
+    public int immuneDamageDuration = 150;
+    [SerializeField] private int immuneDamageCount;
     private Vector3 originPos;
     //player info
-    public int levelPlayer = 1, charMaxNo = 10;
+    public int levelPlayer = 1, charMaxNo = 10, dieNum, bookNum;
+    public float objHeight;
+    [SerializeField] private int playerMode;
+    private string deathScenario;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,9 +41,15 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine3Coll, true);
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine4Coll, true);
         originPos = transform.position;
+        objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    //50 frame per sec
     void FixedUpdate()
     {
         //make climb event
@@ -45,11 +57,83 @@ public class Player : MonoBehaviour
         {
             ClimbEvent();
         }
+        if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
+            return;
+        //immunedamage for few second in start game
+        if (immuneDamageCount < immuneDamageDuration)
+            immuneDamageCount++;
+        else
+            isImmuneDamage = false;
+    }
+
+    public void StartGame(int mode)
+    {
+        GameMode(mode);
+        //store player mode in current stage
+        playerMode = mode;
+        ChangeImmuneDamage(true);
+        hp = 3;
+        gameMenuUi.SetHpUI();
+    }
+    public void FinishGame()
+    {
+        ChangeDieNum(0);
+        ChangeIsHasDie(false);
+        ChangeImmune(false);
+    }
+    public void PauseGame(bool isPause)
+    {
+        ChangeImmune(isPause);
+    }
+    //revive
+    public void Revive()
+    {
+        ChangeIsHasDie(false);
+        ChangeImmuneDamage(true);
+        ReturnGameModeAfterDeath();
+        hp = 3;
+        gameMenuUi.SetHpUI();
+        switch (deathScenario)
+        {
+            case "alphabet":
+                Debug.Log("Revive alphabet");
+                ReviveAlphabet();
+                //TODO () - Revive animation
+                break;
+            case "drowning":
+                Debug.Log("Revive drowning");
+                ReviveDrowning();
+                //TODO () - Revive animation
+                break;
+            case "monster":
+                Debug.Log("Revive monster");
+                ReviveMonster();
+                //TODO () - Revive animation
+                break;
+            default:
+                break;
+        }
+    }
+    private void ReviveAlphabet()
+    {
+
+    }
+    private void ReviveDrowning()
+    {
+        //move water down
+        GameManager.instance.inGame.water.AfterRevive();
+    }
+    private void ReviveMonster()
+    {
+        //move monster down
+        GameManager.instance.inGame.monster.AfterRevive();
     }
 
     //TODO () - 
     public void ReceiveDamage(Damage dmg)
     {
+        if (isImmuneDamage)
+            return;
         if (isImmune)
             return;
         //make damage - delete char in store
@@ -69,7 +153,14 @@ public class Player : MonoBehaviour
         }
         else
         {
+            // if (hp > 0)
+            // {
+            //     hp--;
+            // }
+            // else
+            // {
             Death("alphabet");
+            //}
         }
     }
 
@@ -77,6 +168,8 @@ public class Player : MonoBehaviour
     //call when attacked by monster
     public void ReceiveDamageHp(Damage dmg)
     {
+        if (isImmuneDamage)
+            return;
         if (isImmune)
             return;
         if (hp > 0)
@@ -119,6 +212,7 @@ public class Player : MonoBehaviour
     {
         if (isHasDie)
             return;
+        deathScenario = scenario;
         switch (scenario)
         {
             case "alphabet":
@@ -136,7 +230,7 @@ public class Player : MonoBehaviour
                 break;
             case "monster":
                 Debug.Log("DEATH monster");
-                //DieEvent();
+                DieEvent();
                 //TODO () - die animation
                 break;
             default:
@@ -145,9 +239,15 @@ public class Player : MonoBehaviour
     }
     private void DieEvent()
     {
-        isHasDie = true;
+        ChangeIsHasDie(true);
         //freeze all - pause game - off rigidbody player
         GameMode(2);
+        //make chance after die once only
+        dieNum++;
+        if (dieNum < 2)
+            GameManager.instance.Death(false);
+        else
+            GameManager.instance.Death(true);
     }
 
     //Lifeline effect - call when water touch lifeline
@@ -319,11 +419,13 @@ public class Player : MonoBehaviour
     private IEnumerator WinStatic()
     {
         yield return new WaitForSeconds(1);
+        gameMenuUi.FinishGame(false);
     }
     //TODO () -
     private IEnumerator WinRun()
     {
         yield return new WaitForSeconds(1);
+        gameMenuUi.FinishGame(false);
     }
 
     //player game mode - call in gamemanager
@@ -331,6 +433,7 @@ public class Player : MonoBehaviour
     //    static   run     pause
     public void GameMode(int mode)
     {
+        Debug.Log("game mode = " + mode);
         switch (mode)
         {
             case 0:
@@ -342,7 +445,7 @@ public class Player : MonoBehaviour
                 break;
             case 1:
                 //run mode
-                playerRB.bodyType = RigidbodyType2D.Kinematic;
+                playerRB.bodyType = RigidbodyType2D.Static;
                 transform.position = new Vector3(originPos.x, -1.538f, originPos.z);
                 isImmune = false;
                 break;
@@ -350,6 +453,25 @@ public class Player : MonoBehaviour
                 //pause
                 playerRB.bodyType = RigidbodyType2D.Static;
                 isImmune = true;
+                break;
+        }
+    }
+    private void ReturnGameModeAfterDeath()
+    {
+        switch (playerMode)
+        {
+            case 0:
+                //drowned mode
+                playerRB.bodyType = RigidbodyType2D.Dynamic;
+                isImmune = false;
+                //TODO () - 
+                break;
+            case 1:
+                //run mode
+                playerRB.bodyType = RigidbodyType2D.Static;
+                isImmune = false;
+                break;
+            default:
                 break;
         }
     }
@@ -370,5 +492,27 @@ public class Player : MonoBehaviour
         if (alphabetsStore.Count > charMaxNo)
             alphabetsStore.RemoveAt(0);
         gameMenuUi.AddCharPlayer(abc);
+    }
+    public void ChangeImmuneDamage(bool isTrue)
+    {
+        isImmuneDamage = isTrue;
+        if (isTrue)
+            immuneDamageCount = 0;
+    }
+    public void ChangeIsHasDie(bool isTrue)
+    {
+        isHasDie = isTrue;
+    }
+    public void ChangeDieNum(int num)
+    {
+        dieNum = num;
+    }
+    public void AddBookNum(int num)
+    {
+        bookNum += num;
+    }
+    public void ResetBookNum()
+    {
+        bookNum = 0;
     }
 }

@@ -31,7 +31,9 @@ public class GameMenuUi : MonoBehaviour
     private string letterCombine;
     public int wordPoint;
     public bool isRunGame;
-    private bool isCharLvl1;
+    [SerializeField] private bool isCharLvl1, isObjBuildBtnClickable = true;
+
+    [SerializeField] private int objBuildCooldownNum = 100, objBuildCooldownDuration;
     void Awake()
     {
         //convert word in .txt to string word
@@ -47,10 +49,23 @@ public class GameMenuUi : MonoBehaviour
         canvasGroupFunc = GameManager.instance.canvasGroupFunc;
     }
 
-    // Update is called once per frame
-    void Update()
+    // 50 frame per sec
+    void FixedUpdate()
     {
-
+        if (GameManager.instance.isPauseGame)
+            return;
+        if (inGame.isFence || inGame.isSlime)
+        {
+            //stop countdown
+            if (isObjBuildBtnClickable)
+                return;
+            objBuildCooldownNum++;
+            if (objBuildCooldownNum >= objBuildCooldownDuration)
+            {
+                SetRunBtn(true);
+                SetBuildBtnsInteracteable();
+            }
+        }
     }
 
     //set game menu ui mode base on game mode
@@ -227,7 +242,7 @@ public class GameMenuUi : MonoBehaviour
             gameMenuUiAnim.SetTrigger("info");
         else
             gameMenuUiAnim.SetTrigger("infoHp");
-        canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 1, true, true);
+        canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 1, true, false);
         GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
         GameManager.instance.PauseGame(false);
@@ -329,21 +344,68 @@ public class GameMenuUi : MonoBehaviour
     {
         //ladder
         if (inGame.isLadder)
-            //check if word point more than point needed
-            SetBuildBtninteractable(0, wordPoint >= inGame.ladderPt);
+        {
+            //if ladders complete
+            if (!inGame.ladders.isCompleted)
+                //check if word point more than point needed
+                SetBuildBtninteractable(0, wordPoint >= inGame.ladderPt);
+            else
+                SetBuildBtninteractable(0, false);
+        }
         //ground
         if (inGame.isGround)
-            SetBuildBtninteractable(1, wordPoint >= inGame.groundPt);
+        {
+            //if ladders complete
+            if (!inGame.ladders.isCompleted)
+                //check if word point more than point needed
+                SetBuildBtninteractable(1, wordPoint >= inGame.groundPt);
+            else
+                SetBuildBtninteractable(1, false);
+        }
         //fence
         if (inGame.isFence)
-            SetBuildBtninteractable(2, wordPoint >= inGame.fencePt);
+        {
+            if (!isObjBuildBtnClickable)
+                SetBuildBtninteractable(2, false);
+            else if (inGame.builderInRun.objBuildInGame < inGame.builderInRun.objBuildInGameLimit)
+                SetBuildBtninteractable(2, wordPoint >= inGame.fencePt);
+            else
+                SetBuildBtninteractable(2, false);
+        }
         //slime
         if (inGame.isSlime)
-            SetBuildBtninteractable(3, wordPoint >= inGame.slimePt);
+        {
+            if (!isObjBuildBtnClickable)
+                SetBuildBtninteractable(3, false);
+            else if (inGame.builderInRun.objBuildInGame < inGame.builderInRun.objBuildInGameLimit)
+                SetBuildBtninteractable(3, wordPoint >= inGame.slimePt);
+            else
+                SetBuildBtninteractable(3, false);
+        }
     }
     private void SetBuildBtninteractable(int buildBtnNo, bool isActive)
     {
         canvasGroupFunc.ModifyCG(builBtnCG[buildBtnNo], 1, isActive, true);
+    }
+    private void SetRunBtn(bool isEnable)
+    {
+        isObjBuildBtnClickable = isEnable;
+        if (!isEnable)
+            objBuildCooldownNum = 0;
+    }
+
+    public void Death(bool isReal)
+    {
+        if (!isReal)
+            gameMenuUiAnim.SetTrigger("death");
+    }
+
+    public void Revive()
+    {
+        if (!isRunGame)
+            gameMenuUiAnim.SetTrigger("info");
+        else
+            gameMenuUiAnim.SetTrigger("infoHp");
     }
 
     //USED () - in ladder btn
@@ -367,6 +429,7 @@ public class GameMenuUi : MonoBehaviour
     {
         inGame.BuildFence();
         wordPoint -= inGame.fencePt;
+        SetRunBtn(false);
         SetWordPointEvent();
         CloseActionMenu();
     }
@@ -375,6 +438,7 @@ public class GameMenuUi : MonoBehaviour
     {
         inGame.BuildSlime();
         wordPoint -= inGame.slimePt;
+        SetRunBtn(false);
         SetWordPointEvent();
         CloseActionMenu();
     }
@@ -392,19 +456,26 @@ public class GameMenuUi : MonoBehaviour
         ResetAlphabetWordBtnClick();
         GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
-        GameManager.instance.PauseGame(false);
+        //GameManager.instance.PauseGame(false);
         GameManager.instance.BackToHome();
         Debug.Log("game menu ui hide");
     }
 
-    //USED () - in home btn
-    public void FinishGame()
+    //TODO () - when win or real die
+    //USED () - dieWindow, giveUpBtn, or after win in player script
+    public void FinishGame(bool isBackToHome)
     {
         ResetAlphabetWordBtnClick();
-        GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
-        GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
-        GameManager.instance.PauseGame(false);
-        GameManager.instance.FinishGame();
+        //GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
+        //GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
+        //GameManager.instance.PauseGame(false);
+        GameManager.instance.FinishGame(isBackToHome);
+    }
+
+    //USED () - continuebookbtn, continuesadsbtn
+    public void ContinueAfterDeathBtn(bool isAds)
+    {
+        GameManager.instance.ContinueAfterDeath(isAds);
     }
 
     //setting window--------------------------
