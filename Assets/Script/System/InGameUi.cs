@@ -19,6 +19,10 @@ public class InGameUi : MonoBehaviour
     [SerializeField] private Vector3 prevPlayerLinePos;
     [SerializeField] private GameObject startLine, endLine, playerLine;
     [SerializeField] private TextMeshProUGUI dangerText;
+    //  0               1       
+    //alphabet    monster/water
+    public Sprite[] deathSprite;
+    public Sprite winSprite;
     // Start is called before the first frame update
     void Start()
     {

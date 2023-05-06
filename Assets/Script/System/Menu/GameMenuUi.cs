@@ -20,10 +20,13 @@ public class GameMenuUi : MonoBehaviour
     public Image hpImg;
     public Sprite[] hpSprite;
     public Animator gameMenuUiAnim;
+    public GameObject buildCooldownObj;
+    public TextMeshProUGUI buildCooldownText;
     public CanvasGroup[] builBtnCG;
     public Image[] buildBtnImg;
     public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
     public Slider musicSlider, soundSlider;
+    [SerializeField] private Image deathImg, winImg;
     [SerializeField] private TextMeshProUGUI pointText;
     [SerializeField] private TextMeshProUGUI[] buildText;
     [SerializeField] private TextAsset wordList;
@@ -59,7 +62,7 @@ public class GameMenuUi : MonoBehaviour
             //stop countdown
             if (isObjBuildBtnClickable)
                 return;
-            objBuildCooldownNum++;
+            SetBuildCooldown();
             if (objBuildCooldownNum >= objBuildCooldownDuration)
             {
                 SetRunBtn(true);
@@ -74,9 +77,17 @@ public class GameMenuUi : MonoBehaviour
         inGame = GameManager.instance.inGame;
         isRunGame = isRun;
         if (!isRun)
+        {
+            //for drowned game
             gameMenuUiAnim.SetTrigger("info");
+            buildCooldownObj.SetActive(false);
+        }
         else
+        {
+            //for run game
             gameMenuUiAnim.SetTrigger("infoHp");
+            buildCooldownObj.SetActive(true);
+        }
         SetCharUIInfo();
         SetCharUIAction();
         SetCharUiWord();
@@ -99,6 +110,12 @@ public class GameMenuUi : MonoBehaviour
             buildText[buildBtnNo].text = point.ToString();
             buildBtnImg[buildBtnNo].sprite = inGame.builderSprite[buildBtnNo];
         }
+    }
+
+    private void SetBuildCooldown()
+    {
+        objBuildCooldownNum++;
+        buildCooldownText.text = (2 - objBuildCooldownNum / 50).ToString();
     }
 
     //add char in player
@@ -398,6 +415,19 @@ public class GameMenuUi : MonoBehaviour
     {
         if (!isReal)
             gameMenuUiAnim.SetTrigger("death");
+        else
+        {
+            switch (player.deathScenario)
+            {
+                case "alphabet":
+                    deathImg.sprite = GameManager.instance.inGameUi.deathSprite[0];
+                    break;
+                default:
+                    deathImg.sprite = GameManager.instance.inGameUi.deathSprite[1];
+                    break;
+            }
+            gameMenuUiAnim.SetTrigger("realDeath");
+        }
     }
 
     public void Revive()
@@ -406,6 +436,13 @@ public class GameMenuUi : MonoBehaviour
             gameMenuUiAnim.SetTrigger("info");
         else
             gameMenuUiAnim.SetTrigger("infoHp");
+    }
+
+    public void Win()
+    {
+        gameMenuUiAnim.SetTrigger("win");
+        Debug.Log("win window");
+        FinishGame(false);
     }
 
     //USED () - in ladder btn
@@ -450,7 +487,7 @@ public class GameMenuUi : MonoBehaviour
 
     }
 
-    //USED () - in home btn
+    //USED () - in home btn, home btn in winWindow
     public void BackToHome()
     {
         ResetAlphabetWordBtnClick();
@@ -462,7 +499,7 @@ public class GameMenuUi : MonoBehaviour
     }
 
     //TODO () - when win or real die
-    //USED () - dieWindow, giveUpBtn, or after win in player script
+    //USED () - dieWindow, giveUpBtn, homeBtn
     public void FinishGame(bool isBackToHome)
     {
         ResetAlphabetWordBtnClick();
@@ -476,6 +513,12 @@ public class GameMenuUi : MonoBehaviour
     public void ContinueAfterDeathBtn(bool isAds)
     {
         GameManager.instance.ContinueAfterDeath(isAds);
+    }
+
+    //USED () - continuebtn in winWindow
+    public void ContinueNextStage()
+    {
+        GameManager.instance.ContinueNextStage();
     }
 
     //setting window--------------------------

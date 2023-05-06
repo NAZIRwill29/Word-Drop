@@ -1360,9 +1360,11 @@ MonoBehaviour:
   isSlime: 1
   ladderPt: 1
   groundPt: 2
-  fencePt: 1
-  slimePt: 2
+  fencePt: 3
+  slimePt: 4
   dangerDist: 0
+  nextStageName: StageDrowned
+  nextStageMode: 1
   playerPos: 0
   waterPos: 0
   monsterPos: 0
@@ -6721,9 +6723,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2120178772}
     - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+      propertyPath: timeLeft
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+      propertyPath: winSprite
+      value: 
+      objectReference: {fileID: 442854044, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
+    - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: isTimeScore
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+      propertyPath: deathSprite.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+      propertyPath: deathSprite.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
+    - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
+      propertyPath: deathSprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: bb51334c6930f864abac38001f7bdf6e, type: 3}
     - target: {fileID: 4443392489956021380, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: m_IsActive
       value: 0

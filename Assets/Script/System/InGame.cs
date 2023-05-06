@@ -15,6 +15,9 @@ public class InGame : MonoBehaviour
     public bool isLadder, isGround, isFence, isSlime;
     public int ladderPt = 6, groundPt = 3, fencePt = 3, slimePt = 4;
     public float dangerDist;
+    //next stage detail
+    public string nextStageName;
+    public int nextStageMode;
     [SerializeField] private float playerPos, waterPos, monsterPos;
     //  0       1       2       3
     //ladder  ground  fence   slime

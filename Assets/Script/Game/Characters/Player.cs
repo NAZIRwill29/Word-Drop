@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D playerRB;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     [SerializeField] private GameMenuUi gameMenuUi;
+    [SerializeField] private Animator playerAnim;
     public int hp = 3;
     public float speed = 0.01f;
     //LifeLine
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     public int levelPlayer = 1, charMaxNo = 10, dieNum, bookNum;
     public float objHeight;
     [SerializeField] private int playerMode;
-    private string deathScenario;
+    public string deathScenario;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +62,15 @@ public class Player : MonoBehaviour
             return;
         //immunedamage for few second in start game
         if (immuneDamageCount < immuneDamageDuration)
+        {
             immuneDamageCount++;
+            playerAnim.SetBool("shield", true);
+        }
         else
+        {
             isImmuneDamage = false;
+            playerAnim.SetBool("shield", false);
+        }
     }
 
     public void StartGame(int mode)
@@ -74,6 +81,7 @@ public class Player : MonoBehaviour
         ChangeImmuneDamage(true);
         hp = 3;
         gameMenuUi.SetHpUI();
+        isHasWin = false;
     }
     public void FinishGame()
     {
@@ -419,13 +427,13 @@ public class Player : MonoBehaviour
     private IEnumerator WinStatic()
     {
         yield return new WaitForSeconds(1);
-        gameMenuUi.FinishGame(false);
+        gameMenuUi.Win();
     }
     //TODO () -
     private IEnumerator WinRun()
     {
         yield return new WaitForSeconds(1);
-        gameMenuUi.FinishGame(false);
+        gameMenuUi.Win();
     }
 
     //player game mode - call in gamemanager

@@ -136,14 +136,14 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator InBackToHome()
     {
-        yield return StartCoroutine(mainMenuUI.ShowAnim());
         yield return StartCoroutine(InBackToHomeEvent());
+        yield return StartCoroutine(mainMenuUI.ShowAnim());
     }
     private IEnumerator InBackToHomeEvent()
     {
-        yield return new WaitForSeconds(0);
         SceneManager.LoadScene("MainMenu");
         OnMainMenu();
+        yield return new WaitForSeconds(0.1f);
     }
 
     //TODO - make start game
@@ -219,6 +219,12 @@ public class GameManager : MonoBehaviour
         {
             adsMediate.ShowRewarded();
         }
+    }
+
+    public void ContinueNextStage()
+    {
+        SaveState();
+        StartGame(inGame.nextStageName, inGame.nextStageMode);
     }
 
     //revive player
