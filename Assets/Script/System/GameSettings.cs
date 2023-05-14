@@ -5,16 +5,48 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour
 {
     public AudioSource mainCameraAudioSource;
-    public float musicVolume, soundVolume;
+    public AudioClip mainCameraAudioClip;
+    public float musicVolume = 1, soundVolume = 1;
+    public bool isSoundOn = true, isMusicOn = true;
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    public void TurnOnOffSoundVolume(bool isWantOn)
+    public void ChangeMusicBackground(bool isInGame, int index)
     {
-        //TODO () - set all sound volume inGame
+        Debug.Log("change music background");
+        if (isInGame)
+            mainCameraAudioSource.clip = GameManager.instance.inGame.inGameAudioClip[index];
+        else
+            mainCameraAudioSource.clip = mainCameraAudioClip;
+        mainCameraAudioSource.Play();
+    }
+
+    public void TurnOnMusicVolume(bool isOn)
+    {
+        isMusicOn = isOn;
+        //Debug.Log("change isMusicOn = " + isMusicOn);
+        MuteMusicVolumeSystem();
+    }
+    public void MuteMusicVolumeSystem()
+    {
+        mainCameraAudioSource.mute = !isMusicOn;
+    }
+
+    public void TurnOnSoundVolume(bool isOn)
+    {
+        isSoundOn = isOn;
+        MuteSoundVolumeEvent();
+    }
+    public void MuteSoundVolumeEvent()
+    {
+        if (GameManager.instance.inGame)
+            GameManager.instance.inGame.TurnOnOffInGameSound(!isSoundOn);
+        GameManager.instance.player.playerAudioSource.mute = !isSoundOn;
+        GameManager.instance.gameMenuUi.gameMenuUiAudioSource.mute = !isSoundOn;
+        GameManager.instance.mainMenuUI.mainMenuUIAudioSource.mute = !isSoundOn;
     }
 
     //change music volume
@@ -34,17 +66,23 @@ public class GameSettings : MonoBehaviour
     public void MusicSystem()
     {
         mainCameraAudioSource.volume = musicVolume;
+        MuteMusicVolumeSystem();
     }
 
     public void SoundSystem()
     {
-        //TODO () - set all sound volume inGame
+        if (GameManager.instance.inGame)
+            GameManager.instance.inGame.ChangeSoundVolume(soundVolume);
+        GameManager.instance.player.playerAudioSource.volume = soundVolume;
+        GameManager.instance.gameMenuUi.gameMenuUiAudioSource.volume = soundVolume;
+        GameManager.instance.mainMenuUI.mainMenuUIAudioSource.volume = soundVolume;
+        MuteSoundVolumeEvent();
     }
 
-    //TODO () - used when set according to savedData
+    // used when set according to savedData
     public void UpdateMenuVolumeSetting()
     {
-        GameManager.instance.mainMenuUI.UpdateSoundSetting(musicVolume, soundVolume);
-        GameManager.instance.gameMenuUi.UpdateSoundSetting(musicVolume, soundVolume);
+        GameManager.instance.mainMenuUI.UpdateSoundSetting(musicVolume, soundVolume, isMusicOn, isSoundOn);
+        GameManager.instance.gameMenuUi.UpdateSoundSetting(musicVolume, soundVolume, isMusicOn, isSoundOn);
     }
 }

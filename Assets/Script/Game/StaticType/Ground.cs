@@ -14,7 +14,7 @@ public class Ground : MonoBehaviour
     [SerializeField]
     private int hp = 3;
     [SerializeField]
-    private Grounds Grounds;
+    private Grounds grounds;
     public SpriteRenderer groundSR;
     //physic
     // public Collider2D groundColl;
@@ -45,7 +45,7 @@ public class Ground : MonoBehaviour
         //avoid out of bound
         if (num >= 0)
             //change sprite
-            groundSR.sprite = Grounds.groundSprite[num];
+            groundSR.sprite = grounds.groundSprite[num];
         if (num > 0)
         {
             //set to normal state
@@ -58,7 +58,11 @@ public class Ground : MonoBehaviour
             //set to abnormal state - raise it to block player from walk
             //Debug.Log("abnormal state ground");
             if (groundType != 0)
+            {
+                grounds.groundManager.PlaySoundDamage();
                 SetSpike(true);
+            }
+
         }
     }
 

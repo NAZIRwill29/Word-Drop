@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public AudioSource monsterAudioSource;
+    //     0           1          2        3
+    //  damage    damageAnger  slime    attack    
+    [SerializeField] private AudioClip[] monsterAudioClip;
     private bool isImmune, isHasBegin, isMonsterBeginEvent;
     public bool isForeverChangeState;
     public string objType = "Monster";
@@ -20,6 +24,7 @@ public class Monster : MonoBehaviour
     public Sprite[] monsterSprite;
     public SpriteRenderer monsterSR;
     public float objHeight;
+    private float lastSlowObjSound, TimeSlowObjSoundCooldown = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,17 +82,19 @@ public class Monster : MonoBehaviour
     {
         if (isImmune)
             return;
-        transform.position -= new Vector3(0, fallBackDist / 4 * dmg1.damageAmount, 0);
+        PlaySoundDamage();
+        transform.position -= new Vector3(0, fallBackDist / 8 * dmg1.damageAmount, 0);
         hpChange += 1;
         SetMonsterState();
     }
 
-    //monster recovery by thing - increase speed
+    //monster recovery by thing - make monster anger - increase speed
     public void ObjRecovery(Damage dmg1)
     {
         if (isImmune)
             return;
-        transform.position -= new Vector3(0, fallBackDist / 4, 0);
+        PlaySoundDamageAnger();
+        transform.position -= new Vector3(0, fallBackDist / 8, 0);
         hpChange -= 1;
         SetMonsterState();
     }
@@ -98,13 +105,19 @@ public class Monster : MonoBehaviour
         if (isImmune)
             return;
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
+        if (Time.time - lastSlowObjSound > TimeSlowObjSoundCooldown)
+        {
+            lastSlowObjSound = Time.time;
+            PlaySoundDamage();
+            hpChange -= 1;
+        }
     }
 
     private void SetMonsterState()
     {
         //TODO () - set sprite, speed, damage monster
         //0 123
-        if (hpChange < 1)
+        if (hpChange < 0)
         {
             //speedy / rage state
             monsterSR.sprite = monsterSprite[2];
@@ -116,7 +129,7 @@ public class Monster : MonoBehaviour
             else
                 ChangeSpeed(0.9f);
         }
-        else if (hpChange > 3)
+        else if (hpChange > 4)
         {
             //slower state
             monsterSR.sprite = monsterSprite[1];
@@ -136,7 +149,7 @@ public class Monster : MonoBehaviour
     private IEnumerator ResetMonsterStateDelay()
     {
         //10 second
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         hpChange = 2;
         SetMonsterState();
     }
@@ -164,5 +177,24 @@ public class Monster : MonoBehaviour
     {
         speed = num;
     }
+
+    //play sound -------------------------------------------
+    public void PlaySoundDamage()
+    {
+        monsterAudioSource.PlayOneShot(monsterAudioClip[0]);
+    }
+    public void PlaySoundDamageAnger()
+    {
+        monsterAudioSource.PlayOneShot(monsterAudioClip[1]);
+    }
+    public void PlaySoundSlime()
+    {
+        monsterAudioSource.PlayOneShot(monsterAudioClip[2]);
+    }
+    public void PlaySoundAttack()
+    {
+        monsterAudioSource.PlayOneShot(monsterAudioClip[3]);
+    }
+    //----------------------------------------------------
 
 }

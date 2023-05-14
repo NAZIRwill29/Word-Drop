@@ -19,6 +19,7 @@ public class ObjByPlayer : DropObject
 
     void Update()
     {
+        //safety execution of not trigger when hit monster
         if (transform.position.y < monsterObj.transform.position.y)
         {
             ShowObj(false);

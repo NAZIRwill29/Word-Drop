@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static GameObject canvasMainInstance;
     public CanvasGroupFunc canvasGroupFunc;
     public Boundary boundary;
-    public Data gameData = new Data();
+    public Data gameData = new Data() { musicVolume = 1, soundVolume = 1 };
     //save
     public CloudSave cloudSave;
     //authenticate
@@ -27,8 +28,12 @@ public class GameManager : MonoBehaviour
     public InGame inGame;
     public InGameUi inGameUi;
     public Sprite[] alphabetSprite, reverseAlphabetSprite;
+    //data to be saved
     public int passStageNo;
+    public int coin;
+    //public int coin, diamond, skinIndexBought;
     //variable
+    public bool isHasFirstOpen;
     public bool isStartGame;
     public bool isPauseGame = true;
     private bool isCanShowAds;
@@ -36,6 +41,7 @@ public class GameManager : MonoBehaviour
     //awake
     void Awake()
     {
+        Debug.Log("awake");
         //check if have instance
         if (GameManager.instance != null)
         {
@@ -78,7 +84,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SetMainMenu(bool isInstance)
     {
-        OnMainMenu();
         if (isInstance)
         {
             //set stage if instance != null
@@ -93,16 +98,19 @@ public class GameManager : MonoBehaviour
             yield return StartCoroutine(LoadData());
             //yield return StartCoroutine(TurnOnStageButton());
             yield return StartCoroutine(UpdatePlayerInfoInStart());
+            if (!isHasFirstOpen)
+                StartCoroutine(CloseFirstScene());
         }
+        OnMainMenu();
     }
 
     //coroutine for setStage
     private IEnumerator DestroyGameObject()
     {
-        yield return new WaitForSeconds(0);
         //Destroy(gameObject);
         Destroy(dontDestroyGameObject);
         Debug.Log("destroy game object");
+        yield return new WaitForSeconds(0);
     }
     private IEnumerator LoadData()
     {
@@ -117,14 +125,24 @@ public class GameManager : MonoBehaviour
         //TODO () - update player info
     }
 
+    private IEnumerator CloseFirstScene()
+    {
+        yield return new WaitForSeconds(0.3f);
+        mainMenuUI.firstScreen.SetActive(false);
+        isHasFirstOpen = true;
+    }
+
     //TODO - make on main menu
     public void OnMainMenu()
     {
         isStartGame = false;
         isPauseGame = true;
         player.FinishGame();
+        player.LevelUp(true);
         //SceneManager.LoadScene("MainMenu");
         mainMenuUI.blackScreen.SetActive(true);
+        //change music based on gameSettings
+        gameSettings.ChangeMusicBackground(false, 0);
     }
 
     //back to home
@@ -142,7 +160,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator InBackToHomeEvent()
     {
         SceneManager.LoadScene("MainMenu");
-        OnMainMenu();
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -169,6 +186,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         mainMenuUI.blackScreen.SetActive(false);
         mainMenuUI.blackScreen2.SetActive(false);
+        //change music based on inGame
+        gameSettings.ChangeMusicBackground(true, 0);
     }
 
     //pause game - TODO () - used in button or start game
@@ -184,6 +203,11 @@ public class GameManager : MonoBehaviour
     public void FinishGame(bool isBackToHome)
     {
         player.FinishGame();
+        //prevent from take low pass stages
+        if (passStageNo < inGame.currentStageNo)
+            passStageNo = inGame.currentStageNo;
+        //TODO () - create stage menu - list all stage
+        PauseGame(true);
         SaveState();
         if (isBackToHome)
             BackToHome();
@@ -193,7 +217,10 @@ public class GameManager : MonoBehaviour
             isCanShowAds = false;
         }
         else
+        {
+            Debug.Log("show ads");
             isCanShowAds = true;
+        }
     }
 
     public void Death(bool isReal)
@@ -217,14 +244,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            adsMediate.ShowRewarded();
+            adsMediate.ShowRewarded("revive");
         }
     }
 
+    //continue next stage - start game in game play
     public void ContinueNextStage()
     {
         SaveState();
-        StartGame(inGame.nextStageName, inGame.nextStageMode);
+        mainMenuUI.blackScreen2.SetActive(true);
+        adsMediate.LoadInterstitial();
+        StartCoroutine(InStartGameEvent(inGame.nextStageName, inGame.nextStageMode));
+        Debug.Log("continue game");
     }
 
     //revive player
@@ -236,14 +267,22 @@ public class GameManager : MonoBehaviour
         PauseGame(false);
     }
 
-    //ingame data----------------------------------------
-    //TODO () call every scene
+    //game data----------------------------------------
+    //call every scene
     public void SaveState()
     {
         //save variable
         gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
         gameData.passStageNo = passStageNo;
-        //TODO () - assign save data
+        gameData.bookNumCollect = player.bookNum;
+        gameData.playerLevel = player.levelPlayer;
+        gameData.coin = coin;
+        //gameData.isMusicOn = gameSettings.isMusicOn;
+        //gameData.isSoundOn = gameSettings.isSoundOn;
+        gameData.musicVolume = gameSettings.musicVolume;
+        gameData.soundVolume = gameSettings.soundVolume;
+        //gameData.diamond = diamond;
+        //gameData.skinIndexBought = skinIndexBought;
         //transform instance to json
         string json = JsonUtility.ToJson(gameData);
         //method to write string to a file
@@ -253,7 +292,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Save state");
         SaveGameDataInCloud();
     }
-    //TODO () - call when open game
+    //call when open game
     public void LoadState(Scene s, LoadSceneMode mode)
     {
         gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
@@ -267,11 +306,47 @@ public class GameManager : MonoBehaviour
             string json = File.ReadAllText(path);
             //transform into SaveData instance
             Data dataLoad = JsonUtility.FromJson<Data>(json);
-            //TODO () - assign load data
-            gameData.passStageNo = passStageNo;
+            gameData = dataLoad;
+            //DebugAllData();
+            passStageNo = gameData.passStageNo;
+            player.SetBookNum(gameData.bookNumCollect);
+            player.SetPlayerLevel(gameData.playerLevel);
+            coin = gameData.coin;
+            gameSettings.ChangeMusicVolumeSystem(gameData.musicVolume);
+            gameSettings.ChangeSoundVolumeSystem(gameData.soundVolume);
+            //gameSettings.TurnOnMusicVolume(gameData.isMusicOn);
+            //gameSettings.TurnOnSoundVolume(gameData.isSoundOn);
+            //diamond = gameData.diamond;
+            //skinIndexBought = gameData.skinIndexBought;
             //make call only once only
             SceneManager.sceneLoaded -= LoadState;
         }
+    }
+    public void ResetData()
+    {
+        //gameData.isSoundOn = true;
+        //gameData.isMusicOn = true;
+        gameData.soundVolume = 1;
+        gameData.musicVolume = 1;
+        gameData.dateNow = "";
+        gameData.savedDate = "";
+        gameData.passStageNo = 0;
+        gameData.bookNumCollect = 0;
+        gameData.playerLevel = 1;
+        gameData.coin = 0;
+    }
+    private void DebugAllData()
+    {
+        //Debug.Log("isSoundOn = " + gameData.isSoundOn);
+        //Debug.Log("isMusicOn = " + gameData.isMusicOn);
+        Debug.Log("soundVolume = " + gameData.soundVolume);
+        Debug.Log("musicVolume = " + gameData.musicVolume);
+        Debug.Log("dateNow = " + gameData.dateNow);
+        Debug.Log("savedDate = " + gameData.savedDate);
+        Debug.Log("passStageNo = " + gameData.passStageNo);
+        Debug.Log("bookNumCollect = " + gameData.bookNumCollect);
+        Debug.Log("playerLevel = " + gameData.playerLevel);
+        Debug.Log("coin = " + gameData.coin);
     }
     //---------------------------------------------------
 
@@ -310,11 +385,12 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            Debug.Log("OnSceneLoaded");
             SaveState();
             //Debug.Log("OnSceneLoaded");
             gameSettings.MusicSystem();
             gameSettings.SoundSystem();
-            mainMenuUI.UpdateSoundSetting(gameSettings.musicVolume, gameSettings.soundVolume);
+            mainMenuUI.UpdateSoundSetting(gameSettings.musicVolume, gameSettings.soundVolume, gameSettings.isMusicOn, gameSettings.isSoundOn);
             if (GameObject.Find("InGame"))
             {
                 inGame = GameObject.Find("InGame").GetComponent<InGame>();
@@ -335,11 +411,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //TODO () - may use or not
+    //loading scene between scene
+    private IEnumerator LoadingSceneEvent()
+    {
+        Debug.Log("laoding show");
+        mainMenuUI.loadingScreenAnim.SetBool("show", true);
+        yield return new WaitForSeconds(1.5f);
+        mainMenuUI.loadingScreenAnim.SetBool("show", false);
+        Debug.Log("laoding hide");
+    }
+
     //set variable------------------------------------------
+    public void AddCoin(int num)
+    {
+        coin += num;
+    }
     public void SetSavedDate(string date1)
     {
         gameData.savedDate = date1;
     }
+    //use in load state and reset state
     public void SetGameData(Data data, bool isWantSave)
     {
         gameData = data;

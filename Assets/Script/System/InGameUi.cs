@@ -12,10 +12,11 @@ public class InGameUi : MonoBehaviour
     public CanvasGroup inGameUICG;
     [Tooltip("Tick one only")]
     public bool isTimeCountDown, isTimeScore, isRun;
-    [SerializeField]
-    private float timeLeft = 300;
+    [Tooltip("time for game to finish")]
+    [SerializeField] private float timeLeft = 300;
     //Run type
-    [SerializeField] private float totalRunLength, currentRunLength, totalTime;
+    [SerializeField] private float totalRunLength, currentRunLength;
+    public float totalTime;
     [SerializeField] private Vector3 prevPlayerLinePos;
     [SerializeField] private GameObject startLine, endLine, playerLine;
     [SerializeField] private TextMeshProUGUI dangerText;
@@ -45,13 +46,16 @@ public class InGameUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isPauseGame && GameManager.instance.isStartGame)
-            if (isTimeCountDown)
-                TimeCountdown();
-            else if (isTimeScore)
-                TimeScore();
-            else if (isRun)
-                UpdateMap();
+        if (GameManager.instance.player.isHasWin)
+            return;
+        if (GameManager.instance.isPauseGame || !GameManager.instance.isStartGame)
+            return;
+        if (isTimeCountDown)
+            TimeCountdown();
+        else if (isTimeScore)
+            TimeScore();
+        else if (isRun)
+            UpdateMap();
     }
 
     //danger indicator

@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Collider2D playerColl, hitBoxColl, lifeLine1Coll, lifeLine2Coll, lifeLine3Coll, lifeLine4Coll;
     public Rigidbody2D playerRB;
+    //sound
+    //  0                 1              2         3       4       5         6         7
+    //levelUp    getChar/coin/book    getDamage   immune   win   revive    death     climb
+    [SerializeField] private AudioClip[] playerAudioClip;
+    public AudioSource playerAudioSource;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     [SerializeField] private GameMenuUi gameMenuUi;
     [SerializeField] private Animator playerAnim;
@@ -99,6 +104,7 @@ public class Player : MonoBehaviour
         ChangeIsHasDie(false);
         ChangeImmuneDamage(true);
         ReturnGameModeAfterDeath();
+        PlaySoundRevive();
         hp = 3;
         gameMenuUi.SetHpUI();
         switch (deathScenario)
@@ -141,9 +147,16 @@ public class Player : MonoBehaviour
     public void ReceiveDamage(Damage dmg)
     {
         if (isImmuneDamage)
+        {
+            PlaySoundImmune();
             return;
+        }
         if (isImmune)
             return;
+        if (dmg.objType == "Spike")
+            GameManager.instance.inGame.groundManager.PlaySoundAttack1();
+        else
+            PlaySoundDamage();
         //make damage - delete char in store
         //Debug.Log("damage " + dmg.damageAmount);
         int numDeleteChar = dmg.damageAmount;
@@ -177,11 +190,15 @@ public class Player : MonoBehaviour
     public void ReceiveDamageHp(Damage dmg)
     {
         if (isImmuneDamage)
+        {
+            PlaySoundImmune();
             return;
+        }
         if (isImmune)
             return;
         if (hp > 0)
         {
+            PlaySoundDamage();
             hp--;
         }
         else
@@ -195,6 +212,7 @@ public class Player : MonoBehaviour
     {
         if (isImmune)
             return;
+        PlaySoundChar();
         alphabetsStore.Add(abc);
         //if more than char max ->  remove first char
         if (alphabetsStore.Count > charMaxNo)
@@ -202,7 +220,17 @@ public class Player : MonoBehaviour
         gameMenuUi.AddCharPlayer(abc);
     }
 
-    //TODO () - 
+    public void ReceiveBook()
+    {
+        AddBookNum(1);
+    }
+    public void ReceiveCoin(int coin)
+    {
+        GameManager.instance.AddCoin(coin);
+        gameMenuUi.SetCoinEvent();
+        PlaySoundChar();
+    }
+
     public void RemoveChar(int charIndex)
     {
         alphabetsStore.RemoveAt(charIndex);
@@ -220,6 +248,7 @@ public class Player : MonoBehaviour
     {
         if (isHasDie)
             return;
+        PlaySoundDeath();
         deathScenario = scenario;
         switch (scenario)
         {
@@ -340,10 +369,62 @@ public class Player : MonoBehaviour
         }
     }
 
-    //char container level
-    public void SetPlayerLevel(int lvl)
+    //level up
+    public void LevelUp(bool isShowOnly)
     {
-        levelPlayer = lvl;
+        int levelPlayerTemp = levelPlayer + 1;
+        switch (levelPlayerTemp)
+        {
+            case 2:
+                LevelUpEvent(10, 2, isShowOnly);
+                break;
+            case 3:
+                LevelUpEvent(20, 4, isShowOnly);
+                break;
+            case 4:
+                LevelUpEvent(40, 8, isShowOnly);
+                break;
+            case 5:
+                LevelUpEvent(80, 16, isShowOnly);
+                break;
+            case 6:
+                LevelUpEvent(160, 32, isShowOnly);
+                break;
+            default:
+                break;
+        }
+    }
+    private void LevelUpEvent(int coinNeed, int bookNeed, bool isShowOnly)
+    {
+        //check if have enough coin and book
+        if (GameManager.instance.coin < coinNeed && bookNum < bookNeed)
+        {
+            GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(false);
+            return;
+        }
+        GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(true);
+        //only exec if not show only
+        if (!isShowOnly)
+        {
+            PlaySoundLevelUp();
+            GameManager.instance.AddCoin(-coinNeed);
+            bookNum -= bookNeed;
+            levelPlayer++;
+        }
+        ManagePlayerLevel();
+    }
+
+    public void SetPlayerLevel(int num)
+    {
+        //prevent from level 0
+        if (num <= 0)
+            num = 1;
+        levelPlayer = num;
+        ManagePlayerLevel();
+    }
+    //player level
+    public void ManagePlayerLevel()
+    {
         switch (levelPlayer)
         {
             case 1:
@@ -394,6 +475,8 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(GameManager.instance.inGame.laddersObj.transform.position.x, transform.position.y, transform.position.z);
         transform.position += new Vector3(0, 0.444f, 0);
         climbNo--;
+        //TODO () - play sound climb - may need fix
+        PlaySoundClimb();
     }
 
     //win
@@ -401,6 +484,7 @@ public class Player : MonoBehaviour
     {
         if (isHasWin)
             return;
+        GameManager.instance.inGame.spawn.StopSpawn(true);
         if (isStaticGameMode)
         {
             LifeLine(0);
@@ -484,6 +568,41 @@ public class Player : MonoBehaviour
         }
     }
 
+    //play sound -------------------------------------------
+    public void PlaySoundLevelUp()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[0]);
+    }
+    public void PlaySoundChar()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[1]);
+    }
+    public void PlaySoundDamage()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[2]);
+    }
+    public void PlaySoundImmune()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[3]);
+    }
+    public void PlaySoundWin()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[4]);
+    }
+    public void PlaySoundRevive()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[5]);
+    }
+    public void PlaySoundDeath()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[6]);
+    }
+    public void PlaySoundClimb()
+    {
+        playerAudioSource.PlayOneShot(playerAudioClip[7]);
+    }
+    //----------------------------------------------------
+
     //variable
     public void ChangeSpeed(float num)
     {
@@ -514,6 +633,10 @@ public class Player : MonoBehaviour
     public void ChangeDieNum(int num)
     {
         dieNum = num;
+    }
+    public void SetBookNum(int num)
+    {
+        bookNum = num;
     }
     public void AddBookNum(int num)
     {

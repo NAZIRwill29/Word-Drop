@@ -65,10 +65,11 @@ public class AdsMediate : MonoBehaviour
 
     //TODO () - 
     //show rewarded
-    public void ShowRewarded()
+    public void ShowRewarded(string rewardType)
     {
         if (IronSource.Agent.isRewardedVideoAvailable())
         {
+            reward = rewardType;
             IronSource.Agent.showRewardedVideo();
         }
         else

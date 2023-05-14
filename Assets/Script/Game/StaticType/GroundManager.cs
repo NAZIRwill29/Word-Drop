@@ -5,14 +5,11 @@ using UnityEngine;
 public class GroundManager : MonoBehaviour
 {
     //need 13 grounds
-    [SerializeField]
-    private Grounds[] arrGrounds;
-    //TODO () - replace with gameManager-------
-    // public Player player;
-    // public Spawn spawn;
-    // public Ladders ladders;
-
-    //------------------------------
+    [SerializeField] private Grounds[] arrGrounds;
+    public AudioSource groundManagerAudioSource;
+    //  0           1           2
+    //damage    attack1     attack2
+    [SerializeField] private AudioClip[] groundManagerAudioClip;
     public float riseNum = 0.513f;
     public int currentActiveGroundNo;
     // Start is called before the first frame update
@@ -60,4 +57,19 @@ public class GroundManager : MonoBehaviour
     {
         arrGrounds[num].ChangeIsActive(isEnable);
     }
+
+    //play sound -------------------------------------------
+    public void PlaySoundDamage()
+    {
+        groundManagerAudioSource.PlayOneShot(groundManagerAudioClip[0]);
+    }
+    public void PlaySoundAttack1()
+    {
+        groundManagerAudioSource.PlayOneShot(groundManagerAudioClip[1]);
+    }
+    public void PlaySoundAttack2()
+    {
+        groundManagerAudioSource.PlayOneShot(groundManagerAudioClip[2]);
+    }
+    //----------------------------------------------------
 }

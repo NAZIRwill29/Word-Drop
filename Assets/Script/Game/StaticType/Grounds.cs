@@ -7,6 +7,7 @@ public class Grounds : MonoBehaviour
     [SerializeField]
     private Ground[] arrGround;
     public Sprite[] groundSprite;
+    public GroundManager groundManager;
     //public PhysicsMaterial2D stickyPsc, normalPsc;
     // Make ground rise
     public void GroundRise(float num)

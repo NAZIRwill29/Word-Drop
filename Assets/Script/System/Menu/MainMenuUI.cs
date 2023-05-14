@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class MainMenuUI : MonoBehaviour
 {
+    [SerializeField] Player player;
     //sound
-    //  0       1       2       3       4
+    //  0       1       2       
     //play   cancel  navigate 
-    public AudioClip[] mainMenuUIAudioClip;
+    [SerializeField] private AudioClip[] mainMenuUIAudioClip;
     public AudioSource mainMenuUIAudioSource;
     public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
-    public GameObject blackScreen, blackScreen2;
+    public GameObject blackScreen, blackScreen2, firstScreen;
     public Slider musicSlider, soundSlider;
     [SerializeField]
-    private Animator mainMenuAnim, backgroundAnim;
+    private Animator mainMenuAnim, backgroundAnim, playerInfoBtnAnim, playerLvlBtnAnim;
+    public Animator loadingScreenAnim;
+    //player info window
+    public Image playerImg;
+    public TextMeshProUGUI lvlText, hpText, abcText, coinText, bookText;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,42 +43,44 @@ public class MainMenuUI : MonoBehaviour
 
     }
 
+    //player info window----------------------
+    //USED () - in player info btn
+    public void PlayerInfoWindow()
+    {
+        //Update player info
+        //make show level up option only
+        player.LevelUp(true);
+        lvlText.text = "Lv " + player.levelPlayer;
+        hpText.text = "x" + player.hp;
+        abcText.text = "x" + player.charMaxNo;
+        coinText.text = GameManager.instance.coin.ToString();
+        bookText.text = "x" + player.bookNum;
+        GameManager.instance.gameMenuUi.SetCoinEvent();
+    }
+    public void LevelUp()
+    {
+        //levele up
+        player.LevelUp(false);
+        PlayerInfoWindow();
+    }
+    //----------------------------------------
+
     //setting window--------------------------
     //music
     public void MusicToggle(bool isWantOn)
     {
-        if (isWantOn)
-        {
-            musicBtnOn.SetActive(true);
-            musicBtnOff.SetActive(false);
-            //on music
-            GameManager.instance.gameSettings.mainCameraAudioSource.enabled = true;
-        }
-        else
-        {
-            musicBtnOn.SetActive(false);
-            musicBtnOff.SetActive(true);
-            //off music
-            GameManager.instance.gameSettings.mainCameraAudioSource.enabled = false;
-        }
+        musicBtnOn.SetActive(isWantOn);
+        musicBtnOff.SetActive(!isWantOn);
+        //on/off music
+        GameManager.instance.gameSettings.TurnOnMusicVolume(isWantOn);
     }
     //sound effect
     public void SoundToggle(bool isWantOn)
     {
-        if (isWantOn)
-        {
-            SoundBtnOn.SetActive(true);
-            SoundBtnOff.SetActive(false);
-            //on sound
-            GameManager.instance.gameSettings.TurnOnOffSoundVolume(true);
-        }
-        else
-        {
-            SoundBtnOn.SetActive(false);
-            SoundBtnOff.SetActive(true);
-            //off sound
-            GameManager.instance.gameSettings.TurnOnOffSoundVolume(false);
-        }
+        SoundBtnOn.SetActive(isWantOn);
+        SoundBtnOff.SetActive(!isWantOn);
+        //on/off sound
+        GameManager.instance.gameSettings.TurnOnSoundVolume(isWantOn);
     }
     //USED IN () - credit button
     public void CreditButton()
@@ -96,10 +104,14 @@ public class MainMenuUI : MonoBehaviour
     }
 
     //update sound setting
-    public void UpdateSoundSetting(float musicVolume, float soundVolume)
+    public void UpdateSoundSetting(float musicVolume, float soundVolume, bool isMusicOn, bool isSoundOn)
     {
         musicSlider.value = musicVolume;
         soundSlider.value = soundVolume;
+        musicBtnOn.SetActive(isMusicOn);
+        musicBtnOff.SetActive(!isMusicOn);
+        SoundBtnOn.SetActive(isSoundOn);
+        SoundBtnOff.SetActive(!isSoundOn);
     }
 
     //animation-------------------------------------------
@@ -109,6 +121,7 @@ public class MainMenuUI : MonoBehaviour
         mainMenuAnim.SetTrigger("show");
         backgroundAnim.SetTrigger("show");
         Debug.Log("main menu show");
+        GameManager.instance.OnMainMenu();
     }
     public IEnumerator HideAnim()
     {
@@ -118,6 +131,13 @@ public class MainMenuUI : MonoBehaviour
         Debug.Log("main menu hide");
     }
     //---------------------------------------------------
+
+    //set player lvl upgrade notice
+    public void SetPlayerUpgradeNotice(bool isUpgradable)
+    {
+        playerInfoBtnAnim.SetBool("upgradable", isUpgradable);
+        playerLvlBtnAnim.SetBool("upgradable", isUpgradable);
+    }
 
     //play sound -------------------------------------------
     public void PlaySoundPlay()

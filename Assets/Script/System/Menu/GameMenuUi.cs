@@ -6,6 +6,11 @@ using TMPro;
 
 public class GameMenuUi : MonoBehaviour
 {
+    //sound
+    //  0          1
+    //word      build
+    [SerializeField] private AudioClip[] gameMenuUiAudioClip;
+    public AudioSource gameMenuUiAudioSource;
     [SerializeField] private Player player;
     private CanvasGroupFunc canvasGroupFunc;
     private InGame inGame;
@@ -20,8 +25,9 @@ public class GameMenuUi : MonoBehaviour
     public Image hpImg;
     public Sprite[] hpSprite;
     public Animator gameMenuUiAnim;
-    public GameObject buildCooldownObj;
+    public CanvasGroup buildCooldownCG;
     public TextMeshProUGUI buildCooldownText;
+    public GameObject completeLadderImg;
     public CanvasGroup[] builBtnCG;
     public Image[] buildBtnImg;
     public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
@@ -29,6 +35,7 @@ public class GameMenuUi : MonoBehaviour
     [SerializeField] private Image deathImg, winImg;
     [SerializeField] private TextMeshProUGUI pointText;
     [SerializeField] private TextMeshProUGUI[] buildText;
+    [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextAsset wordList;
     private List<string> words;
     private string letterCombine;
@@ -62,12 +69,9 @@ public class GameMenuUi : MonoBehaviour
             //stop countdown
             if (isObjBuildBtnClickable)
                 return;
-            SetBuildCooldown();
-            if (objBuildCooldownNum >= objBuildCooldownDuration)
-            {
-                SetRunBtn(true);
-                SetBuildBtnsInteracteable();
-            }
+            if (objBuildCooldownNum < objBuildCooldownDuration)
+                objBuildCooldownNum++;
+            //SetBuildCooldown();
         }
     }
 
@@ -80,19 +84,31 @@ public class GameMenuUi : MonoBehaviour
         {
             //for drowned game
             gameMenuUiAnim.SetTrigger("info");
-            buildCooldownObj.SetActive(false);
+            ShowBuildCooldownObj(false);
         }
         else
         {
             //for run game
             gameMenuUiAnim.SetTrigger("infoHp");
-            buildCooldownObj.SetActive(true);
+            //ShowBuildCooldownObj(true);
         }
         SetCharUIInfo();
         SetCharUIAction();
         SetCharUiWord();
         SetBuildBtnsActive();
-        SetBuildBtnsInteracteable();
+        //SetBuildBtnsInteracteable();
+    }
+
+    //action menu
+    public void SetActionMenu()
+    {
+        SetCoinEvent();
+        SetBuildCooldown();
+        if (objBuildCooldownNum >= objBuildCooldownDuration)
+        {
+            SetRunBuildBtn(true);
+            SetBuildBtnsInteracteable();
+        }
     }
     //set build button active event
     private void SetBuildBtnsActive()
@@ -114,8 +130,28 @@ public class GameMenuUi : MonoBehaviour
 
     private void SetBuildCooldown()
     {
-        objBuildCooldownNum++;
-        buildCooldownText.text = (2 - objBuildCooldownNum / 50).ToString();
+        if (objBuildCooldownNum < objBuildCooldownDuration)
+        {
+            ShowBuildCooldownObj(true);
+            buildCooldownText.text = (2 - objBuildCooldownNum / 50).ToString();
+        }
+        else
+            ShowBuildCooldownObj(false);
+    }
+
+    //show build cooldown obj in game menu ui
+    private void ShowBuildCooldownObj(bool isShow)
+    {
+        if (isShow)
+        {
+            GameManager.instance.canvasGroupFunc.ModifyCG(buildCooldownCG, 1, isShow, isShow);
+            Debug.Log("build cooldown show");
+        }
+        else
+        {
+            GameManager.instance.canvasGroupFunc.ModifyCG(buildCooldownCG, 0, isShow, isShow);
+            Debug.Log("build cooldown hide");
+        }
     }
 
     //add char in player
@@ -255,6 +291,7 @@ public class GameMenuUi : MonoBehaviour
     public void CloseActionMenu()
     {
         ResetAlphabetWordBtnClick();
+        GameManager.instance.inGame.spawn.ResetLastTimeSpawn();
         if (!isRunGame)
             gameMenuUiAnim.SetTrigger("info");
         else
@@ -325,7 +362,11 @@ public class GameMenuUi : MonoBehaviour
         //reward combine letter to word
         if (CheckWordExist(letterCombine))
         {
+            PlaySoundWord();
+            //add word pt 
             wordPoint += letterCombine.Length;
+            //add coin event
+            WordToCoin();
             //player.PlaySoundWord();
             //give point based on number of char in word
             Debug.Log("give " + wordPoint + " points");
@@ -347,6 +388,24 @@ public class GameMenuUi : MonoBehaviour
         return words.Contains(word);
     }
 
+    //add coin event
+    public void WordToCoin()
+    {
+        //if word is 4 - produce coin
+        if (letterCombine.Length >= 4)
+        {
+            //get coin for letter length >= 4 --- 4 letter = 1 coin
+            GameManager.instance.AddCoin((int)(letterCombine.Length / 4));
+            player.PlaySoundChar();
+            SetCoinEvent();
+        }
+    }
+    //TODO () - set coin in gamemenu - coin info
+    public void SetCoinEvent()
+    {
+        coinText.text = "$" + GameManager.instance.coin.ToString();
+    }
+
     //set word point event - set word pt text
     public void SetWordPointEvent()
     {
@@ -354,6 +413,13 @@ public class GameMenuUi : MonoBehaviour
         pointText.text = wordPoint.ToString();
         //set build button availability
         SetBuildBtnsInteracteable();
+    }
+
+    //reset word point event
+    public void ResetWordPointEvent()
+    {
+        wordPoint = 0;
+        SetWordPointEvent();
     }
 
     //check build button availability - set clickable or not
@@ -364,10 +430,16 @@ public class GameMenuUi : MonoBehaviour
         {
             //if ladders complete
             if (!inGame.ladders.isCompleted)
+            {
                 //check if word point more than point needed
                 SetBuildBtninteractable(0, wordPoint >= inGame.ladderPt);
+                completeLadderImg.SetActive(false);
+            }
             else
+            {
                 SetBuildBtninteractable(0, false);
+                completeLadderImg.SetActive(true);
+            }
         }
         //ground
         if (inGame.isGround)
@@ -382,6 +454,8 @@ public class GameMenuUi : MonoBehaviour
         //fence
         if (inGame.isFence)
         {
+            //off the complete ladder img
+            completeLadderImg.SetActive(false);
             if (!isObjBuildBtnClickable)
                 SetBuildBtninteractable(2, false);
             else if (inGame.builderInRun.objBuildInGame < inGame.builderInRun.objBuildInGameLimit)
@@ -404,7 +478,7 @@ public class GameMenuUi : MonoBehaviour
     {
         canvasGroupFunc.ModifyCG(builBtnCG[buildBtnNo], 1, isActive, true);
     }
-    private void SetRunBtn(bool isEnable)
+    private void SetRunBuildBtn(bool isEnable)
     {
         isObjBuildBtnClickable = isEnable;
         if (!isEnable)
@@ -443,11 +517,15 @@ public class GameMenuUi : MonoBehaviour
         gameMenuUiAnim.SetTrigger("win");
         Debug.Log("win window");
         FinishGame(false);
+        player.PlaySoundWin();
+        //change music background to win theme
+        GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
     }
 
     //USED () - in ladder btn
     public void BuildLadder()
     {
+        PlaySoundBuild();
         inGame.BuildLadder();
         //pay with word pt
         wordPoint -= inGame.ladderPt;
@@ -457,6 +535,7 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in ground btn
     public void BuildGround()
     {
+        PlaySoundBuild();
         inGame.BuildGround();
         wordPoint -= inGame.groundPt;
         SetWordPointEvent();
@@ -464,20 +543,24 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in fence btn
     public void BuildFence()
     {
+        PlaySoundBuild();
         inGame.BuildFence();
         wordPoint -= inGame.fencePt;
-        SetRunBtn(false);
+        SetRunBuildBtn(false);
         SetWordPointEvent();
         CloseActionMenu();
+        objBuildCooldownNum = 0;
     }
     //USED () - in slime btn
     public void BuildSlime()
     {
+        PlaySoundBuild();
         inGame.BuildSlime();
         wordPoint -= inGame.slimePt;
-        SetRunBtn(false);
+        SetRunBuildBtn(false);
         SetWordPointEvent();
         CloseActionMenu();
+        objBuildCooldownNum = 0;
     }
 
     //USED () - in setting btn
@@ -525,39 +608,18 @@ public class GameMenuUi : MonoBehaviour
     //music
     public void MusicToggle(bool isWantOn)
     {
-        if (isWantOn)
-        {
-            musicBtnOn.SetActive(true);
-            musicBtnOff.SetActive(false);
-            //on music
-            GameManager.instance.gameSettings.mainCameraAudioSource.enabled = true;
-        }
-        else
-        {
-            musicBtnOn.SetActive(false);
-            musicBtnOff.SetActive(true);
-            //off music
-            GameManager.instance.gameSettings.mainCameraAudioSource.enabled = false;
-        }
+        musicBtnOn.SetActive(isWantOn);
+        musicBtnOff.SetActive(!isWantOn);
+        //on/off music
+        GameManager.instance.gameSettings.TurnOnMusicVolume(isWantOn);
     }
-
     //sound effect
     public void SoundToggle(bool isWantOn)
     {
-        if (isWantOn)
-        {
-            SoundBtnOn.SetActive(true);
-            SoundBtnOff.SetActive(false);
-            //on sound
-            GameManager.instance.gameSettings.TurnOnOffSoundVolume(true);
-        }
-        else
-        {
-            SoundBtnOn.SetActive(false);
-            SoundBtnOff.SetActive(true);
-            //off sound
-            GameManager.instance.gameSettings.TurnOnOffSoundVolume(false);
-        }
+        SoundBtnOn.SetActive(isWantOn);
+        SoundBtnOff.SetActive(!isWantOn);
+        //on/off sound
+        GameManager.instance.gameSettings.TurnOnSoundVolume(isWantOn);
     }
 
     //USED IN () - musicSlide
@@ -572,10 +634,25 @@ public class GameMenuUi : MonoBehaviour
     }
 
     //update sound setting
-    public void UpdateSoundSetting(float musicVolume, float soundVolume)
+    public void UpdateSoundSetting(float musicVolume, float soundVolume, bool isMusicOn, bool isSoundOn)
     {
         musicSlider.value = musicVolume;
         soundSlider.value = soundVolume;
+        musicBtnOn.SetActive(isMusicOn);
+        musicBtnOff.SetActive(!isMusicOn);
+        SoundBtnOn.SetActive(isSoundOn);
+        SoundBtnOff.SetActive(!isSoundOn);
     }
+
+    //play sound -------------------------------------------
+    public void PlaySoundWord()
+    {
+        gameMenuUiAudioSource.PlayOneShot(gameMenuUiAudioClip[0]);
+    }
+    public void PlaySoundBuild()
+    {
+        gameMenuUiAudioSource.PlayOneShot(gameMenuUiAudioClip[1]);
+    }
+    //----------------------------------------------------
 
 }

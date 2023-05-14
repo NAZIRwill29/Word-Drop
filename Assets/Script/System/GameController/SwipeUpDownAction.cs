@@ -37,6 +37,8 @@ public class SwipeUpDownAction : MonoBehaviour
                         //TODO () - make word menu appear -> make isActionValid = true after close
                         Debug.Log("word menu appear");
                         GameManager.instance.gameMenuUi.gameMenuUiAnim.SetTrigger("actionMenu");
+                        GameManager.instance.mainMenuUI.PlaySoundNavigate();
+                        GameManager.instance.gameMenuUi.SetActionMenu();
                         GameManager.instance.canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 0, false, false);
                         GameManager.instance.PauseGame(true);
                     }

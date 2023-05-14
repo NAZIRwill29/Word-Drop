@@ -30,6 +30,16 @@ public class HitBox : MonoBehaviour
             player.ReceiveChar(abc);
 
     }
+    public void ReceiveBook()
+    {
+        if (parentType == 0)
+            player.ReceiveBook();
+    }
+    public void ReceiveCoin(int coin)
+    {
+        if (parentType == 0)
+            player.ReceiveCoin(coin);
+    }
     public void Climb(int num)
     {
         if (parentType == 0)

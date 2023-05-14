@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    //SOLUTION () - resolve the 2 audio listener error 
+    public static GameObject mainCameraInstance;
     public GameObject playerObj;
     [SerializeField]
     private float elevation;
