@@ -1789,10 +1789,10 @@ MonoBehaviour:
   waterPos: 0
   monsterPos: 0
   builderSprite:
-  - {fileID: 496012319, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
-  - {fileID: -842442772, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
-  - {fileID: -182603770, guid: 06030f79797c36e4fbccbe267e68ecc3, type: 3}
-  - {fileID: 674795365, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
+  - {fileID: 1788460580, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
+  - {fileID: -311627788, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
+  - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
+  - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
 --- !u!4 &385399426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2969480161401683158, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
@@ -10190,6 +10190,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1876517264}
     m_Modifications:
+    - target: {fileID: 649806302693393077, guid: b6a92bc746866cd4e8adad383101155c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -311627788, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
     - target: {fileID: 7135315350840182052, guid: b6a92bc746866cd4e8adad383101155c, type: 3}
       propertyPath: groundManager
       value: 
@@ -10241,6 +10245,14 @@ PrefabInstance:
     - target: {fileID: 7135315350840182059, guid: b6a92bc746866cd4e8adad383101155c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996178844778022384, guid: b6a92bc746866cd4e8adad383101155c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996178844778022384, guid: b6a92bc746866cd4e8adad383101155c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6a92bc746866cd4e8adad383101155c, type: 3}
