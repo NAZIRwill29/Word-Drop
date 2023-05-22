@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5123368635380849235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dc066d681be0d4a98c75250027df92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPos: {x: 10, y: 21, z: 0}
+  originalPos: {x: 10, y: 26, z: 0}
   dropObjRb: {fileID: 5966535117749136987}
   damage: 1
   objType: bomb

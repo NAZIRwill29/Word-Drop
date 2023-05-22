@@ -9,10 +9,9 @@ public class Ground : MonoBehaviour
     //  0         1      2
     //normal    spike   slow
     [Tooltip("0,1,2")]
-    public int groundType;
+    public int groundType, groundSerialNum;
     private Damage dmg;
-    [SerializeField]
-    private int hp = 3;
+    private int hp = 2;
     [SerializeField]
     private Grounds grounds;
     public SpriteRenderer groundSR;
@@ -44,8 +43,26 @@ public class Ground : MonoBehaviour
     {
         //avoid out of bound
         if (num >= 0)
-            //change sprite
-            groundSR.sprite = grounds.groundSprite[num];
+        {
+            //change sprite based on serial number
+            switch (groundSerialNum)
+            {
+                case 0:
+                    //change sprite
+                    groundSR.sprite = grounds.groundSprite1[num];
+                    break;
+                case 1:
+                    //change sprite
+                    groundSR.sprite = grounds.groundSprite2[num];
+                    break;
+                case 2:
+                    //change sprite
+                    groundSR.sprite = grounds.groundSprite3[num];
+                    break;
+                default:
+                    break;
+            }
+        }
         if (num > 0)
         {
             //set to normal state
