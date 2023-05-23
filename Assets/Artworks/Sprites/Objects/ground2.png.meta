@@ -719,6 +719,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: groundWood 3v2.1
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 0
+        width: 266
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4098f5f1cf26444888d2c5cd3be6819
+      internalID: -509919910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundWood 2v2.1
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 0
+        width: 266
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2adcef52992c94ab96af2741909947
+      internalID: 2008064653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundWood 1v2.1
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 0
+        width: 266
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54ebbb10bca915f4c933190d4c1208a5
+      internalID: 508606082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -752,12 +815,15 @@ TextureImporter:
       groundWood 1: -880228378
       groundWood 1v1: 840837295
       groundWood 1v2: -1182583239
+      groundWood 1v2.1: 508606082
       groundWood 2: -998154238
       groundWood 2v1: 1173428670
       groundWood 2v2: -1440784122
+      groundWood 2v2.1: 2008064653
       groundWood 3: -942810048
       groundWood 3v1: 1984991307
       groundWood 3v2: -1543275068
+      groundWood 3v2.1: -509919910
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

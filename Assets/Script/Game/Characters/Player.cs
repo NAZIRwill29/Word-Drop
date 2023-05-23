@@ -444,7 +444,7 @@ public class Player : MonoBehaviour
                 break;
             case 4:
                 charMaxNo = 14;
-                hp = 3;
+                hp = 4;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 5:
@@ -454,7 +454,7 @@ public class Player : MonoBehaviour
                 break;
             case 6:
                 charMaxNo = 20;
-                hp = 6;
+                hp = 5;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             default:

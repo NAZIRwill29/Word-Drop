@@ -4143,13 +4143,12 @@ MonoBehaviour:
   - {fileID: 1880891464}
   hpImg: {fileID: 209550217}
   hpSprite:
-  - {fileID: -2005312961, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
-  - {fileID: -573817938, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
-  - {fileID: 431985647, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
-  - {fileID: -767081431, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
-  - {fileID: -563991702, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
-  - {fileID: 1175799022, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
-  - {fileID: -1705694691, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
+  - {fileID: 224170068, guid: cbe4f1ae7c21fa44f85d8266078a5b4a, type: 3}
+  - {fileID: 1685790849, guid: cbe4f1ae7c21fa44f85d8266078a5b4a, type: 3}
+  - {fileID: -1644855511, guid: cbe4f1ae7c21fa44f85d8266078a5b4a, type: 3}
+  - {fileID: -779329979, guid: cbe4f1ae7c21fa44f85d8266078a5b4a, type: 3}
+  - {fileID: -147005314, guid: cbe4f1ae7c21fa44f85d8266078a5b4a, type: 3}
+  - {fileID: -1331545076, guid: cbe4f1ae7c21fa44f85d8266078a5b4a, type: 3}
   gameMenuUiAnim: {fileID: 300275454}
   buildCooldownCG: {fileID: 1527494304}
   buildCooldownText: {fileID: 1045128794}
