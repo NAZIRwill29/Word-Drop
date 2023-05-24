@@ -4171,6 +4171,7 @@ MonoBehaviour:
   soundSlider: {fileID: 1615863963}
   deathImg: {fileID: 1711547466}
   winImg: {fileID: 2031356412}
+  bookNumText: {fileID: 2010921976}
   pointText: {fileID: 2075689620}
   buildText:
   - {fileID: 914672808}

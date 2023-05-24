@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     public float objHeight;
     [SerializeField] private int playerMode;
     public string deathScenario;
+    //for push forward by monster
+    //private bool isPush;
+    //private int pushNum = 50;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +79,8 @@ public class Player : MonoBehaviour
             isImmuneDamage = false;
             playerAnim.SetBool("shield", false);
         }
+        //if (isPush)
+        //PushByMonster();
     }
 
     public void StartGame(int mode)
@@ -196,10 +201,12 @@ public class Player : MonoBehaviour
         }
         if (isImmune)
             return;
-        if (hp > 0)
+        if (hp > 1)
         {
             PlaySoundDamage();
             hp--;
+            //set push forward by monster
+            //StartPushByMonster();
         }
         else
         {
@@ -461,6 +468,28 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+    //start push event
+    // private void StartPushByMonster()
+    // {
+    //     isPush = true;
+    // }
+
+    //push forward by monster
+    // private void PushByMonster()
+    // {
+    //     if (pushNum > 0)
+    //     {
+    //         Debug.Log("push forward");
+    //         transform.position += new Vector3(0, 0.02f, 0);
+    //         pushNum--;
+    //     }
+    //     else
+    //     {
+    //         pushNum = 100;
+    //         isPush = false;
+    //     }
+    // }
 
     //climb ladder - how many ladder
     public void Climb(int num)

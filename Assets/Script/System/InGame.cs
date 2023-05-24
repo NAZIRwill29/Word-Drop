@@ -13,6 +13,7 @@ public class InGame : MonoBehaviour
     public GroundManager groundManager;
     public BuilderInRun builderInRun;
     public Monster monster;
+    public BackgroundManagement backgroundManagement;
     public Spawn spawn;
     public Water water;
     public bool isLadder, isGround, isFence, isSlime;
@@ -65,6 +66,8 @@ public class InGame : MonoBehaviour
         if (builderInRun)
             builderInRun.PauseGame(isPause);
         spawn.FreezeAllObjects(isPause);
+        if (backgroundManagement)
+            backgroundManagement.FreezeBackgrounds(isPause);
     }
 
     public void BuildLadder()

@@ -24,7 +24,10 @@ public class Monster : MonoBehaviour
     public Sprite[] monsterSprite;
     public SpriteRenderer monsterSR;
     public float objHeight;
-    private float lastSlowObjSound, TimeSlowObjSoundCooldown = 100;
+    private float lastSlowObjSound, TimeSlowObjSoundCooldown = 150;
+    //for push backward when hitted
+    private bool isPushByPlayer, isPushByObj;
+    private int pushPlayerNum = 75, pushObjNum = 25, multPushForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +44,18 @@ public class Monster : MonoBehaviour
         objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
-    // Update is called once per frame
-    void Update()
+    //50 frame per sec
+    void FixedUpdate()
     {
         if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
             if (isHasBegin)
+            {
+                if (isPushByPlayer)
+                    PushByPlayer();
+                if (isPushByObj)
+                    PushByObj();
                 MonsterChase();
+            }
             else
             {
                 if (!isMonsterBeginEvent)
@@ -58,6 +67,7 @@ public class Monster : MonoBehaviour
     {
         isMonsterBeginEvent = true;
         yield return new WaitForSeconds(0.5f);
+        //StartPushByPlayer();
         transform.position -= new Vector3(0, fallBackDist, 0);
         isHasBegin = true;
     }
@@ -83,7 +93,9 @@ public class Monster : MonoBehaviour
         if (isImmune)
             return;
         PlaySoundDamage();
-        transform.position -= new Vector3(0, fallBackDist / 8 * dmg1.damageAmount, 0);
+        multPushForce = dmg1.damageAmount;
+        //transform.position -= new Vector3(0, fallBackDist / 20 * dmg1.damageAmount, 0);
+        StartPushByObj();
         hpChange += 1;
         SetMonsterState();
     }
@@ -94,7 +106,9 @@ public class Monster : MonoBehaviour
         if (isImmune)
             return;
         PlaySoundDamageAnger();
-        transform.position -= new Vector3(0, fallBackDist / 8, 0);
+        multPushForce = 1;
+        //transform.position -= new Vector3(0, fallBackDist / 20, 0);
+        StartPushByObj();
         hpChange -= 1;
         SetMonsterState();
     }
@@ -110,6 +124,45 @@ public class Monster : MonoBehaviour
             lastSlowObjSound = Time.time;
             PlaySoundDamage();
             hpChange -= 1;
+        }
+    }
+
+    //start push event
+    private void StartPushByPlayer()
+    {
+        isPushByPlayer = true;
+    }
+    private void StartPushByObj()
+    {
+        isPushByObj = true;
+    }
+    //push backward
+    private void PushByPlayer()
+    {
+        if (pushPlayerNum > 0)
+        {
+            Debug.Log("push backward");
+            transform.position -= new Vector3(0, fallBackDist / 50, 0);
+            pushPlayerNum--;
+        }
+        else
+        {
+            pushPlayerNum = 75;
+            isPushByPlayer = false;
+        }
+    }
+    private void PushByObj()
+    {
+        if (pushObjNum > 0)
+        {
+            Debug.Log("push backward");
+            transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce, 0);
+            pushObjNum--;
+        }
+        else
+        {
+            pushObjNum = 25;
+            isPushByObj = false;
         }
     }
 
@@ -162,7 +215,8 @@ public class Monster : MonoBehaviour
         {
             Debug.Log("attack damage");
             coll.SendMessage("ReceiveDamageHp", dmg);
-            transform.position -= new Vector3(0, fallBackDist, 0);
+            StartPushByPlayer();
+            //transform.position -= new Vector3(0, fallBackDist, 0);
         }
         //if (Time.time - lastAttack > attackDuration)
         //{

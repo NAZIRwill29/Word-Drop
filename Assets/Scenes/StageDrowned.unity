@@ -585,6 +585,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3571373543144504339, guid: 0435efb1b6c44aa4d9796d1b928ad453, type: 3}
+      propertyPath: m_Size.x
+      value: 8.429079
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571373543144504339, guid: 0435efb1b6c44aa4d9796d1b928ad453, type: 3}
+      propertyPath: m_Size.y
+      value: 17.288582
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571373543144504339, guid: 0435efb1b6c44aa4d9796d1b928ad453, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571373543144504339, guid: 0435efb1b6c44aa4d9796d1b928ad453, type: 3}
+      propertyPath: m_Offset.y
+      value: -3.5382624
+      objectReference: {fileID: 0}
     - target: {fileID: 3571373543144504342, guid: 0435efb1b6c44aa4d9796d1b928ad453, type: 3}
       propertyPath: m_Name
       value: Water

@@ -33,7 +33,7 @@ public class GameMenuUi : MonoBehaviour
     public GameObject musicBtnOn, musicBtnOff, SoundBtnOn, SoundBtnOff;
     public Slider musicSlider, soundSlider;
     [SerializeField] private Image deathImg, winImg;
-    [SerializeField] private TextMeshProUGUI pointText;
+    [SerializeField] private TextMeshProUGUI bookNumText, pointText;
     [SerializeField] private TextMeshProUGUI[] buildText;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextAsset wordList;
@@ -488,7 +488,10 @@ public class GameMenuUi : MonoBehaviour
     public void Death(bool isReal)
     {
         if (!isReal)
+        {
+            bookNumText.text = player.bookNum.ToString();
             gameMenuUiAnim.SetTrigger("death");
+        }
         else
         {
             switch (player.deathScenario)

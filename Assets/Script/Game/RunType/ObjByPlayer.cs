@@ -13,14 +13,13 @@ public class ObjByPlayer : DropObject
     public float posY;
     [Tooltip("Only change for slime")]
     public float timeDelayHide = 0.1f;
-    [SerializeField] private GameObject monsterObj;
     [SerializeField] private float hitSlimeNum = 0;
     public bool isInDeploy;
 
     void Update()
     {
         //safety execution of not trigger when hit monster
-        if (transform.position.y < monsterObj.transform.position.y)
+        if (transform.position.y < GameManager.instance.inGame.monster.transform.position.y)
         {
             ShowObj(false);
         }
