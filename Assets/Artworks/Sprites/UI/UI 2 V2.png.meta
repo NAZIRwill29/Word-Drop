@@ -157,7 +157,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 480
+        y: 720
         width: 240
         height: 240
       alignment: 0
@@ -178,7 +178,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 240
-        y: 480
+        y: 720
         width: 240
         height: 240
       alignment: 0
@@ -198,8 +198,8 @@ TextureImporter:
       name: UI Scroll
       rect:
         serializedVersion: 2
-        x: 0
-        y: 240
+        x: 480
+        y: 720
         width: 240
         height: 240
       alignment: 0
@@ -219,8 +219,8 @@ TextureImporter:
       name: UI Upgrade
       rect:
         serializedVersion: 2
-        x: 240
-        y: 240
+        x: 0
+        y: 480
         width: 240
         height: 240
       alignment: 0
@@ -240,8 +240,8 @@ TextureImporter:
       name: UI Diamond
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 240
+        y: 480
         width: 240
         height: 240
       alignment: 0
@@ -257,6 +257,153 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI UpgradeV2
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 480
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bff8708886006644fa3d6f568344145f
+      internalID: 1403749964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI Ads1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f256a28019564e4da3b6d143ffb50e6
+      internalID: 1073446323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI Ads2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff2aa579d06735a409b610ccd94f1664
+      internalID: -844984605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI Ads3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 240
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a701f7f4b377f494f93b97205d9e7ec6
+      internalID: -311580233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI CompleteLadders
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3c5c467f91405d4c9eac4fbb724e65e
+      internalID: 379141226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI Pen
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9beb11c5c7f604d41ad70a3e30f7ef30
+      internalID: -1398558313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI PenInk
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9a8e10393d1d37419d883f74d09cdff
+      internalID: 1599546057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -268,11 +415,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      UI 2 V2_1: 1468488030
+      UI Ads1: 1073446323
+      UI Ads2: -844984605
+      UI Ads3: -311580233
       UI Book: 811112125
       UI Coin: 1828515096
+      UI CompleteLadders: 379141226
       UI Diamond: -376118507
+      UI Pen: -1398558313
+      UI PenInk: 1599546057
       UI Scroll: 1360440301
       UI Upgrade: -1696497084
+      UI UpgradeV2: 1403749964
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
