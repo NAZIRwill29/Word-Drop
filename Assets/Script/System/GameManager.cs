@@ -295,6 +295,7 @@ public class GameManager : MonoBehaviour
     //call when open game
     public void LoadState(Scene s, LoadSceneMode mode)
     {
+        //return;
         gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
         //get path of saved data
         string path = Application.persistentDataPath + "/savefile.json";
