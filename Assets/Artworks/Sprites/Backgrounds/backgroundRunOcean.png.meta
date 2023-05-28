@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 001ddbecc646ecb48a7fea55a4ef54f0
+guid: 4bc5440ce7ddad64a8c011a7e000c7c7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -153,7 +153,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: backgroundRun_0
+      name: backgroundRunOcean_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,14 +167,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1437f87cd736e85428b352ff52f10e6a
-      internalID: -1240344337
+      spriteID: 1b82cc2710f0e284b8d39f887428fae4
+      internalID: 1610101468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_1
+      name: backgroundRunOcean_1
       rect:
         serializedVersion: 2
         x: 400
@@ -188,14 +188,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9807e78ef8347f47b424125393d3155
-      internalID: 1029349290
+      spriteID: 447816495990ac641b343f3cb60cd50d
+      internalID: -683402041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_2
+      name: backgroundRunOcean_2
       rect:
         serializedVersion: 2
         x: 800
@@ -209,14 +209,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06c7cedab5b77ad498306755fd7a78af
-      internalID: -1916896735
+      spriteID: 3535180674d88df46ba7ff3d3fd0df29
+      internalID: 596620861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_3
+      name: backgroundRunOcean_3
       rect:
         serializedVersion: 2
         x: 1200
@@ -230,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0492a76d739f97e42b2afed9ae343b3a
-      internalID: 739561615
+      spriteID: b54a32fd4d0851b43b8ea76a9aeb4401
+      internalID: -361693723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_4
+      name: backgroundRunOcean_4
       rect:
         serializedVersion: 2
         x: 1600
@@ -251,14 +251,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 891b9d6e8ae57e24ca448651e408b76e
-      internalID: -247289342
+      spriteID: f43b8f564194e344e9be62e18e5d92f0
+      internalID: 207706201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_5
+      name: backgroundRunOcean_5
       rect:
         serializedVersion: 2
         x: 0
@@ -272,14 +272,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6484bf535ac8dde428fd9b292e8e12ff
-      internalID: 1324633643
+      spriteID: 546252ddf3156bf468eb1737fbb72c74
+      internalID: 1858637215
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_6
+      name: backgroundRunOcean_6
       rect:
         serializedVersion: 2
         x: 400
@@ -293,14 +293,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e67108aa567056e469812b14f63a1532
-      internalID: 490894754
+      spriteID: 22dd8f634b76b8e49a42ae16ee17e9e0
+      internalID: -61458691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_7
+      name: backgroundRunOcean_7
       rect:
         serializedVersion: 2
         x: 800
@@ -314,14 +314,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d48a9144ab4d2774ab72c97af4f36c61
-      internalID: -1202927386
+      spriteID: b5f13b66e755d0c458545d1d77d58bac
+      internalID: -1448796993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_8
+      name: backgroundRunOcean_8
       rect:
         serializedVersion: 2
         x: 1200
@@ -335,14 +335,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da10a8a1d5b680a40a9a3c873e33c8c1
-      internalID: 1563856311
+      spriteID: b8c16f53866f0a64bb1bbd1d0b8c60d3
+      internalID: 1495006256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_9
+      name: backgroundRunOcean_9
       rect:
         serializedVersion: 2
         x: 1600
@@ -356,14 +356,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7022b2bc20430ec4b80ccb9be748771f
-      internalID: 938791368
+      spriteID: b24e82c9b266edb459e664220edc8d27
+      internalID: 1154420941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_10
+      name: backgroundRunOcean_10
       rect:
         serializedVersion: 2
         x: 0
@@ -377,14 +377,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eacae4d04203bf748a3c6ad188644ad9
-      internalID: -2060453902
+      spriteID: a8b3408b137c7a14aa0e0f5d90b094cc
+      internalID: 789389584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_11
+      name: backgroundRunOcean_11
       rect:
         serializedVersion: 2
         x: 400
@@ -398,14 +398,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb7e0a86b28f4a64a9e021acdd541823
-      internalID: -1218201168
+      spriteID: a4dca0a7c62558b46b38c22f3895e04c
+      internalID: 64682083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_12
+      name: backgroundRunOcean_12
       rect:
         serializedVersion: 2
         x: 800
@@ -419,14 +419,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b55ad137d3bb44949993dffef663082f
-      internalID: -1532365784
+      spriteID: 423140b5f142e5048ae2e2539746216c
+      internalID: -1429017150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_13
+      name: backgroundRunOcean_13
       rect:
         serializedVersion: 2
         x: 1200
@@ -440,14 +440,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13bb48c3bc2722342be5e015bb8a2649
-      internalID: -2046547161
+      spriteID: 826dc1734082593458977bbd0411e79c
+      internalID: -982959995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: backgroundRun_14
+      name: backgroundRunOcean_14
       rect:
         serializedVersion: 2
         x: 1600
@@ -461,8 +461,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50409a2cb1ccb8642be63b2348a99ae3
-      internalID: -612461148
+      spriteID: 35c03b7b7c6786743a9bc94893539184
+      internalID: 1429761614
       vertices: []
       indices: 
       edges: []
@@ -478,22 +478,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      backgroundRun_0: -1240344337
-      backgroundRun_1: 1029349290
-      backgroundRun_10: -2060453902
-      backgroundRun_11: -1218201168
-      backgroundRun_12: -1532365784
-      backgroundRun_13: -2046547161
-      backgroundRun_14: -612461148
-      backgroundRun_15: -1859412445
-      backgroundRun_2: -1916896735
-      backgroundRun_3: 739561615
-      backgroundRun_4: -247289342
-      backgroundRun_5: 1324633643
-      backgroundRun_6: 490894754
-      backgroundRun_7: -1202927386
-      backgroundRun_8: 1563856311
-      backgroundRun_9: 938791368
+      backgroundRunOcean_0: 1610101468
+      backgroundRunOcean_1: -683402041
+      backgroundRunOcean_10: 789389584
+      backgroundRunOcean_11: 64682083
+      backgroundRunOcean_12: -1429017150
+      backgroundRunOcean_13: -982959995
+      backgroundRunOcean_14: 1429761614
+      backgroundRunOcean_2: 596620861
+      backgroundRunOcean_3: -361693723
+      backgroundRunOcean_4: 207706201
+      backgroundRunOcean_5: 1858637215
+      backgroundRunOcean_6: -61458691
+      backgroundRunOcean_7: -1448796993
+      backgroundRunOcean_8: 1495006256
+      backgroundRunOcean_9: 1154420941
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

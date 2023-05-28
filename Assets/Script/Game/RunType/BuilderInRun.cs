@@ -23,6 +23,8 @@ public class BuilderInRun : MonoBehaviour
         //     //TOOD () - builder is busy
         //     return;
         // }
+        //push monster a little
+        GameManager.instance.inGame.monster.transform.position -= new Vector3(0, 0.5f, 0); 
         if (objType == 0)
         {
             fences[fenceIndex].ShowObj(true);

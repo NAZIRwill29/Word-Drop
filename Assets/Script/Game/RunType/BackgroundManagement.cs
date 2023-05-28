@@ -18,6 +18,8 @@ public class BackgroundManagement : MonoBehaviour
     {
         boundY = GameManager.instance.boundary.boundY;
         backgroundObjHeight = backgroundsSR[0].bounds.size.y;
+        //get spawn pos by making it at top of all bg = lowbound - bgheight x (total - 1)
+        spawnPosY = -boundY + backgroundObjHeight * (backgroundsSR.Length - 1);
     }
 
     // Update is called once per frame

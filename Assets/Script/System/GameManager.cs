@@ -295,33 +295,41 @@ public class GameManager : MonoBehaviour
     //call when open game
     public void LoadState(Scene s, LoadSceneMode mode)
     {
-        //return;
-        gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
-        //get path of saved data
-        string path = Application.persistentDataPath + "/savefile.json";
-        //check if exist
-        if (File.Exists(path))
+        try
         {
-            Debug.Log("Load state");
-            //read content
-            string json = File.ReadAllText(path);
-            //transform into SaveData instance
-            Data dataLoad = JsonUtility.FromJson<Data>(json);
-            gameData = dataLoad;
-            //DebugAllData();
-            passStageNo = gameData.passStageNo;
-            player.SetBookNum(gameData.bookNumCollect);
-            player.SetPlayerLevel(gameData.playerLevel);
-            coin = gameData.coin;
-            gameSettings.ChangeMusicVolumeSystem(gameData.musicVolume);
-            gameSettings.ChangeSoundVolumeSystem(gameData.soundVolume);
-            //gameSettings.TurnOnMusicVolume(gameData.isMusicOn);
-            //gameSettings.TurnOnSoundVolume(gameData.isSoundOn);
-            //diamond = gameData.diamond;
-            //skinIndexBought = gameData.skinIndexBought;
-            //make call only once only
-            SceneManager.sceneLoaded -= LoadState;
+            //return;
+            gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            //get path of saved data
+            string path = Application.persistentDataPath + "/savefile.json";
+            //check if exist
+            if (File.Exists(path))
+            {
+                Debug.Log("Load state");
+                //read content
+                string json = File.ReadAllText(path);
+                //transform into SaveData instance
+                Data dataLoad = JsonUtility.FromJson<Data>(json);
+                gameData = dataLoad;
+                //DebugAllData();
+                passStageNo = gameData.passStageNo;
+                player.SetBookNum(gameData.bookNumCollect);
+                player.SetPlayerLevel(gameData.playerLevel);
+                coin = gameData.coin;
+                gameSettings.ChangeMusicVolumeSystem(gameData.musicVolume);
+                gameSettings.ChangeSoundVolumeSystem(gameData.soundVolume);
+                //gameSettings.TurnOnMusicVolume(gameData.isMusicOn);
+                //gameSettings.TurnOnSoundVolume(gameData.isSoundOn);
+                //diamond = gameData.diamond;
+                //skinIndexBought = gameData.skinIndexBought;
+                //make call only once only
+                SceneManager.sceneLoaded -= LoadState;
+            }
         }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
     }
     public void ResetData()
     {
