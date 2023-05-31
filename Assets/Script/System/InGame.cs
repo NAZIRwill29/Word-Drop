@@ -16,6 +16,10 @@ public class InGame : MonoBehaviour
     public BackgroundManagement backgroundManagement;
     public Spawn spawn;
     public Water water;
+    //  0     1       2       3       4        5           6       
+    //car1  car2    car3    boat1   boat2   airplane    helicopter
+    [Tooltip("car1, 2, 3, boat1, 2, sky1, 2")]
+    public int playerVehicleIndex;
     public bool isLadder, isGround, isFence, isSlime;
     public int ladderPt = 6, groundPt = 3, fencePt = 3, slimePt = 4;
     public float dangerDist;
@@ -32,12 +36,14 @@ public class InGame : MonoBehaviour
     //  0       1       2       3
     //ladder  ground  fence   slime
     public Sprite[] builderSprite;
+    //every 50 = 1 sec
+    private float timeIncNum = 30, lastIncNumTime;
 
     void Start()
     {
         //reset word point event every stage enter
         GameManager.instance.gameMenuUi.ResetWordPointEvent();
-        spawn.ResetAllSpawnNum();
+        ResetAllSpawnNum();
         if (isBookSpawnOne)
             bookSpawnTime = Random.Range(15, inGameUi.totalTime);
     }
@@ -60,6 +66,28 @@ public class InGame : MonoBehaviour
         inGameUi.UpdateDangerIndicator(dangerDist);
     }
 
+    void FixedUpdate()
+    {
+        if (!GameManager.instance.isStartGame)
+            return;
+        if (GameManager.instance.isPauseGame)
+            return;
+        if (spawn.isSpawnStop)
+            return;
+        //increase difficulty by increase speed fall of object
+        if (isIncreaseDifficulty)
+        {
+            if (Time.time - lastIncNumTime > timeIncNum)
+            {
+                Debug.Log("increase diff");
+                lastIncNumTime = Time.time;
+                spawn.IncreaseFreqSpeed();
+                if (backgroundManagement)
+                    backgroundManagement.IncreaseSpeedBackground();
+            }
+        }
+    }
+
     //TODO () - call when pause game
     public void PauseGame(bool isPause)
     {
@@ -68,6 +96,18 @@ public class InGame : MonoBehaviour
         spawn.FreezeAllObjects(isPause);
         if (backgroundManagement)
             backgroundManagement.FreezeBackgrounds(isPause);
+    }
+
+    public void ResetAllSpawnNum()
+    {
+        lastIncNumTime = Time.time;
+        spawn.ResetAllSpawnNum();
+    }
+
+    public void ResetLastTimeSpawn()
+    {
+        lastIncNumTime = Time.time;
+        spawn.ResetLastTimeSpawn();
     }
 
     public void BuildLadder()

@@ -165,12 +165,14 @@ MonoBehaviour:
   lastObsTime: 0
   dragChar: 2.5
   dragObs: 2.25
-  timeCharDuration: 1
-  timeObsDuration: 1.25
+  timeCharDuration: 0.75
+  timeObsDuration: 1
   lastBookTime: 0
   lastCoinTime: 0
   timeBookDuration: 60
   timeCoinDuration: 25
+  dragCoin: 1.75
+  dragBook: 1.25
   isSpawnStop: 0
   timeIncNum: 5
   lastIncNumTime: 0

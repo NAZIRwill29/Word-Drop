@@ -60,17 +60,17 @@ MonoBehaviour:
   - {fileID: 5872164534739476389}
   - {fileID: 2213208827300900216}
   groundSprite1:
-  - {fileID: 930400948, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
-  - {fileID: 994494704, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
   - {fileID: 128227493, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
+  - {fileID: 994494704, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
+  - {fileID: 930400948, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
   groundSprite2:
-  - {fileID: 2006702487, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
-  - {fileID: 108329930, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
   - {fileID: 863880295, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
+  - {fileID: 108329930, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
+  - {fileID: 2006702487, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
   groundSprite3:
-  - {fileID: -1831513757, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
-  - {fileID: 1789474623, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
   - {fileID: -841182429, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
+  - {fileID: 1789474623, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
+  - {fileID: -1831513757, guid: 94ae5e2f49cc21c459afd19ac418529c, type: 3}
   groundManager: {fileID: 0}
 --- !u!1001 &630711138278335832
 PrefabInstance:
@@ -94,6 +94,10 @@ PrefabInstance:
     - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
       propertyPath: groundType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
+      propertyPath: groundSerialNum
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8296262964179482839, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
       propertyPath: m_Name
@@ -285,6 +289,10 @@ PrefabInstance:
       propertyPath: groundType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
+      propertyPath: groundSerialNum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8296262964179482839, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
       propertyPath: m_Name
       value: Ground (4)
@@ -372,6 +380,10 @@ PrefabInstance:
       objectReference: {fileID: 7135315350840182052}
     - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
       propertyPath: groundType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
+      propertyPath: groundSerialNum
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8296262964179482839, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
@@ -563,6 +575,10 @@ PrefabInstance:
     - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
       propertyPath: groundType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6466785301174778621, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
+      propertyPath: groundSerialNum
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8296262964179482839, guid: 51ea2804dce35344baa9ffd52eda4e6a, type: 3}
       propertyPath: m_Name

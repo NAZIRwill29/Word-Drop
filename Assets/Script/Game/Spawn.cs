@@ -12,12 +12,11 @@ public class Spawn : MonoBehaviour
     [SerializeField] private float lastCharTime, lastObsTime, dragChar, dragObs;
     //min msc for set difficulty - linearDrag = 1-3 / timeCharDuration = 1-1.5
     public float timeCharDuration, timeObsDuration;
-    [SerializeField] private float lastBookTime, lastCoinTime, timeBookDuration, timeCoinDuration;
+    [SerializeField] private float lastBookTime, lastCoinTime, timeBookDuration, timeCoinDuration, dragCoin, dragBook;
     private float timeBook;
     public bool isSpawnStop;
-    //every 10 sec
-    [SerializeField] private float timeIncNum = 10, lastIncNumTime;
     private float timeCharDurationOri, timeObsDurationOri, dragCharOri, dragObsOri, increaseNum, increaseNumObs;
+    private float dragCoinOri, dragBookOri, increaseNumCoin, increaseNumBook;
     //alphabet list
     private char[] alphabets =
     {
@@ -56,8 +55,12 @@ public class Spawn : MonoBehaviour
         timeObsDurationOri = timeObsDuration;
         dragCharOri = dragChar;
         dragObsOri = dragObs;
+        dragCoinOri = dragCoin;
+        dragBookOri = dragBook;
         ChangeFreqSpeedChar(dragChar, timeCharDuration);
         ChangeFreqSpeedObs(dragObs, timeObsDuration);
+        ChangeFreqSpeedCoin(dragCoin);
+        ChangeFreqSpeedBook(dragBook);
     }
 
     // Update is called once per frame
@@ -85,22 +88,6 @@ public class Spawn : MonoBehaviour
             if (bookObj.Length > 0)
                 SpawnBook();
         }
-    }
-
-    void FixedUpdate()
-    {
-        if (!GameManager.instance.isStartGame)
-            return;
-        if (GameManager.instance.isPauseGame)
-            return;
-        if (isSpawnStop)
-            return;
-        if (inGame.isIncreaseDifficulty)
-            if (Time.time - lastIncNumTime > timeIncNum)
-            {
-                lastIncNumTime = Time.time;
-                IncreaseFreqSpeed();
-            }
     }
 
     public void SpawnChar()
@@ -201,7 +188,6 @@ public class Spawn : MonoBehaviour
     //reset last time spawn
     public void ResetLastTimeSpawn()
     {
-        lastIncNumTime = Time.time;
         lastCharTime = Time.time;
         lastObsTime = Time.time;
         lastCoinTime = Time.time;
@@ -259,12 +245,16 @@ public class Spawn : MonoBehaviour
     public void IncreaseFreqSpeed()
     {
         increaseNum += 0.005f;
-        increaseNumObs += 0.003f;
+        increaseNumObs += 0.001f;
+        increaseNumCoin += 0.0015f;
+        increaseNumBook += 0.002f;
         Debug.Log("increase num = " + increaseNum);
         Debug.Log("dragChar = " + dragChar);
         ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum);
         ChangeFreqSpeedObs(dragObs - increaseNum - increaseNumObs, timeObsDuration - increaseNum - increaseNumObs);
         //Debug.Log("increase num = " + increaseNum);
+        ChangeFreqSpeedCoin(dragCoin - increaseNumCoin - increaseNum);
+        ChangeFreqSpeedBook(dragBook - increaseNumBook - increaseNum);
     }
 
     //variable change
@@ -272,7 +262,9 @@ public class Spawn : MonoBehaviour
     {
         Debug.Log("dragNum = " + dragNum);
         Debug.Log("duration = " + duration);
-        if (duration < 0.1f)
+        if (duration < 0.2f)
+            return;
+        if (dragNum < 0.5f)
             return;
         timeCharDuration = duration;
         foreach (var item in charObj)
@@ -282,7 +274,9 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedObs(float dragNum, float duration)
     {
-        if (duration < 0.1f)
+        if (duration < 0.2f)
+            return;
+        if (dragNum < 0.4f)
             return;
         timeObsDuration = duration;
         foreach (var item in obstacleObj)
@@ -290,21 +284,19 @@ public class Spawn : MonoBehaviour
             item.GetComponent<Rigidbody2D>().drag = dragNum;
         }
     }
-    public void ChangeFreqSpeedCoin(float dragNum, float duration)
+    public void ChangeFreqSpeedCoin(float dragNum)
     {
-        if (duration < 0.1f)
+        if (dragNum < 0.3f)
             return;
-        timeCoinDuration = duration;
         foreach (var item in coinObj)
         {
             item.GetComponent<Rigidbody2D>().drag = dragNum;
         }
     }
-    public void ChangeFreqSpeedBook(float dragNum, float duration)
+    public void ChangeFreqSpeedBook(float dragNum)
     {
-        if (duration < 0.1f)
+        if (dragNum < 0.2f)
             return;
-        timeBookDuration = duration;
         foreach (var item in bookObj)
         {
             item.GetComponent<Rigidbody2D>().drag = dragNum;

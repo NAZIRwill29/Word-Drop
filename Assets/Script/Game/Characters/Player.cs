@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
     [SerializeField]
     private Collider2D playerColl, hitBoxColl, lifeLine1Coll, lifeLine2Coll, lifeLine3Coll, lifeLine4Coll;
     public Rigidbody2D playerRB;
@@ -15,24 +16,9 @@ public class Player : MonoBehaviour
     public SwipeRigthLeftMove swipeRigthLeftMove;
     [SerializeField] private GameMenuUi gameMenuUi;
     [SerializeField] private Animator playerAnim;
-    public int hp = 3;
-    public float speed = 0.01f;
-    //LifeLine
-    [SerializeField] private int lifeLineTrigger;
-    public int lifeLineBuildTrigger = -1;
-    //climb number
-    private float climbNo;
+    public SpriteRenderer playerSr;
     public List<char> alphabetsStore;
-    public bool isImmune, isHasWin, isHasDie, isImmuneDamage = true;
-    //immune damage - use for in start game
-    public int immuneDamageDuration = 150;
-    [SerializeField] private int immuneDamageCount;
-    private Vector3 originPos;
-    //player info
-    public int levelPlayer = 1, charMaxNo = 10, dieNum, bookNum;
     public float objHeight;
-    [SerializeField] private int playerMode;
-    public string deathScenario;
     //for push forward by monster
     //private bool isPush;
     //private int pushNum = 50;
@@ -49,7 +35,7 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine2Coll, true);
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine3Coll, true);
         Physics2D.IgnoreCollision(hitBoxColl, lifeLine4Coll, true);
-        originPos = transform.position;
+        playerData.originPos = transform.position;
         objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
@@ -62,36 +48,42 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //make climb event
-        if (climbNo > 0)
+        if (playerData.climbNo > 0)
         {
             ClimbEvent();
         }
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         //immunedamage for few second in start game
-        if (immuneDamageCount < immuneDamageDuration)
+        if (playerData.immuneDamageCount < playerData.immuneDamageDuration)
         {
-            immuneDamageCount++;
+            playerData.immuneDamageCount++;
             playerAnim.SetBool("shield", true);
         }
         else
         {
-            isImmuneDamage = false;
+            playerData.isImmuneDamage = false;
             playerAnim.SetBool("shield", false);
         }
         //if (isPush)
         //PushByMonster();
     }
 
+    //move player
+    public void MovePlayer(float posX)
+    {
+        transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+    }
     public void StartGame(int mode)
     {
+        Debug.Log("player start game");
         GameMode(mode);
         //store player mode in current stage
-        playerMode = mode;
+        playerData.playerMode = mode;
         ChangeImmuneDamage(true);
-        hp = 3;
+        playerData.hp = 3;
         gameMenuUi.SetHpUI();
-        isHasWin = false;
+        playerData.isHasWin = false;
     }
     public void FinishGame()
     {
@@ -110,9 +102,9 @@ public class Player : MonoBehaviour
         ChangeImmuneDamage(true);
         ReturnGameModeAfterDeath();
         PlaySoundRevive();
-        hp = 3;
+        playerData.hp = 3;
         gameMenuUi.SetHpUI();
-        switch (deathScenario)
+        switch (playerData.deathScenario)
         {
             case "alphabet":
                 Debug.Log("Revive alphabet");
@@ -151,12 +143,12 @@ public class Player : MonoBehaviour
     //TODO () - 
     public void ReceiveDamage(Damage dmg)
     {
-        if (isImmuneDamage)
+        if (playerData.isImmuneDamage)
         {
             PlaySoundImmune();
             return;
         }
-        if (isImmune)
+        if (playerData.isImmune)
             return;
         if (dmg.objType == "Spike")
             GameManager.instance.inGame.groundManager.PlaySoundAttack1();
@@ -174,6 +166,7 @@ public class Player : MonoBehaviour
             //delete number of alphabet in store base on damage amount
             for (int i = 0; i < numDeleteChar; i++)
             {
+                //Debug.Log("remove char");
                 RemoveChar(Random.Range(0, alphabetsStore.Count));
             }
         }
@@ -194,17 +187,17 @@ public class Player : MonoBehaviour
     //call when attacked by monster
     public void ReceiveDamageHp(Damage dmg)
     {
-        if (isImmuneDamage)
+        if (playerData.isImmuneDamage)
         {
             PlaySoundImmune();
             return;
         }
-        if (isImmune)
+        if (playerData.isImmune)
             return;
-        if (hp > 1)
+        if (playerData.hp > 1)
         {
             PlaySoundDamage();
-            hp--;
+            playerData.hp--;
             //set push forward by monster
             //StartPushByMonster();
         }
@@ -217,12 +210,12 @@ public class Player : MonoBehaviour
 
     public void ReceiveChar(char abc)
     {
-        if (isImmune)
+        if (playerData.isImmune)
             return;
         PlaySoundChar();
         alphabetsStore.Add(abc);
         //if more than char max ->  remove first char
-        if (alphabetsStore.Count > charMaxNo)
+        if (alphabetsStore.Count > playerData.charMaxNo)
             alphabetsStore.RemoveAt(0);
         gameMenuUi.AddCharPlayer(abc);
     }
@@ -253,10 +246,10 @@ public class Player : MonoBehaviour
     //TODO() - 
     public void Death(string scenario)
     {
-        if (isHasDie)
+        if (playerData.isHasDie)
             return;
         PlaySoundDeath();
-        deathScenario = scenario;
+        playerData.deathScenario = scenario;
         switch (scenario)
         {
             case "alphabet":
@@ -287,8 +280,8 @@ public class Player : MonoBehaviour
         //freeze all - pause game - off rigidbody player
         GameMode(2);
         //make chance after die once only
-        dieNum++;
-        if (dieNum < 2)
+        playerData.dieNum++;
+        if (playerData.dieNum < 2)
             GameManager.instance.Death(false);
         else
             GameManager.instance.Death(true);
@@ -297,57 +290,57 @@ public class Player : MonoBehaviour
     //Lifeline effect - call when water touch lifeline
     public void LifeLine(int num)
     {
-        if (isImmune)
+        if (playerData.isImmune)
             return;
         switch (num)
         {
             case 0:
                 //TODO () - call when free from water
                 //back to normal
-                lifeLineTrigger = 0;
+                playerData.lifeLineTrigger = 0;
                 break;
             case 1:
-                if (lifeLineTrigger < 1)
-                    lifeLineTrigger = 1;
+                if (playerData.lifeLineTrigger < 1)
+                    playerData.lifeLineTrigger = 1;
 
                 break;
             case 2:
-                if (lifeLineTrigger < 2)
+                if (playerData.lifeLineTrigger < 2)
 
-                    lifeLineTrigger = 2;
+                    playerData.lifeLineTrigger = 2;
 
                 break;
             case 3:
-                if (lifeLineTrigger < 3)
-                    lifeLineTrigger = 3;
+                if (playerData.lifeLineTrigger < 3)
+                    playerData.lifeLineTrigger = 3;
                 break;
             case 4:
-                if (lifeLineTrigger < 4)
+                if (playerData.lifeLineTrigger < 4)
                     Death("drowning");
                 break;
             case -1:
-                if (lifeLineTrigger > 0)
+                if (playerData.lifeLineTrigger > 0)
                 {
-                    lifeLineTrigger--;
-                    lifeLineBuildTrigger = -2;
+                    playerData.lifeLineTrigger--;
+                    playerData.lifeLineBuildTrigger = -2;
                 }
                 break;
             case -2:
-                if (lifeLineTrigger > 1)
+                if (playerData.lifeLineTrigger > 1)
                 {
-                    lifeLineTrigger -= 2;
-                    lifeLineBuildTrigger = -1;
+                    playerData.lifeLineTrigger -= 2;
+                    playerData.lifeLineBuildTrigger = -1;
                 }
-                else if (lifeLineTrigger > 0)
+                else if (playerData.lifeLineTrigger > 0)
                 {
-                    lifeLineTrigger--;
-                    lifeLineBuildTrigger = -1;
+                    playerData.lifeLineTrigger--;
+                    playerData.lifeLineBuildTrigger = -1;
                 }
                 break;
             default:
                 break;
         }
-        SetSpeed(lifeLineTrigger);
+        SetSpeed(playerData.lifeLineTrigger);
     }
     //set player speed based on the water effect
     private void SetSpeed(int num)
@@ -379,7 +372,7 @@ public class Player : MonoBehaviour
     //level up
     public void LevelUp(bool isShowOnly)
     {
-        int levelPlayerTemp = levelPlayer + 1;
+        int levelPlayerTemp = playerData.levelPlayer + 1;
         switch (levelPlayerTemp)
         {
             case 2:
@@ -404,7 +397,7 @@ public class Player : MonoBehaviour
     private void LevelUpEvent(int coinNeed, int bookNeed, bool isShowOnly)
     {
         //check if have enough coin and book
-        if (GameManager.instance.coin < coinNeed && bookNum < bookNeed)
+        if (GameManager.instance.coin < coinNeed && playerData.bookNum < bookNeed)
         {
             GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(false);
             return;
@@ -415,8 +408,8 @@ public class Player : MonoBehaviour
         {
             PlaySoundLevelUp();
             GameManager.instance.AddCoin(-coinNeed);
-            bookNum -= bookNeed;
-            levelPlayer++;
+            playerData.bookNum -= bookNeed;
+            playerData.levelPlayer++;
         }
         ManagePlayerLevel();
     }
@@ -426,42 +419,42 @@ public class Player : MonoBehaviour
         //prevent from level 0
         if (num <= 0)
             num = 1;
-        levelPlayer = num;
+        playerData.levelPlayer = num;
         ManagePlayerLevel();
     }
     //player level
     public void ManagePlayerLevel()
     {
-        switch (levelPlayer)
+        switch (playerData.levelPlayer)
         {
             case 1:
-                charMaxNo = 10;
-                hp = 3;
+                playerData.charMaxNo = 10;
+                playerData.hp = 3;
                 gameMenuUi.SetPlayerLevelUI(0);
                 break;
             case 2:
-                charMaxNo = 11;
-                hp = 3;
+                playerData.charMaxNo = 11;
+                playerData.hp = 3;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 3:
-                charMaxNo = 12;
-                hp = 4;
+                playerData.charMaxNo = 12;
+                playerData.hp = 4;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 4:
-                charMaxNo = 14;
-                hp = 4;
+                playerData.charMaxNo = 14;
+                playerData.hp = 4;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 5:
-                charMaxNo = 17;
-                hp = 5;
+                playerData.charMaxNo = 17;
+                playerData.hp = 5;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 6:
-                charMaxNo = 20;
-                hp = 5;
+                playerData.charMaxNo = 20;
+                playerData.hp = 5;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             default:
@@ -496,14 +489,14 @@ public class Player : MonoBehaviour
     {
         //TODO () - 
         Debug.Log("climb");
-        climbNo = (num + 1) * 2;
+        playerData.climbNo = (num + 1) * 2;
         LifeLine(0);
     }
     private void ClimbEvent()
     {
         transform.position = new Vector3(GameManager.instance.inGame.laddersObj.transform.position.x, transform.position.y, transform.position.z);
         transform.position += new Vector3(0, 0.444f, 0);
-        climbNo--;
+        playerData.climbNo--;
         //TODO () - play sound climb - may need fix
         PlaySoundClimb();
     }
@@ -511,13 +504,13 @@ public class Player : MonoBehaviour
     //win
     public void Win(bool isStaticGameMode)
     {
-        if (isHasWin)
+        if (playerData.isHasWin)
             return;
         GameManager.instance.inGame.spawn.StopSpawn(true);
         if (isStaticGameMode)
         {
             LifeLine(0);
-            isHasWin = true;
+            playerData.isHasWin = true;
             //for static game
             //TODO () -
             Debug.Log("win");
@@ -527,7 +520,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            isHasWin = true;
+            playerData.isHasWin = true;
             //for run game
             //TODO () - add push forward
             Debug.Log("win");
@@ -560,37 +553,38 @@ public class Player : MonoBehaviour
             case 0:
                 //drowned mode
                 playerRB.bodyType = RigidbodyType2D.Dynamic;
-                transform.position = originPos;
-                isImmune = false;
+                transform.position = playerData.originPos;
+                playerData.isImmune = false;
                 //TODO () - 
                 break;
             case 1:
                 //run mode
+                Debug.Log("game mode run");
                 playerRB.bodyType = RigidbodyType2D.Static;
-                transform.position = new Vector3(originPos.x, -1.538f, originPos.z);
-                isImmune = false;
+                transform.position = new Vector3(playerData.originPos.x, -1.538f, playerData.originPos.z);
+                playerData.isImmune = false;
                 break;
             default:
                 //pause
                 playerRB.bodyType = RigidbodyType2D.Static;
-                isImmune = true;
+                playerData.isImmune = true;
                 break;
         }
     }
     private void ReturnGameModeAfterDeath()
     {
-        switch (playerMode)
+        switch (playerData.playerMode)
         {
             case 0:
                 //drowned mode
                 playerRB.bodyType = RigidbodyType2D.Dynamic;
-                isImmune = false;
+                playerData.isImmune = false;
                 //TODO () - 
                 break;
             case 1:
                 //run mode
                 playerRB.bodyType = RigidbodyType2D.Static;
-                isImmune = false;
+                playerData.isImmune = false;
                 break;
             default:
                 break;
@@ -635,44 +629,44 @@ public class Player : MonoBehaviour
     //variable
     public void ChangeSpeed(float num)
     {
-        speed = num;
+        playerData.speed = num;
     }
     public void ChangeImmune(bool isTrue)
     {
-        isImmune = isTrue;
+        playerData.isImmune = isTrue;
     }
     public void AddAlphabetStore(char abc)
     {
         alphabetsStore.Add(abc);
         //if more than char max ->  remove first char
-        if (alphabetsStore.Count > charMaxNo)
+        if (alphabetsStore.Count > playerData.charMaxNo)
             alphabetsStore.RemoveAt(0);
         gameMenuUi.AddCharPlayer(abc);
     }
     public void ChangeImmuneDamage(bool isTrue)
     {
-        isImmuneDamage = isTrue;
+        playerData.isImmuneDamage = isTrue;
         if (isTrue)
-            immuneDamageCount = 0;
+            playerData.immuneDamageCount = 0;
     }
     public void ChangeIsHasDie(bool isTrue)
     {
-        isHasDie = isTrue;
+        playerData.isHasDie = isTrue;
     }
     public void ChangeDieNum(int num)
     {
-        dieNum = num;
+        playerData.dieNum = num;
     }
     public void SetBookNum(int num)
     {
-        bookNum = num;
+        playerData.bookNum = num;
     }
     public void AddBookNum(int num)
     {
-        bookNum += num;
+        playerData.bookNum += num;
     }
     public void ResetBookNum()
     {
-        bookNum = 0;
+        playerData.bookNum = 0;
     }
 }

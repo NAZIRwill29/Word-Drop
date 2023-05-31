@@ -13,6 +13,8 @@ public class BackgroundManagement : MonoBehaviour
     private int index;
     [SerializeField] private float boundY, spawnPosY;
     [SerializeField] private bool isLoopBackground;
+    private float incNum, dragBgOri;
+    [SerializeField] private float dragBg;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class BackgroundManagement : MonoBehaviour
         backgroundObjHeight = backgroundsSR[0].bounds.size.y;
         //get spawn pos by making it at top of all bg = lowbound - bgheight x (total - 1)
         spawnPosY = -boundY + backgroundObjHeight * (backgroundsSR.Length - 1);
+        dragBgOri = dragBg;
+        ChangeSpeedBackground(dragBg);
     }
 
     // Update is called once per frame
@@ -55,6 +59,23 @@ public class BackgroundManagement : MonoBehaviour
             {
                 item.bodyType = RigidbodyType2D.Dynamic;
             }
+        }
+    }
+
+    public void IncreaseSpeedBackground()
+    {
+        incNum += 0.005f;
+        ChangeSpeedBackground(dragBg - incNum);
+    }
+
+    private void ChangeSpeedBackground(float dragNum)
+    {
+        if (dragNum < 0.4f)
+            return;
+        Debug.Log("dragNum = " + dragNum);
+        foreach (var item in backgroundsRb)
+        {
+            item.GetComponent<Rigidbody2D>().drag = dragNum;
         }
     }
 }

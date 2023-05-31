@@ -21,7 +21,14 @@ public class GameManager : MonoBehaviour
     public GameMenuUi gameMenuUi;
     public GameSettings gameSettings;
     public GameObject dontDestroyGameObject;
+    public PlayerData playerData;
     public Player player;
+    //  0       1             2         3
+    //human   car/boat    airplane    helicopter  
+    [SerializeField] private Player[] players;
+    //  0     1       2       3       4     
+    //car1  car2    car3    boat1   boat2   
+    [SerializeField] private Sprite[] playerSprite;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     public SwipeUpDownAction swipeUpDownAction;
     //game
@@ -182,7 +189,6 @@ public class GameManager : MonoBehaviour
         gameSettings.UpdateMenuVolumeSetting();
         isStartGame = true;
         isPauseGame = false;
-        player.StartGame(mode);
         yield return new WaitForSeconds(0.1f);
         mainMenuUI.blackScreen.SetActive(false);
         mainMenuUI.blackScreen2.SetActive(false);
@@ -234,7 +240,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isAds)
         {
-            if (player.bookNum > 0)
+            if (playerData.bookNum > 0)
             {
                 player.AddBookNum(-1);
                 Revive();
@@ -274,8 +280,8 @@ public class GameManager : MonoBehaviour
         //save variable
         gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
         gameData.passStageNo = passStageNo;
-        gameData.bookNumCollect = player.bookNum;
-        gameData.playerLevel = player.levelPlayer;
+        gameData.bookNumCollect = playerData.bookNum;
+        gameData.playerLevel = playerData.levelPlayer;
         gameData.coin = coin;
         //gameData.isMusicOn = gameSettings.isMusicOn;
         //gameData.isSoundOn = gameSettings.isSoundOn;
@@ -407,6 +413,7 @@ public class GameManager : MonoBehaviour
             if (GameObject.Find("InGameUI"))
             {
                 inGameUi = GameObject.Find("InGameUI").GetComponent<InGameUi>();
+                ChangePlayer();
             }
             //reset player
             player.RemoveAllChar();
@@ -429,6 +436,70 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         mainMenuUI.loadingScreenAnim.SetBool("show", false);
         Debug.Log("laoding hide");
+    }
+
+    //decide player - exec in run only
+    private void ChangePlayer()
+    {
+        if (!inGameUi.isRun)
+        {
+            player = players[0];
+            TurnOnPlayer(0);
+            player.StartGame(0);
+        }
+        else
+        {
+            Debug.Log("change vehicle");
+            switch (inGame.playerVehicleIndex)
+            {
+                case 0:
+                    player = players[1];
+                    TurnOnPlayer(1);
+                    players[1].playerSr.sprite = playerSprite[0];
+                    Debug.Log("change sprite");
+                    break;
+                case 1:
+                    player = players[1];
+                    TurnOnPlayer(1);
+                    players[1].playerSr.sprite = playerSprite[1];
+                    break;
+                case 2:
+                    player = players[1];
+                    TurnOnPlayer(1);
+                    players[1].playerSr.sprite = playerSprite[2];
+                    break;
+                case 3:
+                    player = players[1];
+                    TurnOnPlayer(1);
+                    players[1].playerSr.sprite = playerSprite[3];
+                    break;
+                case 4:
+                    player = players[1];
+                    TurnOnPlayer(1);
+                    players[1].playerSr.sprite = playerSprite[4];
+                    break;
+                case 5:
+                    player = players[2];
+                    TurnOnPlayer(2);
+                    break;
+                case 6:
+                    player = players[3];
+                    TurnOnPlayer(3);
+                    break;
+                default:
+                    break;
+            }
+            player.StartGame(1);
+        }
+    }
+    //turn on/off player obj
+    private void TurnOnPlayer(int index)
+    {
+        foreach (var item in players)
+        {
+            item.gameObject.SetActive(false);
+        }
+        players[index].gameObject.SetActive(true);
     }
 
     //set variable------------------------------------------

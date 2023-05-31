@@ -10,47 +10,45 @@ public class HitBox : MonoBehaviour
     [SerializeField]
     private int parentType = 0;
     [Tooltip("no need if not player")]
-    [SerializeField]
-    private Player player;
 
     //player-----------------------
     public void ReceiveDamage(Damage dmg)
     {
         if (parentType == 0)
-            player.ReceiveDamage(dmg);
+            GameManager.instance.player.ReceiveDamage(dmg);
     }
     public void ReceiveDamageHp(Damage dmg)
     {
         if (parentType == 0)
-            player.ReceiveDamageHp(dmg);
+            GameManager.instance.player.ReceiveDamageHp(dmg);
     }
     public void ReceiveChar(char abc)
     {
         if (parentType == 0)
-            player.ReceiveChar(abc);
+            GameManager.instance.player.ReceiveChar(abc);
 
     }
     public void ReceiveBook()
     {
         if (parentType == 0)
-            player.ReceiveBook();
+            GameManager.instance.player.ReceiveBook();
     }
     public void ReceiveCoin(int coin)
     {
         if (parentType == 0)
-            player.ReceiveCoin(coin);
+            GameManager.instance.player.ReceiveCoin(coin);
     }
     public void Climb(int num)
     {
         if (parentType == 0)
-            player.Climb(num);
+            GameManager.instance.player.Climb(num);
     }
     public void Win()
     {
         Debug.Log("hit win line");
         //only call for drowned game mode
         if (parentType == 0)
-            player.Win(true);
+            GameManager.instance.player.Win(true);
     }
 
     //monster------------------------

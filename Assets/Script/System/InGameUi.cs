@@ -46,7 +46,7 @@ public class InGameUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.player.isHasWin)
+        if (GameManager.instance.playerData.isHasWin)
             return;
         if (GameManager.instance.isPauseGame || !GameManager.instance.isStartGame)
             return;

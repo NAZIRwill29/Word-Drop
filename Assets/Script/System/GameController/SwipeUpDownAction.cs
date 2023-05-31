@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SwipeUpDownAction : MonoBehaviour
 {
-    [SerializeField]
-    private Player player;
+    //[SerializeField]    private Player player;
     private Touch touch;
     public float bound = 125;
     private float swipeForce;
@@ -16,9 +15,9 @@ public class SwipeUpDownAction : MonoBehaviour
     {
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
-        if (player.isHasWin)
+        if (GameManager.instance.playerData.isHasWin)
             return;
-        if (player.isHasDie)
+        if (GameManager.instance.playerData.isHasDie)
             return;
         if (Input.touchCount > 0)
         {

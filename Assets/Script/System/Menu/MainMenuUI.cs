@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] Player player;
+    //[SerializeField] Player player;
     //sound
     //  0       1       2       
     //play   cancel  navigate 
@@ -49,18 +49,18 @@ public class MainMenuUI : MonoBehaviour
     {
         //Update player info
         //make show level up option only
-        player.LevelUp(true);
-        lvlText.text = "Lv " + player.levelPlayer;
-        hpText.text = "x" + player.hp;
-        abcText.text = "x" + player.charMaxNo;
+        GameManager.instance.player.LevelUp(true);
+        lvlText.text = "Lv " + GameManager.instance.playerData.levelPlayer;
+        hpText.text = "x" + GameManager.instance.playerData.hp;
+        abcText.text = "x" + GameManager.instance.playerData.charMaxNo;
         coinText.text = GameManager.instance.coin.ToString();
-        bookText.text = "x" + player.bookNum;
+        bookText.text = "x" + GameManager.instance.playerData.bookNum;
         GameManager.instance.gameMenuUi.SetCoinEvent();
     }
     public void LevelUp()
     {
         //levele up
-        player.LevelUp(false);
+        GameManager.instance.player.LevelUp(false);
         PlayerInfoWindow();
     }
     //----------------------------------------

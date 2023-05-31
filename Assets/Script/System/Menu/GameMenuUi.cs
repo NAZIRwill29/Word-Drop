@@ -11,9 +11,9 @@ public class GameMenuUi : MonoBehaviour
     //word      build
     [SerializeField] private AudioClip[] gameMenuUiAudioClip;
     public AudioSource gameMenuUiAudioSource;
-    [SerializeField] private Player player;
+    //[SerializeField] private Player player;
     private CanvasGroupFunc canvasGroupFunc;
-    private InGame inGame;
+    //private InGame inGame;
     public List<char> alphabetsPlayerInfo, alphabetsWord;
     public GameObject[] charUIInfoObj;
     public Image[] charUIInfoImg;
@@ -64,7 +64,7 @@ public class GameMenuUi : MonoBehaviour
     {
         if (GameManager.instance.isPauseGame)
             return;
-        if (inGame.isFence || inGame.isSlime)
+        if (GameManager.instance.inGame.isFence || GameManager.instance.inGame.isSlime)
         {
             //stop countdown
             if (isObjBuildBtnClickable)
@@ -78,7 +78,7 @@ public class GameMenuUi : MonoBehaviour
     //set game menu ui mode base on game mode
     public void SetGameMenuUIMode(bool isRun)
     {
-        inGame = GameManager.instance.inGame;
+        // inGame = GameManager.instance.inGame;
         isRunGame = isRun;
         if (!isRun)
         {
@@ -113,10 +113,10 @@ public class GameMenuUi : MonoBehaviour
     //set build button active event
     private void SetBuildBtnsActive()
     {
-        SetBuildBtnActive(0, inGame.isLadder, inGame.ladderPt);
-        SetBuildBtnActive(1, inGame.isGround, inGame.groundPt);
-        SetBuildBtnActive(2, inGame.isFence, inGame.fencePt);
-        SetBuildBtnActive(3, inGame.isSlime, inGame.slimePt);
+        SetBuildBtnActive(0, GameManager.instance.inGame.isLadder, GameManager.instance.inGame.ladderPt);
+        SetBuildBtnActive(1, GameManager.instance.inGame.isGround, GameManager.instance.inGame.groundPt);
+        SetBuildBtnActive(2, GameManager.instance.inGame.isFence, GameManager.instance.inGame.fencePt);
+        SetBuildBtnActive(3, GameManager.instance.inGame.isSlime, GameManager.instance.inGame.slimePt);
     }
     private void SetBuildBtnActive(int buildBtnNo, bool isActive, int point)
     {
@@ -124,7 +124,7 @@ public class GameMenuUi : MonoBehaviour
         if (isActive)
         {
             buildText[buildBtnNo].text = point.ToString();
-            buildBtnImg[buildBtnNo].sprite = inGame.builderSprite[buildBtnNo];
+            buildBtnImg[buildBtnNo].sprite = GameManager.instance.inGame.builderSprite[buildBtnNo];
         }
     }
 
@@ -184,7 +184,7 @@ public class GameMenuUi : MonoBehaviour
     //remove char in player - 
     public void RemoveCharPlayer(int charIndex)
     {
-        player.RemoveChar(charIndex);
+        GameManager.instance.player.RemoveChar(charIndex);
         SetCharUIInfo();
         SetCharUIAction();
     }
@@ -219,14 +219,14 @@ public class GameMenuUi : MonoBehaviour
         if (!isCharLvl1)
         {
             //make active for contain char
-            for (int i = 0; i < player.alphabetsStore.Count; i++)
+            for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
             {
                 alphabetStoreBtn[i].gameObject.SetActive(true);
                 //set image
-                alphabetStoreBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)player.alphabetsStore[i] - 65];
+                alphabetStoreBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
             }
             //make unactive for remaining
-            for (int i = alphabetStoreBtn.Length - 1; i >= player.alphabetsStore.Count; i--)
+            for (int i = alphabetStoreBtn.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
             {
                 alphabetStoreBtn[i].gameObject.SetActive(false);
             }
@@ -234,14 +234,14 @@ public class GameMenuUi : MonoBehaviour
         else
         {
             //make active for contain char
-            for (int i = 0; i < player.alphabetsStore.Count; i++)
+            for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
             {
                 alphabetStoreBtn2[i].gameObject.SetActive(true);
                 //set image
-                alphabetStoreBtnImg2[i].sprite = GameManager.instance.alphabetSprite[(int)player.alphabetsStore[i] - 65];
+                alphabetStoreBtnImg2[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
             }
             //make unactive for remaining
-            for (int i = alphabetStoreBtn2.Length - 1; i >= player.alphabetsStore.Count; i--)
+            for (int i = alphabetStoreBtn2.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
             {
                 alphabetStoreBtn2[i].gameObject.SetActive(false);
             }
@@ -268,7 +268,7 @@ public class GameMenuUi : MonoBehaviour
     public void SetPlayerLevelUI(int charLvl)
     {
         //TODO () - set hp lvl ui and char container ui in menu
-        hpImg.sprite = hpSprite[player.hp];
+        hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
         if (charLvl == 0)
         {
             alphabetStoreContainer[0].SetActive(true);
@@ -284,14 +284,14 @@ public class GameMenuUi : MonoBehaviour
     }
     public void SetHpUI()
     {
-        hpImg.sprite = hpSprite[player.hp];
+        hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
     }
 
     //close action menu - USED () - in close btn in action menu
     public void CloseActionMenu()
     {
         ResetAlphabetWordBtnClick();
-        GameManager.instance.inGame.spawn.ResetLastTimeSpawn();
+        GameManager.instance.inGame.ResetLastTimeSpawn();
         if (!isRunGame)
             gameMenuUiAnim.SetTrigger("info");
         else
@@ -322,7 +322,7 @@ public class GameMenuUi : MonoBehaviour
         // if (!isCharLvl1)
         // {
         // add in word
-        alphabetsWord.Add(player.alphabetsStore[indexBtn]);
+        alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
         //remove in store
         RemoveCharPlayer(indexBtn);
         SetCharUiWord();
@@ -339,7 +339,7 @@ public class GameMenuUi : MonoBehaviour
     public void AlphabetWordBtnClick(int indexBtn)
     {
         //add in store
-        player.AddAlphabetStore(alphabetsWord[indexBtn]);
+        GameManager.instance.player.AddAlphabetStore(alphabetsWord[indexBtn]);
         //remove in word
         alphabetsWord.RemoveAt(indexBtn);
         SetCharUiWord();
@@ -396,7 +396,7 @@ public class GameMenuUi : MonoBehaviour
         {
             //get coin for letter length >= 4 --- 4 letter = 1 coin
             GameManager.instance.AddCoin((int)(letterCombine.Length / 4));
-            player.PlaySoundChar();
+            GameManager.instance.player.PlaySoundChar();
             SetCoinEvent();
         }
     }
@@ -426,13 +426,13 @@ public class GameMenuUi : MonoBehaviour
     private void SetBuildBtnsInteracteable()
     {
         //ladder
-        if (inGame.isLadder)
+        if (GameManager.instance.inGame.isLadder)
         {
             //if ladders complete
-            if (!inGame.ladders.isCompleted)
+            if (!GameManager.instance.inGame.ladders.isCompleted)
             {
                 //check if word point more than point needed
-                SetBuildBtninteractable(0, wordPoint >= inGame.ladderPt);
+                SetBuildBtninteractable(0, wordPoint >= GameManager.instance.inGame.ladderPt);
                 completeLadderImg.SetActive(false);
             }
             else
@@ -442,34 +442,34 @@ public class GameMenuUi : MonoBehaviour
             }
         }
         //ground
-        if (inGame.isGround)
+        if (GameManager.instance.inGame.isGround)
         {
             //if ladders complete
-            if (!inGame.ladders.isCompleted)
+            if (!GameManager.instance.inGame.ladders.isCompleted)
                 //check if word point more than point needed
-                SetBuildBtninteractable(1, wordPoint >= inGame.groundPt);
+                SetBuildBtninteractable(1, wordPoint >= GameManager.instance.inGame.groundPt);
             else
                 SetBuildBtninteractable(1, false);
         }
         //fence
-        if (inGame.isFence)
+        if (GameManager.instance.inGame.isFence)
         {
             //off the complete ladder img
             completeLadderImg.SetActive(false);
             if (!isObjBuildBtnClickable)
                 SetBuildBtninteractable(2, false);
-            else if (inGame.builderInRun.objBuildInGame < inGame.builderInRun.objBuildInGameLimit)
-                SetBuildBtninteractable(2, wordPoint >= inGame.fencePt);
+            else if (GameManager.instance.inGame.builderInRun.objBuildInGame < GameManager.instance.inGame.builderInRun.objBuildInGameLimit)
+                SetBuildBtninteractable(2, wordPoint >= GameManager.instance.inGame.fencePt);
             else
                 SetBuildBtninteractable(2, false);
         }
         //slime
-        if (inGame.isSlime)
+        if (GameManager.instance.inGame.isSlime)
         {
             if (!isObjBuildBtnClickable)
                 SetBuildBtninteractable(3, false);
-            else if (inGame.builderInRun.objBuildInGame < inGame.builderInRun.objBuildInGameLimit)
-                SetBuildBtninteractable(3, wordPoint >= inGame.slimePt);
+            else if (GameManager.instance.inGame.builderInRun.objBuildInGame < GameManager.instance.inGame.builderInRun.objBuildInGameLimit)
+                SetBuildBtninteractable(3, wordPoint >= GameManager.instance.inGame.slimePt);
             else
                 SetBuildBtninteractable(3, false);
         }
@@ -489,12 +489,12 @@ public class GameMenuUi : MonoBehaviour
     {
         if (!isReal)
         {
-            bookNumText.text = player.bookNum.ToString();
+            bookNumText.text = GameManager.instance.playerData.bookNum.ToString();
             gameMenuUiAnim.SetTrigger("death");
         }
         else
         {
-            switch (player.deathScenario)
+            switch (GameManager.instance.playerData.deathScenario)
             {
                 case "alphabet":
                     deathImg.sprite = GameManager.instance.inGameUi.deathSprite[0];
@@ -520,7 +520,7 @@ public class GameMenuUi : MonoBehaviour
         gameMenuUiAnim.SetTrigger("win");
         Debug.Log("win window");
         FinishGame(false);
-        player.PlaySoundWin();
+        GameManager.instance.player.PlaySoundWin();
         //change music background to win theme
         GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
     }
@@ -529,9 +529,9 @@ public class GameMenuUi : MonoBehaviour
     public void BuildLadder()
     {
         PlaySoundBuild();
-        inGame.BuildLadder();
+        GameManager.instance.inGame.BuildLadder();
         //pay with word pt
-        wordPoint -= inGame.ladderPt;
+        wordPoint -= GameManager.instance.inGame.ladderPt;
         //set word point event and builder button interactable
         SetWordPointEvent();
     }
@@ -539,16 +539,16 @@ public class GameMenuUi : MonoBehaviour
     public void BuildGround()
     {
         PlaySoundBuild();
-        inGame.BuildGround();
-        wordPoint -= inGame.groundPt;
+        GameManager.instance.inGame.BuildGround();
+        wordPoint -= GameManager.instance.inGame.groundPt;
         SetWordPointEvent();
     }
     //USED () - in fence btn
     public void BuildFence()
     {
         PlaySoundBuild();
-        inGame.BuildFence();
-        wordPoint -= inGame.fencePt;
+        GameManager.instance.inGame.BuildFence();
+        wordPoint -= GameManager.instance.inGame.fencePt;
         SetRunBuildBtn(false);
         SetWordPointEvent();
         CloseActionMenu();
@@ -558,8 +558,8 @@ public class GameMenuUi : MonoBehaviour
     public void BuildSlime()
     {
         PlaySoundBuild();
-        inGame.BuildSlime();
-        wordPoint -= inGame.slimePt;
+        GameManager.instance.inGame.BuildSlime();
+        wordPoint -= GameManager.instance.inGame.slimePt;
         SetRunBuildBtn(false);
         SetWordPointEvent();
         CloseActionMenu();

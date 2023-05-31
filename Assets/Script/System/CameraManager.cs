@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour
 {
     //SOLUTION () - resolve the 2 audio listener error 
     public static GameObject mainCameraInstance;
-    public GameObject playerObj;
+    //public GameObject playerObj;
     [SerializeField]
     private float elevation;
 
@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
     //follow player
     private void FollowPlayer()
     {
-        transform.position = new Vector3(0, playerObj.transform.position.y + elevation, -10);
+        transform.position = new Vector3(0, GameManager.instance.player.transform.position.y + elevation, -10);
     }
 
     //rise camera follow ground

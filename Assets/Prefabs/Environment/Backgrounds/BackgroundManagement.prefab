@@ -60,3 +60,4 @@ MonoBehaviour:
   boundY: 0
   spawnPosY: 20.33
   isLoopBackground: 1
+  dragBg: 4

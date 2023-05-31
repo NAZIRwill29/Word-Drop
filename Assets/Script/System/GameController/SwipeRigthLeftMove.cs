@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class SwipeRigthLeftMove : MonoBehaviour
 {
-    public Player player;
+    // public Player player;
     private Touch touch;
-    private float posX;
+    [SerializeField] private float posX;
 
     // Update is called once per frame
     void Update()
     {
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
-        if (player.isHasWin)
+        if (GameManager.instance.playerData.isHasWin)
             return;
-        if (player.isHasDie)
+        if (GameManager.instance.playerData.isHasDie)
             return;
         if (Input.touchCount > 0)
         {
@@ -24,14 +24,13 @@ public class SwipeRigthLeftMove : MonoBehaviour
             if (touch.phase == TouchPhase.Moved)
             {
                 //move player
-                posX = transform.position.x + touch.deltaPosition.x * player.speed;
+                posX = GameManager.instance.player.transform.position.x + touch.deltaPosition.x * GameManager.instance.playerData.speed;
                 //set boundary
                 if (posX < -GameManager.instance.boundary.boundX)
                     posX = -GameManager.instance.boundary.boundX;
                 else if (posX > GameManager.instance.boundary.boundX)
                     posX = GameManager.instance.boundary.boundX;
-                else
-                    transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+                GameManager.instance.player.MovePlayer(posX);
             }
         }
     }

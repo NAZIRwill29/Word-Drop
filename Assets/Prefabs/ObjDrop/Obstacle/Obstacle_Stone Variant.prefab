@@ -13,19 +13,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.78
+      value: 7.34
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.3
+      value: 23.079
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233530543518676933, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Name
-      value: Obstacle_Stone Variant
+      value: Obstacle_Stone
       objectReference: {fileID: 0}
     - target: {fileID: 1803271827837437713, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Size.x
@@ -85,11 +85,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5123368635380849235, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: isReverseObj
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5123368635380849235, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: originalPos.y
-      value: 21
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 8290260344927748647, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Sprite

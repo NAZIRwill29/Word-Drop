@@ -11,14 +11,13 @@ public class Ground : MonoBehaviour
     [Tooltip("0,1,2")]
     public int groundType, groundSerialNum;
     private Damage dmg;
-    private int hp = 2;
-    [SerializeField]
-    private Grounds grounds;
+    [SerializeField] private int hp = 2;
+    [SerializeField] private Grounds grounds;
     public SpriteRenderer groundSR;
     //physic
     // public Collider2D groundColl;
     //private Vector3 originPos;
-    private bool isSpike, isActive;
+    [SerializeField] private bool isSpike, isActive;
     private float spikeDuration = 2, lastSpike;
 
     void Start()
@@ -35,7 +34,7 @@ public class Ground : MonoBehaviour
     public void ObjHit(Damage dmg1)
     {
         //Debug.Log("obj hitted ground" + (hp - dmg.damageAmount));
-        hp -= dmg1.damageAmount;
+        hp--;
         SetGroundState(hp);
     }
 
@@ -44,6 +43,7 @@ public class Ground : MonoBehaviour
         //avoid out of bound
         if (num >= 0)
         {
+            //Debug.Log("set ground");
             //change sprite based on serial number
             switch (groundSerialNum)
             {
@@ -123,7 +123,7 @@ public class Ground : MonoBehaviour
             if (coll.collider.tag == "Player")
             {
                 lastSpike = Time.time;
-                Debug.Log("spike damage");
+                //Debug.Log("spike damage");
                 coll.collider.SendMessage("ReceiveDamage", dmg);
             }
     }

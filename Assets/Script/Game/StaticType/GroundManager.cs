@@ -35,7 +35,7 @@ public class GroundManager : MonoBehaviour
             GameManager.instance.inGame.ladders.AddActiveLadders(true);
             GameManager.instance.inGame.ladders.ladderUse.transform.position += new Vector3(0, riseNum, 0);
             //heal from water
-            GameManager.instance.player.LifeLine(GameManager.instance.player.lifeLineBuildTrigger);
+            GameManager.instance.player.LifeLine(GameManager.instance.playerData.lifeLineBuildTrigger);
         }
         else
         {
