@@ -153,6 +153,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: vehicle_7
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 864923fd58780024a96d304956cf7b2e
+      internalID: 1609212722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: vehicle_0
       rect:
         serializedVersion: 2
@@ -161,14 +182,14 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 864923fd58780024a96d304956cf7b2e
-      internalID: 1609212722
+      spriteID: 9d2df1303fc164e4cb38a03276bc5e55
+      internalID: -69899715
       vertices: []
       indices: 
       edges: []
@@ -182,14 +203,14 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d2df1303fc164e4cb38a03276bc5e55
-      internalID: -69899715
+      spriteID: 725162b03fe5e534bb10c40b46321b2c
+      internalID: -1455453229
       vertices: []
       indices: 
       edges: []
@@ -203,14 +224,14 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 725162b03fe5e534bb10c40b46321b2c
-      internalID: -1455453229
+      spriteID: cd747ed1fdd92444e8d9aa1069a6ea34
+      internalID: 1514609811
       vertices: []
       indices: 
       edges: []
@@ -224,14 +245,14 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd747ed1fdd92444e8d9aa1069a6ea34
-      internalID: 1514609811
+      spriteID: 130935dbefb10b3449ef48baed9c86f4
+      internalID: 1967474889
       vertices: []
       indices: 
       edges: []
@@ -245,14 +266,14 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 130935dbefb10b3449ef48baed9c86f4
-      internalID: 1967474889
+      spriteID: ecf79d209b9ecdb47b80d17028aa1b11
+      internalID: -1529645658
       vertices: []
       indices: 
       edges: []
@@ -266,14 +287,14 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf79d209b9ecdb47b80d17028aa1b11
-      internalID: -1529645658
+      spriteID: 515fdb65af451bb4288e2d940e3e1a50
+      internalID: 1067678953
       vertices: []
       indices: 
       edges: []
@@ -287,14 +308,35 @@ TextureImporter:
         width: 400
         height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 515fdb65af451bb4288e2d940e3e1a50
-      internalID: 1067678953
+      spriteID: 6aebab044996db44fab5c4889bdfbb45
+      internalID: -2107786069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vehicle_8
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0ae266d20e21734985f3bbdb3b8fa91
+      internalID: 919392335
       vertices: []
       indices: 
       edges: []
@@ -318,6 +360,7 @@ TextureImporter:
       vehicle_5: 1067678953
       vehicle_6: -2107786069
       vehicle_7: 1609212722
+      vehicle_8: 919392335
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

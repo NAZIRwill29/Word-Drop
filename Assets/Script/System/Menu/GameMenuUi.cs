@@ -37,6 +37,8 @@ public class GameMenuUi : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] buildText;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextAsset wordList;
+    [SerializeField] private Image uiFill;
+    //[SerializeField] private Text uiText;
     private List<string> words;
     private string letterCombine;
     public int wordPoint;
@@ -44,6 +46,10 @@ public class GameMenuUi : MonoBehaviour
     [SerializeField] private bool isCharLvl1, isObjBuildBtnClickable = true;
 
     [SerializeField] private int objBuildCooldownNum = 100, objBuildCooldownDuration;
+    //timer    
+    [SerializeField] private int deathClockDuration;
+    private int remainingDurationClock;
+    private bool isStartdeathClock;
     void Awake()
     {
         //convert word in .txt to string word
@@ -62,6 +68,8 @@ public class GameMenuUi : MonoBehaviour
     // 50 frame per sec
     void FixedUpdate()
     {
+        if (isStartdeathClock)
+            UpdateTimerDeathClock();
         if (GameManager.instance.isPauseGame)
             return;
         if (GameManager.instance.inGame.isFence || GameManager.instance.inGame.isSlime)
@@ -491,6 +499,8 @@ public class GameMenuUi : MonoBehaviour
         {
             bookNumText.text = GameManager.instance.playerData.bookNum.ToString();
             gameMenuUiAnim.SetTrigger("death");
+            //clock countdown anim
+            TimerClockCountdown(deathClockDuration);
         }
         else
         {
@@ -523,6 +533,35 @@ public class GameMenuUi : MonoBehaviour
         GameManager.instance.player.PlaySoundWin();
         //change music background to win theme
         GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
+    }
+
+    //timer clock countdown
+    private void TimerClockCountdown(int Second)
+    {
+        remainingDurationClock = Second;
+        //StartCoroutine(UpdateTimerClock());
+        isStartdeathClock = true;
+    }
+    private void UpdateTimerDeathClock()
+    {
+        if (remainingDurationClock >= 0)
+        {
+            //uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
+            uiFill.fillAmount = Mathf.InverseLerp(0, deathClockDuration, remainingDurationClock);
+            remainingDurationClock--;
+            //yield return new WaitForSeconds(1f);
+        }
+        else
+            OnEnd();
+    }
+    private void OnEnd()
+    {
+        //End Time , if want Do something
+        Debug.Log("End");
+        //TODO () - go to main menu
+        FinishGame(true);
+        gameMenuUiAnim.SetTrigger("hide");
+        GameManager.instance.mainMenuUI.PlaySoundNavigate();
     }
 
     //USED () - in ladder btn
@@ -588,6 +627,7 @@ public class GameMenuUi : MonoBehaviour
     //USED () - dieWindow, giveUpBtn, homeBtn
     public void FinishGame(bool isBackToHome)
     {
+        isStartdeathClock = false;
         ResetAlphabetWordBtnClick();
         //GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         //GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
@@ -598,6 +638,7 @@ public class GameMenuUi : MonoBehaviour
     //USED () - continuebookbtn, continuesadsbtn
     public void ContinueAfterDeathBtn(bool isAds)
     {
+        isStartdeathClock = false;
         GameManager.instance.ContinueAfterDeath(isAds);
     }
 
