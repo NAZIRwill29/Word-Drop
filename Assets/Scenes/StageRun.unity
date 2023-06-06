@@ -9585,10 +9585,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundRun_Sky1R
       objectReference: {fileID: 0}
-    - target: {fileID: 345320602001235781, guid: 8307f9b607e290145b2ac59863ee8eb8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 345320602001235783, guid: 8307f9b607e290145b2ac59863ee8eb8, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -10553,10 +10549,6 @@ PrefabInstance:
     - target: {fileID: 3092461504872706251, guid: 79b48716504ba5e42950b13e90370d48, type: 3}
       propertyPath: m_Name
       value: BackgroundRun_Sky1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3092461504872706251, guid: 79b48716504ba5e42950b13e90370d48, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b48716504ba5e42950b13e90370d48, type: 3}

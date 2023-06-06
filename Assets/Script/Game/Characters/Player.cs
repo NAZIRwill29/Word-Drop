@@ -15,10 +15,12 @@ public class Player : MonoBehaviour
     public AudioSource playerAudioSource;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     [SerializeField] private GameMenuUi gameMenuUi;
-    [SerializeField] private Animator playerAnim;
+    public Animator playerAnim;
     public SpriteRenderer playerSr;
     public List<char> alphabetsStore;
     public float objHeight;
+    public bool isSquare;
+    private bool isClimb;
     //for push forward by monster
     //private bool isPush;
     //private int pushNum = 50;
@@ -52,6 +54,11 @@ public class Player : MonoBehaviour
         {
             ClimbEvent();
         }
+        if (!isClimb && !playerData.isHasWin)
+        {
+            if (isSquare)
+                playerAnim.SetBool("run", true);
+        }
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         //immunedamage for few second in start game
@@ -72,6 +79,11 @@ public class Player : MonoBehaviour
     //move player
     public void MovePlayer(float posX)
     {
+        //make player face the direction they go
+        if (posX > transform.position.x)
+            playerSr.flipX = false;
+        else
+            playerSr.flipX = true;
         transform.position = new Vector3(posX, transform.position.y, transform.position.z);
     }
     public void StartGame(int mode)
@@ -491,11 +503,13 @@ public class Player : MonoBehaviour
         Debug.Log("climb");
         playerData.climbNo = (num + 1) * 2;
         LifeLine(0);
+        isClimb = true;
+        playerAnim.SetTrigger("climb");
     }
     private void ClimbEvent()
     {
         transform.position = new Vector3(GameManager.instance.inGame.laddersObj.transform.position.x, transform.position.y, transform.position.z);
-        transform.position += new Vector3(0, 0.444f, 0);
+        transform.position += new Vector3(0, 0.525f, 0);
         playerData.climbNo--;
         //TODO () - play sound climb - may need fix
         PlaySoundClimb();
@@ -504,6 +518,7 @@ public class Player : MonoBehaviour
     //win
     public void Win(bool isStaticGameMode)
     {
+        Debug.Log("Win");
         if (playerData.isHasWin)
             return;
         GameManager.instance.inGame.spawn.StopSpawn(true);

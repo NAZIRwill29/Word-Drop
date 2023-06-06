@@ -32,6 +32,11 @@ public class SwipeRigthLeftMove : MonoBehaviour
                     posX = GameManager.instance.boundary.boundX;
                 GameManager.instance.player.MovePlayer(posX);
             }
+            // else
+            // {
+            //     if (GameManager.instance.player.isSquare)
+            //         GameManager.instance.player.playerAnim.SetBool("run", false);
+            // }
         }
     }
 }

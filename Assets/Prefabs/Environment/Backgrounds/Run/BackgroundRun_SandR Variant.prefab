@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8585837114947231333, guid: 8e68894e35b0c9745bd64b6594278684, type: 3}
       propertyPath: m_Name
-      value: BackgroundRun_SandR Variant
+      value: BackgroundRun_SandR
       objectReference: {fileID: 0}
     - target: {fileID: 8585837114947231333, guid: 8e68894e35b0c9745bd64b6594278684, type: 3}
       propertyPath: m_IsActive
@@ -18,7 +18,7 @@ PrefabInstance:
     - target: {fileID: 8585837114947231334, guid: 8e68894e35b0c9745bd64b6594278684, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 881134562, guid: a8a4f2e352fe8ee4482c7ae5501a5b85, type: 3}
+      objectReference: {fileID: -1487737845, guid: 5c4bd6f86cc1b7b47be597f97be9c654, type: 3}
     - target: {fileID: 8585837114947231335, guid: 8e68894e35b0c9745bd64b6594278684, type: 3}
       propertyPath: m_RootOrder
       value: 0

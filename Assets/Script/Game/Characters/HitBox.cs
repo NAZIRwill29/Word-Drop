@@ -43,7 +43,7 @@ public class HitBox : MonoBehaviour
         if (parentType == 0)
             GameManager.instance.player.Climb(num);
     }
-    public void Win()
+    public void Win(bool isStaticGameMode)
     {
         Debug.Log("hit win line");
         //only call for drowned game mode
