@@ -163,10 +163,10 @@ MonoBehaviour:
   - {fileID: 0}
   lastCharTime: 0
   lastObsTime: 0
-  dragChar: 2.5
-  dragObs: 2.25
-  timeCharDuration: 0.75
-  timeObsDuration: 1
+  dragChar: 2.25
+  dragObs: 2
+  timeCharDuration: 0.6
+  timeObsDuration: 0.7
   lastBookTime: 0
   lastCoinTime: 0
   timeBookDuration: 60
@@ -174,5 +174,3 @@ MonoBehaviour:
   dragCoin: 1.75
   dragBook: 1.25
   isSpawnStop: 0
-  timeIncNum: 5
-  lastIncNumTime: 0

@@ -186,7 +186,7 @@ public class Monster : MonoBehaviour
         {
             //slower state
             monsterSR.sprite = monsterSprite[1];
-            ChangeSpeed(prevSpeed - 0.3f);
+            ChangeSpeed(prevSpeed - 0.15f);
             StartCoroutine(ResetMonsterStateDelay());
         }
         else
@@ -202,7 +202,7 @@ public class Monster : MonoBehaviour
     private IEnumerator ResetMonsterStateDelay()
     {
         //10 second
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(30);
         hpChange = 2;
         SetMonsterState();
     }

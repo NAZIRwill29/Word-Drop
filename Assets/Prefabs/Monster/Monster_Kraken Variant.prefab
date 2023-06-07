@@ -74,7 +74,7 @@ PrefabInstance:
     - target: {fileID: 4644710323527676689, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1627535683, guid: ceb7e0467efaac74797188f26a3fd01f, type: 3}
+      objectReference: {fileID: -742217482, guid: d5cf60f6b4bdf9943958243225bcc50b, type: 3}
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: fallBackDist
       value: 3
@@ -82,15 +82,15 @@ PrefabInstance:
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: monsterSprite.Array.data[0]
       value: 
-      objectReference: {fileID: -1627535683, guid: ceb7e0467efaac74797188f26a3fd01f, type: 3}
+      objectReference: {fileID: -742217482, guid: d5cf60f6b4bdf9943958243225bcc50b, type: 3}
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: monsterSprite.Array.data[1]
       value: 
-      objectReference: {fileID: -1627535683, guid: ceb7e0467efaac74797188f26a3fd01f, type: 3}
+      objectReference: {fileID: -198154324, guid: d5cf60f6b4bdf9943958243225bcc50b, type: 3}
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: monsterSprite.Array.data[2]
       value: 
-      objectReference: {fileID: -1627535683, guid: ceb7e0467efaac74797188f26a3fd01f, type: 3}
+      objectReference: {fileID: 191039330, guid: d5cf60f6b4bdf9943958243225bcc50b, type: 3}
     - target: {fileID: 4644710323527676691, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: m_Name
       value: Monster_Kraken
@@ -117,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4644710323527676695, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 8.502075
+      value: 8.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
