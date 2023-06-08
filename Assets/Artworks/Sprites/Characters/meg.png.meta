@@ -69,7 +69,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -157,7 +157,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 850
+        y: 1700
         width: 850
         height: 850
       alignment: 0
@@ -178,7 +178,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 850
-        y: 850
+        y: 1700
         width: 850
         height: 850
       alignment: 0
@@ -199,7 +199,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 850
         width: 850
         height: 850
       alignment: 0
@@ -211,6 +211,69 @@ TextureImporter:
       bones: []
       spriteID: b048fc1b80820364180642220b8682c9
       internalID: 514787874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meg_3
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 850
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 480e4100509c0a34496cbd97f00ea49d
+      internalID: -2101691814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meg_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60810f4dd96fe624da1ff8d5ce7c5cf4
+      internalID: 437400126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meg_5
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 0
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97fa72d6c03c9ae4b9d5a9d0b91da4ce
+      internalID: 597985197
       vertices: []
       indices: 
       edges: []
@@ -229,6 +292,9 @@ TextureImporter:
       meg_0: -1862936476
       meg_1: 1431192687
       meg_2: 514787874
+      meg_3: -2101691814
+      meg_4: 437400126
+      meg_5: 597985197
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

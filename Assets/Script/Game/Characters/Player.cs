@@ -59,6 +59,11 @@ public class Player : MonoBehaviour
             if (isSquare)
                 playerAnim.SetBool("run", true);
         }
+        else
+        {
+            if (isSquare)
+                playerAnim.SetBool("run", false);
+        }
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         //immunedamage for few second in start game
@@ -85,6 +90,18 @@ public class Player : MonoBehaviour
         else
             playerSr.flipX = true;
         transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+    }
+    //player move right
+    public void MoveRight()
+    {
+        playerSr.flipX = false;
+        transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+    }
+    //player move left
+    public void MoveLeft()
+    {
+        playerSr.flipX = true;
+        transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
     }
     public void StartGame(int mode)
     {

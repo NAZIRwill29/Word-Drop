@@ -69,7 +69,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -157,7 +157,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 850
+        y: 1700
         width: 850
         height: 850
       alignment: 0
@@ -178,7 +178,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 850
-        y: 850
+        y: 1700
         width: 850
         height: 850
       alignment: 0
@@ -198,8 +198,8 @@ TextureImporter:
       name: anaconda_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 1700
+        y: 1700
         width: 850
         height: 850
       alignment: 0
@@ -211,6 +211,132 @@ TextureImporter:
       bones: []
       spriteID: 8009ede24e5c53249834cb190d634c28
       internalID: -1737550143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anaconda_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 850
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f210b193ff67b24584b7a64e1147f8c
+      internalID: -745589250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anaconda_4
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 850
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1080e9587109e6749a6d1289a43a1ce7
+      internalID: -561406731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anaconda_5
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 850
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a829abfacaebd4087d991ed5cf1550
+      internalID: 59765378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anaconda_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 722c9f20a7f1aa242ae4f36c7b83648e
+      internalID: -391538604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anaconda_7
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 0
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7195101fc64e244c8064db48591b490
+      internalID: -1077655592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anaconda_8
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 0
+        width: 850
+        height: 850
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20fd820b3cd3ef446a756bbdc713b17d
+      internalID: -255930565
       vertices: []
       indices: 
       edges: []
@@ -229,6 +355,12 @@ TextureImporter:
       anaconda_0: -1027322186
       anaconda_1: 305108109
       anaconda_2: -1737550143
+      anaconda_3: -745589250
+      anaconda_4: -561406731
+      anaconda_5: 59765378
+      anaconda_6: -391538604
+      anaconda_7: -1077655592
+      anaconda_8: -255930565
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

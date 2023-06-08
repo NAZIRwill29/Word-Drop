@@ -7,6 +7,7 @@ public class SwipeRigthLeftMove : MonoBehaviour
     // public Player player;
     private Touch touch;
     [SerializeField] private float posX;
+    private Vector2 startTouchPos, endTouchPos;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +18,12 @@ public class SwipeRigthLeftMove : MonoBehaviour
             return;
         if (GameManager.instance.playerData.isHasDie)
             return;
+        SwipeV1();
+        //SwipeV2();
+    }
+
+    private void SwipeV1()
+    {
         if (Input.touchCount > 0)
         {
             //get input
@@ -37,6 +44,20 @@ public class SwipeRigthLeftMove : MonoBehaviour
             //     if (GameManager.instance.player.isSquare)
             //         GameManager.instance.player.playerAnim.SetBool("run", false);
             // }
+        }
+    }
+
+    private void SwipeV2()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            startTouchPos = Input.GetTouch(0).position;
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            endTouchPos = Input.GetTouch(0).position;
+            if (endTouchPos.x < startTouchPos.x)
+                GameManager.instance.player.MoveLeft();
+            if (endTouchPos.x > startTouchPos.x)
+                GameManager.instance.player.MoveRight();
         }
     }
 }

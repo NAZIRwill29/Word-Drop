@@ -9,7 +9,7 @@ public class Monster : MonoBehaviour
     //  damage    damageAnger  slime    attack    
     [SerializeField] private AudioClip[] monsterAudioClip;
     private bool isImmune, isHasBegin, isMonsterBeginEvent;
-    public bool isForeverChangeState;
+    public bool isForeverChangeState, isNoSlowDown;
     public string objType = "Monster";
     private Damage dmg;
     public int damage = 1;
@@ -23,6 +23,10 @@ public class Monster : MonoBehaviour
     //   normal   slower    speedy/rage
     public Sprite[] monsterSprite;
     public SpriteRenderer monsterSR;
+    public Animator monsterAnim;
+    //      0        1     
+    //  normal    animation
+    public int monsterNo;
     public float objHeight;
     private float lastSlowObjSound, TimeSlowObjSoundCooldown = 150;
     //for push backward when hitted
@@ -173,19 +177,33 @@ public class Monster : MonoBehaviour
         if (hpChange < 0)
         {
             //speedy / rage state
-            monsterSR.sprite = monsterSprite[2];
+            //decide based on monster no - because some has animation
+            if (monsterNo == 0)
+                monsterSR.sprite = monsterSprite[2];
+            else
+                monsterAnim.SetInteger("state", 2);
+
             if (!isForeverChangeState)
             {
                 ChangeSpeed(prevSpeed + 0.3f);
-                StartCoroutine(ResetMonsterStateDelay());
+                if (monsterNo == 0)
+                    StartCoroutine(ResetMonsterStateDelay());
+                else
+                    monsterAnim.SetInteger("state", 1);
             }
             else
                 ChangeSpeed(0.9f);
         }
         else if (hpChange > 4)
         {
+            if (isNoSlowDown)
+                return;
             //slower state
-            monsterSR.sprite = monsterSprite[1];
+            if (monsterNo == 0)
+                monsterSR.sprite = monsterSprite[1];
+            else
+                monsterAnim.SetInteger("state", 1);
+
             ChangeSpeed(prevSpeed - 0.15f);
             StartCoroutine(ResetMonsterStateDelay());
         }
@@ -193,7 +211,11 @@ public class Monster : MonoBehaviour
         {
             //hpChange = 2
             //normal state
-            monsterSR.sprite = monsterSprite[0];
+            if (monsterNo == 0)
+                monsterSR.sprite = monsterSprite[0];
+            else
+                monsterAnim.SetInteger("state", 1);
+
             ChangeSpeed(prevSpeed);
         }
     }
