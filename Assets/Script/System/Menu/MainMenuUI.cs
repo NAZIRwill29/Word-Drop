@@ -20,6 +20,7 @@ public class MainMenuUI : MonoBehaviour
     //player info window
     public Image playerImg;
     public TextMeshProUGUI lvlText, hpText, abcText, coinText, bookText;
+    public GameObject[] stageBtnObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,22 @@ public class MainMenuUI : MonoBehaviour
     {
 
     }
+
+    //level window------------------------------
+    //USED () - in play btn
+    public void LevelWindow()
+    {
+        //hide and unhide stage btn
+        foreach (var item in stageBtnObj)
+        {
+            item.SetActive(false);
+        }
+        for (int i = 0; i < GameManager.instance.gameData.passStageNo + 1; i++)
+        {
+            stageBtnObj[i].SetActive(true);
+        }
+    }
+    //----------------------------------------
 
     //player info window----------------------
     //USED () - in player info btn

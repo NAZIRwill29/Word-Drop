@@ -79,6 +79,14 @@ PrefabInstance:
       propertyPath: monsterSprite.Array.data[2]
       value: 
       objectReference: {fileID: -1981396647, guid: 71a3f507041f44e47b3462a01c55fc8a, type: 3}
+    - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
+      propertyPath: monsterAudioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 69c9a9fffd602ee43a60df4ea572155c, type: 3}
+    - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
+      propertyPath: monsterAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 69c9a9fffd602ee43a60df4ea572155c, type: 3}
     - target: {fileID: 4644710323527676691, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: m_Name
       value: Monster_Garuda Variant

@@ -126,7 +126,7 @@ public class Monster : MonoBehaviour
         if (Time.time - lastSlowObjSound > TimeSlowObjSoundCooldown)
         {
             lastSlowObjSound = Time.time;
-            PlaySoundDamage();
+            PlaySoundSlime();
             hpChange -= 1;
         }
     }

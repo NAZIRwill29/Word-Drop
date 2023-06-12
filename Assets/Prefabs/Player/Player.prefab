@@ -633,7 +633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6481887011344408256
 Transform:
   m_ObjectHideFlags: 0
@@ -765,9 +765,9 @@ MonoBehaviour:
   lifeLine4Coll: {fileID: 6481887010042284316}
   playerRB: {fileID: 6481887011344408259}
   playerAudioClip:
-  - {fileID: 8300000, guid: b1b9c1f0ea1fcae439ed1a4d44ff05fd, type: 3}
+  - {fileID: 8300000, guid: fe58af53a4274b34aac9753aaa83b103, type: 3}
   - {fileID: 8300000, guid: 0e89b476d4715fd42935e9900eedb033, type: 3}
-  - {fileID: 8300000, guid: 913d6445ee8cc4152a9c18da590ee203, type: 3}
+  - {fileID: 8300000, guid: 69c9a9fffd602ee43a60df4ea572155c, type: 3}
   - {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
   - {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
   - {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
@@ -780,6 +780,7 @@ MonoBehaviour:
   playerSr: {fileID: 6481887011344408257}
   alphabetsStore: 
   objHeight: 2
+  isSquare: 0
 --- !u!95 &6481887011344408267
 Animator:
   serializedVersion: 5
