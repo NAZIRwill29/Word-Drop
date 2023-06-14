@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public static GameObject canvasMainInstance;
+    //public static GameObject canvasMainInstance;
+    public CameraManager cameraManager;
     public CanvasGroupFunc canvasGroupFunc;
     public Boundary boundary;
     public Data gameData = new Data() { musicVolume = 1, soundVolume = 1 };
@@ -209,9 +210,7 @@ public class GameManager : MonoBehaviour
     public void FinishGame(bool isBackToHome)
     {
         player.FinishGame();
-        //prevent from take low pass stages
-        if (passStageNo < inGame.currentStageNo)
-            passStageNo = inGame.currentStageNo;
+
         //TODO () - create stage menu - list all stage
         PauseGame(true);
         SaveState();
@@ -500,6 +499,14 @@ public class GameManager : MonoBehaviour
             item.gameObject.SetActive(false);
         }
         players[index].gameObject.SetActive(true);
+    }
+
+    //update stage progress
+    public void UpdateStageProgress()
+    {
+        //prevent from take low pass stages
+        if (passStageNo < inGame.currentStageNo)
+            passStageNo = inGame.currentStageNo;
     }
 
     //set variable------------------------------------------

@@ -5,10 +5,11 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     //SOLUTION () - resolve the 2 audio listener error 
-    public static GameObject mainCameraInstance;
+    public static GameObject cameraInstance;
+    public Animator camAnim;
     //public GameObject playerObj;
     [SerializeField]
-    private float elevation;
+    private float elevation = 1.45f;
 
     // Update is called once per frame
     void LateUpdate()
@@ -21,6 +22,26 @@ public class CameraManager : MonoBehaviour
     private void FollowPlayer()
     {
         transform.position = new Vector3(0, GameManager.instance.player.transform.position.y + elevation, -10);
+    }
+
+    public void CamShake()
+    {
+        int randomNo = Random.Range(0, 2);
+        switch (randomNo)
+        {
+            case 0:
+                camAnim.SetTrigger("shake");
+                break;
+            case 1:
+                camAnim.SetTrigger("shake1");
+                break;
+            case 2:
+                camAnim.SetTrigger("shake2");
+                break;
+            default:
+                break;
+        }
+
     }
 
     //rise camera follow ground

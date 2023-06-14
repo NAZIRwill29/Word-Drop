@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public AudioSource playerAudioSource;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     [SerializeField] private GameMenuUi gameMenuUi;
-    public Animator playerAnim;
+    public Animator playerAnim, hitEffectAnim;
     public SpriteRenderer playerSr;
     public List<char> alphabetsStore;
     public float objHeight;
@@ -198,6 +198,10 @@ public class Player : MonoBehaviour
                 //Debug.Log("remove char");
                 RemoveChar(Random.Range(0, alphabetsStore.Count));
             }
+            //shake camera
+            GameManager.instance.cameraManager.CamShake();
+            //hit effect anim
+            hitEffectAnim.SetTrigger("hit");
         }
         else
         {
@@ -229,6 +233,10 @@ public class Player : MonoBehaviour
             playerData.hp--;
             //set push forward by monster
             //StartPushByMonster();
+            //shake camera
+            GameManager.instance.cameraManager.CamShake();
+            //hit effect anim
+            hitEffectAnim.SetTrigger("hit");
         }
         else
         {
@@ -539,6 +547,7 @@ public class Player : MonoBehaviour
         if (playerData.isHasWin)
             return;
         GameManager.instance.inGame.spawn.StopSpawn(true);
+        GameManager.instance.UpdateStageProgress();
         if (isStaticGameMode)
         {
             LifeLine(0);

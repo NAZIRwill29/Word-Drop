@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233530543518676933, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Name
-      value: Obstacle_Fish2
+      value: Obstacle_Fish2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5123368635380849235, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: objType
@@ -79,6 +79,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -660168633, guid: 2da7386f5418b8846a29d6db59824489, type: 3}
+    - target: {fileID: 8290260344927748647, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
+      propertyPath: m_Color.a
+      value: 0.6862745
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1803271827837437713, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
