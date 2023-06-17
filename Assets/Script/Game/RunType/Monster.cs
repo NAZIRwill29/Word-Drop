@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
     //   normal   slower    speedy/rage
     public Sprite[] monsterSprite;
     public SpriteRenderer monsterSR;
-    public Animator monsterAnim;
+    public Animator monsterAnim, hitEffectAnim;
     //      0        1     
     //  normal    animation
     public int monsterNo;
@@ -102,6 +102,8 @@ public class Monster : MonoBehaviour
         StartPushByObj();
         hpChange += 1;
         SetMonsterState();
+        //make hit anim
+        hitEffectAnim.SetTrigger("hit");
     }
 
     //monster recovery by thing - make monster anger - increase speed

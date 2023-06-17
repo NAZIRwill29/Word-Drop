@@ -427,21 +427,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7662417610345676649, guid: ed2d397f95446674993b83181e333da6, type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
-    - target: {fileID: 7662417610345676650, guid: ed2d397f95446674993b83181e333da6, type: 3}
-      propertyPath: monsterNo
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7662417610345676651, guid: ed2d397f95446674993b83181e333da6, type: 3}
       propertyPath: m_Name
       value: Monster_Shark Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 7662417610345676651, guid: ed2d397f95446674993b83181e333da6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed2d397f95446674993b83181e333da6, type: 3}
