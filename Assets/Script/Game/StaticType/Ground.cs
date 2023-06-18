@@ -19,6 +19,7 @@ public class Ground : MonoBehaviour
     //private Vector3 originPos;
     [SerializeField] private bool isSpike, isActive;
     private float spikeDuration = 2, lastSpike;
+    [SerializeField] private GameObject effect;
 
     void Start()
     {
@@ -68,7 +69,10 @@ public class Ground : MonoBehaviour
             //set to normal state
             //Debug.Log("normal state ground");
             if (groundType != 0)
+            {
+                effect.SetActive(false);
                 SetSpike(false);
+            }
         }
         else if (num == 0)
         {
@@ -76,10 +80,10 @@ public class Ground : MonoBehaviour
             //Debug.Log("abnormal state ground");
             if (groundType != 0)
             {
-                grounds.groundManager.PlaySoundDamage();
+                effect.SetActive(true);
                 SetSpike(true);
+                grounds.groundManager.PlaySoundDamage();
             }
-
         }
     }
 

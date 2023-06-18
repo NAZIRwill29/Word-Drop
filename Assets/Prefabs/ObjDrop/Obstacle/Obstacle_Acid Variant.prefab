@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 184886619973666722}
   - component: {fileID: 6167591033993432869}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4afa471958c3b214b8f1695996e98e36, type: 3}
-  m_Color: {r: 0.2941177, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.2941177, g: 1, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,11 +105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.482
+      value: 7.585
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.665
+      value: 24.199
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.z

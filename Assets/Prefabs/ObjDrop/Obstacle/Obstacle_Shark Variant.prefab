@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 796335711911117772}
   - component: {fileID: 807531207390435194}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c2e0a23098fa79345bbebc506be3755b, type: 3}
-  m_Color: {r: 0.990566, g: 0.5186454, b: 0.5186454, a: 1}
+  m_Color: {r: 1, g: 0.3443396, b: 0.3443396, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

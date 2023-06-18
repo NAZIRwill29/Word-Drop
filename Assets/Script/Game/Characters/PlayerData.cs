@@ -20,15 +20,4 @@ public class PlayerData : MonoBehaviour
     public int levelPlayer = 1, charMaxNo = 10, dieNum, bookNum;
     public int playerMode;
     public string deathScenario;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

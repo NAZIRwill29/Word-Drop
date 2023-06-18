@@ -255,6 +255,9 @@ public class Player : MonoBehaviour
         if (alphabetsStore.Count > playerData.charMaxNo)
             alphabetsStore.RemoveAt(0);
         gameMenuUi.AddCharPlayer(abc);
+        //for tutorial
+        if (GameManager.instance.tutorial)
+            GameManager.instance.tutorial.Tutorial2Trigger(alphabetsStore.Count);
     }
 
     public void ReceiveBook()

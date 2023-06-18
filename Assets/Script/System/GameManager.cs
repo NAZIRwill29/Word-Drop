@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     //game
     public InGame inGame;
     public InGameUi inGameUi;
+    public Tutorial tutorial;
     public Sprite[] alphabetSprite, reverseAlphabetSprite;
     //data to be saved
     public int passStageNo;
@@ -419,6 +420,12 @@ public class GameManager : MonoBehaviour
             player.LifeLine(0);
             if (isStartGame)
                 gameMenuUi.SetGameMenuUIMode(inGameUi.isRun);
+            if (GameObject.Find("Tutorial"))
+            {
+                //start tutorial
+                tutorial = GameObject.Find("Tutorial").GetComponent<Tutorial>();
+                gameMenuUi.Tutorial1();
+            }
         }
         catch (System.Exception e)
         {

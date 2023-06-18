@@ -5,8 +5,8 @@ using UnityEngine;
 public class Char : DropObject
 {
     public char alphabet;
-    [SerializeField]
-    private SpriteRenderer charSR;
+    [SerializeField] private SpriteRenderer charSR;
+    [SerializeField] private GameObject effect;
     public void OnTriggerEnter2D(Collider2D coll)
     {
         if (GameManager.instance.isPauseGame)
@@ -44,9 +44,15 @@ public class Char : DropObject
         //Debug.Log(abc + "char index = " + (int)abc);
         //TODO () - replace with instance --- convert char to ASCii
         if (!isReverseObj)
+        {
             charSR.sprite = GameManager.instance.alphabetSprite[(int)abc - 65];
+            effect.SetActive(false);
+        }
         else
+        {
             //for reserve char
             charSR.sprite = GameManager.instance.reverseAlphabetSprite[(int)abc - 65];
+            effect.SetActive(true);
+        }
     }
 }

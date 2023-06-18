@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3513396206741212364}
   - component: {fileID: 3238477726845362734}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a419d73b0c50ab41bed508422aa5d30, type: 3}
-  m_Color: {r: 0.3679245, g: 0.2645966, b: 0.1475169, a: 1}
+  m_Color: {r: 0.3679245, g: 0.2645966, b: 0.1475169, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,11 +105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.3
+      value: 7.34
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.14
+      value: 23.079
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233530543518676933, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Name
-      value: Obstacle_Stone Variant
+      value: Obstacle_Stone
       objectReference: {fileID: 0}
     - target: {fileID: 1803271827837437713, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Size.x
@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5123368635380849235, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5123368635380849235, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: originalPos.y

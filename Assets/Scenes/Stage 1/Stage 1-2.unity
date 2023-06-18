@@ -9124,10 +9124,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_Stone
       objectReference: {fileID: 0}
-    - target: {fileID: 4920859935485561875, guid: b29123bd02614524a890469b8d593bcb, type: 3}
-      propertyPath: isReverseObj
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b29123bd02614524a890469b8d593bcb, type: 3}
 --- !u!1001 &496213771962450923

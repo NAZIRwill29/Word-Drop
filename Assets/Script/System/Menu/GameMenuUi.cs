@@ -24,7 +24,7 @@ public class GameMenuUi : MonoBehaviour
     public Image[] alphabetWordBtnImg;
     public Image hpImg;
     public Sprite[] hpSprite;
-    public Animator gameMenuUiAnim;
+    public Animator gameMenuUiAnim, tutorialAnim;
     public CanvasGroup buildCooldownCG;
     public TextMeshProUGUI buildCooldownText;
     public GameObject completeLadderImg;
@@ -687,6 +687,31 @@ public class GameMenuUi : MonoBehaviour
         SoundBtnOn.SetActive(isSoundOn);
         SoundBtnOff.SetActive(!isSoundOn);
     }
+
+    //Tutorial window--------------------------------
+    public void Tutorial1()
+    {
+        tutorialAnim.SetInteger("tutorial", 1);
+        GameManager.instance.PauseGame(true);
+        GameManager.instance.tutorial.TutorialPhaseNo = 1;
+    }
+    public void Tutorial2()
+    {
+        tutorialAnim.SetInteger("tutorial", 2);
+        GameManager.instance.PauseGame(true);
+        GameManager.instance.tutorial.TutorialPhaseNo = 2;
+    }
+    public void Tutorial3()
+    {
+
+    }
+    public void TutorialEnd()
+    {
+        tutorialAnim.SetInteger("tutorial", 0);
+        if (GameManager.instance.tutorial.TutorialPhaseNo == 1)
+            GameManager.instance.PauseGame(false);
+    }
+
 
     //play sound -------------------------------------------
     public void PlaySoundWord()

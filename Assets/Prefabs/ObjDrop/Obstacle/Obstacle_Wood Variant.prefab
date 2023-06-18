@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7702510670295389434}
   - component: {fileID: 7222322116993530767}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2b4f654feba5dfd4f8b957c52c63b49b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,11 +105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.58
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.6
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233530543518676933, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Name
-      value: Obstacle_Wood Variant (1)
+      value: Obstacle_Wood Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1803271827837437713, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Size.x

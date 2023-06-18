@@ -40,6 +40,9 @@ public class SwipeUpDownAction : MonoBehaviour
                         GameManager.instance.gameMenuUi.SetActionMenu();
                         GameManager.instance.canvasGroupFunc.ModifyCG(GameManager.instance.inGameUi.inGameUICG, 0, false, false);
                         GameManager.instance.PauseGame(true);
+                        //for tutorial
+                        if (GameManager.instance.tutorial)
+                            GameManager.instance.tutorial.Tutorial3Trigger();
                     }
                 }
             }

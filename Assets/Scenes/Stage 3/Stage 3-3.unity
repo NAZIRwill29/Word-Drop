@@ -1405,6 +1405,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_Stone Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4920859935485561875, guid: b29123bd02614524a890469b8d593bcb, type: 3}
+      propertyPath: isReverseObj
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5875206937030772869, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2821,6 +2825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_Stone Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4920859935485561875, guid: b29123bd02614524a890469b8d593bcb, type: 3}
+      propertyPath: isReverseObj
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5875206937030772869, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3021,6 +3029,10 @@ PrefabInstance:
     - target: {fileID: 1318945378763481477, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_Name
       value: Obstacle_Stone Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920859935485561875, guid: b29123bd02614524a890469b8d593bcb, type: 3}
+      propertyPath: isReverseObj
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5875206937030772869, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_IsActive
@@ -7169,6 +7181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_Stone Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4920859935485561875, guid: b29123bd02614524a890469b8d593bcb, type: 3}
+      propertyPath: isReverseObj
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5875206937030772869, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -7239,6 +7255,10 @@ PrefabInstance:
     - target: {fileID: 1318945378763481477, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_Name
       value: Obstacle_Stone Variant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920859935485561875, guid: b29123bd02614524a890469b8d593bcb, type: 3}
+      propertyPath: isReverseObj
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5875206937030772869, guid: b29123bd02614524a890469b8d593bcb, type: 3}
       propertyPath: m_IsActive

@@ -141,8 +141,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   bookObj:
   - {fileID: 0}
   - {fileID: 0}
@@ -163,8 +161,8 @@ MonoBehaviour:
   - {fileID: 0}
   lastCharTime: 0
   lastObsTime: 0
-  dragChar: 2.25
-  dragObs: 2
+  dragChar: 2.3
+  dragObs: 2.05
   timeCharDuration: 0.6
   timeObsDuration: 0.7
   lastBookTime: 0
