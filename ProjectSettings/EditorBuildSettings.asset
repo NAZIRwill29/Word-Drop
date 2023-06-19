@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StageRun.unity
     guid: 6f95d579bb4165b4493f8f780c424bbe
   - enabled: 1
+    path: Assets/Scenes/Stage 1/Tutorial.unity
+    guid: d966c33a0f406894a86271864e1befb3
+  - enabled: 1
     path: Assets/Scenes/Stage 1/Stage 1-1.unity
     guid: b5abe4470f8a48642baae6b73700a4fb
   - enabled: 1

@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite[] playerSprite;
     public SwipeRigthLeftMove swipeRigthLeftMove;
     public SwipeUpDownAction swipeUpDownAction;
+    public TutorialUI tutorialUI;
     //game
     public InGame inGame;
     public InGameUi inGameUi;
@@ -424,7 +425,8 @@ public class GameManager : MonoBehaviour
             {
                 //start tutorial
                 tutorial = GameObject.Find("Tutorial").GetComponent<Tutorial>();
-                gameMenuUi.Tutorial1();
+                tutorial.TutorialPhaseNo = 1;
+                tutorial.Tutorial1Trigger();
             }
         }
         catch (System.Exception e)

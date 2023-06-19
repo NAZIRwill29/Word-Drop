@@ -38,6 +38,10 @@ public class SwipeRigthLeftMove : MonoBehaviour
                 else if (posX > GameManager.instance.boundary.boundX)
                     posX = GameManager.instance.boundary.boundX;
                 GameManager.instance.player.MovePlayer(posX);
+                //for tutorial
+                // if (!GameManager.instance.tutorial)
+                //     return;
+                // GameManager.instance.gameMenuUi.TutorialEnd();
             }
             // else
             // {

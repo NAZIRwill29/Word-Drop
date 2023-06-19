@@ -53,7 +53,7 @@ public class MainMenuUI : MonoBehaviour
         {
             item.SetActive(false);
         }
-        for (int i = 0; i < GameManager.instance.gameData.passStageNo + 1; i++)
+        for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
         {
             stageBtnObj[i].SetActive(true);
         }

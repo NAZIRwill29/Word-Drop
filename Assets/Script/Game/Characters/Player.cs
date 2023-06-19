@@ -256,7 +256,9 @@ public class Player : MonoBehaviour
             alphabetsStore.RemoveAt(0);
         gameMenuUi.AddCharPlayer(abc);
         //for tutorial
-        if (GameManager.instance.tutorial)
+        if (!GameManager.instance.tutorial)
+            return;
+        if (GameManager.instance.tutorial.TutorialPhaseNo == 2)
             GameManager.instance.tutorial.Tutorial2Trigger(alphabetsStore.Count);
     }
 
