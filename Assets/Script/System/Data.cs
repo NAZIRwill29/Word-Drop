@@ -14,6 +14,7 @@ public class Data
     public int bookNumCollect;
     public int playerLevel;
     public int coin;
+    public bool isHasTutorial;
     //TODO () - in future
     //public int diamond;
     //public int skinIndexBought;

@@ -255,8 +255,8 @@ public class Player : MonoBehaviour
         if (alphabetsStore.Count > playerData.charMaxNo)
             alphabetsStore.RemoveAt(0);
         gameMenuUi.AddCharPlayer(abc);
-        //for tutorial
-        if (!GameManager.instance.tutorial)
+        //TUTORIAL MODE ()
+        if (!GameManager.instance.isTutorialMode)
             return;
         if (GameManager.instance.tutorial.TutorialPhaseNo == 2)
             GameManager.instance.tutorial.Tutorial2Trigger(alphabetsStore.Count);
@@ -531,7 +531,11 @@ public class Player : MonoBehaviour
     {
         //TODO () - 
         Debug.Log("climb");
-        playerData.climbNo = (num + 1) * 2;
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
+            playerData.climbNo = (7 + 1) * 2;
+        else
+            playerData.climbNo = (num + 1) * 2;
         LifeLine(0);
         isClimb = true;
         playerAnim.SetTrigger("climb");

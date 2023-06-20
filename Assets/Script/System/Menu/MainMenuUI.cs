@@ -53,9 +53,20 @@ public class MainMenuUI : MonoBehaviour
         {
             item.SetActive(false);
         }
-        for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
+        //TUTORIAL MODE ()
+        if (!GameManager.instance.isHasTutorial)
         {
-            stageBtnObj[i].SetActive(true);
+            for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
+            {
+                stageBtnObj[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 1; i < GameManager.instance.gameData.passStageNo + 1; i++)
+            {
+                stageBtnObj[i].SetActive(true);
+            }
         }
     }
     //----------------------------------------

@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     //variable
     public bool isHasFirstOpen;
     public bool isStartGame;
-    public bool isPauseGame = true;
+    public bool isPauseGame = true, isTutorialMode, isHasTutorial;
     private bool isCanShowAds;
 
     //awake
@@ -288,6 +288,8 @@ public class GameManager : MonoBehaviour
         //gameData.isSoundOn = gameSettings.isSoundOn;
         gameData.musicVolume = gameSettings.musicVolume;
         gameData.soundVolume = gameSettings.soundVolume;
+        //TODO () - uncomment when finish tutorial
+        //gameData.isHasTutorial = true;
         //gameData.diamond = diamond;
         //gameData.skinIndexBought = skinIndexBought;
         //transform instance to json
@@ -425,9 +427,12 @@ public class GameManager : MonoBehaviour
             {
                 //start tutorial
                 tutorial = GameObject.Find("Tutorial").GetComponent<Tutorial>();
+                isTutorialMode = true;
                 tutorial.TutorialPhaseNo = 1;
                 tutorial.Tutorial1Trigger();
             }
+            else
+                isTutorialMode = false;
         }
         catch (System.Exception e)
         {

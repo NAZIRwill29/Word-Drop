@@ -50,6 +50,8 @@ public class GameMenuUi : MonoBehaviour
     [SerializeField] private int deathClockDuration;
     private int remainingDurationClock;
     private bool isStartdeathClock;
+    //for tutorial mode
+    private bool isTutorialCombineClicked;
     void Awake()
     {
         //convert word in .txt to string word
@@ -309,6 +311,13 @@ public class GameMenuUi : MonoBehaviour
         GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
         GameManager.instance.PauseGame(false);
         Debug.Log("Game Menu ui info");
+        //TUTORIAL MODE ()
+        if (!GameManager.instance.isTutorialMode)
+            return;
+        if (GameManager.instance.tutorial.TutorialPhaseNo == 11)
+        {
+            GameManager.instance.tutorialUI.TutorialEnd();
+        }
     }
 
     //reset alphabet word button
@@ -351,12 +360,23 @@ public class GameMenuUi : MonoBehaviour
         //remove in word
         alphabetsWord.RemoveAt(indexBtn);
         SetCharUiWord();
+        //TUTORIAL MODE ()
+        if (!GameManager.instance.isTutorialMode)
+            return;
+        if (GameManager.instance.tutorial.TutorialPhaseNo == 5)
+        {
+            GameManager.instance.tutorialUI.TutorialEvent(5);
+            //GameManager.instance.tutorialUI.TutorialEnd();
+        }
     }
 
     //USED () - in word button
     //convert char to word for points
     public void WordCombine()
     {
+        if (GameManager.instance.isTutorialMode)
+            if (GameManager.instance.tutorial.TutorialPhaseNo != 6)
+                return;
         letterCombine = "";
         //Debug.Log(alphabetsWord.Length);
         for (int i = 0; i < alphabetsWord.Count; i++)
@@ -382,11 +402,28 @@ public class GameMenuUi : MonoBehaviour
             RemoveCharWord();
             //set word pt event
             SetWordPointEvent();
+            //TUTORIAL MODE ()
+            if (!GameManager.instance.isTutorialMode)
+                return;
+            if (isTutorialCombineClicked)
+                return;
+            if (GameManager.instance.tutorial.TutorialPhaseNo == 6)
+            {
+                isTutorialCombineClicked = true;
+                GameManager.instance.tutorialUI.TutorialEvent(6);
+            }
         }
         else
         {
             //player.PlaySoundFailed();
             ResetAlphabetWordBtnClick();
+            //TUTORIAL MODE () - use for fail to combine - made tutorial 5F
+            if (!GameManager.instance.isTutorialMode)
+                return;
+            if (GameManager.instance.tutorial.TutorialPhaseNo == 6)
+            {
+                //GameManager.instance.tutorialUI.TutorialEvent(6);
+            }
         }
     }
 
@@ -533,6 +570,13 @@ public class GameMenuUi : MonoBehaviour
         GameManager.instance.player.PlaySoundWin();
         //change music background to win theme
         GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
+        {
+            GameManager.instance.isTutorialMode = false;
+            GameManager.instance.tutorialUI.isTutorialEnd = false;
+            GameManager.instance.isHasTutorial = true;
+        }
     }
 
     //timer clock countdown
@@ -573,6 +617,13 @@ public class GameMenuUi : MonoBehaviour
         wordPoint -= GameManager.instance.inGame.ladderPt;
         //set word point event and builder button interactable
         SetWordPointEvent();
+        //TUTORIAL MODE ()
+        if (!GameManager.instance.isTutorialMode)
+            return;
+        if (GameManager.instance.tutorial.TutorialPhaseNo == 10)
+        {
+            GameManager.instance.tutorialUI.TutorialEvent(10);
+        }
     }
     //USED () - in ground btn
     public void BuildGround()
