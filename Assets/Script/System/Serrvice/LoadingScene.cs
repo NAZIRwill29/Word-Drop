@@ -7,18 +7,21 @@ using UnityEngine.SceneManagement;
 //DEPECRATED SCRIPT()
 public class LoadingScene : MonoBehaviour
 {
-    public GameObject LoadingScreen;
-    public Image LoadingBarFill;
+    // [SerializeField] private GameObject LoadingScreen, blackScreen;
+    [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private Image LoadingBarFill;
     public float speed;
 
-    public void LoadScene(int sceneId)
+    public void LoadLoadingScene()
     {
-        StartCoroutine(LoadSceneAsync(sceneId));
+        //Debug.Log("load scene event");
+        //StartCoroutine(LoadSceneAsync(sceneId));
+        StartCoroutine(LoadSceneEvent());
     }
 
     IEnumerator LoadSceneAsync(int sceneId)
     {
-        LoadingScreen.SetActive(true);
+        //LoadingScreen.SetActive(true);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
 
@@ -29,5 +32,36 @@ public class LoadingScene : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    // private IEnumerator LoadSceneEvent()
+    // {
+    //    StartCoroutine(LoadLoadingScreen());
+    // }
+
+    private IEnumerator LoadSceneEvent()
+    {
+        //Debug.Log("load screen start");
+        mainMenuUI.ShowLoadingScreen(true);
+        yield return new WaitForSeconds(5);
+        //exec when isFinishLoadScene = true
+        yield return new WaitUntil(() => GameManager.instance.isFinishLoadScene);
+        // show inGameUi - only if has
+        if (GameManager.instance.inGameUi)
+            GameManager.instance.inGameUi.SetupInGameUi(true);
+        mainMenuUI.ShowLoadingScreen(false);
+        if (GameManager.instance.inGame)
+            StartCoroutine(LoadBlackScreen());
+        //Debug.Log("load screen end");
+    }
+
+    private IEnumerator LoadBlackScreen()
+    {
+        //Debug.Log("black screen start");
+        mainMenuUI.blackScreen2.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        mainMenuUI.blackScreen2.SetActive(false);
+        //Debug.Log("black screen end");
+        GameManager.instance.isInStage = true;
     }
 }

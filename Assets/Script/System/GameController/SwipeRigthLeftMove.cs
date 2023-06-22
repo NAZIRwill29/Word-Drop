@@ -12,6 +12,10 @@ public class SwipeRigthLeftMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.instance.isInStage)
+            return;
+        if (!GameManager.instance.isStartStagePlay)
+            TouchToStart();
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         if (GameManager.instance.playerData.isHasWin)
@@ -19,7 +23,7 @@ public class SwipeRigthLeftMove : MonoBehaviour
         if (GameManager.instance.playerData.isHasDie)
             return;
         SwipeV1();
-        //SwipeV2();
+        //SwipeV2();        
     }
 
     private void SwipeV1()
@@ -38,16 +42,18 @@ public class SwipeRigthLeftMove : MonoBehaviour
                 else if (posX > GameManager.instance.boundary.boundX)
                     posX = GameManager.instance.boundary.boundX;
                 GameManager.instance.player.MovePlayer(posX);
-                //for tutorial
-                // if (!GameManager.instance.tutorial)
-                //     return;
-                // GameManager.instance.gameMenuUi.TutorialEnd();
             }
-            // else
-            // {
-            //     if (GameManager.instance.player.isSquare)
-            //         GameManager.instance.player.playerAnim.SetBool("run", false);
-            // }
+        }
+    }
+
+    //detect touch to start stage play
+    private void TouchToStart()
+    {
+        if (Input.touchCount > 0)
+        {
+            //get input
+            touch = Input.GetTouch(0);
+            GameManager.instance.StartStagePlay();
         }
     }
 

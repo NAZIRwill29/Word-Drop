@@ -10,8 +10,10 @@ public class TutorialUI : MonoBehaviour
     private Vector2 startTouchPos, endTouchPos;
     public float bound = 125;
     private float swipeForce;
-    public bool isActionInvalid, isTutorialEnd;
-    private float lastClick, clickCooldown = 2.5f;
+    public bool isActionInvalid, isTutorialEnd, isActionMenuEnable;
+    private float lastClick, clickCooldown = 1.5f;
+    public Animator[] alphabetTutorialBtnAnim;
+    public int numStage3;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class TutorialUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.instance.isStartGame)
+            return;
         if (!GameManager.instance.isTutorialMode)
             return;
         if (Input.touchCount > 0)
@@ -39,26 +43,31 @@ public class TutorialUI : MonoBehaviour
             }
             if (GameManager.instance.tutorial.TutorialPhaseNo == 1)
                 SwipeLeftRight();
-            else if (GameManager.instance.tutorial.TutorialPhaseNo == 2)
+            else if (GameManager.instance.tutorial.TutorialPhaseNo == 2 && isActionMenuEnable)
                 SwipeUpDown();
-            // else if (GameManager.instance.tutorial.TutorialPhaseNo < 4)
+            else if (GameManager.instance.tutorial.TutorialPhaseNo == 3)
+            {
+                //for trial 3
+                if (numStage3 != 0)
+                    return;
+                if (Time.time - lastClick > clickCooldown)
+                {
+                    lastClick = Time.time;
+                    numStage3++;
+                    tutorialAnim.SetTrigger("next");
+                    Tutorial3AltStart(0);
+                }
+            }
+            // TODO () - AFTER T3 B4 T4
+            // else if (GameManager.instance.tutorial.TutorialPhaseNo == 4)
             // {
-            //     //for trial 3
-            //     if (Time.time - lastClick > clickCooldown)
+            //     //trigger when has 4 letters in word
+            //     if (GameManager.instance.gameMenuUi.alphabetsWord.Count > 4)
             //     {
-            //         lastClick = Time.time;
+            //         TutorialEvent(4);
             //         TutorialEnd();
             //     }
             // }
-            else if (GameManager.instance.tutorial.TutorialPhaseNo == 4)
-            {
-                //trigger when has 4 letters
-                if (GameManager.instance.gameMenuUi.alphabetsWord.Count > 4)
-                {
-                    TutorialEvent(4);
-                    TutorialEnd();
-                }
-            }
             else if (GameManager.instance.tutorial.TutorialPhaseNo > 6 && GameManager.instance.tutorial.TutorialPhaseNo < 10)
             {
                 if (Time.time - lastClick > clickCooldown)
@@ -68,15 +77,14 @@ public class TutorialUI : MonoBehaviour
                     TutorialEnd();
                 }
             }
+            // else if (GameManager.instance.tutorial.TutorialPhaseNo > 11)
+            // {
+            //     TutorialEnd();
+            //     GameManager.instance.isTutorialMode = false;
+            //     GameManager.instance.tutorialUI.isTutorialEnd = false;
+            //     GameManager.instance.isHasTutorial = true;
+            // }
         }
-        // if (GameManager.instance.tutorial.TutorialPhaseNo > 11)
-        // {
-        //     if (!isTutorialEnd)
-        //     {
-        //         TutorialEvent(11);
-        //         isTutorialEnd = true;
-        //     }
-        // }
     }
 
     public void TutorialEvent(int tutorialNo)
@@ -86,7 +94,9 @@ public class TutorialUI : MonoBehaviour
         if (tutorialNo <= 2)
             GameManager.instance.PauseGame(true);
         tutorialAnim.SetInteger("tutorialNo", tutorialNo);
-        if (tutorialNo == 3 || tutorialNo == 5 || tutorialNo == 6 || tutorialNo == 10)
+        if (tutorialNo == 2)
+            isActionMenuEnable = true;
+        if (tutorialNo == 4 || tutorialNo == 5 || tutorialNo == 6 || tutorialNo == 10 || tutorialNo == 12)
             TutorialEnd();
         //if (GameManager.instance.tutorial.TutorialPhaseNo > 8)
     }
@@ -103,6 +113,25 @@ public class TutorialUI : MonoBehaviour
             //StartCoroutine(Tutorial11());
         }
         GameManager.instance.tutorial.TutorialPhaseNo++;
+    }
+    public void Tutorial3AltStart(int numStage)
+    {
+        alphabetTutorialBtnAnim[numStage].SetTrigger("blink");
+    }
+    public void Tutorial3AltEnd(int numStage)
+    {
+        alphabetTutorialBtnAnim[numStage].SetTrigger("normal");
+    }
+    public void AllTutorial3AltEnd()
+    {
+        for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
+        {
+            alphabetTutorialBtnAnim[i].SetTrigger("normal");
+        }
+        // foreach (var item in alphabetTutorialBtnAnim)
+        // {
+        //     item.SetTrigger("normal");
+        // }
     }
 
     // private IEnumerator Tutorial11()
@@ -147,7 +176,7 @@ public class TutorialUI : MonoBehaviour
                 {
                     isActionInvalid = true;
                     //TODO () - make word menu appear -> make isActionValid = true after close
-                    Debug.Log("word menu appear");
+                    Debug.Log("word menu tutorial appear");
                     GameManager.instance.gameMenuUi.gameMenuUiAnim.SetTrigger("actionMenu");
                     GameManager.instance.mainMenuUI.PlaySoundNavigate();
                     GameManager.instance.gameMenuUi.SetActionMenu();

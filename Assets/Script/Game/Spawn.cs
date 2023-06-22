@@ -14,7 +14,7 @@ public class Spawn : MonoBehaviour
     public float timeCharDuration, timeObsDuration;
     [SerializeField] private float lastBookTime, lastCoinTime, timeBookDuration, timeCoinDuration, dragCoin, dragBook;
     private float timeBook;
-    public bool isSpawnStop;
+    public bool isSpawnStop, isTutorialMode;
     private float timeCharDurationOri, timeObsDurationOri, dragCharOri, dragObsOri, increaseNum, increaseNumObs;
     private float dragCoinOri, dragBookOri, increaseNumCoin, increaseNumBook;
     //alphabet list
@@ -98,7 +98,9 @@ public class Spawn : MonoBehaviour
             lastCharTime = Time.time;
             //Debug.Log("Spawn char");
             SpawnObject(charObj[charIndex]);
-            charObj[charIndex].GetComponent<Char>().SetAlphabet(alphabets[Random.Range(0, alphabets.Length)]);
+            //TUTORIAL MODE
+            if (!isTutorialMode)
+                charObj[charIndex].GetComponent<Char>().SetAlphabet(alphabets[Random.Range(0, alphabets.Length)]);
             charObj[charIndex].GetComponent<Char>().ChangeIsTouched(false);
             charIndex++;
             if (charIndex == charObj.Length - 1)

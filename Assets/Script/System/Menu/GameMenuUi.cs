@@ -13,15 +13,16 @@ public class GameMenuUi : MonoBehaviour
     public AudioSource gameMenuUiAudioSource;
     //[SerializeField] private Player player;
     private CanvasGroupFunc canvasGroupFunc;
+    public Button homeBtn, settingBtn;
     //private InGame inGame;
     public List<char> alphabetsPlayerInfo, alphabetsWord;
     public GameObject[] charUIInfoObj;
     public Image[] charUIInfoImg;
-    public GameObject[] alphabetStoreContainer;
-    public Button[] alphabetStoreBtn, alphabetStoreBtn2;
-    public Image[] alphabetStoreBtnImg, alphabetStoreBtnImg2;
-    public Button[] alphabetWordBtn;
-    public Image[] alphabetWordBtnImg;
+    public GameObject[] alphabetStoreContainer, alphabetWordStoreContainer;
+    public Button[] alphabetStoreBtn, alphabetStoreBtn2, alphabetTutorialBtn;
+    public Image[] alphabetStoreBtnImg, alphabetStoreBtnImg2, alphabetTutorialBtnImg;
+    public Button[] alphabetWordBtn, alphabetWordTutorialBtn;
+    public Image[] alphabetWordBtnImg, alphabetWordTutorialBtnImg;
     public Image hpImg;
     public Sprite[] hpSprite;
     public Animator gameMenuUiAnim;
@@ -118,6 +119,17 @@ public class GameMenuUi : MonoBehaviour
         {
             SetRunBuildBtn(true);
             SetBuildBtnsInteracteable();
+        }
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
+        {
+            homeBtn.enabled = false;
+            settingBtn.enabled = false;
+        }
+        else
+        {
+            homeBtn.enabled = true;
+            settingBtn.enabled = true;
         }
     }
     //set build button active event
@@ -226,34 +238,53 @@ public class GameMenuUi : MonoBehaviour
     //set char UI Info
     public void SetCharUIAction()
     {
-        if (!isCharLvl1)
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
         {
             //make active for contain char
             for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
             {
-                alphabetStoreBtn[i].gameObject.SetActive(true);
+                alphabetTutorialBtn[i].gameObject.SetActive(true);
                 //set image
-                alphabetStoreBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
+                alphabetTutorialBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
             }
             //make unactive for remaining
-            for (int i = alphabetStoreBtn.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
+            for (int i = alphabetTutorialBtn.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
             {
-                alphabetStoreBtn[i].gameObject.SetActive(false);
+                alphabetTutorialBtn[i].gameObject.SetActive(false);
             }
         }
         else
         {
-            //make active for contain char
-            for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
+            if (!isCharLvl1)
             {
-                alphabetStoreBtn2[i].gameObject.SetActive(true);
-                //set image
-                alphabetStoreBtnImg2[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
+                //make active for contain char
+                for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
+                {
+                    alphabetStoreBtn[i].gameObject.SetActive(true);
+                    //set image
+                    alphabetStoreBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
+                }
+                //make unactive for remaining
+                for (int i = alphabetStoreBtn.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
+                {
+                    alphabetStoreBtn[i].gameObject.SetActive(false);
+                }
             }
-            //make unactive for remaining
-            for (int i = alphabetStoreBtn2.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
+            else
             {
-                alphabetStoreBtn2[i].gameObject.SetActive(false);
+                //make active for contain char
+                for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
+                {
+                    alphabetStoreBtn2[i].gameObject.SetActive(true);
+                    //set image
+                    alphabetStoreBtnImg2[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
+                }
+                //make unactive for remaining
+                for (int i = alphabetStoreBtn2.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
+                {
+                    alphabetStoreBtn2[i].gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -261,17 +292,36 @@ public class GameMenuUi : MonoBehaviour
     //set char ui word
     public void SetCharUiWord()
     {
-        //make active for contain char
-        for (int i = 0; i < alphabetsWord.Count; i++)
+        //TUTORIAL MODE () 
+        if (GameManager.instance.isTutorialMode)
         {
-            alphabetWordBtn[i].gameObject.SetActive(true);
-            //set image
-            alphabetWordBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
+            //make active for contain char
+            for (int i = 0; i < alphabetsWord.Count; i++)
+            {
+                alphabetWordTutorialBtn[i].gameObject.SetActive(true);
+                //set image
+                alphabetWordTutorialBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
+            }
+            //make unactive for remaining
+            for (int i = alphabetWordTutorialBtn.Length - 1; i >= alphabetsWord.Count; i--)
+            {
+                alphabetWordTutorialBtn[i].gameObject.SetActive(false);
+            }
         }
-        //make unactive for remaining
-        for (int i = alphabetWordBtn.Length - 1; i >= alphabetsWord.Count; i--)
+        else
         {
-            alphabetWordBtn[i].gameObject.SetActive(false);
+            //make active for contain char
+            for (int i = 0; i < alphabetsWord.Count; i++)
+            {
+                alphabetWordBtn[i].gameObject.SetActive(true);
+                //set image
+                alphabetWordBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
+            }
+            //make unactive for remaining
+            for (int i = alphabetWordBtn.Length - 1; i >= alphabetsWord.Count; i--)
+            {
+                alphabetWordBtn[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -279,17 +329,35 @@ public class GameMenuUi : MonoBehaviour
     {
         //TODO () - set hp lvl ui and char container ui in menu
         hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
-        if (charLvl == 0)
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
         {
-            alphabetStoreContainer[0].SetActive(true);
+            alphabetStoreContainer[0].SetActive(false);
             alphabetStoreContainer[1].SetActive(false);
-            isCharLvl1 = false;
+            alphabetStoreContainer[2].SetActive(true);
+
+            alphabetWordStoreContainer[0].SetActive(false);
+            alphabetWordStoreContainer[1].SetActive(true);
         }
         else
         {
-            alphabetStoreContainer[0].SetActive(false);
-            alphabetStoreContainer[1].SetActive(true);
-            isCharLvl1 = true;
+            alphabetWordStoreContainer[0].SetActive(true);
+            alphabetWordStoreContainer[1].SetActive(false);
+
+            if (charLvl == 0)
+            {
+                alphabetStoreContainer[0].SetActive(true);
+                alphabetStoreContainer[1].SetActive(false);
+                alphabetStoreContainer[2].SetActive(false);
+                isCharLvl1 = false;
+            }
+            else
+            {
+                alphabetStoreContainer[0].SetActive(false);
+                alphabetStoreContainer[1].SetActive(true);
+                alphabetStoreContainer[2].SetActive(false);
+                isCharLvl1 = true;
+            }
         }
     }
     public void SetHpUI()
@@ -316,7 +384,7 @@ public class GameMenuUi : MonoBehaviour
             return;
         if (GameManager.instance.tutorial.TutorialPhaseNo == 11)
         {
-            GameManager.instance.tutorialUI.TutorialEnd();
+            GameManager.instance.tutorialUI.TutorialEvent(11);
         }
     }
 
@@ -351,6 +419,40 @@ public class GameMenuUi : MonoBehaviour
         //     SetCharUiWord();
         // }
     }
+
+    //TUTORIAL MODE ()
+    //USED () - in the alpahbet btn tutorial
+    public void AlphabetBtnTutorialClick(int indexBtn)
+    {
+        Debug.Log("alphabet tutorial " + indexBtn);
+        // add in word
+        alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
+        GameManager.instance.tutorialUI.Tutorial3AltEnd(indexBtn);
+        //remove in store
+        RemoveCharPlayer(indexBtn);
+        SetCharUiWord();
+        if (GameManager.instance.gameMenuUi.alphabetsWord.Count <= 4)
+            GameManager.instance.tutorialUI.Tutorial3AltStart(indexBtn);
+        else
+        {
+            Debug.Log("alphabet tutorial end");
+            GameManager.instance.tutorialUI.AllTutorial3AltEnd();
+            GameManager.instance.tutorialUI.TutorialEnd();
+            GameManager.instance.tutorialUI.TutorialEvent(4);
+        }
+    }
+    //TUTORIAL MODE ()
+    //USED () - in the last alpahbet btn tutorial
+    // public void AlphabetBtnTutorialEndClick(int indexBtn)
+    // {
+    //     // add in word
+    //     alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
+    //     GameManager.instance.tutorialUI.Tutorial3AltEnd(indexBtn);
+    //     //remove in store
+    //     RemoveCharPlayer(indexBtn);
+    //     SetCharUiWord();
+
+    // }
 
     //USED () - in the alpahbet word btn
     public void AlphabetWordBtnClick(int indexBtn)
@@ -564,19 +666,25 @@ public class GameMenuUi : MonoBehaviour
 
     public void Win()
     {
-        gameMenuUiAnim.SetTrigger("win");
+
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
+        {
+            gameMenuUiAnim.SetTrigger("winTutorial");
+            //GameManager.instance.tutorialUI.TutorialEvent(12);
+            GameManager.instance.tutorialUI.TutorialEnd();
+            GameManager.instance.isTutorialMode = false;
+            GameManager.instance.tutorialUI.isTutorialEnd = false;
+            GameManager.instance.isHasTutorial = true;
+            GameManager.instance.player.ManagePlayerLevel();
+        }
+        else
+            gameMenuUiAnim.SetTrigger("win");
         Debug.Log("win window");
         FinishGame(false);
         GameManager.instance.player.PlaySoundWin();
         //change music background to win theme
         GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
-        //TUTORIAL MODE ()
-        if (GameManager.instance.isTutorialMode)
-        {
-            GameManager.instance.isTutorialMode = false;
-            GameManager.instance.tutorialUI.isTutorialEnd = false;
-            GameManager.instance.isHasTutorial = true;
-        }
     }
 
     //timer clock countdown
@@ -698,6 +806,13 @@ public class GameMenuUi : MonoBehaviour
     {
         GameManager.instance.ContinueNextStage();
     }
+
+    //TODO () - DELETE
+    //USED () - start btn in gameMenuUi_info
+    // public void StartStagePlay()
+    // {
+    //     GameManager.instance.StartStagePlay();
+    // }
 
     //setting window--------------------------
     //music

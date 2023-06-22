@@ -50,6 +50,8 @@ public class InGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.instance.isStartGame)
+            return;
         if (GameManager.instance.isPauseGame)
             return;
         playerPos = GameManager.instance.player.transform.position.y - GameManager.instance.player.objHeight / 2;
@@ -88,7 +90,7 @@ public class InGame : MonoBehaviour
         }
     }
 
-    //TODO () - call when pause game
+    //call when pause game
     public void PauseGame(bool isPause)
     {
         if (builderInRun)
@@ -96,6 +98,13 @@ public class InGame : MonoBehaviour
         spawn.FreezeAllObjects(isPause);
         if (backgroundManagement)
             backgroundManagement.FreezeBackgrounds(isPause);
+    }
+
+    //call when start stage play
+    public void StartStagePlay()
+    {
+        ResetAllSpawnNum();
+        ResetLastTimeSpawn();
     }
 
     public void ResetAllSpawnNum()

@@ -31,7 +31,8 @@ public class Char : DropObject
             {
                 //make trigger once only
                 isTouched = true;
-                coll.SendMessage("ReceiveChar", alphabet);
+                GameManager.instance.player.SendMessage("ReceiveChar", alphabet);
+                //coll.SendMessage("ReceiveChar", alphabet);
                 //put to birth location
                 transform.position = originalPos;
             }

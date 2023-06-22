@@ -54,20 +54,26 @@ public class MainMenuUI : MonoBehaviour
             item.SetActive(false);
         }
         //TUTORIAL MODE ()
-        if (!GameManager.instance.isHasTutorial)
+        // if (!GameManager.instance.isHasTutorial)
+        // {
+        //     for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
+        //     {
+        //         stageBtnObj[i].SetActive(true);
+        //     }
+        // }
+        // else
+        // {
+        for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
         {
-            for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
-            {
-                stageBtnObj[i].SetActive(true);
-            }
+            //prevent from enable non exist btn
+            if (i >= stageBtnObj.Length)
+                return;
+            stageBtnObj[i].SetActive(true);
         }
-        else
-        {
-            for (int i = 1; i < GameManager.instance.gameData.passStageNo + 1; i++)
-            {
-                stageBtnObj[i].SetActive(true);
-            }
-        }
+        //TUTORIAL MODE () - ended
+        if (GameManager.instance.isHasTutorial)
+            stageBtnObj[0].SetActive(false);
+        //}
     }
     //----------------------------------------
 
@@ -165,6 +171,20 @@ public class MainMenuUI : MonoBehaviour
     {
         playerInfoBtnAnim.SetBool("upgradable", isUpgradable);
         playerLvlBtnAnim.SetBool("upgradable", isUpgradable);
+    }
+
+    //loading screen
+    public void ShowLoadingScreen(bool isShow)
+    {
+        if (isShow)
+        {
+            //TODO () - make random number -> change tip image and text 
+            //int tipNo = Random.Range(1, 3);
+            loadingScreenAnim.SetInteger("state", 3);
+        }
+        else
+            loadingScreenAnim.SetInteger("state", 0);
+
     }
 
     //play sound -------------------------------------------

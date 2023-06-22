@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public AnonymousAuthenticate anonymousAuthenticate;
     //ads mediate
     public AdsMediate adsMediate;
+    //loading scene
+    public LoadingScene loadingScene;
     public MainMenuUI mainMenuUI;
     public GameMenuUi gameMenuUi;
     public GameSettings gameSettings;
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
     //variable
     public bool isHasFirstOpen;
     public bool isStartGame;
-    public bool isPauseGame = true, isTutorialMode, isHasTutorial;
+    public bool isPauseGame = true, isTutorialMode, isHasTutorial, isFinishLoadScene, isStartStagePlay, isInStage;
     private bool isCanShowAds;
 
     //awake
@@ -158,17 +160,23 @@ public class GameManager : MonoBehaviour
     //back to home
     public void BackToHome()
     {
+        //hide inGameUi
+        if (inGameUi)
+            inGameUi.SetupInGameUi(false);
         mainMenuUI.blackScreen.SetActive(true);
         StartCoroutine(InBackToHome());
         Debug.Log("back to home");
     }
     private IEnumerator InBackToHome()
     {
+        loadingScene.LoadLoadingScene();
         yield return StartCoroutine(InBackToHomeEvent());
         yield return StartCoroutine(mainMenuUI.ShowAnim());
     }
     private IEnumerator InBackToHomeEvent()
     {
+        //for load scene
+        isFinishLoadScene = false;
         SceneManager.LoadScene("MainMenu");
         yield return new WaitForSeconds(0.1f);
     }
@@ -177,6 +185,7 @@ public class GameManager : MonoBehaviour
     public void StartGame(string name, int mode)
     {
         mainMenuUI.blackScreen2.SetActive(true);
+        loadingScene.LoadLoadingScene();
         adsMediate.LoadInterstitial();
         StartCoroutine(InStartGame(name, mode));
         Debug.Log("start game");
@@ -188,13 +197,16 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator InStartGameEvent(string name, int mode)
     {
+        //for load scene
+        isFinishLoadScene = false;
         SceneManager.LoadScene(name);
         gameSettings.UpdateMenuVolumeSetting();
-        isStartGame = true;
-        isPauseGame = false;
+        //TODO () - for start stage play
+        // isStartGame = true;
+        // isPauseGame = false;
         yield return new WaitForSeconds(0.1f);
         mainMenuUI.blackScreen.SetActive(false);
-        mainMenuUI.blackScreen2.SetActive(false);
+        //mainMenuUI.blackScreen2.SetActive(false);
         //change music based on inGame
         gameSettings.ChangeMusicBackground(true, 0);
     }
@@ -205,6 +217,16 @@ public class GameManager : MonoBehaviour
         isPauseGame = isPause;
         inGame.PauseGame(isPause);
         player.PauseGame(isPause);
+    }
+
+    //Start stage play - used after finish loading
+    public void StartStagePlay()
+    {
+        Debug.Log("start stage play");
+        isStartGame = true;
+        isStartStagePlay = true;
+        inGame.StartStagePlay();
+        PauseGame(false);
     }
 
     //TODO () - USED () - in finish button after finish game due to win or loss
@@ -403,6 +425,10 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            //reset in stage
+            isInStage = false;
+            //reset start stage play
+            isStartStagePlay = false;
             Debug.Log("OnSceneLoaded");
             SaveState();
             //Debug.Log("OnSceneLoaded");
@@ -412,17 +438,19 @@ public class GameManager : MonoBehaviour
             if (GameObject.Find("InGame"))
             {
                 inGame = GameObject.Find("InGame").GetComponent<InGame>();
+                //LOADING ()
+                PauseGame(true);
             }
             if (GameObject.Find("InGameUI"))
             {
                 inGameUi = GameObject.Find("InGameUI").GetComponent<InGameUi>();
                 ChangePlayer();
+                // if (isStartGame)
+                gameMenuUi.SetGameMenuUIMode(inGameUi.isRun);
             }
             //reset player
             player.RemoveAllChar();
             player.LifeLine(0);
-            if (isStartGame)
-                gameMenuUi.SetGameMenuUIMode(inGameUi.isRun);
             if (GameObject.Find("Tutorial"))
             {
                 //start tutorial
@@ -433,6 +461,8 @@ public class GameManager : MonoBehaviour
             }
             else
                 isTutorialMode = false;
+            //for load scene
+            isFinishLoadScene = true;
         }
         catch (System.Exception e)
         {
@@ -440,16 +470,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //TODO () - may use or not
+    //TODO () - DELETE
     //loading scene between scene
-    private IEnumerator LoadingSceneEvent()
-    {
-        Debug.Log("laoding show");
-        mainMenuUI.loadingScreenAnim.SetBool("show", true);
-        yield return new WaitForSeconds(1.5f);
-        mainMenuUI.loadingScreenAnim.SetBool("show", false);
-        Debug.Log("laoding hide");
-    }
+    // private IEnumerator LoadingSceneEvent()
+    // {
+    //     Debug.Log("laoding show");
+    //     mainMenuUI.loadingScreenAnim.SetBool("show", true);
+    //     yield return new WaitForSeconds(1.5f);
+    //     mainMenuUI.loadingScreenAnim.SetBool("show", false);
+    //     Debug.Log("laoding hide");
+    // }
 
     //decide player - exec in run only
     private void ChangePlayer()

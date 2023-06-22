@@ -19,6 +19,9 @@ public class SwipeUpDownAction : MonoBehaviour
             return;
         if (GameManager.instance.playerData.isHasDie)
             return;
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
+            return;
         if (Input.touchCount > 0)
         {
             //get input

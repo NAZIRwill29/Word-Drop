@@ -167,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7414968748482020819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 4443392489956021383}
+  dangerIndicator: {fileID: 1912875953525999180}
   runMap: {fileID: 2922182349615910736}
   inGameUICG: {fileID: 4443392488367841603}
   isTimeCountDown: 0
@@ -766,6 +767,8 @@ MonoBehaviour:
   endLine: {fileID: 2950749135344370833}
   playerLine: {fileID: 5363460740693435188}
   dangerText: {fileID: 4149413544101175858}
+  deathSprite: []
+  winSprite: {fileID: 0}
 --- !u!225 &4443392488367841603
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -795,7 +798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4443392489956021385
 RectTransform:
   m_ObjectHideFlags: 0

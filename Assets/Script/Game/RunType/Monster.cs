@@ -51,20 +51,21 @@ public class Monster : MonoBehaviour
     //50 frame per sec
     void FixedUpdate()
     {
-        if (GameManager.instance.isStartGame && !GameManager.instance.isPauseGame)
-            if (isHasBegin)
-            {
-                if (isPushByPlayer)
-                    PushByPlayer();
-                if (isPushByObj)
-                    PushByObj();
-                MonsterChase();
-            }
-            else
-            {
-                if (!isMonsterBeginEvent)
-                    StartCoroutine(MonsterBeginEvent());
-            }
+        if (!GameManager.instance.isStartGame && GameManager.instance.isPauseGame)
+            return;
+        if (isHasBegin)
+        {
+            if (isPushByPlayer)
+                PushByPlayer();
+            if (isPushByObj)
+                PushByObj();
+            MonsterChase();
+        }
+        else
+        {
+            if (!isMonsterBeginEvent)
+                StartCoroutine(MonsterBeginEvent());
+        }
     }
 
     private IEnumerator MonsterBeginEvent()

@@ -472,31 +472,37 @@ public class Player : MonoBehaviour
             case 1:
                 playerData.charMaxNo = 10;
                 playerData.hp = 3;
+                playerData.immuneDamageDuration = 150;
                 gameMenuUi.SetPlayerLevelUI(0);
                 break;
             case 2:
                 playerData.charMaxNo = 11;
                 playerData.hp = 3;
+                playerData.immuneDamageDuration = 150;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 3:
                 playerData.charMaxNo = 12;
                 playerData.hp = 4;
+                playerData.immuneDamageDuration = 200;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 4:
                 playerData.charMaxNo = 14;
                 playerData.hp = 4;
+                playerData.immuneDamageDuration = 200;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 5:
                 playerData.charMaxNo = 17;
                 playerData.hp = 5;
+                playerData.immuneDamageDuration = 250;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 6:
                 playerData.charMaxNo = 20;
                 playerData.hp = 5;
+                playerData.immuneDamageDuration = 250;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             default:

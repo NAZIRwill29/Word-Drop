@@ -8,12 +8,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6411202054217993801, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411202054217993801, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411202054217993801, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.039
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: 6411202054217993801, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.111
+      value: -0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481887009974159616, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8384423
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481887009974159616, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0014686584
       objectReference: {fileID: 0}
     - target: {fileID: 6481887009974159617, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -35,6 +51,14 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6481887010907806602, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7561947
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481887010907806602, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.001468718
+      objectReference: {fileID: 0}
     - target: {fileID: 6481887010907806603, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.141
@@ -42,6 +66,14 @@ PrefabInstance:
     - target: {fileID: 6481887010936414916, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
       propertyPath: m_Color.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481887010936414917, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.61813647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481887010936414917, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.008812219
       objectReference: {fileID: 0}
     - target: {fileID: 6481887010936414918, guid: 052a35fa587e74042b0b5c5dbaa779b4, type: 3}
       propertyPath: m_LocalPosition.y

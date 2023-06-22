@@ -7,11 +7,13 @@ using UnityEngine.UI;
 
 public class InGameUi : MonoBehaviour
 {
-    public TextMeshProUGUI timer;
+    [SerializeField] private TextMeshProUGUI timer;
+    [SerializeField] private GameObject dangerIndicator;
     public Image runMap;
     public CanvasGroup inGameUICG;
     [Tooltip("Tick one only")]
     public bool isTimeCountDown, isTimeScore, isRun;
+    private bool isCanStart;
     [Tooltip("time for game to finish")]
     [SerializeField] private float timeLeft = 300;
     //Run type
@@ -27,40 +29,71 @@ public class InGameUi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (isTimeCountDown)
-            timer.gameObject.SetActive(true);
-        else if (isTimeScore)
-        {
-            timer.gameObject.SetActive(true);
-            timeLeft = 0;
-        }
-        else if (isRun)
-        {
-            runMap.gameObject.SetActive(true);
-            totalRunLength = endLine.transform.position.x - startLine.transform.position.x;
-            totalTime = timeLeft;
-            prevPlayerLinePos = playerLine.transform.position;
-        }
+        // if (isHasTimer)
+        // {
+        // }
+        // else
+        //     timer.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isCanStart)
+            return;
         if (GameManager.instance.playerData.isHasWin)
             return;
         if (GameManager.instance.isPauseGame || !GameManager.instance.isStartGame)
             return;
+        // if (isHasTimer)
+        // {
         if (isTimeCountDown)
             TimeCountdown();
         else if (isTimeScore)
             TimeScore();
+        //}
         else if (isRun)
             UpdateMap();
+    }
+
+    //setup inGameUi
+    public void SetupInGameUi(bool isShow)
+    {
+        if (isShow)
+        {
+            if (isTimeCountDown)
+                timer.gameObject.SetActive(true);
+            else if (isTimeScore)
+            {
+                timer.gameObject.SetActive(true);
+                timeLeft = 0;
+            }
+            else if (isRun)
+            {
+                runMap.gameObject.SetActive(true);
+                totalRunLength = endLine.transform.position.x - startLine.transform.position.x;
+                totalTime = timeLeft;
+                prevPlayerLinePos = playerLine.transform.position;
+            }
+            dangerIndicator.SetActive(true);
+            isCanStart = true;
+        }
+        else
+        {
+            if (timer)
+                timer.gameObject.SetActive(false);
+            if (runMap)
+                runMap.gameObject.SetActive(false);
+            dangerIndicator.SetActive(false);
+        }
     }
 
     //danger indicator
     public void UpdateDangerIndicator(float num)
     {
+        if (!isCanStart)
+            return;
         if (num < 0.1f)
             num = 0.0f;
         dangerText.text = num.ToString("F1") + "m";

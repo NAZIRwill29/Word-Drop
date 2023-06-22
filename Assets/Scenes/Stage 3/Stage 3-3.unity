@@ -8179,7 +8179,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3407484448523741585, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443392488367841603, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: m_BlocksRaycasts
