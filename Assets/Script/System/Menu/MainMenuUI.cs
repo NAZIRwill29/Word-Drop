@@ -21,6 +21,7 @@ public class MainMenuUI : MonoBehaviour
     public Image playerImg;
     public TextMeshProUGUI lvlText, hpText, abcText, coinText, bookText;
     public GameObject[] stageBtnObj;
+    [SerializeField] private GameObject[] tipModule;
     // Start is called before the first frame update
     void Start()
     {
@@ -179,7 +180,14 @@ public class MainMenuUI : MonoBehaviour
         if (isShow)
         {
             //TODO () - make random number -> change tip image and text 
-            //int tipNo = Random.Range(1, 3);
+            foreach (var item in tipModule)
+            {
+                item.SetActive(false);
+            }
+            //change tip module randomly
+            int tipNo = Random.Range(0, tipModule.Length - 1);
+            tipModule[tipNo].SetActive(true);
+            //show loading screen
             loadingScreenAnim.SetInteger("state", 3);
         }
         else
