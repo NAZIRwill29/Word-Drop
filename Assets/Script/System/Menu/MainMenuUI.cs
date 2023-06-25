@@ -16,12 +16,12 @@ public class MainMenuUI : MonoBehaviour
     public Slider musicSlider, soundSlider;
     [SerializeField]
     private Animator mainMenuAnim, backgroundAnim, playerInfoBtnAnim, playerLvlBtnAnim;
-    public Animator loadingScreenAnim;
+    public Animator loadingScreenAnim, tipModules;
     //player info window
     public Image playerImg;
     public TextMeshProUGUI lvlText, hpText, abcText, coinText, bookText;
     public GameObject[] stageBtnObj;
-    [SerializeField] private GameObject[] tipModule;
+    //private bool isLoadingScreenAnimate;
     // Start is called before the first frame update
     void Start()
     {
@@ -179,20 +179,23 @@ public class MainMenuUI : MonoBehaviour
     {
         if (isShow)
         {
-            //TODO () - make random number -> change tip image and text 
-            foreach (var item in tipModule)
-            {
-                item.SetActive(false);
-            }
+            // if (isLoadingScreenAnimate)
+            //     return;
+            // isLoadingScreenAnimate = true;
             //change tip module randomly
-            int tipNo = Random.Range(0, tipModule.Length - 1);
-            tipModule[tipNo].SetActive(true);
+            int tipNo = Random.Range(1, 9);
+            tipModules.SetInteger("state", tipNo);
             //show loading screen
             loadingScreenAnim.SetInteger("state", 3);
         }
         else
+        {
+            // if (!isLoadingScreenAnimate)
+            //     return;
+            // isLoadingScreenAnimate = false;
+            tipModules.SetInteger("state", 0);
             loadingScreenAnim.SetInteger("state", 0);
-
+        }
     }
 
     //play sound -------------------------------------------

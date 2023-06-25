@@ -12,10 +12,10 @@ public class SwipeRigthLeftMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isInStage)
-            return;
-        if (!GameManager.instance.isStartStagePlay)
-            TouchToStart();
+        // if (!GameManager.instance.isInStage)
+        //     return;
+        // if (!GameManager.instance.isStartStagePlay)
+        //     TouchToStart();
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         if (GameManager.instance.playerData.isHasWin)
@@ -43,17 +43,6 @@ public class SwipeRigthLeftMove : MonoBehaviour
                     posX = GameManager.instance.boundary.boundX;
                 GameManager.instance.player.MovePlayer(posX);
             }
-        }
-    }
-
-    //detect touch to start stage play
-    private void TouchToStart()
-    {
-        if (Input.touchCount > 0)
-        {
-            //get input
-            touch = Input.GetTouch(0);
-            GameManager.instance.StartStagePlay();
         }
     }
 

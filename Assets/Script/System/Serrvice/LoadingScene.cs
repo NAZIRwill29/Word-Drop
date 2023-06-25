@@ -9,9 +9,9 @@ public class LoadingScene : MonoBehaviour
 {
     // [SerializeField] private GameObject LoadingScreen, blackScreen;
     [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private StartPlay startPlay;
     [SerializeField] private Image LoadingBarFill;
     public float speed;
-
     public void LoadLoadingScene()
     {
         //Debug.Log("load scene event");
@@ -63,5 +63,7 @@ public class LoadingScene : MonoBehaviour
         mainMenuUI.blackScreen2.SetActive(false);
         //Debug.Log("black screen end");
         GameManager.instance.isInStage = true;
+        if (!GameManager.instance.isTutorialMode)
+            startPlay.startPlayAnim.SetBool("show", true);
     }
 }

@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public bool isHasFirstOpen;
     public bool isStartGame;
     public bool isPauseGame = true, isTutorialMode, isHasTutorial, isFinishLoadScene, isStartStagePlay, isInStage;
+    //isInStage;
     private bool isCanShowAds;
 
     //awake
@@ -201,9 +202,6 @@ public class GameManager : MonoBehaviour
         isFinishLoadScene = false;
         SceneManager.LoadScene(name);
         gameSettings.UpdateMenuVolumeSetting();
-        //TODO () - for start stage play
-        // isStartGame = true;
-        // isPauseGame = false;
         yield return new WaitForSeconds(0.1f);
         mainMenuUI.blackScreen.SetActive(false);
         //mainMenuUI.blackScreen2.SetActive(false);

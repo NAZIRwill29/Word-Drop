@@ -8,6 +8,7 @@ public class Tutorial : MonoBehaviour
     //trigger tutorial 1
     public void Tutorial1Trigger()
     {
+        GameManager.instance.isStartGame = true;
         if (TutorialPhaseNo == 1)
             GameManager.instance.tutorialUI.TutorialEvent(1);
     }
