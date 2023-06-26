@@ -9,13 +9,12 @@ public class Monster : MonoBehaviour
     //  damage    damageAnger  slime    attack    
     [SerializeField] private AudioClip[] monsterAudioClip;
     private bool isImmune, isHasBegin, isMonsterBeginEvent;
-    public bool isForeverChangeState, isNoSlowDown;
+    public bool isForeverChangeState, isNoSlowDown, isImmuneInAnger, isImmuneEffect;
     public string objType = "Monster";
     private Damage dmg;
     public int damage = 1;
-    private int hpChange = 2;
-    [SerializeField]
-    private float speed = 0.07f, fallBackDist = 0.8f;
+    [SerializeField] private int hpChange = 2;
+    [SerializeField] private float speed = 0.07f, fallBackDist = 0.8f;
     private Vector3 originPos;
     private float originSpeed, prevSpeed;
     private float lastAttack;
@@ -51,7 +50,7 @@ public class Monster : MonoBehaviour
     //50 frame per sec
     void FixedUpdate()
     {
-        if (!GameManager.instance.isStartGame && GameManager.instance.isPauseGame)
+        if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
         if (isHasBegin)
         {
@@ -95,7 +94,7 @@ public class Monster : MonoBehaviour
     //monster damage by thing - push backward
     public void ObjHit(Damage dmg1)
     {
-        if (isImmune)
+        if (isImmune && dmg1.objType == "bomb")
             return;
         PlaySoundDamage();
         multPushForce = dmg1.damageAmount;
@@ -110,7 +109,7 @@ public class Monster : MonoBehaviour
     //monster recovery by thing - make monster anger - increase speed
     public void ObjRecovery(Damage dmg1)
     {
-        if (isImmune)
+        if (isImmune && dmg1.objType != "fence")
             return;
         PlaySoundDamageAnger();
         multPushForce = 1;
@@ -121,9 +120,9 @@ public class Monster : MonoBehaviour
     }
 
     //monster slow speed by slime
-    public void SlowObj()
+    public void SlowObj(Damage dmg1)
     {
-        if (isImmune)
+        if (isImmune && dmg1.objType != "slime")
             return;
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
         if (Time.time - lastSlowObjSound > TimeSlowObjSoundCooldown)
@@ -175,7 +174,7 @@ public class Monster : MonoBehaviour
 
     private void SetMonsterState()
     {
-        //TODO () - set sprite, speed, damage monster
+        //set sprite, speed, damage monster
         //0 123
         if (hpChange < 0)
         {
@@ -188,6 +187,8 @@ public class Monster : MonoBehaviour
 
             if (!isForeverChangeState)
             {
+                if (isImmuneInAnger)
+                    isImmune = true;
                 ChangeSpeed(prevSpeed + 0.3f);
                 if (monsterNo == 0)
                     StartCoroutine(ResetMonsterStateDelay());
@@ -195,7 +196,13 @@ public class Monster : MonoBehaviour
                     monsterAnim.SetInteger("state", 1);
             }
             else
+            {
+                if (isImmuneInAnger)
+                    isImmune = true;
+                if (isImmuneEffect)
+                    isImmune = true;
                 ChangeSpeed(0.9f);
+            }
         }
         else if (hpChange > 4)
         {
@@ -208,6 +215,8 @@ public class Monster : MonoBehaviour
                 monsterAnim.SetInteger("state", 1);
 
             ChangeSpeed(prevSpeed - 0.15f);
+            if (isImmuneEffect)
+                isImmune = true;
             StartCoroutine(ResetMonsterStateDelay());
         }
         else
@@ -220,6 +229,9 @@ public class Monster : MonoBehaviour
                 monsterAnim.SetInteger("state", 1);
 
             ChangeSpeed(prevSpeed);
+            isImmune = false;
+            if (isImmuneEffect)
+                isImmune = true;
         }
     }
 
@@ -243,11 +255,6 @@ public class Monster : MonoBehaviour
             StartPushByPlayer();
             //transform.position -= new Vector3(0, fallBackDist, 0);
         }
-        //if (Time.time - lastAttack > attackDuration)
-        //{
-        //lastAttack = Time.time;
-
-        //}
     }
 
     //variable

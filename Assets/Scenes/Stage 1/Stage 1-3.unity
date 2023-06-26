@@ -1049,6 +1049,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2317353762410816063, guid: 16506171a357ed94ca92a897f2b3da85, type: 3}
+      propertyPath: monsterAudioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd919e8283aedaf4b9ef1c91e3b924e7, type: 3}
+    - target: {fileID: 2317353762410816063, guid: 16506171a357ed94ca92a897f2b3da85, type: 3}
+      propertyPath: monsterAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd919e8283aedaf4b9ef1c91e3b924e7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16506171a357ed94ca92a897f2b3da85, type: 3}
 --- !u!4 &249032095 stripped
@@ -5761,6 +5769,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4362909447680567570, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
+      propertyPath: monsterAudioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd919e8283aedaf4b9ef1c91e3b924e7, type: 3}
+    - target: {fileID: 4362909447680567570, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
+      propertyPath: monsterAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd919e8283aedaf4b9ef1c91e3b924e7, type: 3}
     - target: {fileID: 4362909447680567571, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
       propertyPath: m_Name
       value: Monster_Anaconda Variant
@@ -11124,6 +11140,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4533888987573306966, guid: 9ba57c6cacd80fd44ae8d144969331f3, type: 3}
+      propertyPath: monsterAudioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd919e8283aedaf4b9ef1c91e3b924e7, type: 3}
+    - target: {fileID: 4533888987573306966, guid: 9ba57c6cacd80fd44ae8d144969331f3, type: 3}
+      propertyPath: monsterAudioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd919e8283aedaf4b9ef1c91e3b924e7, type: 3}
     - target: {fileID: 4533888987573306967, guid: 9ba57c6cacd80fd44ae8d144969331f3, type: 3}
       propertyPath: m_Name
       value: Monster_Kraken

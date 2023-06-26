@@ -5104,6 +5104,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4362909447680567570, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
+      propertyPath: isNoSlowDown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4362909447680567571, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
       propertyPath: m_Name
       value: Monster_Anaconda Variant

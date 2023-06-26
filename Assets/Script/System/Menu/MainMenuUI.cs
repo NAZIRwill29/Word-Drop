@@ -54,16 +54,6 @@ public class MainMenuUI : MonoBehaviour
         {
             item.SetActive(false);
         }
-        //TUTORIAL MODE ()
-        // if (!GameManager.instance.isHasTutorial)
-        // {
-        //     for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
-        //     {
-        //         stageBtnObj[i].SetActive(true);
-        //     }
-        // }
-        // else
-        // {
         for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
         {
             //prevent from enable non exist btn

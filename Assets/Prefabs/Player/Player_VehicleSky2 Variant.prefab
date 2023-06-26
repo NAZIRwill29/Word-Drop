@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 69f415fc3f1a8e24b92fd75e6473eacb, type: 2}
+    - target: {fileID: 6331924952539104857, guid: 210d97c60bfa3c84b990ea96aa9549ba, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6331924952539104858, guid: 210d97c60bfa3c84b990ea96aa9549ba, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -98,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 6331924952539104859, guid: 210d97c60bfa3c84b990ea96aa9549ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 919392335, guid: 591bee0f71bb51d4e8263a5e02e20b51, type: 3}
+      objectReference: {fileID: 1609212722, guid: 591bee0f71bb51d4e8263a5e02e20b51, type: 3}
     - target: {fileID: 6331924952539104860, guid: 210d97c60bfa3c84b990ea96aa9549ba, type: 3}
       propertyPath: m_Size.x
       value: 3.067551

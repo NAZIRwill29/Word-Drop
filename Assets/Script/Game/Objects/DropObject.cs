@@ -7,7 +7,7 @@ public class DropObject : MonoBehaviour
     [SerializeField] protected Vector3 originalPos;
     public Rigidbody2D dropObjRb;
     public int damage = 1;
-    [Tooltip("char, bomb")]
+    [Tooltip("char, bomb, fence, slime")]
     public string objType;
     protected Damage dmg;
     //TODO () - if hit ground will damage ground

@@ -166,6 +166,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4351416613909583884}
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
+      propertyPath: isImmuneInAnger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: monsterSprite.Array.data[0]
       value: 
       objectReference: {fileID: -742217482, guid: d5cf60f6b4bdf9943958243225bcc50b, type: 3}

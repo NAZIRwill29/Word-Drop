@@ -5,17 +5,19 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     //SOLUTION () - resolve the 2 audio listener error 
-    public static GameObject cameraInstance;
+    //public static GameObject cameraInstance;
     public Animator camAnim;
     //public GameObject playerObj;
-    [SerializeField]
-    private float elevation = 1.45f;
+    [SerializeField] private float elevation = 1.45f;
+    public bool isStopFollow;
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if (GameManager.instance.isStartGame)
-            FollowPlayer();
+        if (isStopFollow)
+            return;
+        //if (GameManager.instance.isStartGame)
+        FollowPlayer();
     }
 
     //follow player
@@ -41,7 +43,6 @@ public class CameraManager : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     //rise camera follow ground

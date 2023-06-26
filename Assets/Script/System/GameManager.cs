@@ -59,12 +59,7 @@ public class GameManager : MonoBehaviour
         if (GameManager.instance != null)
         {
             StartCoroutine(SetMainMenu(true));
-            //set stage based on how many stage passed
             //Debug.Log("awake1");
-            //player.ResetLevelUpReward();
-            //player.LevelUpReward();
-            //reset preventSpawnBoss
-            //preventSpawnBoss = false;
             return;
         }
         else
@@ -165,6 +160,7 @@ public class GameManager : MonoBehaviour
         if (inGameUi)
             inGameUi.SetupInGameUi(false);
         mainMenuUI.blackScreen.SetActive(true);
+        player.GameMode(2);
         StartCoroutine(InBackToHome());
         Debug.Log("back to home");
     }
@@ -193,7 +189,9 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator InStartGame(string name, int mode)
     {
-        yield return StartCoroutine(mainMenuUI.HideAnim());
+        //not hide main menu ui on game - avoid repeat many time
+        if (!inGame)
+            yield return StartCoroutine(mainMenuUI.HideAnim());
         yield return StartCoroutine(InStartGameEvent(name, mode));
     }
     private IEnumerator InStartGameEvent(string name, int mode)
@@ -281,7 +279,7 @@ public class GameManager : MonoBehaviour
         SaveState();
         mainMenuUI.blackScreen2.SetActive(true);
         adsMediate.LoadInterstitial();
-        StartCoroutine(InStartGameEvent(inGame.nextStageName, inGame.nextStageMode));
+        StartGame(inGame.nextStageName, inGame.nextStageMode);
         Debug.Log("continue game");
     }
 
@@ -454,6 +452,7 @@ public class GameManager : MonoBehaviour
                 //start tutorial
                 tutorial = GameObject.Find("Tutorial").GetComponent<Tutorial>();
                 isTutorialMode = true;
+                player.ManagePlayerLevel();
                 tutorial.TutorialPhaseNo = 1;
                 tutorial.Tutorial1Trigger();
             }
@@ -467,17 +466,6 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
-
-    //TODO () - DELETE
-    //loading scene between scene
-    // private IEnumerator LoadingSceneEvent()
-    // {
-    //     Debug.Log("laoding show");
-    //     mainMenuUI.loadingScreenAnim.SetBool("show", true);
-    //     yield return new WaitForSeconds(1.5f);
-    //     mainMenuUI.loadingScreenAnim.SetBool("show", false);
-    //     Debug.Log("laoding hide");
-    // }
 
     //decide player - exec in run only
     private void ChangePlayer()
@@ -494,36 +482,43 @@ public class GameManager : MonoBehaviour
             switch (inGame.playerVehicleIndex)
             {
                 case 0:
+                    //car 1
                     player = players[1];
                     TurnOnPlayer(1);
                     players[1].playerSr.sprite = playerSprite[0];
                     Debug.Log("change sprite");
                     break;
                 case 1:
+                    //car 2
                     player = players[1];
                     TurnOnPlayer(1);
                     players[1].playerSr.sprite = playerSprite[1];
                     break;
                 case 2:
+                    //car 3
                     player = players[1];
                     TurnOnPlayer(1);
                     players[1].playerSr.sprite = playerSprite[2];
                     break;
                 case 3:
+                    //boat 1
                     player = players[1];
                     TurnOnPlayer(1);
                     players[1].playerSr.sprite = playerSprite[3];
                     break;
                 case 4:
+                    //boat 2
                     player = players[1];
                     TurnOnPlayer(1);
                     players[1].playerSr.sprite = playerSprite[4];
                     break;
                 case 5:
+                    //airplane
                     player = players[2];
                     TurnOnPlayer(2);
                     break;
                 case 6:
+                    //helicopter
                     player = players[3];
                     TurnOnPlayer(3);
                     break;

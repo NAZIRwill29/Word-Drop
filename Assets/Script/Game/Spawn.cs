@@ -172,7 +172,10 @@ public class Spawn : MonoBehaviour
         posX = Random.Range(-GameManager.instance.boundary.boundX + 0.2f, GameManager.instance.boundary.boundX - 0.2f);
         if (index == 0)
         {
-            obj.transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+            if (!obj.GetComponent<Obstacle>())
+                obj.transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+            else
+                obj.transform.position = new Vector3(-posX, transform.position.y, transform.position.z);
         }
     }
 

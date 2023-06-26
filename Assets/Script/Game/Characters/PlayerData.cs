@@ -10,7 +10,7 @@ public class PlayerData : MonoBehaviour
     public int lifeLineTrigger;
     public int lifeLineBuildTrigger = -1;
     //climb number
-    public float climbNo;
+    public float climbNo, winMoveNo;
     public bool isImmune, isHasWin, isHasDie, isImmuneDamage = true;
     //immune damage - use for in start game
     public int immuneDamageDuration = 150;

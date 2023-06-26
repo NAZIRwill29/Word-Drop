@@ -24,6 +24,7 @@ public class GameMenuUi : MonoBehaviour
     public Button[] alphabetWordBtn, alphabetWordTutorialBtn;
     public Image[] alphabetWordBtnImg, alphabetWordTutorialBtnImg;
     public Image hpImg;
+    public GameObject hpNotice;
     public Sprite[] hpSprite;
     public Animator gameMenuUiAnim;
     public CanvasGroup buildCooldownCG;
@@ -89,6 +90,8 @@ public class GameMenuUi : MonoBehaviour
     //set game menu ui mode base on game mode
     public void SetGameMenuUIMode(bool isRun)
     {
+        // Debug.Log("tutorialMode = " + GameManager.instance.isTutorialMode);
+        // Debug.Log("set game menu ui");
         // inGame = GameManager.instance.inGame;
         isRunGame = isRun;
         if (!isRun)
@@ -363,6 +366,11 @@ public class GameMenuUi : MonoBehaviour
     public void SetHpUI()
     {
         hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
+        Debug.Log("change hp Ui");
+        if (GameManager.instance.playerData.hp < 2)
+            hpNotice.SetActive(true);
+        else
+            hpNotice.SetActive(false);
     }
 
     //close action menu - USED () - in close btn in action menu
@@ -404,20 +412,11 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in the alpahbet btn
     public void AlphabetBtnClick(int indexBtn)
     {
-        // if (!isCharLvl1)
-        // {
         // add in word
         alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
         //remove in store
         RemoveCharPlayer(indexBtn);
         SetCharUiWord();
-        // }
-        // else
-        // {
-        //     alphabetsWord.Add(player.alphabetsStore[indexBtn]);
-        //     RemoveCharPlayer(indexBtn);
-        //     SetCharUiWord();
-        // }
     }
 
     //TUTORIAL MODE ()
@@ -441,18 +440,6 @@ public class GameMenuUi : MonoBehaviour
             GameManager.instance.tutorialUI.TutorialEvent(4);
         }
     }
-    //TUTORIAL MODE ()
-    //USED () - in the last alpahbet btn tutorial
-    // public void AlphabetBtnTutorialEndClick(int indexBtn)
-    // {
-    //     // add in word
-    //     alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
-    //     GameManager.instance.tutorialUI.Tutorial3AltEnd(indexBtn);
-    //     //remove in store
-    //     RemoveCharPlayer(indexBtn);
-    //     SetCharUiWord();
-
-    // }
 
     //USED () - in the alpahbet word btn
     public void AlphabetWordBtnClick(int indexBtn)
@@ -806,13 +793,6 @@ public class GameMenuUi : MonoBehaviour
     {
         GameManager.instance.ContinueNextStage();
     }
-
-    //TODO () - DELETE
-    //USED () - start btn in gameMenuUi_info
-    // public void StartStagePlay()
-    // {
-    //     GameManager.instance.StartStagePlay();
-    // }
 
     //setting window--------------------------
     //music

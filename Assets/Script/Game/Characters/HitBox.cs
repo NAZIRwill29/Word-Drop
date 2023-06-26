@@ -62,10 +62,10 @@ public class HitBox : MonoBehaviour
         if (parentType == 1)
             GameManager.instance.inGame.monster.ObjRecovery(dmg);
     }
-    public void SlowObj()
+    public void SlowObj(Damage dmg)
     {
         if (parentType == 1)
-            GameManager.instance.inGame.monster.SlowObj();
+            GameManager.instance.inGame.monster.SlowObj(dmg);
     }
 
 

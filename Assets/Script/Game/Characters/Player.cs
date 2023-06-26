@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public List<char> alphabetsStore;
     public float objHeight;
     public bool isSquare;
-    private bool isClimb;
+    private bool isClimb, isRunFinish;
     //for push forward by monster
     //private bool isPush;
     //private int pushNum = 50;
@@ -53,6 +53,10 @@ public class Player : MonoBehaviour
         if (playerData.climbNo > 0)
         {
             ClimbEvent();
+        }
+        if (playerData.winMoveNo > 0)
+        {
+            WinMoveEvent();
         }
         if (!isClimb && !playerData.isHasWin)
         {
@@ -418,19 +422,19 @@ public class Player : MonoBehaviour
         switch (levelPlayerTemp)
         {
             case 2:
-                LevelUpEvent(10, 2, isShowOnly);
+                LevelUpEvent(30, 3, isShowOnly);
                 break;
             case 3:
-                LevelUpEvent(20, 4, isShowOnly);
+                LevelUpEvent(60, 6, isShowOnly);
                 break;
             case 4:
-                LevelUpEvent(40, 8, isShowOnly);
+                LevelUpEvent(100, 10, isShowOnly);
                 break;
             case 5:
-                LevelUpEvent(80, 16, isShowOnly);
+                LevelUpEvent(200, 20, isShowOnly);
                 break;
             case 6:
-                LevelUpEvent(160, 32, isShowOnly);
+                LevelUpEvent(400, 40, isShowOnly);
                 break;
             default:
                 break;
@@ -439,12 +443,15 @@ public class Player : MonoBehaviour
     private void LevelUpEvent(int coinNeed, int bookNeed, bool isShowOnly)
     {
         //check if have enough coin and book
-        if (GameManager.instance.coin < coinNeed && playerData.bookNum < bookNeed)
+        if (GameManager.instance.coin > coinNeed && playerData.bookNum > bookNeed)
+        {
+            GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(true);
+        }
+        else
         {
             GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(false);
             return;
         }
-        GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(true);
         //only exec if not show only
         if (!isShowOnly)
         {
@@ -476,25 +483,25 @@ public class Player : MonoBehaviour
                 gameMenuUi.SetPlayerLevelUI(0);
                 break;
             case 2:
-                playerData.charMaxNo = 11;
+                playerData.charMaxNo = 12;
                 playerData.hp = 3;
                 playerData.immuneDamageDuration = 150;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
             case 3:
-                playerData.charMaxNo = 12;
-                playerData.hp = 4;
-                playerData.immuneDamageDuration = 200;
-                gameMenuUi.SetPlayerLevelUI(1);
-                break;
-            case 4:
                 playerData.charMaxNo = 14;
                 playerData.hp = 4;
                 playerData.immuneDamageDuration = 200;
                 gameMenuUi.SetPlayerLevelUI(1);
                 break;
+            case 4:
+                playerData.charMaxNo = 16;
+                playerData.hp = 4;
+                playerData.immuneDamageDuration = 200;
+                gameMenuUi.SetPlayerLevelUI(1);
+                break;
             case 5:
-                playerData.charMaxNo = 17;
+                playerData.charMaxNo = 18;
                 playerData.hp = 5;
                 playerData.immuneDamageDuration = 250;
                 gameMenuUi.SetPlayerLevelUI(1);
@@ -509,28 +516,6 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
-    //start push event
-    // private void StartPushByMonster()
-    // {
-    //     isPush = true;
-    // }
-
-    //push forward by monster
-    // private void PushByMonster()
-    // {
-    //     if (pushNum > 0)
-    //     {
-    //         Debug.Log("push forward");
-    //         transform.position += new Vector3(0, 0.02f, 0);
-    //         pushNum--;
-    //     }
-    //     else
-    //     {
-    //         pushNum = 100;
-    //         isPush = false;
-    //     }
-    // }
 
     //climb ladder - how many ladder
     public void Climb(int num)
@@ -594,8 +579,23 @@ public class Player : MonoBehaviour
     //TODO () -
     private IEnumerator WinRun()
     {
-        yield return new WaitForSeconds(1);
+        playerData.winMoveNo = 60;
+        GameManager.instance.cameraManager.isStopFollow = true;
+        yield return new WaitUntil(() => isRunFinish);
         gameMenuUi.Win();
+        isRunFinish = false;
+        GameManager.instance.cameraManager.isStopFollow = false;
+    }
+
+    private void WinMoveEvent()
+    {
+        transform.position += new Vector3(0, 0.25f, 0);
+        playerData.winMoveNo--;
+        if (playerData.winMoveNo < 2)
+        {
+            isRunFinish = true;
+            playerData.winMoveNo = 0;
+        }
     }
 
     //player game mode - call in gamemanager

@@ -14,7 +14,7 @@ public class Slime : ObjByPlayer
         {
             Debug.Log("Slow Monster");
             //send message damage to ground
-            coll.SendMessage("SlowObj");
+            coll.SendMessage("SlowObj", dmg);
             if (!isTouched)
             {
                 //make trigger once only
