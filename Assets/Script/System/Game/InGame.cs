@@ -16,6 +16,7 @@ public class InGame : MonoBehaviour
     public BackgroundManagement backgroundManagement;
     public Spawn spawn;
     public Water water;
+    public GameObject confettiWin;
     //  0     1       2       3       4        5           6       
     //car1  car2    car3    boat1   boat2   airplane    helicopter
     [Tooltip("car1, 2, 3, boat1, 2, sky1, 2")]

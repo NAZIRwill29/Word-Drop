@@ -579,17 +579,17 @@ public class Player : MonoBehaviour
     //TODO () -
     private IEnumerator WinRun()
     {
-        playerData.winMoveNo = 60;
+        playerData.winMoveNo = 50;
         GameManager.instance.cameraManager.isStopFollow = true;
-        yield return new WaitUntil(() => isRunFinish);
         gameMenuUi.Win();
+        yield return new WaitUntil(() => isRunFinish);
         isRunFinish = false;
         GameManager.instance.cameraManager.isStopFollow = false;
     }
 
     private void WinMoveEvent()
     {
-        transform.position += new Vector3(0, 0.25f, 0);
+        transform.position += new Vector3(0, 0.12f, 0);
         playerData.winMoveNo--;
         if (playerData.winMoveNo < 2)
         {
@@ -667,6 +667,7 @@ public class Player : MonoBehaviour
     public void PlaySoundWin()
     {
         playerAudioSource.PlayOneShot(playerAudioClip[4]);
+        Debug.Log("play sound win");
     }
     public void PlaySoundRevive()
     {

@@ -100,6 +100,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4800883371638957219, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
+      propertyPath: objType
+      value: fence
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800883371638957219, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
       propertyPath: monsterObj
       value: 
       objectReference: {fileID: 0}

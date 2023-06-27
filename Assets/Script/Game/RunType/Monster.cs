@@ -27,7 +27,7 @@ public class Monster : MonoBehaviour
     //  normal    animation
     public int monsterNo;
     public float objHeight;
-    private float lastSlowObjSound, TimeSlowObjSoundCooldown = 150;
+    public bool isSlowByObj;
     //for push backward when hitted
     private bool isPushByPlayer, isPushByObj;
     private int pushPlayerNum = 75, pushObjNum = 25, multPushForce;
@@ -125,12 +125,20 @@ public class Monster : MonoBehaviour
         if (isImmune && dmg1.objType != "slime")
             return;
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
-        if (Time.time - lastSlowObjSound > TimeSlowObjSoundCooldown)
+        Debug.Log("slow obj");
+        if (!isSlowByObj)
         {
-            lastSlowObjSound = Time.time;
             PlaySoundSlime();
             hpChange -= 1;
+            isSlowByObj = true;
         }
+        // if (Time.time - lastSlowObjSound > TimeSlowObjSoundCooldown)
+        // {
+        //     Debug.Log("slow obj 2");
+        //     lastSlowObjSound = Time.time;
+        //     PlaySoundSlime();
+        //     hpChange -= 1;
+        // }
     }
 
     //start push event
@@ -147,7 +155,7 @@ public class Monster : MonoBehaviour
     {
         if (pushPlayerNum > 0)
         {
-            Debug.Log("push backward");
+            //Debug.Log("push backward");
             transform.position -= new Vector3(0, fallBackDist / 50, 0);
             pushPlayerNum--;
         }
@@ -161,7 +169,7 @@ public class Monster : MonoBehaviour
     {
         if (pushObjNum > 0)
         {
-            Debug.Log("push backward");
+            //Debug.Log("push backward");
             transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce, 0);
             pushObjNum--;
         }
@@ -276,6 +284,7 @@ public class Monster : MonoBehaviour
     public void PlaySoundSlime()
     {
         monsterAudioSource.PlayOneShot(monsterAudioClip[2]);
+        Debug.Log("play sound slime");
     }
     public void PlaySoundAttack()
     {

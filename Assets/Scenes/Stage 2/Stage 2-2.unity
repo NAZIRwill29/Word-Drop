@@ -2013,6 +2013,7 @@ Transform:
   - {fileID: 909472760}
   - {fileID: 164377074}
   - {fileID: 274012535}
+  - {fileID: 2123953482}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2030,7 +2031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameAudioClip:
   - {fileID: 8300000, guid: c6b1e4491dcc9de4dad8102c76c2b05e, type: 3}
-  - {fileID: 8300000, guid: 93850243ac83fbf4597b770e9f05bb99, type: 3}
+  - {fileID: 8300000, guid: c6b1e4491dcc9de4dad8102c76c2b05e, type: 3}
   inGameUi: {fileID: 4443392488367841602}
   laddersObj: {fileID: 274012534}
   ladders: {fileID: 274012536}
@@ -2040,6 +2041,7 @@ MonoBehaviour:
   backgroundManagement: {fileID: 0}
   spawn: {fileID: 502309639}
   water: {fileID: 909472759}
+  confettiWin: {fileID: 2123953483}
   playerVehicleIndex: 0
   isLadder: 1
   isGround: 1
@@ -9617,6 +9619,77 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6073675984091207459, guid: d74f3c43378e292409c1ffa54fc4ab1b, type: 3}
   m_PrefabInstance: {fileID: 2121324370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2123953481
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 363549338}
+    m_Modifications:
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_Name
+      value: ConfettiWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+--- !u!4 &2123953482 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+  m_PrefabInstance: {fileID: 2123953481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2123953483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+  m_PrefabInstance: {fileID: 2123953481}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2130492256
 PrefabInstance:

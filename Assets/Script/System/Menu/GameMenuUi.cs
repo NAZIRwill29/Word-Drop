@@ -27,7 +27,7 @@ public class GameMenuUi : MonoBehaviour
     public GameObject hpNotice;
     public Sprite[] hpSprite;
     public Animator gameMenuUiAnim;
-    public CanvasGroup buildCooldownCG;
+    public CanvasGroup buildCooldownCG, buildLimitCG;
     public TextMeshProUGUI buildCooldownText;
     public GameObject completeLadderImg;
     public CanvasGroup[] builBtnCG;
@@ -118,6 +118,7 @@ public class GameMenuUi : MonoBehaviour
     {
         SetCoinEvent();
         SetBuildCooldown();
+        SetBuildLimit();
         if (objBuildCooldownNum >= objBuildCooldownDuration)
         {
             SetRunBuildBtn(true);
@@ -153,6 +154,7 @@ public class GameMenuUi : MonoBehaviour
         }
     }
 
+    //set build cooldown obj in game menu ui
     private void SetBuildCooldown()
     {
         if (objBuildCooldownNum < objBuildCooldownDuration)
@@ -170,13 +172,28 @@ public class GameMenuUi : MonoBehaviour
         if (isShow)
         {
             GameManager.instance.canvasGroupFunc.ModifyCG(buildCooldownCG, 1, isShow, isShow);
-            Debug.Log("build cooldown show");
+            //Debug.Log("build cooldown show");
         }
         else
         {
             GameManager.instance.canvasGroupFunc.ModifyCG(buildCooldownCG, 0, isShow, isShow);
-            Debug.Log("build cooldown hide");
+            //Debug.Log("build cooldown hide");
         }
+    }
+
+    //set build limit
+    private void SetBuildLimit()
+    {
+        //TUTORIAL MODE ()
+        if (!GameManager.instance.inGameUi.isRun)
+        {
+            GameManager.instance.canvasGroupFunc.ModifyCG(buildLimitCG, 0, false, false);
+            return;
+        }
+        if (GameManager.instance.inGame.builderInRun.objBuildInGame >= GameManager.instance.inGame.builderInRun.objBuildInGameLimit)
+            GameManager.instance.canvasGroupFunc.ModifyCG(buildLimitCG, 1, true, true);
+        else
+            GameManager.instance.canvasGroupFunc.ModifyCG(buildLimitCG, 0, false, false);
     }
 
     //add char in player
@@ -592,6 +609,7 @@ public class GameMenuUi : MonoBehaviour
             completeLadderImg.SetActive(false);
             if (!isObjBuildBtnClickable)
                 SetBuildBtninteractable(2, false);
+            //limit the obj to build based on th total of obj build existed
             else if (GameManager.instance.inGame.builderInRun.objBuildInGame < GameManager.instance.inGame.builderInRun.objBuildInGameLimit)
                 SetBuildBtninteractable(2, wordPoint >= GameManager.instance.inGame.fencePt);
             else
@@ -653,7 +671,8 @@ public class GameMenuUi : MonoBehaviour
 
     public void Win()
     {
-
+        //confetti win 
+        GameManager.instance.inGame.confettiWin.SetActive(true);
         //TUTORIAL MODE ()
         if (GameManager.instance.isTutorialMode)
         {
@@ -668,10 +687,10 @@ public class GameMenuUi : MonoBehaviour
         else
             gameMenuUiAnim.SetTrigger("win");
         Debug.Log("win window");
-        FinishGame(false);
         GameManager.instance.player.PlaySoundWin();
         //change music background to win theme
         GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
+        FinishGame(false);
     }
 
     //timer clock countdown

@@ -83,12 +83,13 @@ public class ObjByPlayer : DropObject
     private IEnumerator HideObjSlimeEvent()
     {
         hitSlimeNum++;
-        Debug.Log("slime hit x" + hitSlimeNum);
+        //Debug.Log("slime hit x" + hitSlimeNum);
         if (hitSlimeNum / 30 > timeDelayHide)
         {
             isInDeploy = false;
             isTouched = true;
             Debug.Log("hide slime");
+            GameManager.instance.inGame.monster.isSlowByObj = false;
             yield return new WaitForSeconds(0.1f);
             ObjColl.enabled = false;
             ObjSR.enabled = false;

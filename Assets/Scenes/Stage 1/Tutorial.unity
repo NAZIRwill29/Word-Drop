@@ -1647,6 +1647,7 @@ Transform:
   - {fileID: 7813030384232074519}
   - {fileID: 164377074}
   - {fileID: 274012535}
+  - {fileID: 1162231287}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1674,6 +1675,7 @@ MonoBehaviour:
   backgroundManagement: {fileID: 0}
   spawn: {fileID: 502309639}
   water: {fileID: 164377075}
+  confettiWin: {fileID: 1162231288}
   playerVehicleIndex: 0
   isLadder: 1
   isGround: 1
@@ -4666,6 +4668,73 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1710927286496433279, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
   m_PrefabInstance: {fileID: 1710927285484567425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1162231286
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 363549338}
+    m_Modifications:
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_Name
+      value: ConfettiWin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+--- !u!4 &1162231287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+  m_PrefabInstance: {fileID: 1162231286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1162231288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+  m_PrefabInstance: {fileID: 1162231286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1165457123
 PrefabInstance:

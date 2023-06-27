@@ -34,7 +34,7 @@ public class SwipeRigthLeftMove : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved)
             {
-                Debug.Log("swipe left right");
+                //Debug.Log("swipe left right");
                 //move player
                 posX = GameManager.instance.player.transform.position.x + touch.deltaPosition.x * GameManager.instance.playerData.speed;
                 //set boundary

@@ -770,6 +770,77 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4443392488500488707, guid: eba322fba443ee948899f066fae6acb3, type: 3}
   m_PrefabInstance: {fileID: 4443392488367841601}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &143845810
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 363549338}
+    m_Modifications:
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_Name
+      value: ConfettiWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+--- !u!4 &143845811 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6612074033689331080, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+  m_PrefabInstance: {fileID: 143845810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &143845812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7899783110104098603, guid: 80ec5fee996bc8a439f5e8d153aa7c47, type: 3}
+  m_PrefabInstance: {fileID: 143845810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &151177748 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3675417965707701122, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
@@ -2013,6 +2084,7 @@ Transform:
   - {fileID: 909472760}
   - {fileID: 164377074}
   - {fileID: 274012535}
+  - {fileID: 143845811}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2030,7 +2102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameAudioClip:
   - {fileID: 8300000, guid: c6b1e4491dcc9de4dad8102c76c2b05e, type: 3}
-  - {fileID: 8300000, guid: 93850243ac83fbf4597b770e9f05bb99, type: 3}
+  - {fileID: 8300000, guid: c6b1e4491dcc9de4dad8102c76c2b05e, type: 3}
   inGameUi: {fileID: 4443392488367841602}
   laddersObj: {fileID: 274012534}
   ladders: {fileID: 274012536}
@@ -2040,6 +2112,7 @@ MonoBehaviour:
   backgroundManagement: {fileID: 0}
   spawn: {fileID: 502309639}
   water: {fileID: 909472759}
+  confettiWin: {fileID: 143845812}
   playerVehicleIndex: 0
   isLadder: 1
   isGround: 1
