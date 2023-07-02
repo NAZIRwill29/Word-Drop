@@ -43,12 +43,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
-    }
-
-    //50 frame per sec
-    void FixedUpdate()
-    {
         //make climb event
         if (playerData.climbNo > 0)
         {
@@ -68,9 +62,13 @@ public class Player : MonoBehaviour
             if (isSquare)
                 playerAnim.SetBool("run", false);
         }
+    }
+
+    //50 frame per sec
+    void FixedUpdate()
+    {
         if (!GameManager.instance.isStartGame || GameManager.instance.isPauseGame)
             return;
-        //immunedamage for few second in start game
         if (playerData.immuneDamageCount < playerData.immuneDamageDuration)
         {
             playerData.immuneDamageCount++;
@@ -80,6 +78,7 @@ public class Player : MonoBehaviour
         {
             playerData.isImmuneDamage = false;
             playerAnim.SetBool("shield", false);
+            //Debug.Log("stop immuneDamage - " + playerData.isImmuneDamage + playerData.immuneDamageCount);
         }
         //if (isPush)
         //PushByMonster();
@@ -528,6 +527,7 @@ public class Player : MonoBehaviour
         else
             playerData.climbNo = (num + 1) * 2;
         LifeLine(0);
+        playerAnim.SetBool("reset", false);
         isClimb = true;
         playerAnim.SetTrigger("climb");
     }
@@ -552,6 +552,7 @@ public class Player : MonoBehaviour
         {
             LifeLine(0);
             playerData.isHasWin = true;
+            isClimb = false;
             //for static game
             //TODO () -
             Debug.Log("win");
@@ -704,7 +705,14 @@ public class Player : MonoBehaviour
     {
         playerData.isImmuneDamage = isTrue;
         if (isTrue)
+        {
             playerData.immuneDamageCount = 0;
+            //reset player animation
+            playerAnim.SetBool("reset", true);
+            //playerAnim.SetBool("run", true);
+            playerAnim.SetBool("shield", true);
+        }
+
     }
     public void ChangeIsHasDie(bool isTrue)
     {

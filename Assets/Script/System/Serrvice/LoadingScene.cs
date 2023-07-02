@@ -46,13 +46,13 @@ public class LoadingScene : MonoBehaviour
         yield return new WaitForSeconds(5);
         //exec when isFinishLoadScene = true
         yield return new WaitUntil(() => GameManager.instance.isFinishLoadScene);
+        if (GameManager.instance.inGame)
+            StartCoroutine(LoadBlackScreen());
+        //Debug.Log("load screen end");
         // show inGameUi - only if has
         if (GameManager.instance.inGameUi)
             GameManager.instance.inGameUi.SetupInGameUi(true);
         mainMenuUI.ShowLoadingScreen(false);
-        if (GameManager.instance.inGame)
-            StartCoroutine(LoadBlackScreen());
-        //Debug.Log("load screen end");
     }
 
     private IEnumerator LoadBlackScreen()

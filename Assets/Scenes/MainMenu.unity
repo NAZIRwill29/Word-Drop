@@ -6444,7 +6444,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'This is pen button.
 
-    Click it to combine letters into word.'
+    Click it to to create word.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -8490,7 +8490,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 77.25
+  m_fontSize: 60.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13819,7 +13819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camAnim: {fileID: 4827904019053405665}
-  elevation: 1.45
+  elevation: 1.2
   isStopFollow: 0
 --- !u!1 &552063158
 GameObject:
@@ -14639,9 +14639,9 @@ MonoBehaviour:
     -------------------------
 
     1
-    letter = 1 pen point
+    alphabet = 1 pen point
 
-    4 letters = 1 coin'
+    4 alphabets = 1 coin'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -18021,8 +18021,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1.4569092, y: -199.59814}
-  m_SizeDelta: {x: -95.7119, y: 223.35645}
+  m_AnchoredPosition: {x: -1.4569092, y: -205.06467}
+  m_SizeDelta: {x: -95.7119, y: 234.2895}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754169813
 MonoBehaviour:
@@ -26220,7 +26220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click the letters to add to word container.
+  m_text: Click the alphabet to add to word container.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -26543,8 +26543,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 2.1176147, y: 6.4920044}
-  m_SizeDelta: {x: -97.7648, y: 188.1947}
+  m_AnchoredPosition: {x: 2.1176147, y: 17.458609}
+  m_SizeDelta: {x: -97.7648, y: 210.1279}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1059895059
 MonoBehaviour:
@@ -26566,9 +26566,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is words container.
+  m_text: 'This is word''s container.
 
-    Click the letters to remove it.'
+    If want to remove alphabet, click it to
+    remove it'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -26595,7 +26596,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.25
+  m_fontSize: 45.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -48582,7 +48583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is letters container.
+  m_text: 'This is alphabet''s container.
 
     it contain letters you collected.'
   m_isRightToLeft: 0
@@ -48611,7 +48612,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.8
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

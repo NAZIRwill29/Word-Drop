@@ -2118,8 +2118,8 @@ MonoBehaviour:
   isGround: 1
   isFence: 0
   isSlime: 0
-  ladderPt: 3
-  groundPt: 3
+  ladderPt: 5
+  groundPt: 6
   fencePt: 1
   slimePt: 2
   dangerDist: 0
@@ -2128,7 +2128,7 @@ MonoBehaviour:
   nextStageMode: 0
   isBookSpawnOne: 1
   bookSpawnTime: 0
-  isIncreaseDifficulty: 0
+  isIncreaseDifficulty: 1
   playerPos: 0
   waterPos: 0
   monsterPos: 0
@@ -10377,6 +10377,22 @@ PrefabInstance:
       propertyPath: inGame
       value: 
       objectReference: {fileID: 363549339}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: dragObs
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: dragChar
+      value: 2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: timeObsDuration
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: timeCharDuration
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
       propertyPath: bookObj.Array.data[0]
       value: 

@@ -250,16 +250,16 @@ public class Spawn : MonoBehaviour
     public void IncreaseFreqSpeed()
     {
         increaseNum += 0.005f;
-        increaseNumObs += 0.001f;
-        increaseNumCoin += 0.0015f;
-        increaseNumBook += 0.002f;
+        increaseNumObs += 0.006f;
+        increaseNumCoin += 0.007f;
+        increaseNumBook += 0.008f;
         Debug.Log("increase num = " + increaseNum);
         Debug.Log("dragChar = " + dragChar);
-        ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum);
-        ChangeFreqSpeedObs(dragObs - increaseNum - increaseNumObs, timeObsDuration - increaseNum - increaseNumObs);
+        ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum / 2);
+        ChangeFreqSpeedObs(dragObs - increaseNumObs, timeObsDuration - increaseNumObs / 2);
         //Debug.Log("increase num = " + increaseNum);
-        ChangeFreqSpeedCoin(dragCoin - increaseNumCoin - increaseNum);
-        ChangeFreqSpeedBook(dragBook - increaseNumBook - increaseNum);
+        ChangeFreqSpeedCoin(dragCoin - increaseNumCoin);
+        ChangeFreqSpeedBook(dragBook - increaseNumBook);
     }
 
     //variable change
@@ -269,7 +269,7 @@ public class Spawn : MonoBehaviour
         Debug.Log("duration = " + duration);
         if (duration < 0.2f)
             return;
-        if (dragNum < 0.5f)
+        if (dragNum < 1.0f)
             return;
         timeCharDuration = duration;
         foreach (var item in charObj)
@@ -279,9 +279,9 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedObs(float dragNum, float duration)
     {
-        if (duration < 0.2f)
+        if (duration < 0.25f)
             return;
-        if (dragNum < 0.4f)
+        if (dragNum < 0.8f)
             return;
         timeObsDuration = duration;
         foreach (var item in obstacleObj)
@@ -291,7 +291,7 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedCoin(float dragNum)
     {
-        if (dragNum < 0.3f)
+        if (dragNum < 0.35f)
             return;
         foreach (var item in coinObj)
         {
@@ -300,7 +300,7 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedBook(float dragNum)
     {
-        if (dragNum < 0.2f)
+        if (dragNum < 0.25f)
             return;
         foreach (var item in bookObj)
         {

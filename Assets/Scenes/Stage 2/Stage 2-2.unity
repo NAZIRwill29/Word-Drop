@@ -2047,8 +2047,8 @@ MonoBehaviour:
   isGround: 1
   isFence: 0
   isSlime: 0
-  ladderPt: 3
-  groundPt: 3
+  ladderPt: 4
+  groundPt: 4
   fencePt: 1
   slimePt: 2
   dangerDist: 0
@@ -4251,7 +4251,7 @@ PrefabInstance:
       objectReference: {fileID: 1024498422}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -4431,7 +4431,7 @@ PrefabInstance:
       objectReference: {fileID: 1092494138}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -4800,7 +4800,7 @@ PrefabInstance:
       objectReference: {fileID: 1136559516}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -8713,7 +8713,7 @@ PrefabInstance:
       objectReference: {fileID: 2018101227}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -10413,6 +10413,22 @@ PrefabInstance:
       propertyPath: inGame
       value: 
       objectReference: {fileID: 363549339}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: dragObs
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: dragChar
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: timeObsDuration
+      value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: timeCharDuration
+      value: 0.57
+      objectReference: {fileID: 0}
     - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
       propertyPath: bookObj.Array.data[0]
       value: 

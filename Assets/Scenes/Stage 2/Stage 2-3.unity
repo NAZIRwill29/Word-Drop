@@ -11504,6 +11504,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 363549339}
     - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: dragObs
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: dragChar
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: timeObsDuration
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
+      propertyPath: timeCharDuration
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820264706521054733, guid: f248ac543300e994e9c1e09894fa18e7, type: 3}
       propertyPath: bookObj.Array.data[0]
       value: 
       objectReference: {fileID: 2126058978}
