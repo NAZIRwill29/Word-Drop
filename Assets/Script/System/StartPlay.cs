@@ -25,6 +25,26 @@ public class StartPlay : MonoBehaviour
         //get input
         touch = Input.GetTouch(0);
         GameManager.instance.StartStagePlay();
-        startPlayAnim.SetBool("show", false);
+        startPlayAnim.SetInteger("startPlay", 0);
+    }
+
+    public void SetStartPlay()
+    {
+        //set perk 
+        int perkNo = 10;
+        //perk 1
+        if (GameManager.instance.inGame.isIncreaseDifficulty)
+            perkNo = 1;
+        //check monster existence
+        if (GameManager.instance.inGame.monster)
+        {
+            //perk 2
+            if (GameManager.instance.inGame.monster.isNoSlowDown)
+                perkNo = 2;
+            //perk 3
+            if (GameManager.instance.inGame.monster.isForeverChangeState)
+                perkNo = 3;
+        }
+        startPlayAnim.SetInteger("startPlay", perkNo);
     }
 }

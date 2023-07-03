@@ -1663,6 +1663,7 @@ MonoBehaviour:
   backgroundManagement: {fileID: 0}
   spawn: {fileID: 502309639}
   water: {fileID: 164377075}
+  confettiWin: {fileID: 0}
   playerVehicleIndex: 0
   isLadder: 1
   isGround: 1
@@ -6390,6 +6391,7 @@ Transform:
   - {fileID: 1918715113}
   - {fileID: 1910004925}
   - {fileID: 229594072}
+  - {fileID: 7298328911702190589}
   m_Father: {fileID: 363549338}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9769,6 +9771,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1810861569}
     m_Modifications:
+    - target: {fileID: 2593263019622273327, guid: 9fde901a21b9f3e47ac177ce06e36e21, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593263019622273327, guid: 9fde901a21b9f3e47ac177ce06e36e21, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593263019622273327, guid: 9fde901a21b9f3e47ac177ce06e36e21, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4751179238740419789, guid: 9fde901a21b9f3e47ac177ce06e36e21, type: 3}
       propertyPath: m_Name
       value: Obstacle_Bird2
@@ -10146,6 +10160,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a5d9c3646350c4f8030a7c819314fa, type: 3}
+--- !u!1001 &7298328911702190588
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1810861569}
+    m_Modifications:
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 26.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.14856693
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920436915521302274, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+      propertyPath: m_Name
+      value: Obstacle_WoodNail
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+--- !u!4 &7298328911702190589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4826299582377665995, guid: f7533dcab08ea004ca58064dea99ff34, type: 3}
+  m_PrefabInstance: {fileID: 7298328911702190588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7534210723094203367
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -64,6 +64,6 @@ public class LoadingScene : MonoBehaviour
         //Debug.Log("black screen end");
         GameManager.instance.isInStage = true;
         if (!GameManager.instance.isTutorialMode)
-            startPlay.startPlayAnim.SetBool("show", true);
+            startPlay.SetStartPlay();
     }
 }

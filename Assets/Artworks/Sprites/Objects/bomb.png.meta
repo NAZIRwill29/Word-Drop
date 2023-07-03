@@ -237,7 +237,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bomb_bird1
+      name: bomb_bird3
       rect:
         serializedVersion: 2
         x: 0
@@ -279,7 +279,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bomb_bird3
+      name: bomb_bird1
       rect:
         serializedVersion: 2
         x: 1600
@@ -446,6 +446,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bomb_woodNail
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0664ef98e53b0241af0fbac5b052eea
+      internalID: -1104215479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -460,9 +481,9 @@ TextureImporter:
       bomb_14: -1514035750
       bomb_15: -24885090
       bomb_acid: -290281382
-      bomb_bird1: -1323100209
+      bomb_bird1: 309243170
       bomb_bird2: 1371802430
-      bomb_bird3: 309243170
+      bomb_bird3: -1323100209
       bomb_bomb: 492112171
       bomb_fish1: 920019445
       bomb_fish2: -660168633
@@ -473,6 +494,7 @@ TextureImporter:
       bomb_tree2: -2023713471
       bomb_tree3: -270689439
       bomb_wood: -1092223219
+      bomb_woodNail: -1104215479
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

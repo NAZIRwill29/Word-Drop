@@ -44,7 +44,7 @@ public class GameMenuUi : MonoBehaviour
     private List<string> words;
     private string letterCombine;
     public int wordPoint;
-    public bool isRunGame;
+    public bool isRunGame, isHasPlayCancel;
     [SerializeField] private bool isCharLvl1, isObjBuildBtnClickable = true;
 
     [SerializeField] private int objBuildCooldownNum = 100, objBuildCooldownDuration;
@@ -648,15 +648,15 @@ public class GameMenuUi : MonoBehaviour
         }
         else
         {
-            switch (GameManager.instance.playerData.deathScenario)
-            {
-                case "alphabet":
-                    deathImg.sprite = GameManager.instance.inGameUi.deathSprite[0];
-                    break;
-                default:
-                    deathImg.sprite = GameManager.instance.inGameUi.deathSprite[1];
-                    break;
-            }
+            // switch (GameManager.instance.playerData.deathScenario)
+            // {
+            //     case "alphabet":
+            //         deathImg.sprite = GameManager.instance.inGameUi.deathSprite[0];
+            //         break;
+            //     default:
+            //         deathImg.sprite = GameManager.instance.inGameUi.deathSprite[1];
+            //         break;
+            // }
             gameMenuUiAnim.SetTrigger("realDeath");
         }
     }
@@ -714,12 +714,20 @@ public class GameMenuUi : MonoBehaviour
     }
     private void OnEnd()
     {
+        if (isHasPlayCancel)
+            return;
+        isHasPlayCancel = true;
+        //reset death clock
+        isStartdeathClock = false;
         //End Time , if want Do something
         Debug.Log("End");
-        //TODO () - go to main menu
-        FinishGame(true);
-        gameMenuUiAnim.SetTrigger("hide");
-        GameManager.instance.mainMenuUI.PlaySoundNavigate();
+        //go to main menu
+        // FinishGame(true);
+        // gameMenuUiAnim.SetTrigger("hide");
+        // GameManager.instance.mainMenuUI.PlaySoundNavigate();
+        //open real die window
+        Death(true);
+        GameManager.instance.mainMenuUI.PlaySoundCancel();
     }
 
     //USED () - in ladder btn
@@ -792,7 +800,7 @@ public class GameMenuUi : MonoBehaviour
     //USED () - dieWindow, giveUpBtn, homeBtn
     public void FinishGame(bool isBackToHome)
     {
-        isStartdeathClock = false;
+        isHasPlayCancel = false;
         ResetAlphabetWordBtnClick();
         //GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         //GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
