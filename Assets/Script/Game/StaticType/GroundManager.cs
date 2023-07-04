@@ -18,7 +18,7 @@ public class GroundManager : MonoBehaviour
 
     }
 
-    //TODO () - build ground event used in ingameui
+    //build ground event used in ingameui
     public void AddGround()
     {
         //check if reach max will climb and win
@@ -36,10 +36,6 @@ public class GroundManager : MonoBehaviour
             GameManager.instance.inGame.ladders.ladderUse.transform.position += new Vector3(0, riseNum, 0);
             //heal from water
             GameManager.instance.player.LifeLine(GameManager.instance.playerData.lifeLineBuildTrigger);
-        }
-        else
-        {
-            //TODO () - make text tell can't add floor anymore
         }
     }
 

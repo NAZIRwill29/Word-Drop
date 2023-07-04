@@ -8,8 +8,6 @@ public class ObjByPlayer : DropObject
     [SerializeField] private BuilderInRun builderInRun;
     public Collider2D ObjColl;
     public SpriteRenderer ObjSR;
-    //TODO () - replace with GameManager
-    // public Player player;
     public float posY;
     [Tooltip("Only change for slime")]
     public float timeDelayHide = 0.1f;
@@ -39,7 +37,7 @@ public class ObjByPlayer : DropObject
         }
     }
 
-    //TODO () - call in ingameUi
+    //call in ingameUi
     public virtual void ShowObj(bool isShow)
     {
         if (isShow)
@@ -71,7 +69,7 @@ public class ObjByPlayer : DropObject
     private IEnumerator HideObjEvent(int numObjType)
     {
         isInDeploy = false;
-        Debug.Log("hide fence");
+        //Debug.Log("hide fence");
         ObjColl.enabled = false;
         ObjSR.enabled = false;
         yield return new WaitForSeconds(0.1f);
@@ -88,7 +86,7 @@ public class ObjByPlayer : DropObject
         {
             isInDeploy = false;
             isTouched = true;
-            Debug.Log("hide slime");
+            //Debug.Log("hide slime");
             GameManager.instance.inGame.monster.isSlowByObj = false;
             yield return new WaitForSeconds(0.1f);
             ObjColl.enabled = false;

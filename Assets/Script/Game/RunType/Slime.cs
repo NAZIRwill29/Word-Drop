@@ -12,7 +12,7 @@ public class Slime : ObjByPlayer
             return;
         if (coll.tag == "Monster")
         {
-            Debug.Log("Slow Monster");
+            //Debug.Log("Slow Monster");
             //send message damage to ground
             coll.SendMessage("SlowObj", dmg);
             if (!isTouched)

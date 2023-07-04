@@ -17,7 +17,7 @@ public class Fence : ObjByPlayer
                 isTouched = true;
                 //send message damage to ground
                 coll.SendMessage("ObjHit", dmg);
-                Debug.Log("Block Monster");
+                //Debug.Log("Block Monster");
                 //hide and off coliider
                 ShowObj(false);
             }

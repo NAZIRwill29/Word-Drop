@@ -253,8 +253,8 @@ public class Spawn : MonoBehaviour
         increaseNumObs += 0.006f;
         increaseNumCoin += 0.007f;
         increaseNumBook += 0.008f;
-        Debug.Log("increase num = " + increaseNum);
-        Debug.Log("dragChar = " + dragChar);
+        //Debug.Log("increase num = " + increaseNum);
+        //Debug.Log("dragChar = " + dragChar);
         ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum / 2);
         ChangeFreqSpeedObs(dragObs - increaseNumObs, timeObsDuration - increaseNumObs / 2);
         //Debug.Log("increase num = " + increaseNum);
@@ -265,8 +265,8 @@ public class Spawn : MonoBehaviour
     //variable change
     public void ChangeFreqSpeedChar(float dragNum, float duration)
     {
-        Debug.Log("dragNum = " + dragNum);
-        Debug.Log("duration = " + duration);
+        //Debug.Log("dragNum = " + dragNum);
+        //Debug.Log("duration = " + duration);
         if (duration < 0.2f)
             return;
         if (dragNum < 1.0f)

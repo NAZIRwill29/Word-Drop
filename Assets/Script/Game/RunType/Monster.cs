@@ -125,20 +125,13 @@ public class Monster : MonoBehaviour
         if (isImmune && dmg1.objType != "slime")
             return;
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
-        Debug.Log("slow obj");
+        //Debug.Log("slow obj");
         if (!isSlowByObj)
         {
             PlaySoundSlime();
             hpChange -= 1;
             isSlowByObj = true;
         }
-        // if (Time.time - lastSlowObjSound > TimeSlowObjSoundCooldown)
-        // {
-        //     Debug.Log("slow obj 2");
-        //     lastSlowObjSound = Time.time;
-        //     PlaySoundSlime();
-        //     hpChange -= 1;
-        // }
     }
 
     //start push event
@@ -258,7 +251,7 @@ public class Monster : MonoBehaviour
             return;
         if (coll.tag == "Player")
         {
-            Debug.Log("attack damage");
+            //Debug.Log("attack damage");
             coll.SendMessage("ReceiveDamageHp", dmg);
             StartPushByPlayer();
             //transform.position -= new Vector3(0, fallBackDist, 0);
@@ -284,7 +277,7 @@ public class Monster : MonoBehaviour
     public void PlaySoundSlime()
     {
         monsterAudioSource.PlayOneShot(monsterAudioClip[2]);
-        Debug.Log("play sound slime");
+        //Debug.Log("play sound slime");
     }
     public void PlaySoundAttack()
     {

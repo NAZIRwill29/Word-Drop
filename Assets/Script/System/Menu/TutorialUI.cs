@@ -58,16 +58,6 @@ public class TutorialUI : MonoBehaviour
                     Tutorial3AltStart(0);
                 }
             }
-            // TODO () - AFTER T3 B4 T4
-            // else if (GameManager.instance.tutorial.TutorialPhaseNo == 4)
-            // {
-            //     //trigger when has 4 letters in word
-            //     if (GameManager.instance.gameMenuUi.alphabetsWord.Count > 4)
-            //     {
-            //         TutorialEvent(4);
-            //         TutorialEnd();
-            //     }
-            // }
             else if (GameManager.instance.tutorial.TutorialPhaseNo > 6 && GameManager.instance.tutorial.TutorialPhaseNo < 10)
             {
                 if (Time.time - lastClick > clickCooldown)
@@ -77,13 +67,6 @@ public class TutorialUI : MonoBehaviour
                     TutorialEnd();
                 }
             }
-            // else if (GameManager.instance.tutorial.TutorialPhaseNo > 11)
-            // {
-            //     TutorialEnd();
-            //     GameManager.instance.isTutorialMode = false;
-            //     GameManager.instance.tutorialUI.isTutorialEnd = false;
-            //     GameManager.instance.isHasTutorial = true;
-            // }
         }
     }
 
@@ -128,27 +111,13 @@ public class TutorialUI : MonoBehaviour
         {
             alphabetTutorialBtnAnim[i].SetTrigger("normal");
         }
-        // foreach (var item in alphabetTutorialBtnAnim)
-        // {
-        //     item.SetTrigger("normal");
-        // }
     }
-
-    // private IEnumerator Tutorial11()
-    // {
-    //     yield return new WaitForSeconds(5);
-    //     if (!isTutorialEnd)
-    //     {
-    //         TutorialEvent(11);
-    //         isTutorialEnd = true;
-    //     }
-    // }
 
     private void SwipeLeftRight()
     {
         if (touch.phase == TouchPhase.Moved)
         {
-            Debug.Log("swipe left right");
+            //Debug.Log("swipe left right");
             //move player
             posX = GameManager.instance.player.transform.position.x + touch.deltaPosition.x * GameManager.instance.playerData.speed;
             //set boundary
@@ -176,8 +145,8 @@ public class TutorialUI : MonoBehaviour
                 if (!isActionInvalid)
                 {
                     isActionInvalid = true;
-                    //TODO () - make word menu appear -> make isActionValid = true after close
-                    Debug.Log("word menu tutorial appear");
+                    //make word menu appear -> make isActionValid = true after close
+                    //Debug.Log("word menu tutorial appear");
                     GameManager.instance.gameMenuUi.gameMenuUiAnim.SetTrigger("actionMenu");
                     GameManager.instance.mainMenuUI.PlaySoundNavigate();
                     GameManager.instance.gameMenuUi.SetActionMenu();

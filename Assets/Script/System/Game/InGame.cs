@@ -82,7 +82,7 @@ public class InGame : MonoBehaviour
         {
             if (Time.time - lastIncNumTime > timeIncNum)
             {
-                Debug.Log("increase diff");
+                //Debug.Log("increase diff");
                 lastIncNumTime = Time.time;
                 spawn.IncreaseFreqSpeed();
                 if (backgroundManagement)

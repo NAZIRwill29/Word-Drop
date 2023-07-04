@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
     }
     public void StartGame(int mode)
     {
-        Debug.Log("player start game");
+        //Debug.Log("player start game");
         GameMode(mode);
         //store player mode in current stage
         playerData.playerMode = mode;
@@ -139,17 +139,17 @@ public class Player : MonoBehaviour
         switch (playerData.deathScenario)
         {
             case "alphabet":
-                Debug.Log("Revive alphabet");
+                //Debug.Log("Revive alphabet");
                 ReviveAlphabet();
                 //TODO () - Revive animation
                 break;
             case "drowning":
-                Debug.Log("Revive drowning");
+                //Debug.Log("Revive drowning");
                 ReviveDrowning();
                 //TODO () - Revive animation
                 break;
             case "monster":
-                Debug.Log("Revive monster");
+                //Debug.Log("Revive monster");
                 ReviveMonster();
                 //TODO () - Revive animation
                 break;
@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
         GameManager.instance.inGame.monster.AfterRevive();
     }
 
-    //TODO () - 
+    //when hitted by obj or damaged ground
     public void ReceiveDamage(Damage dmg)
     {
         if (playerData.isImmuneDamage)
@@ -219,7 +219,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //TODO () - 
     //call when attacked by monster
     public void ReceiveDamageHp(Damage dmg)
     {
@@ -298,20 +297,20 @@ public class Player : MonoBehaviour
         switch (scenario)
         {
             case "alphabet":
-                Debug.Log("DEATH alphabet");
+                //Debug.Log("DEATH alphabet");
                 if (!GameManager.instance.inGameUi.isRun)
                     LifeLine(0);
                 DieEvent();
                 //TODO () - die animation
                 break;
             case "drowning":
-                Debug.Log("DEATH drowning");
+                //Debug.Log("DEATH drowning");
                 LifeLine(0);
                 DieEvent();
                 //TODO () - die animation
                 break;
             case "monster":
-                Debug.Log("DEATH monster");
+                //Debug.Log("DEATH monster");
                 DieEvent();
                 //TODO () - die animation
                 break;
@@ -340,7 +339,7 @@ public class Player : MonoBehaviour
         switch (num)
         {
             case 0:
-                //TODO () - call when free from water
+                //call when free from water
                 //back to normal
                 playerData.lifeLineTrigger = 0;
                 break;
@@ -519,8 +518,7 @@ public class Player : MonoBehaviour
     //climb ladder - how many ladder
     public void Climb(int num)
     {
-        //TODO () - 
-        Debug.Log("climb");
+        //Debug.Log("climb");
         //TUTORIAL MODE ()
         if (GameManager.instance.isTutorialMode)
             playerData.climbNo = (7 + 1) * 2;
@@ -543,41 +541,40 @@ public class Player : MonoBehaviour
     //win
     public void Win(bool isStaticGameMode)
     {
-        Debug.Log("Win");
+        //Debug.Log("Win");
         if (playerData.isHasWin)
             return;
         GameManager.instance.inGame.spawn.StopSpawn(true);
         GameManager.instance.UpdateStageProgress();
         if (isStaticGameMode)
         {
+            //for static game
             LifeLine(0);
             playerData.isHasWin = true;
             isClimb = false;
-            //for static game
-            //TODO () -
-            Debug.Log("win");
+            //Debug.Log("win");
             //freeze all - pause game - off rigidbody player
             GameMode(2);
             StartCoroutine(WinStatic());
         }
         else
         {
-            playerData.isHasWin = true;
             //for run game
-            //TODO () - add push forward
-            Debug.Log("win");
+            playerData.isHasWin = true;
+            //add push forward
+            //Debug.Log("win");
             //freeze all - pause game - off rigidbody player
             GameMode(2);
             StartCoroutine(WinRun());
         }
     }
-    //TODO () -
+    //TODO () - win static
     private IEnumerator WinStatic()
     {
         yield return new WaitForSeconds(1);
         gameMenuUi.Win();
     }
-    //TODO () -
+    //TODO () - win run
     private IEnumerator WinRun()
     {
         playerData.winMoveNo = 50;
@@ -612,11 +609,10 @@ public class Player : MonoBehaviour
                 playerRB.bodyType = RigidbodyType2D.Dynamic;
                 transform.position = playerData.originPos;
                 playerData.isImmune = false;
-                //TODO () - 
                 break;
             case 1:
                 //run mode
-                Debug.Log("game mode run");
+                //Debug.Log("game mode run");
                 playerRB.bodyType = RigidbodyType2D.Static;
                 transform.position = new Vector3(playerData.originPos.x, -1.538f, playerData.originPos.z);
                 playerData.isImmune = false;
@@ -636,7 +632,6 @@ public class Player : MonoBehaviour
                 //drowned mode
                 playerRB.bodyType = RigidbodyType2D.Dynamic;
                 playerData.isImmune = false;
-                //TODO () - 
                 break;
             case 1:
                 //run mode
@@ -668,7 +663,7 @@ public class Player : MonoBehaviour
     public void PlaySoundWin()
     {
         playerAudioSource.PlayOneShot(playerAudioClip[4]);
-        Debug.Log("play sound win");
+        //Debug.Log("play sound win");
     }
     public void PlaySoundRevive()
     {

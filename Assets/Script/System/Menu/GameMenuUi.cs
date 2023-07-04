@@ -347,7 +347,7 @@ public class GameMenuUi : MonoBehaviour
 
     public void SetPlayerLevelUI(int charLvl)
     {
-        //TODO () - set hp lvl ui and char container ui in menu
+        //set hp lvl ui and char container ui in menu
         hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
         //TUTORIAL MODE ()
         if (GameManager.instance.isTutorialMode)
@@ -383,7 +383,7 @@ public class GameMenuUi : MonoBehaviour
     public void SetHpUI()
     {
         hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
-        Debug.Log("change hp Ui");
+        //Debug.Log("change hp Ui");
         if (GameManager.instance.playerData.hp < 2)
             hpNotice.SetActive(true);
         else
@@ -403,7 +403,7 @@ public class GameMenuUi : MonoBehaviour
         GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
         GameManager.instance.PauseGame(false);
-        Debug.Log("Game Menu ui info");
+        //Debug.Log("Game Menu ui info");
         //TUTORIAL MODE ()
         if (!GameManager.instance.isTutorialMode)
             return;
@@ -440,7 +440,7 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in the alpahbet btn tutorial
     public void AlphabetBtnTutorialClick(int indexBtn)
     {
-        Debug.Log("alphabet tutorial " + indexBtn);
+        //Debug.Log("alphabet tutorial " + indexBtn);
         // add in word
         alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
         GameManager.instance.tutorialUI.Tutorial3AltEnd(indexBtn);
@@ -451,7 +451,7 @@ public class GameMenuUi : MonoBehaviour
             GameManager.instance.tutorialUI.Tutorial3AltStart(indexBtn);
         else
         {
-            Debug.Log("alphabet tutorial end");
+            //Debug.Log("alphabet tutorial end");
             GameManager.instance.tutorialUI.AllTutorial3AltEnd();
             GameManager.instance.tutorialUI.TutorialEnd();
             GameManager.instance.tutorialUI.TutorialEvent(4);
@@ -551,7 +551,7 @@ public class GameMenuUi : MonoBehaviour
             SetCoinEvent();
         }
     }
-    //TODO () - set coin in gamemenu - coin info
+    //set coin in gamemenu - coin info
     public void SetCoinEvent()
     {
         coinText.text = "$" + GameManager.instance.coin.ToString();
@@ -686,7 +686,7 @@ public class GameMenuUi : MonoBehaviour
         }
         else
             gameMenuUiAnim.SetTrigger("win");
-        Debug.Log("win window");
+        //Debug.Log("win window");
         GameManager.instance.player.PlaySoundWin();
         //change music background to win theme
         GameManager.instance.gameSettings.ChangeMusicBackground(true, 1);
@@ -720,7 +720,7 @@ public class GameMenuUi : MonoBehaviour
         //reset death clock
         isStartdeathClock = false;
         //End Time , if want Do something
-        Debug.Log("End");
+        //Debug.Log("End");
         //go to main menu
         // FinishGame(true);
         // gameMenuUiAnim.SetTrigger("hide");
@@ -779,7 +779,6 @@ public class GameMenuUi : MonoBehaviour
     }
 
     //USED () - in setting btn
-    //TODO () - stop play controller
     public void SettingBtn()
     {
 
@@ -793,10 +792,9 @@ public class GameMenuUi : MonoBehaviour
         GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
         //GameManager.instance.PauseGame(false);
         GameManager.instance.BackToHome();
-        Debug.Log("game menu ui hide");
+        //Debug.Log("game menu ui hide");
     }
 
-    //TODO () - when win or real die
     //USED () - dieWindow, giveUpBtn, homeBtn
     public void FinishGame(bool isBackToHome)
     {

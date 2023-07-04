@@ -19,26 +19,20 @@ public class LoadingScene : MonoBehaviour
         StartCoroutine(LoadSceneEvent());
     }
 
-    IEnumerator LoadSceneAsync(int sceneId)
-    {
-        //LoadingScreen.SetActive(true);
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
-
-        while (!operation.isDone)
-        {
-            float progressValue = Mathf.Clamp01(operation.progress / speed);
-            LoadingBarFill.fillAmount = progressValue;
-
-            yield return null;
-        }
-    }
-
-    // private IEnumerator LoadSceneEvent()
+    // IEnumerator LoadSceneAsync(int sceneId)
     // {
-    //    StartCoroutine(LoadLoadingScreen());
-    // }
+    //     //LoadingScreen.SetActive(true);
 
+    //     AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
+
+    //     while (!operation.isDone)
+    //     {
+    //         float progressValue = Mathf.Clamp01(operation.progress / speed);
+    //         LoadingBarFill.fillAmount = progressValue;
+
+    //         yield return null;
+    //     }
+    // }
     private IEnumerator LoadSceneEvent()
     {
         //Debug.Log("load screen start");

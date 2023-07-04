@@ -63,7 +63,7 @@ public class AdsMediate : MonoBehaviour
 
     }
 
-    //TODO () - 
+    //TODO () - RewardedAd
     //show rewarded
     public void ShowRewarded(string rewardType)
     {
@@ -80,7 +80,7 @@ public class AdsMediate : MonoBehaviour
         }
     }
 
-    //TODO () - 
+    //TODO () - InterstitialAd
     //load interstitial - load in start game
     public void LoadInterstitial()
     {
@@ -89,7 +89,7 @@ public class AdsMediate : MonoBehaviour
             text.text = "Interstitial loaded successfully";
     }
 
-    //TODO () - 
+    //TODO () - InterstitialAd
     //show interstitial - show after finish game
     public void ShowInterstitial()
     {

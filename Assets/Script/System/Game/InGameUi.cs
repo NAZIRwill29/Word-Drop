@@ -24,16 +24,11 @@ public class InGameUi : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dangerText;
     //  0               1       
     //alphabet    monster/water
-    public Sprite[] deathSprite;
+    //public Sprite[] deathSprite;
     public Sprite winSprite;
     // Start is called before the first frame update
     void Start()
     {
-        // if (isHasTimer)
-        // {
-        // }
-        // else
-        //     timer.gameObject.SetActive(false);
 
     }
 

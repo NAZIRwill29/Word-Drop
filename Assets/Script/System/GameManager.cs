@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     //awake
     void Awake()
     {
-        Debug.Log("awake");
+        //Debug.Log("awake");
         //check if have instance
         if (GameManager.instance != null)
         {
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("awake2");
             StartCoroutine(SetMainMenu(false));
         }
-        Debug.Log(isStartGame);
+        Debug.Log("isStartGame = " + isStartGame);
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     {
         //Destroy(gameObject);
         Destroy(dontDestroyGameObject);
-        Debug.Log("destroy game object");
+        //Debug.Log("destroy game object");
         yield return new WaitForSeconds(0);
     }
     private IEnumerator LoadData()
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         isHasFirstOpen = true;
     }
 
-    //TODO - make on main menu
+    //on main menu
     public void OnMainMenu()
     {
         isStartGame = false;
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
         gameSettings.ChangeMusicBackground(true, 0);
     }
 
-    //pause game - TODO () - used in button or start game
+    //pause game
     public void PauseGame(bool isPause)
     {
         isPauseGame = isPause;
@@ -225,13 +225,10 @@ public class GameManager : MonoBehaviour
         PauseGame(false);
     }
 
-    //TODO () - USED () - in finish button after finish game due to win or loss
     //finish game/ finish stage
     public void FinishGame(bool isBackToHome)
     {
         player.FinishGame();
-
-        //TODO () - create stage menu - list all stage
         PauseGame(true);
         SaveState();
         if (isBackToHome)

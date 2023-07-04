@@ -72,7 +72,7 @@ public class BackgroundManagement : MonoBehaviour
     {
         if (dragNum < 0.4f)
             return;
-        Debug.Log("dragNum = " + dragNum);
+        //Debug.Log("dragNum = " + dragNum);
         foreach (var item in backgroundsRb)
         {
             item.GetComponent<Rigidbody2D>().drag = dragNum;

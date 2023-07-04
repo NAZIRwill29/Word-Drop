@@ -10,7 +10,6 @@ public class DropObject : MonoBehaviour
     [Tooltip("char, bomb, fence, slime")]
     public string objType;
     protected Damage dmg;
-    //TODO () - if hit ground will damage ground
     public bool isReverseObj;
     [SerializeField] protected bool isTouched;
     protected virtual void Start()

@@ -43,7 +43,6 @@ public class Char : DropObject
     {
         alphabet = abc;
         //Debug.Log(abc + "char index = " + (int)abc);
-        //TODO () - replace with instance --- convert char to ASCii
         if (!isReverseObj)
         {
             charSR.sprite = GameManager.instance.alphabetSprite[(int)abc - 65];

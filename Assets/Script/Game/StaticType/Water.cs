@@ -35,7 +35,7 @@ public class Water : MonoBehaviour
         //check if collide with player or ground
         if (coll.tag == "LifeLine")
         {
-            Debug.Log("LifeLine");
+            //Debug.Log("LifeLine");
             //slow speed / death
             switch (coll.name)
             {

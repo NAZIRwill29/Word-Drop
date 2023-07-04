@@ -18,7 +18,6 @@ public class Ladders : MonoBehaviour
         ladderLimit = arrLadder.Length;
     }
 
-    //TODO () - REQUIRED FIX
     //USED () - in ladder btn
     public void AddActiveLadders(bool isFromGroundManager)
     {
@@ -36,11 +35,6 @@ public class Ladders : MonoBehaviour
                 ladderLimit = Mathf.FloorToInt(ladderToClimb);
                 EnableCompleteLadders(true);
             }
-        }
-        else
-        {
-            //TODO () - make text show can't add ladder anymore
-            Debug.Log("can't add ladder anymore");
         }
     }
 
