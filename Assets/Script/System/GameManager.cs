@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         //check if have instance
         if (GameManager.instance != null)
         {
-            StartCoroutine(SetMainMenu(true));
+            SetMainMenu(true);
             //Debug.Log("awake1");
             return;
         }
@@ -71,41 +71,30 @@ public class GameManager : MonoBehaviour
             anonymousAuthenticate.AnonymousAuthenticateEvent();
             instance = this;
             //Debug.Log("awake2");
-            StartCoroutine(SetMainMenu(false));
+            SetMainMenu(false);
         }
         Debug.Log("isStartGame = " + isStartGame);
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private IEnumerator SetMainMenu(bool isInstance)
+    private void SetMainMenu(bool isInstance)
     {
         if (isInstance)
         {
             //set stage if instance != null
             //yield return StartCoroutine(TurnOnStageButton());
-            yield return StartCoroutine(DestroyGameObject());
-            yield return StartCoroutine(UpdatePlayerInfoInStart());
+            //DestroyGameObject();
+            //yield return StartCoroutine(UpdatePlayerInfoInStart());
+            Destroy(dontDestroyGameObject);
         }
         else
         {
             //set stage if instance = null 
             //- turn on stage button based on player achievement
-            yield return StartCoroutine(LoadData());
+            LoadData();
             //yield return StartCoroutine(TurnOnStageButton());
-            yield return StartCoroutine(UpdatePlayerInfoInStart());
+            //yield return StartCoroutine(UpdatePlayerInfoInStart());
             if (!isHasFirstOpen)
                 StartCoroutine(CloseFirstScene());
         }
@@ -113,25 +102,25 @@ public class GameManager : MonoBehaviour
     }
 
     //coroutine for setStage
-    private IEnumerator DestroyGameObject()
+    // private void DestroyGameObject()
+    // {
+    //     //Destroy(gameObject);
+    //     Destroy(dontDestroyGameObject);
+    //     //Debug.Log("destroy game object");
+    //     //yield return new WaitForSeconds(0);
+    // }
+    private void LoadData()
     {
-        //Destroy(gameObject);
-        Destroy(dontDestroyGameObject);
-        //Debug.Log("destroy game object");
-        yield return new WaitForSeconds(0);
-    }
-    private IEnumerator LoadData()
-    {
-        yield return new WaitForSeconds(0);
+        //yield return new WaitForSeconds(0);
         //Debug.Log("load stageNo = " + stagePassedNo);
         SceneManager.sceneLoaded += LoadState;
     }
 
-    private IEnumerator UpdatePlayerInfoInStart()
-    {
-        yield return new WaitForSeconds(0);
-        //TODO () - update player info
-    }
+    // private IEnumerator UpdatePlayerInfoInStart()
+    // {
+    //     yield return new WaitForSeconds(0);
+    //     //TODO () - update player info
+    // }
 
     private IEnumerator CloseFirstScene()
     {

@@ -406,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 53212201}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -1224,7 +1224,7 @@ PrefabInstance:
       objectReference: {fileID: 220664320}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -4913,7 +4913,7 @@ PrefabInstance:
       objectReference: {fileID: 1136559516}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -5913,7 +5913,7 @@ PrefabInstance:
       objectReference: {fileID: 1352558103}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -6306,7 +6306,7 @@ PrefabInstance:
       objectReference: {fileID: 1503426646}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: isReverseObj
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708138376988036250, guid: 355a4c85cafe0244f9afc57791cbc810, type: 3}
       propertyPath: originalPos.x
@@ -8086,7 +8086,7 @@ MonoBehaviour:
   - {fileID: 367781192}
   groundManagerAudioSource: {fileID: 1876517266}
   groundManagerAudioClip:
-  - {fileID: 8300000, guid: 913d6445ee8cc4152a9c18da590ee203, type: 3}
+  - {fileID: 8300000, guid: 5543cefa2f8fc9e40bb3b5af6eac40ad, type: 3}
   - {fileID: 8300000, guid: 69c9a9fffd602ee43a60df4ea572155c, type: 3}
   - {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
   riseNum: 0.505

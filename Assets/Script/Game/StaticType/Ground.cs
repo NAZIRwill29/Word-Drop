@@ -82,6 +82,7 @@ public class Ground : MonoBehaviour
             {
                 effect.SetActive(true);
                 SetSpike(true);
+                //TODO () - ground damaged sound
                 grounds.groundManager.PlaySoundDamage();
             }
         }

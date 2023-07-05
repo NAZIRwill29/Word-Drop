@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1104215479, guid: 2da7386f5418b8846a29d6db59824489, type: 3}
+    - target: {fileID: 4609250130250598341, guid: cbc2ea9817ff3854695122433ce8f38c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5563697986008316142, guid: cbc2ea9817ff3854695122433ce8f38c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -141,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6766045122391568935, guid: cbc2ea9817ff3854695122433ce8f38c, type: 3}
       propertyPath: m_Name
-      value: Obstacle_WoodNail
+      value: Obstacle_WoodNail Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc2ea9817ff3854695122433ce8f38c, type: 3}

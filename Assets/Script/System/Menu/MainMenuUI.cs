@@ -82,6 +82,7 @@ public class MainMenuUI : MonoBehaviour
         bookText.text = "x" + GameManager.instance.playerData.bookNum;
         GameManager.instance.gameMenuUi.SetCoinEvent();
     }
+    //USED () - in player lvl btn
     public void LevelUp()
     {
         //levele up

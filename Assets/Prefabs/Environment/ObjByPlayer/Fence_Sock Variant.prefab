@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4800883371638957217, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
       propertyPath: m_Name
-      value: Fence_Sock
+      value: Fence_Sock Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4800883371638957218, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
       propertyPath: m_Size.x
@@ -98,6 +98,10 @@ PrefabInstance:
     - target: {fileID: 4800883371638957219, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800883371638957219, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
+      propertyPath: objType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4800883371638957219, guid: 875c3066b08e00647862a8f7da3cbc8c, type: 3}
       propertyPath: monsterObj

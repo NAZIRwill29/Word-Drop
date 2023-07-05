@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
     path: Assets/Scenes/LoadingTest.unity
     guid: 02da612e9851a5645934837de7e33f3d
   - enabled: 1
@@ -46,7 +43,7 @@ EditorBuildSettings:
     guid: 8f031eacadbdbc34e971ba068ed12c6f
   - enabled: 1
     path: Assets/Scenes/Stage 2/Stage 2-2.unity
-    guid: 4a1a7a5bf7e3cb64580c4be8708ce01a
+    guid: 586433640b047f844815e661d9cc6e0f
   - enabled: 1
     path: Assets/Scenes/Stage 2/Stage 2-3.unity
     guid: 2014c044e9209be44acc170d624e58e0
@@ -55,10 +52,52 @@ EditorBuildSettings:
     guid: 7384b5e128e1d464aaf3b33b4fea82ca
   - enabled: 1
     path: Assets/Scenes/Stage 3/Stage 3-2.unity
-    guid: baa805e14aac66a469bcff0b4ab767b4
+    guid: b65e1dbd723ed9b438ba95dbeb105bf7
   - enabled: 1
     path: Assets/Scenes/Stage 3/Stage 3-3.unity
     guid: cae946a5ec1b13e45a5455bac7a445f8
+  - enabled: 1
+    path: Assets/Scenes/Stage 4/Stage 4-1.unity
+    guid: 4ea6978fc8845fe449c831d2511366f7
+  - enabled: 1
+    path: Assets/Scenes/Stage 4/Stage 4-2.unity
+    guid: 4c8e826248479fc46ac8a3fcfa9ea45f
+  - enabled: 1
+    path: Assets/Scenes/Stage 4/Stage 4-3.unity
+    guid: c48567e863aa74c4abdd5c336e22c660
+  - enabled: 1
+    path: Assets/Scenes/Stage 5/Stage 5-1.unity
+    guid: 5323db91397e842459047460830f9f49
+  - enabled: 1
+    path: Assets/Scenes/Stage 5/Stage 5-2.unity
+    guid: ff62100cb1aa82a4f9d8a9c1c295ef4a
+  - enabled: 1
+    path: Assets/Scenes/Stage 5/Stage 5-3.unity
+    guid: 9a7db5edffff85f4499294dd4e0851e4
+  - enabled: 1
+    path: Assets/Scenes/Stage 6/Stage 6-1.unity
+    guid: d4ac2206fc9a3304885170b82e3dc6a5
+  - enabled: 1
+    path: Assets/Scenes/Stage 6/Stage 6-2.unity
+    guid: 9da8f70c1677a404ab267c8738fc3559
+  - enabled: 1
+    path: Assets/Scenes/Stage 6/Stage 6-3.unity
+    guid: 7bc737d80fbd83b42a7951b313bbc27b
+  - enabled: 1
+    path: Assets/Scenes/Stage 6/Stage 6-4.unity
+    guid: 44b2072c495852647891f671043e552b
+  - enabled: 1
+    path: Assets/Scenes/Stage 7/Stage 7-1.unity
+    guid: 00e400b483f59bc4794fdadef44c0ef4
+  - enabled: 1
+    path: Assets/Scenes/Stage 7/Stage 7-2.unity
+    guid: 081f2b06528c1ba4c82f0d112a789837
+  - enabled: 1
+    path: Assets/Scenes/Stage 7/Stage 7-3.unity
+    guid: 2f1eedb9bfd0e23439876a794dc5b32d
+  - enabled: 1
+    path: Assets/Scenes/Stage 7/Stage 7-4.unity
+    guid: 37575a1408f64b545b204981a0f12ca5
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3bd4d30f889d7cd4ea87629f0ca5f0d4, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 9a1076ffde8c5884da422859816e9133, type: 2}

@@ -684,6 +684,9 @@ public class GameMenuUi : MonoBehaviour
             GameManager.instance.isHasTutorial = true;
             GameManager.instance.player.ManagePlayerLevel();
         }
+        ////TODO () - if END - show finish window
+        else if (GameManager.instance.inGame.nextStageName == "END")
+            gameMenuUiAnim.SetTrigger("end");
         else
             gameMenuUiAnim.SetTrigger("win");
         //Debug.Log("win window");
@@ -799,6 +802,8 @@ public class GameMenuUi : MonoBehaviour
     public void FinishGame(bool isBackToHome)
     {
         isHasPlayCancel = false;
+        //reset death clock
+        isStartdeathClock = false;
         ResetAlphabetWordBtnClick();
         //GameManager.instance.swipeUpDownAction.ChangeIsActionInvalid(false);
         //GameManager.instance.gameSettings.UpdateMenuVolumeSetting();
