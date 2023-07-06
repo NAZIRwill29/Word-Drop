@@ -184,14 +184,18 @@ PrefabInstance:
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: monsterAudioClip.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: dd3a9bf23f1906c41820c9956b72b01f, type: 3}
+      objectReference: {fileID: 8300000, guid: ceac75b83765e9f4c9d817f09c0d28a1, type: 3}
     - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: monsterAudioClip.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: dd3a9bf23f1906c41820c9956b72b01f, type: 3}
+      objectReference: {fileID: 8300000, guid: ceac75b83765e9f4c9d817f09c0d28a1, type: 3}
+    - target: {fileID: 4644710323527676690, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
+      propertyPath: monsterAudioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 93e1390dab2ef7d4683e9bc39553184c, type: 3}
     - target: {fileID: 4644710323527676691, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: m_Name
-      value: Monster_Kraken
+      value: Monster_Kraken Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4644710323527676695, guid: 2221fd9c89614214ca59fd9ffd7978a7, type: 3}
       propertyPath: m_Size.x

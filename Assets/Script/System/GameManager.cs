@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
         isStartGame = false;
         isPauseGame = true;
         player.FinishGame();
+        //show level up notice
         player.LevelUp(true);
         //SceneManager.LoadScene("MainMenu");
         mainMenuUI.blackScreen.SetActive(true);
@@ -334,6 +335,9 @@ public class GameManager : MonoBehaviour
                 //gameSettings.TurnOnSoundVolume(gameData.isSoundOn);
                 //diamond = gameData.diamond;
                 //skinIndexBought = gameData.skinIndexBought;
+                if (!inGame)
+                    //show level up notice
+                    player.LevelUp(true);
                 //make call only once only
                 SceneManager.sceneLoaded -= LoadState;
             }

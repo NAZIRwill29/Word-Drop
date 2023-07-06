@@ -1393,7 +1393,7 @@ MonoBehaviour:
   currentStageNo: 7
   nextStageName: Stage 5-3
   nextStageMode: 0
-  isBookSpawnOne: 1
+  isBookSpawnOne: 0
   bookSpawnTime: 0
   isIncreaseDifficulty: 1
   playerPos: 0

@@ -429,10 +429,10 @@ public class Player : MonoBehaviour
                 LevelUpEvent(100, 10, isShowOnly);
                 break;
             case 5:
-                LevelUpEvent(200, 20, isShowOnly);
+                LevelUpEvent(200, 15, isShowOnly);
                 break;
             case 6:
-                LevelUpEvent(400, 40, isShowOnly);
+                LevelUpEvent(400, 21, isShowOnly);
                 break;
             default:
                 break;
@@ -441,7 +441,7 @@ public class Player : MonoBehaviour
     private void LevelUpEvent(int coinNeed, int bookNeed, bool isShowOnly)
     {
         //check if have enough coin and book
-        if (GameManager.instance.coin > coinNeed && playerData.bookNum > bookNeed)
+        if (GameManager.instance.coin >= coinNeed && playerData.bookNum >= bookNeed)
         {
             GameManager.instance.mainMenuUI.SetPlayerUpgradeNotice(true);
         }
@@ -528,14 +528,13 @@ public class Player : MonoBehaviour
         playerAnim.SetBool("reset", false);
         isClimb = true;
         playerAnim.SetTrigger("climb");
+        PlaySoundClimb();
     }
     private void ClimbEvent()
     {
         transform.position = new Vector3(GameManager.instance.inGame.laddersObj.transform.position.x, transform.position.y, transform.position.z);
         transform.position += new Vector3(0, 0.525f, 0);
         playerData.climbNo--;
-        //TODO () - play sound climb - may need fix
-        PlaySoundClimb();
     }
 
     //win
@@ -702,8 +701,9 @@ public class Player : MonoBehaviour
         if (isTrue)
         {
             playerData.immuneDamageCount = 0;
-            //reset player animation
-            playerAnim.SetBool("reset", true);
+            if (!GameManager.instance.inGameUi.isRun)
+                //reset player animation
+                playerAnim.SetBool("reset", true);
             //playerAnim.SetBool("run", true);
             playerAnim.SetBool("shield", true);
         }

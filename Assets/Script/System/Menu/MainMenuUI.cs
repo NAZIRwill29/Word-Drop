@@ -20,7 +20,9 @@ public class MainMenuUI : MonoBehaviour
     //player info window
     public Image playerImg;
     public TextMeshProUGUI lvlText, hpText, abcText, coinText, bookText;
-    public GameObject[] stageBtnObj;
+    //public GameObject[] stageBtnObj;
+    public Button[] stageBtnBtn;
+    public GameObject[] stageBtnFalse;
     //private bool isLoadingScreenAnimate;
     // Start is called before the first frame update
     void Start()
@@ -49,22 +51,33 @@ public class MainMenuUI : MonoBehaviour
     //USED () - in play btn
     public void LevelWindow()
     {
-        //hide and unhide stage btn
-        foreach (var item in stageBtnObj)
+        //hide stage btn
+        foreach (var item in stageBtnBtn)
         {
-            item.SetActive(false);
+            //item.SetActive(false);
+            item.enabled = false;
         }
-        for (int i = 0; i < GameManager.instance.gameData.passStageNo + 2; i++)
+        foreach (var item in stageBtnFalse)
+        {
+            //item.SetActive(false);
+            item.SetActive(true);
+        }
+        //unhide stage btn 
+        for (int i = 0; i <= GameManager.instance.passStageNo + 1; i++)
         {
             //prevent from enable non exist btn
-            if (i >= stageBtnObj.Length)
+            if (i >= stageBtnBtn.Length)
                 return;
-            stageBtnObj[i].SetActive(true);
+            // stageBtnObj[i].SetActive(true);
+            stageBtnBtn[i].enabled = true;
+            stageBtnFalse[i].SetActive(false);
         }
-        //TUTORIAL MODE () - ended
+        //TUTORIAL MODE () - ended - hide stage btn
         if (GameManager.instance.isHasTutorial)
-            stageBtnObj[0].SetActive(false);
-        //}
+        {
+            stageBtnBtn[0].enabled = false;
+            stageBtnFalse[0].SetActive(true);
+        }
     }
     //----------------------------------------
 
@@ -75,12 +88,72 @@ public class MainMenuUI : MonoBehaviour
         //Update player info
         //make show level up option only
         GameManager.instance.player.LevelUp(true);
-        lvlText.text = "Lv " + GameManager.instance.playerData.levelPlayer;
-        hpText.text = "x" + GameManager.instance.playerData.hp;
-        abcText.text = "x" + GameManager.instance.playerData.charMaxNo;
-        coinText.text = GameManager.instance.coin.ToString();
-        bookText.text = "x" + GameManager.instance.playerData.bookNum;
+        if (GameManager.instance.playerData.levelPlayer == 6)
+            lvlText.text = "Lv " + GameManager.instance.playerData.levelPlayer + " (MAX)";
+        else
+            lvlText.text = "Lv " + GameManager.instance.playerData.levelPlayer;
+        hpText.text = GameManager.instance.playerData.hp.ToString();
+        abcText.text = GameManager.instance.playerData.charMaxNo.ToString();
+        coinText.text = GameManager.instance.coin.ToString() + " (" + CoinReqLvlUpText() + ")";
+        bookText.text = GameManager.instance.playerData.bookNum + " (" + BookReqLvlUpText() + ")";
         GameManager.instance.gameMenuUi.SetCoinEvent();
+    }
+    //show level up requirement text
+    private string CoinReqLvlUpText()
+    {
+        int coinNeed;
+        switch (GameManager.instance.playerData.levelPlayer + 1)
+        {
+            case 2:
+                coinNeed = GameManager.instance.coin - 30;
+                break;
+            case 3:
+                coinNeed = GameManager.instance.coin - 60;
+                break;
+            case 4:
+                coinNeed = GameManager.instance.coin - 100;
+                break;
+            case 5:
+                coinNeed = GameManager.instance.coin - 200;
+                break;
+            case 6:
+                coinNeed = GameManager.instance.coin - 400;
+                break;
+            default:
+                return "";
+        }
+        if (coinNeed - 0 > 0)
+            return "+" + coinNeed;
+        else
+            return coinNeed.ToString();
+    }
+    private string BookReqLvlUpText()
+    {
+        int bookNeed;
+        switch (GameManager.instance.playerData.levelPlayer + 1)
+        {
+            case 2:
+                bookNeed = GameManager.instance.playerData.bookNum - 3;
+                break;
+            case 3:
+                bookNeed = GameManager.instance.playerData.bookNum - 6;
+                break;
+            case 4:
+                bookNeed = GameManager.instance.playerData.bookNum - 10;
+                break;
+            case 5:
+                bookNeed = GameManager.instance.playerData.bookNum - 15;
+                break;
+            case 6:
+                bookNeed = GameManager.instance.playerData.bookNum - 21;
+                break;
+            default:
+                return "";
+        }
+        if (bookNeed - 0 > 0)
+            return "+" + bookNeed;
+        else
+            return bookNeed.ToString();
     }
     //USED () - in player lvl btn
     public void LevelUp()
@@ -152,7 +225,7 @@ public class MainMenuUI : MonoBehaviour
     public IEnumerator HideAnim()
     {
         yield return new WaitForSeconds(0);
-        mainMenuAnim.SetTrigger("hide");
+        //mainMenuAnim.SetTrigger("hide");
         backgroundAnim.SetTrigger("hide");
         Debug.Log("main menu hide");
     }

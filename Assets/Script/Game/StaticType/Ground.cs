@@ -82,8 +82,10 @@ public class Ground : MonoBehaviour
             {
                 effect.SetActive(true);
                 SetSpike(true);
-                //TODO () - ground damaged sound
+                //ground damaged sound
                 grounds.groundManager.PlaySoundDamage();
+                //shake camera
+                GameManager.instance.cameraManager.CamShake();
             }
         }
     }
