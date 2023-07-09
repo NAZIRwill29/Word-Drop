@@ -44,8 +44,8 @@ public class ObjByPlayer : DropObject
             StartCoroutine(ShowObjEvent());
         else
         {
-            if (objType != "slime")
-                StartCoroutine(HideObjEvent(0));
+            if (objType == "fence")
+                StartCoroutine(HideObjEvent("fence"));
             else
                 StartCoroutine(HideObjSlimeEvent());
         }
@@ -66,7 +66,7 @@ public class ObjByPlayer : DropObject
         ObjSR.enabled = true;
     }
     //use for fence/slime
-    private IEnumerator HideObjEvent(int numObjType)
+    private IEnumerator HideObjEvent(string objType)
     {
         isInDeploy = false;
         //Debug.Log("hide fence");
@@ -75,7 +75,7 @@ public class ObjByPlayer : DropObject
         yield return new WaitForSeconds(0.1f);
         transform.position = originalPos;
         PauseGame(true);
-        builderInRun.ChangeIndexNo(numObjType);
+        builderInRun.ChangeIndexNo(objType);
     }
     //use for slime
     private IEnumerator HideObjSlimeEvent()
@@ -93,7 +93,7 @@ public class ObjByPlayer : DropObject
             ObjSR.enabled = false;
             transform.position = originalPos;
             PauseGame(true);
-            builderInRun.ChangeIndexNo(1);
+            builderInRun.ChangeIndexNo("slime");
             hitSlimeNum = 0;
         }
         yield return new WaitForSeconds(0);

@@ -49,7 +49,9 @@ public class GameManager : MonoBehaviour
     public bool isStartGame;
     public bool isPauseGame = true, isTutorialMode, isHasTutorial, isFinishLoadScene, isStartStagePlay, isInStage;
     //isInStage;
-    private bool isCanShowAds;
+    private bool isCanShowAds, isStartPlayTime;
+    public bool isPremiumPlan;
+    public float playTime;
 
     //awake
     void Awake()
@@ -76,6 +78,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("isStartGame = " + isStartGame);
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void Update()
+    {
+        if (isStartPlayTime)
+            playTime++;
     }
 
     private void SetMainMenu(bool isInstance)
@@ -223,6 +230,10 @@ public class GameManager : MonoBehaviour
         SaveState();
         if (isBackToHome)
             BackToHome();
+        //check premium plan - no ads
+        if (isPremiumPlan)
+            return;
+        //check ads cycle
         if (isCanShowAds)
         {
             adsMediate.ShowInterstitial();
@@ -285,6 +296,7 @@ public class GameManager : MonoBehaviour
     {
         //save variable
         gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
+        gameData.playTime = playTime;
         gameData.passStageNo = passStageNo;
         gameData.bookNumCollect = playerData.bookNum;
         gameData.playerLevel = playerData.levelPlayer;
@@ -295,6 +307,7 @@ public class GameManager : MonoBehaviour
         gameData.soundVolume = gameSettings.soundVolume;
         //TODO () - uncomment when finish tutorial
         //gameData.isHasTutorial = true;
+        gameData.isPremiumPlan = isPremiumPlan;
         //gameData.diamond = diamond;
         //gameData.skinIndexBought = skinIndexBought;
         //transform instance to json
@@ -323,8 +336,14 @@ public class GameManager : MonoBehaviour
                 string json = File.ReadAllText(path);
                 //transform into SaveData instance
                 Data dataLoad = JsonUtility.FromJson<Data>(json);
-                gameData = dataLoad;
+                //compare play duration - if longer then exec
+                if (dataLoad.playTime > gameData.playTime)
+                    gameData = dataLoad;
                 //DebugAllData();
+                //play time
+                playTime = gameData.playTime;
+                //start record playTime
+                isStartPlayTime = true;
                 passStageNo = gameData.passStageNo;
                 player.SetBookNum(gameData.bookNumCollect);
                 player.SetPlayerLevel(gameData.playerLevel);
@@ -333,6 +352,9 @@ public class GameManager : MonoBehaviour
                 gameSettings.ChangeSoundVolumeSystem(gameData.soundVolume);
                 //gameSettings.TurnOnMusicVolume(gameData.isMusicOn);
                 //gameSettings.TurnOnSoundVolume(gameData.isSoundOn);
+                //TODO () - uncomment when finish tutorial
+                //gameData.isHasTutorial = true;
+                isPremiumPlan = gameData.isPremiumPlan;
                 //diamond = gameData.diamond;
                 //skinIndexBought = gameData.skinIndexBought;
                 if (!inGame)
@@ -535,6 +557,17 @@ public class GameManager : MonoBehaviour
         if (passStageNo < inGame.currentStageNo)
             passStageNo = inGame.currentStageNo;
     }
+
+    //record playtime
+    // public IEnumerator RecordTimeRoutine()
+    // {
+    //     //TimeSpan timeSpan;
+    //     while (true)
+    //     {
+    //         yield return new WaitForSeconds(1);
+    //         playTime++;
+    //     }
+    // }
 
     //set variable------------------------------------------
     public void AddCoin(int num)

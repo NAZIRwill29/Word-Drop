@@ -5,10 +5,12 @@ using UnityEngine;
 public class Water : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 0.05f;
+    private float speed = 0.05f, originSpeed;
     public float objHeight;
     void Start()
     {
+        //save ori speed
+        originSpeed = speed;
         objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
     }
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class Water : MonoBehaviour
     //use after player revive
     public void AfterRevive()
     {
-        transform.position -= new Vector3(0, 4, 0);
+        transform.position -= new Vector3(0, 6, 0);
     }
 
     //water effect when touch player - lifeline 1,2,3
@@ -58,9 +60,8 @@ public class Water : MonoBehaviour
     }
 
     //variable
-    //use when set difficulty
-    public void ChangeSpeed(float num)
+    public void IncreaseSpeed(float num)
     {
-        speed = num;
+        speed += num;
     }
 }

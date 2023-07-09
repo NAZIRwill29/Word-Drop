@@ -10,11 +10,13 @@ public class Data
     public float musicVolume;
     public string dateNow;
     public string savedDate;
+    public float playTime;
     public int passStageNo;
     public int bookNumCollect;
     public int playerLevel;
     public int coin;
     public bool isHasTutorial;
+    public bool isPremiumPlan;
     //TODO () - in future
     //public int diamond;
     //public int skinIndexBought;

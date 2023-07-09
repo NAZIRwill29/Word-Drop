@@ -38,7 +38,8 @@ public class InGame : MonoBehaviour
     //ladder  ground  fence   slime
     public Sprite[] builderSprite;
     //every 50 = 1 sec
-    private float timeIncNum = 30, lastIncNumTime;
+    [SerializeField] private float timeIncNum = 150, lastIncNumTime;
+    //[SerializeField] private int numDiff;
 
     void Start()
     {
@@ -82,11 +83,21 @@ public class InGame : MonoBehaviour
         {
             if (Time.time - lastIncNumTime > timeIncNum)
             {
+                //numDiff++;
+                //Debug.Log("inc diff x" + numDiff);
                 //Debug.Log("increase diff");
                 lastIncNumTime = Time.time;
+                //increase obj drop
                 spawn.IncreaseFreqSpeed();
+                //increase background run
                 if (backgroundManagement)
                     backgroundManagement.IncreaseSpeedBackground();
+                //increase monster speed
+                if (monster)
+                    monster.IncreaseSpeed(0.0005f);
+                //increae water speed
+                if (water)
+                    water.IncreaseSpeed(0.0005f);
             }
         }
     }

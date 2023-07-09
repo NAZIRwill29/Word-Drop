@@ -57,10 +57,10 @@ public class HitBox : MonoBehaviour
         if (parentType == 1)
             GameManager.instance.inGame.monster.ObjHit(dmg);
     }
-    public void ObjRecovery(Damage dmg)
+    public void ObjMakeRage(Damage dmg)
     {
         if (parentType == 1)
-            GameManager.instance.inGame.monster.ObjRecovery(dmg);
+            GameManager.instance.inGame.monster.ObjMakeRage(dmg);
     }
     public void SlowObj(Damage dmg)
     {

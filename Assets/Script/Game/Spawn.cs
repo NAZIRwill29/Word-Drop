@@ -249,6 +249,7 @@ public class Spawn : MonoBehaviour
 
     public void IncreaseFreqSpeed()
     {
+        //Debug.Log("inc obj speed");
         increaseNum += 0.005f;
         increaseNumObs += 0.006f;
         increaseNumCoin += 0.007f;

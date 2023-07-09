@@ -41,7 +41,7 @@ public class Obstacle : DropObject
                 isTouched = true;
                 if (isReverseObj)
                     //send message damage to ground
-                    coll.collider.SendMessage("ObjRecovery", dmg);
+                    coll.collider.SendMessage("ObjMakeRage", dmg);
                 //put to birth location
                 transform.position = originalPos;
             }

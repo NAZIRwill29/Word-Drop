@@ -1583,8 +1583,8 @@ MonoBehaviour:
   isGround: 1
   isFence: 0
   isSlime: 0
-  ladderPt: 5
-  groundPt: 6
+  ladderPt: 3
+  groundPt: 3
   fencePt: 1
   slimePt: 2
   dangerDist: 0

@@ -24,7 +24,7 @@ public class BuilderInRun : MonoBehaviour
         //     return;
         // }
         //push monster a little
-        GameManager.instance.inGame.monster.transform.position -= new Vector3(0, 0.5f, 0); 
+        GameManager.instance.inGame.monster.transform.position -= new Vector3(0, 0.5f, 0);
         if (objType == 0)
         {
             fences[fenceIndex].ShowObj(true);
@@ -40,10 +40,10 @@ public class BuilderInRun : MonoBehaviour
     }
 
     //variable
-    public void ChangeIndexNo(int ObjType)
+    public void ChangeIndexNo(string ObjType)
     {
         objBuildInGame--;
-        if (ObjType == 0)
+        if (ObjType == "fence")
             fenceIndex--;
         else
             slimeIndex--;

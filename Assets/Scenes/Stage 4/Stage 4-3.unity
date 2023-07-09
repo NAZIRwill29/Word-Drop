@@ -245,6 +245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &27837585 stripped
@@ -318,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &35813435 stripped
@@ -1338,10 +1346,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundRun_Grassland (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8624372008101686956, guid: fb0192c5094e4c4489a7791d74ec5da5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8624372008101686958, guid: fb0192c5094e4c4489a7791d74ec5da5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1352,7 +1356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624372008101686958, guid: fb0192c5094e4c4489a7791d74ec5da5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 35.55
+      value: 35.46
       objectReference: {fileID: 0}
     - target: {fileID: 8624372008101686958, guid: fb0192c5094e4c4489a7791d74ec5da5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1621,8 +1625,8 @@ MonoBehaviour:
   isSlime: 1
   ladderPt: 1
   groundPt: 2
-  fencePt: 4
-  slimePt: 5
+  fencePt: 3
+  slimePt: 4
   dangerDist: 0
   currentStageNo: 9
   nextStageName: Stage 5-1
@@ -1638,6 +1642,8 @@ MonoBehaviour:
   - {fileID: -842442772, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
+  timeIncNum: 150
+  lastIncNumTime: 0
 --- !u!1001 &378903951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1693,6 +1699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &378903952 stripped
@@ -1766,6 +1776,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &406836918 stripped
@@ -3053,6 +3067,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &741220717 stripped
@@ -3193,6 +3211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &791085485 stripped
@@ -4552,6 +4574,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1151561537 stripped
@@ -4630,6 +4656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1164552260 stripped
@@ -4816,6 +4846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1173771639 stripped
@@ -5853,6 +5887,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1456858525 stripped
@@ -6651,6 +6689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1639921964 stripped
@@ -6981,6 +7023,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1658511088 stripped
@@ -7492,6 +7538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1732517999 stripped
@@ -7740,6 +7790,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1786333268 stripped
@@ -8618,6 +8672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &1932036391 stripped
@@ -9491,6 +9549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_Bomb Variant (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6206542032015366971, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
+      propertyPath: builderInRun
+      value: 
+      objectReference: {fileID: 1662401830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d0160b3df8594c88161a2f8c202c4, type: 3}
 --- !u!4 &2133470157 stripped

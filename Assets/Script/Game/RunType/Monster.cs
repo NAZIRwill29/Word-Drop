@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private int hpChange = 2;
     [SerializeField] private float speed = 0.07f, fallBackDist = 0.8f;
     private Vector3 originPos;
-    private float originSpeed, prevSpeed;
+    private float originSpeed, tempSpeed;
     private float lastAttack;
     //      0       1            2
     //   normal   slower    speedy/rage
@@ -35,10 +35,9 @@ public class Monster : MonoBehaviour
     void Start()
     {
         originPos = transform.position;
-        //prevSpeed used when need to increase or decrease speed
-        prevSpeed = speed;
-        //make it multiply difficulty
+        //used when need to increase or decrease speed
         originSpeed = speed;
+        tempSpeed = speed;
         dmg = new Damage
         {
             damageAmount = damage,
@@ -88,14 +87,17 @@ public class Monster : MonoBehaviour
         //calm down monster
         hpChange = 2;
         SetMonsterState();
-        transform.position -= new Vector3(0, 4, 0);
+        transform.position -= new Vector3(0, 6, 0);
     }
 
     //monster damage by thing - push backward
     public void ObjHit(Damage dmg1)
     {
-        if (isImmune && dmg1.objType == "bomb")
+        if (isImmune && dmg1.objType == "char")
+        {
+            //Debug.Log("immune char");
             return;
+        }
         PlaySoundDamage();
         multPushForce = dmg1.damageAmount;
         //transform.position -= new Vector3(0, fallBackDist / 20 * dmg1.damageAmount, 0);
@@ -107,10 +109,13 @@ public class Monster : MonoBehaviour
     }
 
     //monster recovery by thing - make monster anger - increase speed
-    public void ObjRecovery(Damage dmg1)
+    public void ObjMakeRage(Damage dmg1)
     {
         if (isImmune && dmg1.objType != "fence")
+        {
+            //Debug.Log("immune !fence");
             return;
+        }
         PlaySoundDamageAnger();
         multPushForce = 1;
         //transform.position -= new Vector3(0, fallBackDist / 20, 0);
@@ -123,7 +128,10 @@ public class Monster : MonoBehaviour
     public void SlowObj(Damage dmg1)
     {
         if (isImmune && dmg1.objType != "slime")
+        {
+            //Debug.Log("immune !slime");
             return;
+        }
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
         //Debug.Log("slow obj");
         //check audio source is playing
@@ -195,11 +203,11 @@ public class Monster : MonoBehaviour
             {
                 if (isImmuneInAnger)
                     isImmune = true;
-                ChangeSpeed(prevSpeed + 0.3f);
+                ChangeSpeed(tempSpeed + 0.3f);
                 if (monsterNo == 0)
                     StartCoroutine(ResetMonsterStateDelay());
                 else
-                    monsterAnim.SetInteger("state", 1);
+                    monsterAnim.SetInteger("state", 2);
             }
             else
             {
@@ -220,7 +228,7 @@ public class Monster : MonoBehaviour
             else
                 monsterAnim.SetInteger("state", 1);
 
-            ChangeSpeed(prevSpeed - 0.15f);
+            ChangeSpeed(tempSpeed - 0.15f);
             if (isImmuneEffect)
                 isImmune = true;
             StartCoroutine(ResetMonsterStateDelay());
@@ -232,9 +240,9 @@ public class Monster : MonoBehaviour
             if (monsterNo == 0)
                 monsterSR.sprite = monsterSprite[0];
             else
-                monsterAnim.SetInteger("state", 1);
+                monsterAnim.SetInteger("state", 0);
 
-            ChangeSpeed(prevSpeed);
+            ChangeSpeed(tempSpeed);
             isImmune = false;
             if (isImmuneEffect)
                 isImmune = true;
@@ -264,10 +272,15 @@ public class Monster : MonoBehaviour
     }
 
     //variable
-    //use when set difficulty
     public void ChangeSpeed(float num)
     {
         speed = num;
+    }
+    //used in increase difficulty
+    public void IncreaseSpeed(float addNum)
+    {
+        tempSpeed += addNum;
+        speed = tempSpeed;
     }
 
     //play sound -------------------------------------------
