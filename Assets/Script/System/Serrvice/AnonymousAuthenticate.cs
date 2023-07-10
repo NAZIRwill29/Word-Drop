@@ -11,13 +11,20 @@ public class AnonymousAuthenticate : MonoBehaviour
     //make anonymous authenticate
     public async void AnonymousAuthenticateEvent()
     {
-        await UnityServices.InitializeAsync();
-        Debug.Log(UnityServices.State);
-        SetupEvents();
-        await SignInAnonymouslyAsync();
+        try
+        {
+            await UnityServices.InitializeAsync();
+            Debug.Log(UnityServices.State);
+            SetupEvents();
+            await SignInAnonymouslyAsync();
+            //load game
+            GameManager.instance.LoadGameDataFromCloud();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("error in anonymous authenticate " + e);
+        }
 
-        //load game
-        GameManager.instance.LoadGameDataFromCloud();
     }
 
     // Setup authentication event handlers if desired

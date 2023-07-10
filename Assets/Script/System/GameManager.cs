@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
     {
         player.FinishGame();
         PauseGame(true);
-        SaveState();
+        SaveState(true);
         if (isBackToHome)
             BackToHome();
         //check premium plan - no ads
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
     //continue next stage - start game in game play
     public void ContinueNextStage()
     {
-        SaveState();
+        SaveState(true);
         mainMenuUI.blackScreen2.SetActive(true);
         adsMediate.LoadInterstitial();
         StartGame(inGame.nextStageName, inGame.nextStageMode);
@@ -286,38 +286,45 @@ public class GameManager : MonoBehaviour
     {
         player.Revive();
         gameMenuUi.Revive();
-        SaveState();
+        SaveState(true);
         PauseGame(false);
     }
 
     //game data----------------------------------------
     //call every scene
-    public void SaveState()
+    public void SaveState(bool isConditionSave)
     {
-        //save variable
-        gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
-        gameData.playTime = playTime;
-        gameData.passStageNo = passStageNo;
-        gameData.bookNumCollect = playerData.bookNum;
-        gameData.playerLevel = playerData.levelPlayer;
-        gameData.coin = coin;
-        //gameData.isMusicOn = gameSettings.isMusicOn;
-        //gameData.isSoundOn = gameSettings.isSoundOn;
-        gameData.musicVolume = gameSettings.musicVolume;
-        gameData.soundVolume = gameSettings.soundVolume;
-        //TODO () - uncomment when finish tutorial
-        //gameData.isHasTutorial = true;
-        gameData.isPremiumPlan = isPremiumPlan;
-        //gameData.diamond = diamond;
-        //gameData.skinIndexBought = skinIndexBought;
-        //transform instance to json
-        string json = JsonUtility.ToJson(gameData);
-        //method to write string to a file
-        /*Application.persistentDataPath - give you a folder where you can save data that 
-        will survive between application reinstall or update and append to it the filename savefile.json*/
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-        Debug.Log("Save state");
-        SaveGameDataInCloud();
+        try
+        {
+            //save variable
+            gameData.dateNow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            gameData.playTime = playTime;
+            gameData.passStageNo = passStageNo;
+            gameData.bookNumCollect = playerData.bookNum;
+            gameData.playerLevel = playerData.levelPlayer;
+            gameData.coin = coin;
+            //gameData.isMusicOn = gameSettings.isMusicOn;
+            //gameData.isSoundOn = gameSettings.isSoundOn;
+            gameData.musicVolume = gameSettings.musicVolume;
+            gameData.soundVolume = gameSettings.soundVolume;
+            //TODO () - uncomment when finish tutorial
+            //gameData.isHasTutorial = true;
+            gameData.isPremiumPlan = isPremiumPlan;
+            //gameData.diamond = diamond;
+            //gameData.skinIndexBought = skinIndexBought;
+            //transform instance to json
+            string json = JsonUtility.ToJson(gameData);
+            //method to write string to a file
+            /*Application.persistentDataPath - give you a folder where you can save data that 
+            will survive between application reinstall or update and append to it the filename savefile.json*/
+            File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+            Debug.Log("Save state");
+            SaveGameDataInCloud(isConditionSave);
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("error in save state " + e);
+        }
     }
     //call when open game
     public void LoadState(Scene s, LoadSceneMode mode)
@@ -374,6 +381,7 @@ public class GameManager : MonoBehaviour
     {
         //gameData.isSoundOn = true;
         //gameData.isMusicOn = true;
+        gameData.playTime = 0;
         gameData.soundVolume = 1;
         gameData.musicVolume = 1;
         gameData.dateNow = "";
@@ -382,6 +390,12 @@ public class GameManager : MonoBehaviour
         gameData.bookNumCollect = 0;
         gameData.playerLevel = 1;
         gameData.coin = 0;
+        gameData.isHasTutorial = false;
+        gameData.isPremiumPlan = false;
+        gameData.diamond = 0;
+        gameData.skinIndexBought.Clear();
+        gameData.shieldBought = 0;
+        gameData.charBought = 0;
     }
     private void DebugAllData()
     {
@@ -400,18 +414,27 @@ public class GameManager : MonoBehaviour
 
     //cloud--------------------------------------------------------------
     //save game data
-    public void SaveGameDataInCloud()
+    public void SaveGameDataInCloud(bool isConditionSave)
     {
         //gameData.savedDate = "";
         Debug.Log("save : dateNow = " + gameData.dateNow + ", savedDate = " + gameData.savedDate);
-        //save once a day
-        if (gameData.dateNow != gameData.savedDate || gameData.savedDate == "")
+        //make it able to save disregard condition
+        if (isConditionSave)
+        {
+            //save once a day
+            if (gameData.dateNow != gameData.savedDate || gameData.savedDate == "")
+            {
+                gameData.savedDate = gameData.dateNow;
+                cloudSave.SaveComplexDataCloud(gameData);
+            }
+            else
+                Debug.Log("falied save data in cloud due save duration");
+        }
+        else
         {
             gameData.savedDate = gameData.dateNow;
             cloudSave.SaveComplexDataCloud(gameData);
         }
-        else
-            Debug.Log("falied save data in cloud due save duration");
     }
     //load game data
     public void LoadGameDataFromCloud()
@@ -438,7 +461,7 @@ public class GameManager : MonoBehaviour
             //reset start stage play
             isStartStagePlay = false;
             Debug.Log("OnSceneLoaded");
-            SaveState();
+            SaveState(true);
             //Debug.Log("OnSceneLoaded");
             gameSettings.MusicSystem();
             gameSettings.SoundSystem();
@@ -556,6 +579,10 @@ public class GameManager : MonoBehaviour
         //prevent from take low pass stages
         if (passStageNo < inGame.currentStageNo)
             passStageNo = inGame.currentStageNo;
+        else
+            //when pass next stage - save cloud
+            SaveState(false);
+
     }
 
     //record playtime

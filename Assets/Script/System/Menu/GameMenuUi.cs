@@ -683,6 +683,7 @@ public class GameMenuUi : MonoBehaviour
             GameManager.instance.tutorialUI.isTutorialEnd = false;
             GameManager.instance.isHasTutorial = true;
             GameManager.instance.player.ManagePlayerLevel();
+            GameManager.instance.SaveState(false);
         }
         ////TODO () - if END - show finish window
         else if (GameManager.instance.inGame.nextStageName == "END")

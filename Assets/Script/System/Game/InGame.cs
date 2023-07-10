@@ -38,7 +38,7 @@ public class InGame : MonoBehaviour
     //ladder  ground  fence   slime
     public Sprite[] builderSprite;
     //every 50 = 1 sec
-    [SerializeField] private float timeIncNum = 150, lastIncNumTime;
+    [SerializeField] private float timeIncNum = 50, lastIncNumTime;
     //[SerializeField] private int numDiff;
 
     void Start()

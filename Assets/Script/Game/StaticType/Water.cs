@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 0.05f, originSpeed;
+    [SerializeField] private float speed = 0.05f, originSpeed;
     public float objHeight;
     void Start()
     {

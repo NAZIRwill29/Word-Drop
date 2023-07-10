@@ -17,7 +17,8 @@ public class Data
     public int coin;
     public bool isHasTutorial;
     public bool isPremiumPlan;
-    //TODO () - in future
-    //public int diamond;
-    //public int skinIndexBought;
+    public int diamond;
+    public List<int> skinIndexBought;
+    public int shieldBought;
+    public int charBought;
 }

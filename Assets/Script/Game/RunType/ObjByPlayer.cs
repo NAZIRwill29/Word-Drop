@@ -10,7 +10,7 @@ public class ObjByPlayer : DropObject
     public SpriteRenderer ObjSR;
     public float posY;
     [Tooltip("Only change for slime")]
-    public float timeDelayHide = 0.1f;
+    public float timeDelayHide = 2;
     [SerializeField] private float hitSlimeNum = 0;
     public bool isInDeploy;
 

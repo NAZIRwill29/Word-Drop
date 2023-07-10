@@ -241,6 +241,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4228933545075042094, guid: cb887a4e89fc08949b83c75c8c8c8cfc, type: 3}
+      propertyPath: speed
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 4228933545075042095, guid: cb887a4e89fc08949b83c75c8c8c8cfc, type: 3}
       propertyPath: m_Name
       value: Water_Lava Variant
@@ -1850,6 +1854,8 @@ MonoBehaviour:
   - {fileID: 1073326452, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
+  timeIncNum: 50
+  lastIncNumTime: 0
 --- !u!4 &385399426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2969480161401683158, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}
@@ -9466,7 +9472,7 @@ PrefabInstance:
       objectReference: {fileID: 442854044, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
     - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: isTimeScore
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: deathSprite.Array.size

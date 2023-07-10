@@ -334,8 +334,8 @@ public class Player : MonoBehaviour
     //Lifeline effect - call when water touch lifeline
     public void LifeLine(int num)
     {
-        if (playerData.isImmune)
-            return;
+        // if (playerData.isImmune)
+        //     return;
         switch (num)
         {
             case 0:
@@ -346,13 +346,10 @@ public class Player : MonoBehaviour
             case 1:
                 if (playerData.lifeLineTrigger < 1)
                     playerData.lifeLineTrigger = 1;
-
                 break;
             case 2:
                 if (playerData.lifeLineTrigger < 2)
-
                     playerData.lifeLineTrigger = 2;
-
                 break;
             case 3:
                 if (playerData.lifeLineTrigger < 3)

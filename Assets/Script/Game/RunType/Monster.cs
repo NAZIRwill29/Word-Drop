@@ -30,7 +30,8 @@ public class Monster : MonoBehaviour
     public bool isSlowByObj;
     //for push backward when hitted
     private bool isPushByPlayer, isPushByObj;
-    private int pushPlayerNum = 75, pushObjNum = 25, multPushForce;
+    private int pushPlayerNum = 75, pushObjNum = 25, multPushForce, multPlayerLvl;
+    [SerializeField] private float addPushForce = 0.0002f;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class Monster : MonoBehaviour
             objType = objType
         };
         objHeight = GetComponent<SpriteRenderer>().bounds.size.y;
+        multPlayerLvl = GameManager.instance.playerData.levelPlayer - 1;
     }
 
     //50 frame per sec
@@ -162,7 +164,7 @@ public class Monster : MonoBehaviour
         if (pushPlayerNum > 0)
         {
             //Debug.Log("push backward");
-            transform.position -= new Vector3(0, fallBackDist / 50, 0);
+            transform.position -= new Vector3(0, fallBackDist / 55, 0);
             pushPlayerNum--;
         }
         else
@@ -176,7 +178,7 @@ public class Monster : MonoBehaviour
         if (pushObjNum > 0)
         {
             //Debug.Log("push backward");
-            transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce, 0);
+            transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce + addPushForce * multPlayerLvl, 0);
             pushObjNum--;
         }
         else
@@ -215,7 +217,7 @@ public class Monster : MonoBehaviour
                     isImmune = true;
                 if (isImmuneEffect)
                     isImmune = true;
-                ChangeSpeed(0.9f);
+                ChangeSpeed(tempSpeed + 0.3f);
             }
         }
         else if (hpChange > 4)

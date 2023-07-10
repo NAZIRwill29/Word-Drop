@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Slime : ObjByPlayer
 {
+    protected override void Start()
+    {
+        base.Start();
+        //change when lvl up
+        timeDelayHide = 2 * GameManager.instance.playerData.levelPlayer;
+    }
+
     //make it slow for few seconds
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
