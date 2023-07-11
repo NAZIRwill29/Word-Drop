@@ -1808,7 +1808,7 @@ MonoBehaviour:
   - {fileID: -842442772, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
-  timeIncNum: 150
+  timeIncNum: 15
   lastIncNumTime: 0
 --- !u!1 &417355432
 GameObject:
@@ -5473,6 +5473,10 @@ PrefabInstance:
     - target: {fileID: 4362909447680567568, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362909447680567570, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
+      propertyPath: speed
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 4362909447680567570, guid: 74254199f8ce0a449953f1200e025b4d, type: 3}
       propertyPath: isNoSlowDown
@@ -9388,7 +9392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5118871950743283072, guid: 2a044f5fd26f144499be4edf37659cc0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 35.55
+      value: 35.565
       objectReference: {fileID: 0}
     - target: {fileID: 5118871950743283072, guid: 2a044f5fd26f144499be4edf37659cc0, type: 3}
       propertyPath: m_LocalPosition.z

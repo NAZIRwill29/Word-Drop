@@ -21,7 +21,7 @@ public class BackgroundManagement : MonoBehaviour
         boundY = GameManager.instance.boundary.boundY;
         backgroundObjHeight = backgroundsSR[0].bounds.size.y;
         //get spawn pos by making it at top of all bg = lowbound - bgheight x (total - 1)
-        spawnPosY = -boundY + backgroundObjHeight * (backgroundsSR.Length - 1) - 0.01f;
+        spawnPosY = -boundY + backgroundObjHeight * (backgroundsSR.Length - 1) - 0.035f;
         dragBgOri = dragBg;
         ChangeSpeedBackground(dragBg);
     }
@@ -33,7 +33,7 @@ public class BackgroundManagement : MonoBehaviour
             return;
         backgroundHigherPos[index] = backgroundObjHeight / 2 + backgroundsTm[index].position.y;
         //check if below bound screen
-        if (backgroundHigherPos[index] < -boundY)
+        if (backgroundHigherPos[index] < -boundY - 0.01f)
         {
             //move to upper spawn pos
             backgroundsTm[index].position = new Vector3(transform.position.x, spawnPosY + backgroundObjHeight / 2, 1);

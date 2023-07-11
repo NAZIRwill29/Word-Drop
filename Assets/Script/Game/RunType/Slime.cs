@@ -8,7 +8,7 @@ public class Slime : ObjByPlayer
     {
         base.Start();
         //change when lvl up
-        timeDelayHide = 2 * GameManager.instance.playerData.levelPlayer;
+        timeDelayHide = 2 + 1 * (GameManager.instance.playerData.levelPlayer - 1);
     }
 
     //make it slow for few seconds

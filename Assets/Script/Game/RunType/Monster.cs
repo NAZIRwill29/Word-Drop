@@ -29,9 +29,9 @@ public class Monster : MonoBehaviour
     public float objHeight;
     public bool isSlowByObj;
     //for push backward when hitted
-    private bool isPushByPlayer, isPushByObj;
-    private int pushPlayerNum = 75, pushObjNum = 25, multPushForce, multPlayerLvl;
-    [SerializeField] private float addPushForce = 0.0002f;
+    private bool isPushByPlayer, isPushByObj, isPushByObjPlayer;
+    private int pushPlayerNum, pushObjNum, pushObjPlayerNum, multPushForce, multPlayerLvl;
+    //[SerializeField] private float addPushForce = 0.0002f;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +59,8 @@ public class Monster : MonoBehaviour
                 PushByPlayer();
             if (isPushByObj)
                 PushByObj();
+            if (isPushByObjPlayer)
+                PushByObjPlayer();
             MonsterChase();
         }
         else
@@ -103,6 +105,11 @@ public class Monster : MonoBehaviour
         PlaySoundDamage();
         multPushForce = dmg1.damageAmount;
         //transform.position -= new Vector3(0, fallBackDist / 20 * dmg1.damageAmount, 0);
+        //differentiate btw obj from player and dropObj
+        if (dmg1.objType == "char")
+            StartPushByObj();
+        else
+            StartPushByObjPlayer();
         StartPushByObj();
         hpChange += 1;
         SetMonsterState();
@@ -118,12 +125,19 @@ public class Monster : MonoBehaviour
             //Debug.Log("immune !fence");
             return;
         }
+
         PlaySoundDamageAnger();
         multPushForce = 1;
         //transform.position -= new Vector3(0, fallBackDist / 20, 0);
-        StartPushByObj();
+        //differentiate btw obj from player and dropObj
+        if (dmg1.objType != "fence")
+            StartPushByObj();
+        else
+            StartPushByObjPlayer();
         hpChange -= 1;
         SetMonsterState();
+        //make hit anim
+        hitEffectAnim.SetTrigger("hit");
     }
 
     //monster slow speed by slime
@@ -149,14 +163,22 @@ public class Monster : MonoBehaviour
         }
     }
 
+    //push force -------------------------------------------------
     //start push event
     private void StartPushByPlayer()
     {
         isPushByPlayer = true;
+        ResetPushByPlayer();
     }
     private void StartPushByObj()
     {
         isPushByObj = true;
+        ResetPushByObj();
+    }
+    private void StartPushByObjPlayer()
+    {
+        isPushByObjPlayer = true;
+        ResetPushByObjPlayer();
     }
     //push backward
     private void PushByPlayer()
@@ -169,7 +191,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            pushPlayerNum = 75;
+            ResetPushByPlayer();
             isPushByPlayer = false;
         }
     }
@@ -178,15 +200,42 @@ public class Monster : MonoBehaviour
         if (pushObjNum > 0)
         {
             //Debug.Log("push backward");
-            transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce + addPushForce * multPlayerLvl, 0);
+            transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce, 0);
             pushObjNum--;
         }
         else
         {
-            pushObjNum = 25;
+            ResetPushByObj();
             isPushByObj = false;
         }
     }
+    private void PushByObjPlayer()
+    {
+        if (pushObjPlayerNum > 0)
+        {
+            //Debug.Log("push backward");
+            transform.position -= new Vector3(0, fallBackDist / 120 * multPushForce, 0);
+            pushObjPlayerNum--;
+        }
+        else
+        {
+            ResetPushByObjPlayer();
+            isPushByObjPlayer = false;
+        }
+    }
+    private void ResetPushByPlayer()
+    {
+        pushPlayerNum = 100 + 10 * multPlayerLvl;
+    }
+    private void ResetPushByObj()
+    {
+        pushObjNum = 15;
+    }
+    private void ResetPushByObjPlayer()
+    {
+        pushObjPlayerNum = 35 + 5 * multPlayerLvl;
+    }
+    //-------------------------------------------------
 
     private void SetMonsterState()
     {
@@ -205,7 +254,7 @@ public class Monster : MonoBehaviour
             {
                 if (isImmuneInAnger)
                     isImmune = true;
-                ChangeSpeed(tempSpeed + 0.3f);
+                ChangeSpeed(tempSpeed + tempSpeed);
                 if (monsterNo == 0)
                     StartCoroutine(ResetMonsterStateDelay());
                 else
@@ -217,7 +266,7 @@ public class Monster : MonoBehaviour
                     isImmune = true;
                 if (isImmuneEffect)
                     isImmune = true;
-                ChangeSpeed(tempSpeed + 0.3f);
+                ChangeSpeed(tempSpeed + tempSpeed);
             }
         }
         else if (hpChange > 4)
@@ -230,7 +279,7 @@ public class Monster : MonoBehaviour
             else
                 monsterAnim.SetInteger("state", 1);
 
-            ChangeSpeed(tempSpeed - 0.15f);
+            ChangeSpeed(tempSpeed - tempSpeed / 4);
             if (isImmuneEffect)
                 isImmune = true;
             StartCoroutine(ResetMonsterStateDelay());

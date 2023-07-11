@@ -528,6 +528,10 @@ PrefabInstance:
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 7662417610345676650, guid: ed2d397f95446674993b83181e333da6, type: 3}
+      propertyPath: speed
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662417610345676650, guid: ed2d397f95446674993b83181e333da6, type: 3}
       propertyPath: isNoSlowDown
       value: 1
       objectReference: {fileID: 0}
@@ -2267,8 +2271,8 @@ MonoBehaviour:
   isSlime: 1
   ladderPt: 1
   groundPt: 2
-  fencePt: 3
-  slimePt: 4
+  fencePt: 4
+  slimePt: 5
   dangerDist: 0
   currentStageNo: 6
   nextStageName: Stage 7-4
@@ -2284,7 +2288,7 @@ MonoBehaviour:
   - {fileID: -842442772, guid: d2b813ccece031f4697e88ed706296fe, type: 3}
   - {fileID: -2046107402, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 2011381578, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
-  timeIncNum: 150
+  timeIncNum: 5
   lastIncNumTime: 0
 --- !u!1 &417355432
 GameObject:

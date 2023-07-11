@@ -927,6 +927,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5110180275273501300, guid: b3a5dd04c857bc74c831e5659f09972b, type: 3}
+      propertyPath: speed
+      value: 0.095
+      objectReference: {fileID: 0}
     - target: {fileID: 5110180275273501301, guid: b3a5dd04c857bc74c831e5659f09972b, type: 3}
       propertyPath: m_Name
       value: Water_Acid Variant
@@ -1431,6 +1435,8 @@ MonoBehaviour:
   - {fileID: 1073326452, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
+  timeIncNum: 15
+  lastIncNumTime: 0
 --- !u!4 &385399426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2969480161401683158, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}

@@ -525,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7662417610345676650, guid: ed2d397f95446674993b83181e333da6, type: 3}
       propertyPath: speed
-      value: 0.34
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7662417610345676650, guid: ed2d397f95446674993b83181e333da6, type: 3}
       propertyPath: isNoSlowDown
@@ -1811,8 +1811,8 @@ MonoBehaviour:
   isSlime: 1
   ladderPt: 1
   groundPt: 2
-  fencePt: 4
-  slimePt: 5
+  fencePt: 3
+  slimePt: 4
   dangerDist: 0
   currentStageNo: 3
   nextStageName: Stage 2-1
@@ -9434,7 +9434,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1415843590, guid: 20c53cc2c9e1534409050e07cf36cb3e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.33
+      value: 20.362
       objectReference: {fileID: 0}
     - target: {fileID: 5303831951447162042, guid: 20c53cc2c9e1534409050e07cf36cb3e, type: 3}
       propertyPath: m_Name

@@ -28396,6 +28396,8 @@ MonoBehaviour:
   isFinishLoadScene: 0
   isStartStagePlay: 0
   isInStage: 0
+  isPremiumPlan: 0
+  playTime: 0
 --- !u!4 &964980636
 Transform:
   m_ObjectHideFlags: 0

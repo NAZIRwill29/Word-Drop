@@ -44,6 +44,7 @@ public class GameMenuUi : MonoBehaviour
     private List<string> words;
     private string letterCombine;
     public int wordPoint;
+    private int wordBtnNum;
     public bool isRunGame, isHasPlayCancel;
     [SerializeField] private bool isCharLvl1, isObjBuildBtnClickable = true;
 
@@ -212,6 +213,14 @@ public class GameMenuUi : MonoBehaviour
     public void RemoveCharUi(int charIndex)
     {
         alphabetsPlayerInfo.RemoveAt(charIndex);
+        //alphabetsPlayerInfo.Remove(charIndex);
+        SetCharUIInfo();
+        SetCharUIAction();
+    }
+    public void RemoveCharUi(int charIndex, char alphabet)
+    {
+        //alphabetsPlayerInfo.RemoveAt(charIndex);
+        alphabetsPlayerInfo.Remove(alphabet);
         SetCharUIInfo();
         SetCharUIAction();
     }
@@ -224,11 +233,18 @@ public class GameMenuUi : MonoBehaviour
     }
 
     //remove char in player - 
-    public void RemoveCharPlayer(int charIndex)
+    public void RemoveCharPlayer(int charIndex, char alphabet)
     {
-        GameManager.instance.player.RemoveChar(charIndex);
-        SetCharUIInfo();
-        SetCharUIAction();
+        try
+        {
+            GameManager.instance.player.RemoveChar(charIndex, alphabet);
+            SetCharUIInfo();
+            SetCharUIAction();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("failed remove char Player" + e);
+        }
     }
 
     //remove char in word - 
@@ -312,36 +328,43 @@ public class GameMenuUi : MonoBehaviour
     //set char ui word
     public void SetCharUiWord()
     {
-        //TUTORIAL MODE () 
-        if (GameManager.instance.isTutorialMode)
+        try
         {
-            //make active for contain char
-            for (int i = 0; i < alphabetsWord.Count; i++)
+            //TUTORIAL MODE () 
+            if (GameManager.instance.isTutorialMode)
             {
-                alphabetWordTutorialBtn[i].gameObject.SetActive(true);
-                //set image
-                alphabetWordTutorialBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
+                //make active for contain char
+                for (int i = 0; i < alphabetsWord.Count; i++)
+                {
+                    alphabetWordTutorialBtn[i].gameObject.SetActive(true);
+                    //set image
+                    alphabetWordTutorialBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
+                }
+                //make unactive for remaining
+                for (int i = alphabetWordTutorialBtn.Length - 1; i >= alphabetsWord.Count; i--)
+                {
+                    alphabetWordTutorialBtn[i].gameObject.SetActive(false);
+                }
             }
-            //make unactive for remaining
-            for (int i = alphabetWordTutorialBtn.Length - 1; i >= alphabetsWord.Count; i--)
+            else
             {
-                alphabetWordTutorialBtn[i].gameObject.SetActive(false);
+                //make active for contain char
+                for (int i = 0; i < alphabetsWord.Count; i++)
+                {
+                    alphabetWordBtn[i].gameObject.SetActive(true);
+                    //set image
+                    alphabetWordBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
+                }
+                //make unactive for remaining
+                for (int i = alphabetWordBtn.Length - 1; i >= alphabetsWord.Count; i--)
+                {
+                    alphabetWordBtn[i].gameObject.SetActive(false);
+                }
             }
         }
-        else
+        catch (System.Exception e)
         {
-            //make active for contain char
-            for (int i = 0; i < alphabetsWord.Count; i++)
-            {
-                alphabetWordBtn[i].gameObject.SetActive(true);
-                //set image
-                alphabetWordBtnImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsWord[i] - 65];
-            }
-            //make unactive for remaining
-            for (int i = alphabetWordBtn.Length - 1; i >= alphabetsWord.Count; i--)
-            {
-                alphabetWordBtn[i].gameObject.SetActive(false);
-            }
+            Debug.Log("failed set Char Ui Word" + e);
         }
     }
 
@@ -429,10 +452,21 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in the alpahbet btn
     public void AlphabetBtnClick(int indexBtn)
     {
-        // add in word
-        alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
+        //prevent from word be more than container supported
+        if (wordBtnNum > 15)
+            return;
+        wordBtnNum++;
+        try
+        {
+            // add in word
+            alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("failed add alphabetsWord" + e);
+        }
         //remove in store
-        RemoveCharPlayer(indexBtn);
+        RemoveCharPlayer(indexBtn, GameManager.instance.player.alphabetsStore[indexBtn]);
         SetCharUiWord();
     }
 
@@ -440,12 +474,16 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in the alpahbet btn tutorial
     public void AlphabetBtnTutorialClick(int indexBtn)
     {
+        //prevent from word be more than container supported
+        if (wordBtnNum > 15)
+            return;
+        wordBtnNum++;
         //Debug.Log("alphabet tutorial " + indexBtn);
         // add in word
         alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
         GameManager.instance.tutorialUI.Tutorial3AltEnd(indexBtn);
         //remove in store
-        RemoveCharPlayer(indexBtn);
+        RemoveCharPlayer(indexBtn, GameManager.instance.player.alphabetsStore[indexBtn]);
         SetCharUiWord();
         if (GameManager.instance.gameMenuUi.alphabetsWord.Count <= 4)
             GameManager.instance.tutorialUI.Tutorial3AltStart(indexBtn);
@@ -461,6 +499,7 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in the alpahbet word btn
     public void AlphabetWordBtnClick(int indexBtn)
     {
+        wordBtnNum--;
         //add in store
         GameManager.instance.player.AddAlphabetStore(alphabetsWord[indexBtn]);
         //remove in word
@@ -487,6 +526,7 @@ public class GameMenuUi : MonoBehaviour
         //Debug.Log(alphabetsWord.Length);
         for (int i = 0; i < alphabetsWord.Count; i++)
         {
+            wordBtnNum--;
             //Debug.Log("word combine " + i);
             //combine letter to be word
             letterCombine += alphabetsWord[i].ToString();

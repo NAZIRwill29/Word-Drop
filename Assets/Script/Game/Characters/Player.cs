@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
             for (int i = 0; i < numDeleteChar; i++)
             {
                 //Debug.Log("remove char");
-                RemoveChar(Random.Range(0, alphabetsStore.Count));
+                RemoveChar(Random.Range(0, alphabetsStore.Count), alphabetsStore[Random.Range(0, alphabetsStore.Count)]);
             }
             //shake camera
             GameManager.instance.cameraManager.CamShake();
@@ -279,6 +279,11 @@ public class Player : MonoBehaviour
     {
         alphabetsStore.RemoveAt(charIndex);
         gameMenuUi.RemoveCharUi(charIndex);
+    }
+    public void RemoveChar(int charIndex, char alphabet)
+    {
+        alphabetsStore.RemoveAt(charIndex);
+        gameMenuUi.RemoveCharUi(charIndex, alphabet);
     }
 
     public void RemoveAllChar()

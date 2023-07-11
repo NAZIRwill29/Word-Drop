@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water_Ants Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8774952358875186715, guid: 3316b48e889df6546b9cdd507c842657, type: 3}
+      propertyPath: speed
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8774952358875186717, guid: 3316b48e889df6546b9cdd507c842657, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1700,8 +1704,8 @@ MonoBehaviour:
   isGround: 1
   isFence: 0
   isSlime: 0
-  ladderPt: 3
-  groundPt: 3
+  ladderPt: 4
+  groundPt: 4
   fencePt: 1
   slimePt: 2
   dangerDist: 0
@@ -1719,6 +1723,8 @@ MonoBehaviour:
   - {fileID: 1073326452, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
+  timeIncNum: 7.5
+  lastIncNumTime: 0
 --- !u!1001 &373277378
 PrefabInstance:
   m_ObjectHideFlags: 0
