@@ -41230,6 +41230,7 @@ MonoBehaviour:
   - {fileID: 303614448}
   - {fileID: 607832521}
   - {fileID: 2067636182}
+  levelScrollRect: {fileID: 1015865971}
 --- !u!82 &1405347282
 AudioSource:
   m_ObjectHideFlags: 0

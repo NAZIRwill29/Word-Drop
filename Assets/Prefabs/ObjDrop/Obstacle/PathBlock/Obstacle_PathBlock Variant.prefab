@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.7237506
+      value: 2.4069784
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.39
+      value: -17.5483
       objectReference: {fileID: 0}
     - target: {fileID: 129912356447419660, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233530543518676933, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Name
-      value: Obstacle_PathBlock
+      value: Obstacle_PathBlock Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1803271827837437713, guid: 78fdb4bc346400d4ba31a86cbe725d6d, type: 3}
       propertyPath: m_Enabled
@@ -138,6 +138,6 @@ MonoBehaviour:
   originalPos: {x: -17.39, y: 31.52, z: 0}
   dropObjRb: {fileID: 2541547671160716687}
   damage: 1
-  objType: 
+  objType: blockPath
   isReverseObj: 1
   isTouched: 0

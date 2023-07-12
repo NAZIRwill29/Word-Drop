@@ -647,35 +647,51 @@ public class Player : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundLevelUp()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[0]);
     }
     public void PlaySoundChar()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[1]);
     }
     public void PlaySoundDamage()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[2]);
     }
     public void PlaySoundImmune()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[3]);
     }
     public void PlaySoundWin()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[4]);
         //Debug.Log("play sound win");
     }
     public void PlaySoundRevive()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[5]);
     }
     public void PlaySoundDeath()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[6]);
     }
     public void PlaySoundClimb()
     {
+        if (playerAudioSource.isPlaying)
+            return;
         playerAudioSource.PlayOneShot(playerAudioClip[7]);
     }
     //----------------------------------------------------

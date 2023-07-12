@@ -11,31 +11,25 @@ public class BlockPath : Obstacle
             return;
         if (coll.collider.tag == "Monster")
         {
-            if (!isTouched)
-            {
-                //make trigger once only
-                isTouched = true;
-                //send message damage to ground
-                coll.collider.SendMessage("ObjHit", dmg);
-                //put to birth location
-                transform.position = originalPos;
-            }
+            if (isTouched)
+                return;
+            //make trigger once only
+            isTouched = true;
+            //send message damage to ground
+            coll.collider.SendMessage("ObjHit", dmg);
+            //put to birth location
+            transform.position = originalPos;
+
         }
         else if (coll.collider.tag == "Player")
         {
-            if (!isTouched)
-            {
-                if (isReverseObj)
-                {
-                    //make trigger once only
-                    isTouched = true;
-                    coll.collider.SendMessage("ReceiveDamageHp", dmg);
-                    //put to birth location
-                    transform.position = originalPos;
-                }
-                else
-                    coll.collider.SendMessage("ReceiveDamage", dmg);
-            }
+            if (isTouched)
+                return;
+            //make trigger once only
+            isTouched = true;
+            coll.collider.SendMessage("ReceiveDamageHp", dmg);
+            //put to birth location
+            transform.position = originalPos;
         }
     }
 }

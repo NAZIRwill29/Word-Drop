@@ -23,6 +23,7 @@ public class MainMenuUI : MonoBehaviour
     //public GameObject[] stageBtnObj;
     public Button[] stageBtnBtn;
     public GameObject[] stageBtnFalse;
+    [SerializeField] private ScrollRect levelScrollRect;
     //private bool isLoadingScreenAnimate;
     // Start is called before the first frame update
     void Start()
@@ -78,6 +79,8 @@ public class MainMenuUI : MonoBehaviour
             stageBtnBtn[0].enabled = false;
             stageBtnFalse[0].SetActive(true);
         }
+        //reset scroll
+        levelScrollRect.verticalNormalizedPosition = 1;
     }
     //----------------------------------------
 
@@ -265,14 +268,20 @@ public class MainMenuUI : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundPlay()
     {
+        if (mainMenuUIAudioSource.isPlaying)
+            return;
         mainMenuUIAudioSource.PlayOneShot(mainMenuUIAudioClip[0]);
     }
     public void PlaySoundCancel()
     {
+        if (mainMenuUIAudioSource.isPlaying)
+            return;
         mainMenuUIAudioSource.PlayOneShot(mainMenuUIAudioClip[1]);
     }
     public void PlaySoundNavigate()
     {
+        if (mainMenuUIAudioSource.isPlaying)
+            return;
         mainMenuUIAudioSource.PlayOneShot(mainMenuUIAudioClip[2]);
     }
     //----------------------------------------------------

@@ -106,7 +106,7 @@ public class Monster : MonoBehaviour
         multPushForce = dmg1.damageAmount;
         //transform.position -= new Vector3(0, fallBackDist / 20 * dmg1.damageAmount, 0);
         //differentiate btw obj from player and dropObj
-        if (dmg1.objType == "char")
+        if (dmg1.objType == "char" || dmg1.objType == "blockPath")
             StartPushByObj();
         else
             StartPushByObjPlayer();
@@ -151,10 +151,7 @@ public class Monster : MonoBehaviour
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
         //Debug.Log("slow obj");
         //check audio source is playing
-        if (!monsterAudioSource.isPlaying)
-        {
-            PlaySoundSlime();
-        }
+        PlaySoundSlime();
         if (!isSlowByObj)
         {
             //PlaySoundSlime();
@@ -225,15 +222,15 @@ public class Monster : MonoBehaviour
     }
     private void ResetPushByPlayer()
     {
-        pushPlayerNum = 100 + 10 * multPlayerLvl;
+        pushPlayerNum = 100 + 9 * multPlayerLvl;
     }
     private void ResetPushByObj()
     {
-        pushObjNum = 15;
+        pushObjNum = 5;
     }
     private void ResetPushByObjPlayer()
     {
-        pushObjPlayerNum = 35 + 5 * multPlayerLvl;
+        pushObjPlayerNum = 35 + 4 * multPlayerLvl;
     }
     //-------------------------------------------------
 
@@ -337,19 +334,27 @@ public class Monster : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundDamage()
     {
+        if (monsterAudioSource.isPlaying)
+            return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[0]);
     }
     public void PlaySoundDamageAnger()
     {
+        if (monsterAudioSource.isPlaying)
+            return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[1]);
     }
     public void PlaySoundSlime()
     {
+        if (monsterAudioSource.isPlaying)
+            return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[2]);
         //Debug.Log("play sound slime");
     }
     public void PlaySoundAttack()
     {
+        if (monsterAudioSource.isPlaying)
+            return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[3]);
     }
     //----------------------------------------------------

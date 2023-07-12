@@ -57,14 +57,20 @@ public class GroundManager : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundDamage()
     {
+        if (groundManagerAudioSource.isPlaying)
+            return;
         groundManagerAudioSource.PlayOneShot(groundManagerAudioClip[0]);
     }
     public void PlaySoundAttack1()
     {
+        if (groundManagerAudioSource.isPlaying)
+            return;
         groundManagerAudioSource.PlayOneShot(groundManagerAudioClip[1]);
     }
     public void PlaySoundAttack2()
     {
+        if (groundManagerAudioSource.isPlaying)
+            return;
         groundManagerAudioSource.PlayOneShot(groundManagerAudioClip[2]);
     }
     //----------------------------------------------------

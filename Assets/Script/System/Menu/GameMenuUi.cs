@@ -908,10 +908,14 @@ public class GameMenuUi : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundWord()
     {
+        if (gameMenuUiAudioSource.isPlaying)
+            return;
         gameMenuUiAudioSource.PlayOneShot(gameMenuUiAudioClip[0]);
     }
     public void PlaySoundBuild()
     {
+        if (gameMenuUiAudioSource.isPlaying)
+            return;
         gameMenuUiAudioSource.PlayOneShot(gameMenuUiAudioClip[1]);
     }
     //----------------------------------------------------

@@ -250,14 +250,14 @@ public class Spawn : MonoBehaviour
     public void IncreaseFreqSpeed()
     {
         //Debug.Log("inc obj speed");
-        increaseNum += 0.005f;
-        increaseNumObs += 0.006f;
-        increaseNumCoin += 0.007f;
-        increaseNumBook += 0.008f;
+        increaseNum += 0.002f;
+        increaseNumObs += 0.003f;
+        increaseNumCoin += 0.004f;
+        increaseNumBook += 0.005f;
         //Debug.Log("increase num = " + increaseNum);
         //Debug.Log("dragChar = " + dragChar);
-        ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum / 2);
-        ChangeFreqSpeedObs(dragObs - increaseNumObs, timeObsDuration - increaseNumObs / 2);
+        ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum / 3);
+        ChangeFreqSpeedObs(dragObs - increaseNumObs, timeObsDuration - increaseNumObs / 3);
         //Debug.Log("increase num = " + increaseNum);
         ChangeFreqSpeedCoin(dragCoin - increaseNumCoin);
         ChangeFreqSpeedBook(dragBook - increaseNumBook);
