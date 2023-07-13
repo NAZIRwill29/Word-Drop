@@ -1851,7 +1851,7 @@ MonoBehaviour:
   monsterPos: 0
   builderSprite:
   - {fileID: 1788460580, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
-  - {fileID: 1073326452, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
+  - {fileID: -311627788, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   timeIncNum: 5

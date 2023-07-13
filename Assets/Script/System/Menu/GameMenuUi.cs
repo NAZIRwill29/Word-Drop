@@ -15,17 +15,21 @@ public class GameMenuUi : MonoBehaviour
     private CanvasGroupFunc canvasGroupFunc;
     public Button homeBtn, settingBtn;
     //private InGame inGame;
-    public List<char> alphabetsPlayerInfo, alphabetsWord;
-    public GameObject[] charUIInfoObj;
-    public Image[] charUIInfoImg;
+    public GameObject[] alphabetPlayerInfoContainer;
+    public List<char> alphabetsWord;
+    public GameObject[] charUIInfoObj1, charUIInfoObj2;
+    public Image[] charUIInfoImg1, charUIInfoImg2;
     public GameObject[] alphabetStoreContainer, alphabetWordStoreContainer;
     public Button[] alphabetStoreBtn, alphabetStoreBtn2, alphabetTutorialBtn;
     public Image[] alphabetStoreBtnImg, alphabetStoreBtnImg2, alphabetTutorialBtnImg;
     public Button[] alphabetWordBtn, alphabetWordTutorialBtn;
     public Image[] alphabetWordBtnImg, alphabetWordTutorialBtnImg;
     public Image hpImg;
+    //public RectTransform hpImgRT;
     public GameObject hpNotice;
+    public Animator hpNoticeAnim;
     public Sprite[] hpSprite;
+    public PlayerData playerData;
     public Animator gameMenuUiAnim;
     public CanvasGroup buildCooldownCG, buildLimitCG;
     public TextMeshProUGUI buildCooldownText;
@@ -201,10 +205,10 @@ public class GameMenuUi : MonoBehaviour
     public void AddCharPlayer(char abc)
     {
         //show in the player info ui
-        alphabetsPlayerInfo.Add(abc);
+        //alphabetsPlayerInfo.Add(abc);
         //Debug.Log("abc count = " + alphabetsPlayerInfo.Count);
-        if (alphabetsPlayerInfo.Count > 10)
-            alphabetsPlayerInfo.RemoveAt(0);
+        // if (alphabetsPlayerInfo.Count > 10)
+        //     alphabetsPlayerInfo.RemoveAt(0);
         //set char ui
         SetCharUIInfo();
         SetCharUIAction();
@@ -212,32 +216,32 @@ public class GameMenuUi : MonoBehaviour
     //remove char in player ui
     public void RemoveCharUi(int charIndex)
     {
-        alphabetsPlayerInfo.RemoveAt(charIndex);
-        //alphabetsPlayerInfo.Remove(charIndex);
+        //alphabetsPlayerInfo.RemoveAt(charIndex);
+        //alphabetsPlayerInfo.Remove(charIndex);--
         SetCharUIInfo();
         SetCharUIAction();
     }
     public void RemoveCharUi(int charIndex, char alphabet)
     {
-        //alphabetsPlayerInfo.RemoveAt(charIndex);
-        alphabetsPlayerInfo.Remove(alphabet);
+        //alphabetsPlayerInfo.RemoveAt(charIndex);---
+        //alphabetsPlayerInfo.Remove(alphabet);
         SetCharUIInfo();
         SetCharUIAction();
     }
     //remove all char in player ui
     public void RemoveAllCharUI()
     {
-        alphabetsPlayerInfo.RemoveRange(0, alphabetsPlayerInfo.Count);
+        //alphabetsPlayerInfo.RemoveRange(0, alphabetsPlayerInfo.Count);
         SetCharUIInfo();
         SetCharUIAction();
     }
 
     //remove char in player - 
-    public void RemoveCharPlayer(int charIndex, char alphabet)
+    public void RemoveCharPlayer(int charIndex)
     {
         try
         {
-            GameManager.instance.player.RemoveChar(charIndex, alphabet);
+            GameManager.instance.player.RemoveChar(charIndex);
             SetCharUIInfo();
             SetCharUIAction();
         }
@@ -257,18 +261,38 @@ public class GameMenuUi : MonoBehaviour
     //set char UI Info
     public void SetCharUIInfo()
     {
-        //make active for contain char
-        for (int i = 0; i < alphabetsPlayerInfo.Count; i++)
+        //info ()
+        if (playerData.charMaxNo < 11)
         {
-            charUIInfoObj[i].SetActive(true);
-            //set image
-            charUIInfoImg[i].sprite = GameManager.instance.alphabetSprite[(int)alphabetsPlayerInfo[i] - 65];
+            //make active for contain char
+            for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
+            {
+                charUIInfoObj1[i].SetActive(true);
+                //set image
+                charUIInfoImg1[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
+            }
+            //make unactive for remaining
+            for (int i = charUIInfoObj1.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
+            {
+                charUIInfoObj1[i].SetActive(false);
+            }
         }
-        //make unactive for remaining
-        for (int i = charUIInfoObj.Length - 1; i >= alphabetsPlayerInfo.Count; i--)
+        else
         {
-            charUIInfoObj[i].SetActive(false);
+            //make active for contain char
+            for (int i = 0; i < GameManager.instance.player.alphabetsStore.Count; i++)
+            {
+                charUIInfoObj2[i].SetActive(true);
+                //set image
+                charUIInfoImg2[i].sprite = GameManager.instance.alphabetSprite[(int)GameManager.instance.player.alphabetsStore[i] - 65];
+            }
+            //make unactive for remaining
+            for (int i = charUIInfoObj2.Length - 1; i >= GameManager.instance.player.alphabetsStore.Count; i--)
+            {
+                charUIInfoObj2[i].SetActive(false);
+            }
         }
+
     }
 
     //set char UI Info
@@ -392,25 +416,44 @@ public class GameMenuUi : MonoBehaviour
                 alphabetStoreContainer[0].SetActive(true);
                 alphabetStoreContainer[1].SetActive(false);
                 alphabetStoreContainer[2].SetActive(false);
+                alphabetPlayerInfoContainer[0].SetActive(true);
+                alphabetPlayerInfoContainer[1].SetActive(false);
                 isCharLvl1 = false;
+                //hpImgRT.position = new Vector3(hpImgRT.position.x, -195, hpImgRT.position.z);
             }
             else
             {
                 alphabetStoreContainer[0].SetActive(false);
                 alphabetStoreContainer[1].SetActive(true);
                 alphabetStoreContainer[2].SetActive(false);
+                alphabetPlayerInfoContainer[0].SetActive(false);
+                alphabetPlayerInfoContainer[1].SetActive(true);
                 isCharLvl1 = true;
+                //hpImgRT.position = new Vector3(hpImgRT.position.x, -115, hpImgRT.position.z);
             }
         }
     }
-    public void SetHpUI()
+    public void SetHpUI(bool isHeal)
     {
         hpImg.sprite = hpSprite[GameManager.instance.playerData.hp];
         //Debug.Log("change hp Ui");
         if (GameManager.instance.playerData.hp < 2)
             hpNotice.SetActive(true);
         else
-            hpNotice.SetActive(false);
+        {
+            if (isHeal)
+                hpNotice.SetActive(false);
+            else
+                StartCoroutine(HpAlertTemp());
+        }
+    }
+
+    public IEnumerator HpAlertTemp()
+    {
+        hpNotice.SetActive(true);
+        hpNoticeAnim.SetTrigger("fast");
+        yield return new WaitForSeconds(0.31f);
+        hpNotice.SetActive(false);
     }
 
     //close action menu - USED () - in close btn in action menu
@@ -466,7 +509,7 @@ public class GameMenuUi : MonoBehaviour
             Debug.Log("failed add alphabetsWord" + e);
         }
         //remove in store
-        RemoveCharPlayer(indexBtn, GameManager.instance.player.alphabetsStore[indexBtn]);
+        RemoveCharPlayer(indexBtn);
         SetCharUiWord();
     }
 
@@ -483,7 +526,7 @@ public class GameMenuUi : MonoBehaviour
         alphabetsWord.Add(GameManager.instance.player.alphabetsStore[indexBtn]);
         GameManager.instance.tutorialUI.Tutorial3AltEnd(indexBtn);
         //remove in store
-        RemoveCharPlayer(indexBtn, GameManager.instance.player.alphabetsStore[indexBtn]);
+        RemoveCharPlayer(indexBtn);
         SetCharUiWord();
         if (GameManager.instance.gameMenuUi.alphabetsWord.Count <= 4)
             GameManager.instance.tutorialUI.Tutorial3AltStart(indexBtn);
@@ -914,8 +957,8 @@ public class GameMenuUi : MonoBehaviour
     }
     public void PlaySoundBuild()
     {
-        if (gameMenuUiAudioSource.isPlaying)
-            return;
+        // if (gameMenuUiAudioSource.isPlaying)
+        //     return;
         gameMenuUiAudioSource.PlayOneShot(gameMenuUiAudioClip[1]);
     }
     //----------------------------------------------------

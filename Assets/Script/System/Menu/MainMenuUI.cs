@@ -250,7 +250,7 @@ public class MainMenuUI : MonoBehaviour
             //     return;
             // isLoadingScreenAnimate = true;
             //change tip module randomly
-            int tipNo = Random.Range(1, 9);
+            int tipNo = Random.Range(1, 10);
             tipModules.SetInteger("state", tipNo);
             //show loading screen
             loadingScreenAnim.SetInteger("state", 3);

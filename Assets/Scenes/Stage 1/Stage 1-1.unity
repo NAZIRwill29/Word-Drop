@@ -8560,7 +8560,7 @@ PrefabInstance:
       objectReference: {fileID: 442854044, guid: 965596d81528a504bb03ca3c93b8c4d1, type: 3}
     - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: isTimeScore
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443392488500488708, guid: eba322fba443ee948899f066fae6acb3, type: 3}
       propertyPath: deathSprite.Array.size

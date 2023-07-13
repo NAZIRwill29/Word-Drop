@@ -113,8 +113,8 @@ public class Player : MonoBehaviour
         //store player mode in current stage
         playerData.playerMode = mode;
         ChangeImmuneDamage(true);
-        playerData.hp = 3;
-        gameMenuUi.SetHpUI();
+        ManagePlayerLevel();
+        gameMenuUi.SetHpUI(true);
         playerData.isHasWin = false;
     }
     public void FinishGame()
@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         ReturnGameModeAfterDeath();
         PlaySoundRevive();
         playerData.hp = 3;
-        gameMenuUi.SetHpUI();
+        gameMenuUi.SetHpUI(true);
         switch (playerData.deathScenario)
         {
             case "alphabet":
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
             for (int i = 0; i < numDeleteChar; i++)
             {
                 //Debug.Log("remove char");
-                RemoveChar(Random.Range(0, alphabetsStore.Count), alphabetsStore[Random.Range(0, alphabetsStore.Count)]);
+                RemoveChar(Random.Range(0, alphabetsStore.Count));
             }
             //shake camera
             GameManager.instance.cameraManager.CamShake();
@@ -244,7 +244,7 @@ public class Player : MonoBehaviour
         {
             Death("monster");
         }
-        gameMenuUi.SetHpUI();
+        gameMenuUi.SetHpUI(false);
     }
 
     public void ReceiveChar(char abc)
@@ -280,11 +280,11 @@ public class Player : MonoBehaviour
         alphabetsStore.RemoveAt(charIndex);
         gameMenuUi.RemoveCharUi(charIndex);
     }
-    public void RemoveChar(int charIndex, char alphabet)
-    {
-        alphabetsStore.RemoveAt(charIndex);
-        gameMenuUi.RemoveCharUi(charIndex, alphabet);
-    }
+    // public void RemoveChar(int charIndex, char alphabet)
+    // {
+    //     alphabetsStore.Remove(alphabet);
+    //     gameMenuUi.RemoveCharUi(charIndex, alphabet);
+    // }
 
     public void RemoveAllChar()
     {
@@ -469,6 +469,7 @@ public class Player : MonoBehaviour
         if (num <= 0)
             num = 1;
         playerData.levelPlayer = num;
+        //Debug.Log("in SetPlayerLevel : level = " + playerData.levelPlayer);
         ManagePlayerLevel();
     }
     //player level
@@ -515,6 +516,7 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+        //Debug.Log("in ManagePlayerLevel : hp = " + playerData.hp);
     }
 
     //climb ladder - how many ladder
@@ -602,7 +604,7 @@ public class Player : MonoBehaviour
     //    static   run     pause
     public void GameMode(int mode)
     {
-        Debug.Log("game mode = " + mode);
+        //Debug.Log("game mode = " + mode);
         switch (mode)
         {
             case 0:
@@ -647,51 +649,51 @@ public class Player : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundLevelUp()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[0]);
     }
     public void PlaySoundChar()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[1]);
     }
     public void PlaySoundDamage()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[2]);
     }
     public void PlaySoundImmune()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[3]);
     }
     public void PlaySoundWin()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[4]);
         //Debug.Log("play sound win");
     }
     public void PlaySoundRevive()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[5]);
     }
     public void PlaySoundDeath()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[6]);
     }
     public void PlaySoundClimb()
     {
-        if (playerAudioSource.isPlaying)
-            return;
+        // if (playerAudioSource.isPlaying)
+        //     return;
         playerAudioSource.PlayOneShot(playerAudioClip[7]);
     }
     //----------------------------------------------------

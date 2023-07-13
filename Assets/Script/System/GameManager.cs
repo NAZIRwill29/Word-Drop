@@ -353,6 +353,7 @@ public class GameManager : MonoBehaviour
                 isStartPlayTime = true;
                 passStageNo = gameData.passStageNo;
                 player.SetBookNum(gameData.bookNumCollect);
+                Debug.Log("in LoadState : level = " + gameData.playerLevel);
                 player.SetPlayerLevel(gameData.playerLevel);
                 coin = gameData.coin;
                 gameSettings.ChangeMusicVolumeSystem(gameData.musicVolume);

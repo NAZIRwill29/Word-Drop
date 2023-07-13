@@ -9,7 +9,7 @@ public class Monster : MonoBehaviour
     //  damage    damageAnger  slime    attack    
     [SerializeField] private AudioClip[] monsterAudioClip;
     private bool isImmune, isHasBegin, isMonsterBeginEvent;
-    public bool isForeverChangeState, isNoSlowDown, isImmuneInAnger, isImmuneEffect;
+    public bool isForeverChangeState, isNoSlowDown, isImmuneInAnger, isImmuneHit;
     public string objType = "Monster";
     private Damage dmg;
     public int damage = 1;
@@ -17,7 +17,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private float speed = 0.07f, fallBackDist = 0.8f;
     private Vector3 originPos;
     private float originSpeed, tempSpeed;
-    private float lastAttack;
+    //private float lastAttack;
     //      0       1            2
     //   normal   slower    speedy/rage
     public Sprite[] monsterSprite;
@@ -97,6 +97,8 @@ public class Monster : MonoBehaviour
     //monster damage by thing - push backward
     public void ObjHit(Damage dmg1)
     {
+        if (isImmuneHit)
+            return;
         if (isImmune && dmg1.objType == "char")
         {
             //Debug.Log("immune char");
@@ -107,11 +109,15 @@ public class Monster : MonoBehaviour
         //transform.position -= new Vector3(0, fallBackDist / 20 * dmg1.damageAmount, 0);
         //differentiate btw obj from player and dropObj
         if (dmg1.objType == "char" || dmg1.objType == "blockPath")
+        {
             StartPushByObj();
+            hpChange += Random.Range(0, 1);
+        }
         else
+        {
             StartPushByObjPlayer();
-        StartPushByObj();
-        hpChange += 1;
+            hpChange += 1;
+        }
         SetMonsterState();
         //make hit anim
         hitEffectAnim.SetTrigger("hit");
@@ -226,7 +232,7 @@ public class Monster : MonoBehaviour
     }
     private void ResetPushByObj()
     {
-        pushObjNum = 5;
+        pushObjNum = 2;
     }
     private void ResetPushByObjPlayer()
     {
@@ -261,8 +267,8 @@ public class Monster : MonoBehaviour
             {
                 if (isImmuneInAnger)
                     isImmune = true;
-                if (isImmuneEffect)
-                    isImmune = true;
+                // if (isImmuneEffect)
+                //     isImmune = true;
                 ChangeSpeed(tempSpeed + tempSpeed);
             }
         }
@@ -277,8 +283,8 @@ public class Monster : MonoBehaviour
                 monsterAnim.SetInteger("state", 1);
 
             ChangeSpeed(tempSpeed - tempSpeed / 4);
-            if (isImmuneEffect)
-                isImmune = true;
+            // if (isImmuneEffect)
+            //     isImmune = true;
             StartCoroutine(ResetMonsterStateDelay());
         }
         else
@@ -292,8 +298,8 @@ public class Monster : MonoBehaviour
 
             ChangeSpeed(tempSpeed);
             isImmune = false;
-            if (isImmuneEffect)
-                isImmune = true;
+            // if (isImmuneEffect)
+            //     isImmune = true;
         }
     }
 
@@ -334,20 +340,20 @@ public class Monster : MonoBehaviour
     //play sound -------------------------------------------
     public void PlaySoundDamage()
     {
-        if (monsterAudioSource.isPlaying)
-            return;
+        // if (monsterAudioSource.isPlaying)
+        //     return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[0]);
     }
     public void PlaySoundDamageAnger()
     {
-        if (monsterAudioSource.isPlaying)
-            return;
+        // if (monsterAudioSource.isPlaying)
+        //     return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[1]);
     }
     public void PlaySoundSlime()
     {
-        if (monsterAudioSource.isPlaying)
-            return;
+        // if (monsterAudioSource.isPlaying)
+        //     return;
         monsterAudioSource.PlayOneShot(monsterAudioClip[2]);
         //Debug.Log("play sound slime");
     }
