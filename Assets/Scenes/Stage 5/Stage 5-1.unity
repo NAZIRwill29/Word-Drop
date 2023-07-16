@@ -1390,7 +1390,7 @@ MonoBehaviour:
   fencePt: 1
   slimePt: 2
   dangerDist: 0
-  currentStageNo: 7
+  currentStageNo: 13
   nextStageName: Stage 5-2
   nextStageMode: 0
   isBookSpawnOne: 0
@@ -1406,6 +1406,35 @@ MonoBehaviour:
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   timeIncNum: 10
   lastIncNumTime: 0
+  lastCharTime: 0
+  lastObsTime: 0
+  dragChar: 2.15
+  dragObs: 1.95
+  timeCharDuration: 0.5
+  timeObsDuration: 0.6
+  timeBook: 0
+  lastBookTime: 0
+  lastCoinTime: 0
+  timeBookDuration: 40
+  timeCoinDuration: 15
+  dragCoin: 1.75
+  dragBook: 1.5
+  timeCharDurationOri: 0
+  timeObsDurationOri: 0
+  dragCharOri: 0
+  dragObsOri: 0
+  increaseNum: 0
+  increaseNumObs: 0
+  dragCoinOri: 0
+  dragBookOri: 0
+  increaseNumCoin: 0
+  increaseNumBook: 0
+  isChallengeStage: 0
+  spawnerChallengeObj: []
+  spawnerChallenge: []
+  objFallGroup: []
+  lastSpawnChange: 0
+  timeSpawnChange: 30
 --- !u!1001 &373277378
 PrefabInstance:
   m_ObjectHideFlags: 0

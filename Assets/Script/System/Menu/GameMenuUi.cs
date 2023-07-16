@@ -459,6 +459,10 @@ public class GameMenuUi : MonoBehaviour
     //close action menu - USED () - in close btn in action menu
     public void CloseActionMenu()
     {
+        //TUTORIAL MODE ()
+        if (GameManager.instance.isTutorialMode)
+            if (GameManager.instance.tutorial.TutorialPhaseNo != 11)
+                return;
         ResetAlphabetWordBtnClick();
         GameManager.instance.inGame.ResetLastTimeSpawn();
         if (!isRunGame)
@@ -542,6 +546,9 @@ public class GameMenuUi : MonoBehaviour
     //USED () - in the alpahbet word btn
     public void AlphabetWordBtnClick(int indexBtn)
     {
+        if (GameManager.instance.isTutorialMode)
+            if (GameManager.instance.tutorial.TutorialPhaseNo != 5)
+                return;
         wordBtnNum--;
         //add in store
         GameManager.instance.player.AddAlphabetStore(alphabetsWord[indexBtn]);
@@ -562,6 +569,7 @@ public class GameMenuUi : MonoBehaviour
     //convert char to word for points
     public void WordCombine()
     {
+        //TUTORIAL MODE ()
         if (GameManager.instance.isTutorialMode)
             if (GameManager.instance.tutorial.TutorialPhaseNo != 6)
                 return;
@@ -768,6 +776,11 @@ public class GameMenuUi : MonoBehaviour
             GameManager.instance.player.ManagePlayerLevel();
             GameManager.instance.SaveState(false);
         }
+        //Challenge MODE()
+        else if (GameManager.instance.inGame.isChallengeStage)
+        {
+            gameMenuUiAnim.SetTrigger("challenge");
+        }
         ////TODO () - if END - show finish window
         else if (GameManager.instance.inGame.nextStageName == "END")
             gameMenuUiAnim.SetTrigger("end");
@@ -946,6 +959,20 @@ public class GameMenuUi : MonoBehaviour
         musicBtnOff.SetActive(!isMusicOn);
         SoundBtnOn.SetActive(isSoundOn);
         SoundBtnOff.SetActive(!isSoundOn);
+    }
+
+    //USED () - in home btn, giveup btn, continue btn in win and die window
+    //show interstitial ads
+    public void ShowInterstitial()
+    {
+        GameManager.instance.ShowInterstitial();
+    }
+
+    //DELETE ()
+    //set challenge mode
+    public void SetChallengeMode()
+    {
+        GameManager.instance.inGame.SetChallengeMode();
     }
 
     //play sound -------------------------------------------

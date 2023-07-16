@@ -422,19 +422,19 @@ public class Player : MonoBehaviour
         switch (levelPlayerTemp)
         {
             case 2:
-                LevelUpEvent(30, 3, isShowOnly);
+                LevelUpEvent(10, 1, isShowOnly);
                 break;
             case 3:
-                LevelUpEvent(60, 6, isShowOnly);
+                LevelUpEvent(30, 3, isShowOnly);
                 break;
             case 4:
-                LevelUpEvent(100, 10, isShowOnly);
+                LevelUpEvent(55, 5, isShowOnly);
                 break;
             case 5:
-                LevelUpEvent(200, 15, isShowOnly);
+                LevelUpEvent(90, 8, isShowOnly);
                 break;
             case 6:
-                LevelUpEvent(400, 21, isShowOnly);
+                LevelUpEvent(140, 12, isShowOnly);
                 break;
             default:
                 break;

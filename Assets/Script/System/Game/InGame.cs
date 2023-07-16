@@ -40,6 +40,21 @@ public class InGame : MonoBehaviour
     //every 50 = 1 sec
     [SerializeField] private float timeIncNum = 50, lastIncNumTime;
     //[SerializeField] private int numDiff;
+    //spawn------
+    public float lastCharTime, lastObsTime;
+    [Tooltip("change")] public float dragChar, dragObs, timeCharDuration, timeObsDuration;
+    public float timeBook;
+    public float lastBookTime, lastCoinTime;
+    [Tooltip("change")] public float timeBookDuration = 40, timeCoinDuration = 15, dragCoin = 1.75f, dragBook = 1.5f;
+    public float timeCharDurationOri, timeObsDurationOri, dragCharOri, dragObsOri, increaseNum, increaseNumObs;
+    public float dragCoinOri, dragBookOri, increaseNumCoin, increaseNumBook;
+    //challenge stage
+    public bool isChallengeStage;
+    [Tooltip("only for challenge stage")] public GameObject[] spawnerChallengeObj;
+    [Tooltip("only for challenge stage")] public Spawn[] spawnerChallenge;
+    [Tooltip("only for challenge stage")] public GameObject[] objFallGroup;
+    private int spawnIndex;
+    [SerializeField] private float lastSpawnChange, timeSpawnChange = 10;
 
     void Start()
     {
@@ -48,6 +63,9 @@ public class InGame : MonoBehaviour
         ResetAllSpawnNum();
         if (isBookSpawnOne)
             bookSpawnTime = Random.Range(15, inGameUi.totalTime);
+        //Challenge MODE()
+        if (isChallengeStage)
+            spawn = spawnerChallenge[0];
     }
     // Update is called once per frame
     void Update()
@@ -98,6 +116,25 @@ public class InGame : MonoBehaviour
                 //increae water speed
                 if (water)
                     water.IncreaseSpeed(0.0005f);
+            }
+            //Challenge MODE()
+            if (!isChallengeStage)
+                return;
+            //make win and stop challenge
+            if (timeSpawnChange >= 1200)
+            {
+                if (!inGameUi.isRun)
+                    GameManager.instance.player.Win(true);
+                else
+                    GameManager.instance.player.Win(false);
+            }
+            else
+            {
+                if (Time.time - lastSpawnChange > timeSpawnChange)
+                {
+                    lastSpawnChange = Time.time;
+                    SetChallengeMode();
+                }
             }
         }
     }
@@ -164,5 +201,23 @@ public class InGame : MonoBehaviour
             monster.monsterAudioSource.volume = num;
         if (groundManager)
             groundManager.groundManagerAudioSource.volume = num;
+    }
+
+    //set Challenge Mode
+    public void SetChallengeMode()
+    {
+        spawnIndex++;
+        //change spawn is in inbound
+        if (spawnIndex < spawnerChallengeObj.Length)
+        {
+            foreach (var item in spawnerChallengeObj)
+            {
+                item.SetActive(false);
+            }
+            objFallGroup[spawnIndex].SetActive(true);
+            spawnerChallengeObj[spawnIndex].SetActive(true);
+            spawn = spawnerChallenge[spawnIndex];
+            timeSpawnChange += 20;
+        }
     }
 }

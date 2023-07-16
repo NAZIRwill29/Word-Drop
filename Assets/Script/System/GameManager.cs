@@ -230,6 +230,11 @@ public class GameManager : MonoBehaviour
         SaveState(true);
         if (isBackToHome)
             BackToHome();
+    }
+
+    //show interstitial ads
+    public void ShowInterstitial()
+    {
         //check premium plan - no ads
         if (isPremiumPlan)
             return;

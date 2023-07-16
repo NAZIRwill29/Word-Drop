@@ -9,14 +9,7 @@ public class Spawn : MonoBehaviour
     private int index, charIndex, obsIndex, bookIndex, coinIndex;
     private float posX;
     //char
-    [SerializeField] private float lastCharTime, lastObsTime, dragChar, dragObs;
-    //min msc for set difficulty - linearDrag = 1-3 / timeCharDuration = 1-1.5
-    public float timeCharDuration, timeObsDuration;
-    [SerializeField] private float lastBookTime, lastCoinTime, timeBookDuration, timeCoinDuration, dragCoin, dragBook;
-    private float timeBook;
     public bool isSpawnStop, isTutorialMode;
-    private float timeCharDurationOri, timeObsDurationOri, dragCharOri, dragObsOri, increaseNum, increaseNumObs;
-    private float dragCoinOri, dragBookOri, increaseNumCoin, increaseNumBook;
     //alphabet list
     private char[] alphabets =
     {
@@ -51,16 +44,16 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         //store ori value
-        timeCharDurationOri = timeCharDuration;
-        timeObsDurationOri = timeObsDuration;
-        dragCharOri = dragChar;
-        dragObsOri = dragObs;
-        dragCoinOri = dragCoin;
-        dragBookOri = dragBook;
-        ChangeFreqSpeedChar(dragChar, timeCharDuration);
-        ChangeFreqSpeedObs(dragObs, timeObsDuration);
-        ChangeFreqSpeedCoin(dragCoin);
-        ChangeFreqSpeedBook(dragBook);
+        inGame.timeCharDurationOri = inGame.timeCharDuration;
+        inGame.timeObsDurationOri = inGame.timeObsDuration;
+        inGame.dragCharOri = inGame.dragChar;
+        inGame.dragObsOri = inGame.dragObs;
+        inGame.dragCoinOri = inGame.dragCoin;
+        inGame.dragBookOri = inGame.dragBook;
+        ChangeFreqSpeedChar(inGame.dragChar, inGame.timeCharDuration);
+        ChangeFreqSpeedObs(inGame.dragObs, inGame.timeObsDuration);
+        ChangeFreqSpeedCoin(inGame.dragCoin);
+        ChangeFreqSpeedBook(inGame.dragBook);
     }
 
     // Update is called once per frame
@@ -93,9 +86,9 @@ public class Spawn : MonoBehaviour
     public void SpawnChar()
     {
         //check duration
-        if (Time.time - lastCharTime > timeCharDuration)
+        if (Time.time - inGame.lastCharTime > inGame.timeCharDuration)
         {
-            lastCharTime = Time.time;
+            inGame.lastCharTime = Time.time;
             //Debug.Log("Spawn char");
             SpawnObject(charObj[charIndex]);
             //TUTORIAL MODE
@@ -111,9 +104,9 @@ public class Spawn : MonoBehaviour
     public void SpawnObstacle()
     {
         //check duration
-        if (Time.time - lastObsTime > timeObsDuration)
+        if (Time.time - inGame.lastObsTime > inGame.timeObsDuration)
         {
-            lastObsTime = Time.time;
+            inGame.lastObsTime = Time.time;
             //Debug.Log("Spawn obs");
             SpawnObject(obstacleObj[obsIndex]);
             obstacleObj[obsIndex].GetComponent<Obstacle>().ChangeIsTouched(false);
@@ -126,9 +119,9 @@ public class Spawn : MonoBehaviour
     public void SpawnCoin()
     {
         //check duration
-        if (Time.time - lastCoinTime > timeCoinDuration)
+        if (Time.time - inGame.lastCoinTime > inGame.timeCoinDuration)
         {
-            lastCoinTime = Time.time;
+            inGame.lastCoinTime = Time.time;
             //Debug.Log("Spawn obs");
             SpawnObject(coinObj[coinIndex]);
             coinObj[coinIndex].GetComponent<Coin>().ChangeIsTouched(false);
@@ -142,9 +135,9 @@ public class Spawn : MonoBehaviour
     public void SpawnBook()
     {
         //check duration
-        if (Time.time - lastBookTime > timeBookDuration)
+        if (Time.time - inGame.lastBookTime > inGame.timeBookDuration)
         {
-            lastBookTime = Time.time;
+            inGame.lastBookTime = Time.time;
             //Debug.Log("Spawn obs");
             SpawnObject(bookObj[bookIndex]);
             bookObj[bookIndex].GetComponent<Book>().ChangeIsTouched(false);
@@ -157,8 +150,8 @@ public class Spawn : MonoBehaviour
     //spawn book one time only
     public void SpawnBookOne()
     {
-        timeBook += Time.deltaTime;
-        if (timeBook != inGame.bookSpawnTime)
+        inGame.timeBook += Time.deltaTime;
+        if (inGame.timeBook != inGame.bookSpawnTime)
             return;
         SpawnObject(bookObj[bookIndex]);
         bookObj[bookIndex].GetComponent<Book>().ChangeIsTouched(false);
@@ -183,7 +176,7 @@ public class Spawn : MonoBehaviour
     public void ResetAllSpawnNum()
     {
         ResetLastTimeSpawn();
-        timeBook = 0;
+        inGame.timeBook = 0;
         charIndex = 0;
         obsIndex = 0;
         coinIndex = 0;
@@ -193,10 +186,10 @@ public class Spawn : MonoBehaviour
     //reset last time spawn
     public void ResetLastTimeSpawn()
     {
-        lastCharTime = Time.time;
-        lastObsTime = Time.time;
-        lastCoinTime = Time.time;
-        lastBookTime = Time.time;
+        inGame.lastCharTime = Time.time;
+        inGame.lastObsTime = Time.time;
+        inGame.lastCoinTime = Time.time;
+        inGame.lastBookTime = Time.time;
     }
 
     //call when want pause game
@@ -250,17 +243,17 @@ public class Spawn : MonoBehaviour
     public void IncreaseFreqSpeed()
     {
         //Debug.Log("inc obj speed");
-        increaseNum += 0.002f;
-        increaseNumObs += 0.003f;
-        increaseNumCoin += 0.004f;
-        increaseNumBook += 0.005f;
+        inGame.increaseNum += 0.003f;
+        inGame.increaseNumObs += 0.004f;
+        inGame.increaseNumCoin += 0.005f;
+        inGame.increaseNumBook += 0.006f;
         //Debug.Log("increase num = " + increaseNum);
         //Debug.Log("dragChar = " + dragChar);
-        ChangeFreqSpeedChar(dragChar - increaseNum, timeCharDuration - increaseNum / 3);
-        ChangeFreqSpeedObs(dragObs - increaseNumObs, timeObsDuration - increaseNumObs / 3);
+        ChangeFreqSpeedChar(inGame.dragChar - inGame.increaseNum, inGame.timeCharDuration - inGame.increaseNum / 2);
+        ChangeFreqSpeedObs(inGame.dragObs - inGame.increaseNumObs, inGame.timeObsDuration - inGame.increaseNumObs / 2);
         //Debug.Log("increase num = " + increaseNum);
-        ChangeFreqSpeedCoin(dragCoin - increaseNumCoin);
-        ChangeFreqSpeedBook(dragBook - increaseNumBook);
+        ChangeFreqSpeedCoin(inGame.dragCoin - inGame.increaseNumCoin);
+        ChangeFreqSpeedBook(inGame.dragBook - inGame.increaseNumBook);
     }
 
     //variable change
@@ -268,11 +261,11 @@ public class Spawn : MonoBehaviour
     {
         //Debug.Log("dragNum = " + dragNum);
         //Debug.Log("duration = " + duration);
-        if (duration < 0.2f)
+        if (duration < 0.15f)
             return;
         if (dragNum < 1.0f)
             return;
-        timeCharDuration = duration;
+        inGame.timeCharDuration = duration;
         foreach (var item in charObj)
         {
             item.GetComponent<Rigidbody2D>().drag = dragNum;
@@ -280,11 +273,11 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedObs(float dragNum, float duration)
     {
-        if (duration < 0.25f)
+        if (duration < 0.2f)
             return;
         if (dragNum < 0.8f)
             return;
-        timeObsDuration = duration;
+        inGame.timeObsDuration = duration;
         foreach (var item in obstacleObj)
         {
             item.GetComponent<Rigidbody2D>().drag = dragNum;
@@ -292,7 +285,7 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedCoin(float dragNum)
     {
-        if (dragNum < 0.35f)
+        if (dragNum < 0.45f)
             return;
         foreach (var item in coinObj)
         {
@@ -301,7 +294,7 @@ public class Spawn : MonoBehaviour
     }
     public void ChangeFreqSpeedBook(float dragNum)
     {
-        if (dragNum < 0.25f)
+        if (dragNum < 0.35f)
             return;
         foreach (var item in bookObj)
         {

@@ -108,19 +108,19 @@ public class MainMenuUI : MonoBehaviour
         switch (GameManager.instance.playerData.levelPlayer + 1)
         {
             case 2:
-                coinNeed = GameManager.instance.coin - 30;
+                coinNeed = GameManager.instance.coin - 10;
                 break;
             case 3:
-                coinNeed = GameManager.instance.coin - 60;
+                coinNeed = GameManager.instance.coin - 30;
                 break;
             case 4:
-                coinNeed = GameManager.instance.coin - 100;
+                coinNeed = GameManager.instance.coin - 55;
                 break;
             case 5:
-                coinNeed = GameManager.instance.coin - 200;
+                coinNeed = GameManager.instance.coin - 90;
                 break;
             case 6:
-                coinNeed = GameManager.instance.coin - 400;
+                coinNeed = GameManager.instance.coin - 140;
                 break;
             default:
                 return "";
@@ -136,19 +136,19 @@ public class MainMenuUI : MonoBehaviour
         switch (GameManager.instance.playerData.levelPlayer + 1)
         {
             case 2:
-                bookNeed = GameManager.instance.playerData.bookNum - 3;
+                bookNeed = GameManager.instance.playerData.bookNum - 1;
                 break;
             case 3:
-                bookNeed = GameManager.instance.playerData.bookNum - 6;
+                bookNeed = GameManager.instance.playerData.bookNum - 3;
                 break;
             case 4:
-                bookNeed = GameManager.instance.playerData.bookNum - 10;
+                bookNeed = GameManager.instance.playerData.bookNum - 5;
                 break;
             case 5:
-                bookNeed = GameManager.instance.playerData.bookNum - 15;
+                bookNeed = GameManager.instance.playerData.bookNum - 8;
                 break;
             case 6:
-                bookNeed = GameManager.instance.playerData.bookNum - 21;
+                bookNeed = GameManager.instance.playerData.bookNum - 12;
                 break;
             default:
                 return "";

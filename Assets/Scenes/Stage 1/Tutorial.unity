@@ -1700,6 +1700,37 @@ MonoBehaviour:
   - {fileID: -311627788, guid: b11f376e4a3e51148a4a0b6e9d163acc, type: 3}
   - {fileID: 487652394, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
+  timeIncNum: 50
+  lastIncNumTime: 0
+  lastCharTime: 0
+  lastObsTime: 0
+  dragChar: 2.35
+  dragObs: 2.1
+  timeCharDuration: 0.62
+  timeObsDuration: 0.72
+  timeBook: 0
+  lastBookTime: 0
+  lastCoinTime: 0
+  timeBookDuration: 40
+  timeCoinDuration: 15
+  dragCoin: 1.75
+  dragBook: 1.5
+  timeCharDurationOri: 0
+  timeObsDurationOri: 0
+  dragCharOri: 0
+  dragObsOri: 0
+  increaseNum: 0
+  increaseNumObs: 0
+  dragCoinOri: 0
+  dragBookOri: 0
+  increaseNumCoin: 0
+  increaseNumBook: 0
+  isChallengeStage: 0
+  spawnerChallengeObj: []
+  spawnerChallenge: []
+  objFallGroup: []
+  lastSpawnChange: 0
+  timeSpawnChange: 30
 --- !u!4 &385399426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2969480161401683158, guid: 70025f7b9517ce54486e61de3f353fb9, type: 3}

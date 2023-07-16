@@ -1810,6 +1810,35 @@ MonoBehaviour:
   - {fileID: 110402824, guid: 6a281e2b0805b7043aa218b251f331c6, type: 3}
   timeIncNum: 15
   lastIncNumTime: 0
+  lastCharTime: 0
+  lastObsTime: 0
+  dragChar: 2.2
+  dragObs: 2
+  timeCharDuration: 0.55
+  timeObsDuration: 0.65
+  timeBook: 0
+  lastBookTime: 0
+  lastCoinTime: 0
+  timeBookDuration: 40
+  timeCoinDuration: 15
+  dragCoin: 1.75
+  dragBook: 1.5
+  timeCharDurationOri: 0
+  timeObsDurationOri: 0
+  dragCharOri: 0
+  dragObsOri: 0
+  increaseNum: 0
+  increaseNumObs: 0
+  dragCoinOri: 0
+  dragBookOri: 0
+  increaseNumCoin: 0
+  increaseNumBook: 0
+  isChallengeStage: 0
+  spawnerChallengeObj: []
+  spawnerChallenge: []
+  objFallGroup: []
+  lastSpawnChange: 0
+  timeSpawnChange: 30
 --- !u!1 &417355432
 GameObject:
   m_ObjectHideFlags: 0
