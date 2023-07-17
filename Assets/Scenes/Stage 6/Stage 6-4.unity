@@ -2330,8 +2330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameAudioClip:
-  - {fileID: 8300000, guid: c6b1e4491dcc9de4dad8102c76c2b05e, type: 3}
-  - {fileID: 8300000, guid: c6b1e4491dcc9de4dad8102c76c2b05e, type: 3}
+  - {fileID: 8300000, guid: 9a8c7c4510493524db64e72e8cb09901, type: 3}
+  - {fileID: 8300000, guid: 9a8c7c4510493524db64e72e8cb09901, type: 3}
   inGameUi: {fileID: 2120178773}
   laddersObj: {fileID: 0}
   ladders: {fileID: 0}
