@@ -45,7 +45,7 @@ public class InGame : MonoBehaviour
     [Tooltip("change")] public float dragChar, dragObs, timeCharDuration, timeObsDuration;
     public float timeBook;
     public float lastBookTime, lastCoinTime;
-    [Tooltip("change")] public float timeBookDuration = 40, timeCoinDuration = 15, dragCoin = 1.75f, dragBook = 1.5f;
+    [Tooltip("change")] public float timeBookDuration = 25, timeCoinDuration = 15, dragCoin = 1.75f, dragBook = 1.5f;
     public float timeCharDurationOri, timeObsDurationOri, dragCharOri, dragObsOri, increaseNum, increaseNumObs;
     public float dragCoinOri, dragBookOri, increaseNumCoin, increaseNumBook;
     //challenge stage

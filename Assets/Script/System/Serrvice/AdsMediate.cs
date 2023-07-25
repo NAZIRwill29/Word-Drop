@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class AdsMediate : MonoBehaviour
@@ -149,6 +148,9 @@ public class AdsMediate : MonoBehaviour
         {
             case "revive":
                 GameManager.instance.Revive();
+                break;
+            case "book":
+                GameManager.instance.GetBook();
                 break;
             default:
                 break;

@@ -247,7 +247,7 @@ public class GameMenuUi : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.Log("failed remove char Player" + e);
+            Debug.Log("failed remove char Player" + e.Message);
         }
     }
 
@@ -388,7 +388,7 @@ public class GameMenuUi : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.Log("failed set Char Ui Word" + e);
+            Debug.Log("failed set Char Ui Word" + e.Message);
         }
     }
 
@@ -510,7 +510,7 @@ public class GameMenuUi : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.Log("failed add alphabetsWord" + e);
+            Debug.Log("failed add alphabetsWord" + e.Message);
         }
         //remove in store
         RemoveCharPlayer(indexBtn);
@@ -774,7 +774,7 @@ public class GameMenuUi : MonoBehaviour
             GameManager.instance.tutorialUI.isTutorialEnd = false;
             GameManager.instance.isHasTutorial = true;
             GameManager.instance.player.ManagePlayerLevel();
-            GameManager.instance.SaveState(false);
+            GameManager.instance.SaveState(false, false);
         }
         //Challenge MODE()
         else if (GameManager.instance.inGame.isChallengeStage)

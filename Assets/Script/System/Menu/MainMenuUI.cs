@@ -15,11 +15,14 @@ public class MainMenuUI : MonoBehaviour
     public GameObject blackScreen, blackScreen2, firstScreen;
     public Slider musicSlider, soundSlider;
     [SerializeField]
-    private Animator mainMenuAnim, backgroundAnim, playerInfoBtnAnim, playerLvlBtnAnim;
+    private Animator mainMenuAnim, backgroundAnim, playerInfoWindowAnim, playerInfoBtnAnim, playerLvlBtnAnim;
     public Animator loadingScreenAnim, tipModules;
     //player info window
     public Image playerImg;
     public TextMeshProUGUI lvlText, hpText, abcText, coinText, bookText;
+    //book btn ads 
+    public Button bookBtn;
+    //public Image bookAdsImg;
     //public GameObject[] stageBtnObj;
     public Button[] stageBtnBtn;
     public GameObject[] stageBtnFalse;
@@ -100,6 +103,19 @@ public class MainMenuUI : MonoBehaviour
         coinText.text = GameManager.instance.coin.ToString() + " (" + CoinReqLvlUpText() + ")";
         bookText.text = GameManager.instance.playerData.bookNum + " (" + BookReqLvlUpText() + ")";
         GameManager.instance.gameMenuUi.SetCoinEvent();
+        //show if book have free gift ads
+        if (!GameManager.instance.isBookAdsUsed)
+        {
+            bookBtn.enabled = true;
+            //bookAdsImg.enabled = true;
+            playerInfoWindowAnim.SetTrigger("showAds");
+        }
+        else
+        {
+            bookBtn.enabled = false;
+            //bookAdsImg.enabled = false;
+            playerInfoWindowAnim.SetTrigger("show");
+        }
     }
     //show level up requirement text
     private string CoinReqLvlUpText()
@@ -165,6 +181,13 @@ public class MainMenuUI : MonoBehaviour
         GameManager.instance.player.LevelUp(false);
         PlayerInfoWindow();
     }
+    //USED () - in bookBtn
+    //get book by watching ads
+    public void BookAdsBtn()
+    {
+        GameManager.instance.adsMediate.ShowRewarded("book");
+        //GameManager.instance.GetBook();
+    }
     //----------------------------------------
 
     //setting window--------------------------
@@ -216,6 +239,13 @@ public class MainMenuUI : MonoBehaviour
         SoundBtnOff.SetActive(!isSoundOn);
     }
 
+    //delete user account
+    //USED () - in deleteBtn
+    public void RequestDeleteAccount()
+    {
+        GameManager.instance.RequestDeleteUserAccDb();
+    }
+
     //animation-------------------------------------------
     public IEnumerator ShowAnim()
     {
@@ -263,6 +293,12 @@ public class MainMenuUI : MonoBehaviour
             tipModules.SetInteger("state", 0);
             loadingScreenAnim.SetInteger("state", 0);
         }
+    }
+
+    //unlock full stage
+    public void UnlockFullStage()
+    {
+        GameManager.instance.passStageNo = 24;
     }
 
     //play sound -------------------------------------------

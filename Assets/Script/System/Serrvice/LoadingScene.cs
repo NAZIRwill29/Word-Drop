@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 //DEPECRATED SCRIPT()
 public class LoadingScene : MonoBehaviour
@@ -37,6 +36,8 @@ public class LoadingScene : MonoBehaviour
     {
         //Debug.Log("load screen start");
         mainMenuUI.ShowLoadingScreen(true);
+        //turn off music
+        GameManager.instance.gameSettings.TurnOnMusicDueLoading(false);
         yield return new WaitForSeconds(5);
         //exec when isFinishLoadScene = true
         yield return new WaitUntil(() => GameManager.instance.isFinishLoadScene);
@@ -47,6 +48,8 @@ public class LoadingScene : MonoBehaviour
         if (GameManager.instance.inGameUi)
             GameManager.instance.inGameUi.SetupInGameUi(true);
         mainMenuUI.ShowLoadingScreen(false);
+        //turn on music
+        GameManager.instance.gameSettings.TurnOnMusicDueLoading(true);
     }
 
     private IEnumerator LoadBlackScreen()

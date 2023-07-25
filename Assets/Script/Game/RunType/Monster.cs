@@ -157,10 +157,10 @@ public class Monster : MonoBehaviour
         transform.position -= new Vector3(0, fallBackDist / 60, 0);
         //Debug.Log("slow obj");
         //check audio source is playing
-        PlaySoundSlime();
+        //PlaySoundSlime();
         if (!isSlowByObj)
         {
-            //PlaySoundSlime();
+            PlaySoundSlime();
             hpChange -= 1;
             isSlowByObj = true;
         }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class AnonymousAuthenticate : MonoBehaviour
 {
+    public string playerId;
 
     //make anonymous authenticate
     public async void AnonymousAuthenticateEvent()
@@ -17,6 +18,7 @@ public class AnonymousAuthenticate : MonoBehaviour
             Debug.Log(UnityServices.State);
             SetupEvents();
             await SignInAnonymouslyAsync();
+            GameManager.instance.isSuccesLogin = true;
             //load game
             GameManager.instance.LoadGameDataFromCloud();
         }
@@ -33,7 +35,8 @@ public class AnonymousAuthenticate : MonoBehaviour
         AuthenticationService.Instance.SignedIn += () =>
         {
             // Shows how to get a playerID
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
+            playerId = AuthenticationService.Instance.PlayerId;
+            Debug.Log($"PlayerID: {playerId}");
 
             // Shows how to get an access token
             Debug.Log($"Access Token: {AuthenticationService.Instance.AccessToken}");

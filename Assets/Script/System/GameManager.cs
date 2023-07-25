@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public AnonymousAuthenticate anonymousAuthenticate;
     //ads mediate
     public AdsMediate adsMediate;
+    public ConnectBrowser connectBrowser;
     //loading scene
     public LoadingScene loadingScene;
     public MainMenuUI mainMenuUI;
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     public Sprite[] alphabetSprite, reverseAlphabetSprite;
     //data to be saved
     public int passStageNo;
-    public int coin;
+    public int coin, diamond, shieldBought, charBought;
     //public int coin, diamond, skinIndexBought;
     //variable
     public bool isHasFirstOpen;
@@ -50,7 +51,8 @@ public class GameManager : MonoBehaviour
     public bool isPauseGame = true, isTutorialMode, isHasTutorial, isFinishLoadScene, isStartStagePlay, isInStage;
     //isInStage;
     private bool isCanShowAds, isStartPlayTime;
-    public bool isPremiumPlan;
+    public bool isPremiumPlan, isBookAdsUsed = true, isSuccesLogin, isSuccessLoadCloud;
+    public List<int> skinIndexBought;
     public float playTime;
 
     //awake
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CloseFirstScene()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.15f);
         mainMenuUI.firstScreen.SetActive(false);
         isHasFirstOpen = true;
     }
@@ -227,7 +229,7 @@ public class GameManager : MonoBehaviour
     {
         player.FinishGame();
         PauseGame(true);
-        SaveState(true);
+        SaveState(true, false);
         if (isBackToHome)
             BackToHome();
     }
@@ -279,7 +281,7 @@ public class GameManager : MonoBehaviour
     //continue next stage - start game in game play
     public void ContinueNextStage()
     {
-        SaveState(true);
+        SaveState(true, false);
         mainMenuUI.blackScreen2.SetActive(true);
         adsMediate.LoadInterstitial();
         StartGame(inGame.nextStageName, inGame.nextStageMode);
@@ -291,13 +293,13 @@ public class GameManager : MonoBehaviour
     {
         player.Revive();
         gameMenuUi.Revive();
-        SaveState(true);
+        SaveState(true, false);
         PauseGame(false);
     }
 
     //game data----------------------------------------
     //call every scene
-    public void SaveState(bool isConditionSave)
+    public void SaveState(bool isConditionSave, bool isNoCloud)
     {
         try
         {
@@ -313,23 +315,31 @@ public class GameManager : MonoBehaviour
             gameData.musicVolume = gameSettings.musicVolume;
             gameData.soundVolume = gameSettings.soundVolume;
             //TODO () - uncomment when finish tutorial
-            //gameData.isHasTutorial = true;
+            gameData.isHasTutorial = isHasTutorial;
             gameData.isPremiumPlan = isPremiumPlan;
-            //gameData.diamond = diamond;
-            //gameData.skinIndexBought = skinIndexBought;
-            //transform instance to json
-            string json = JsonUtility.ToJson(gameData);
-            //method to write string to a file
-            /*Application.persistentDataPath - give you a folder where you can save data that 
-            will survive between application reinstall or update and append to it the filename savefile.json*/
-            File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+            gameData.diamond = diamond;
+            gameData.skinIndexBought = skinIndexBought;
+            gameData.isBookAdsUsed = isBookAdsUsed;
+            gameData.shieldBought = shieldBought;
+            gameData.charBought = charBought;
+            SavePrefFile();
             Debug.Log("Save state");
-            SaveGameDataInCloud(isConditionSave);
+            if (!isNoCloud)
+                SaveGameDataInCloud(isConditionSave);
         }
         catch (System.Exception e)
         {
-            Debug.Log("error in save state " + e);
+            Debug.Log("error in save state " + e.Message);
         }
+    }
+    private void SavePrefFile()
+    {
+        //transform instance to json
+        string json = JsonUtility.ToJson(gameData);
+        //method to write string to a file
+        /*Application.persistentDataPath - give you a folder where you can save data that 
+        will survive between application reinstall or update and append to it the filename savefile.json*/
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
     //call when open game
     public void LoadState(Scene s, LoadSceneMode mode)
@@ -350,7 +360,7 @@ public class GameManager : MonoBehaviour
                 Data dataLoad = JsonUtility.FromJson<Data>(json);
                 //compare play duration - if longer then exec
                 if (dataLoad.playTime > gameData.playTime)
-                    gameData = dataLoad;
+                    SetGameData(dataLoad, false);
                 //DebugAllData();
                 //play time
                 playTime = gameData.playTime;
@@ -366,13 +376,17 @@ public class GameManager : MonoBehaviour
                 //gameSettings.TurnOnMusicVolume(gameData.isMusicOn);
                 //gameSettings.TurnOnSoundVolume(gameData.isSoundOn);
                 //TODO () - uncomment when finish tutorial
-                //gameData.isHasTutorial = true;
+                isHasTutorial = gameData.isHasTutorial;
                 isPremiumPlan = gameData.isPremiumPlan;
-                //diamond = gameData.diamond;
-                //skinIndexBought = gameData.skinIndexBought;
+                diamond = gameData.diamond;
+                skinIndexBought = gameData.skinIndexBought;
+                isBookAdsUsed = gameData.isBookAdsUsed;
+                shieldBought = gameData.shieldBought;
+                charBought = gameData.charBought;
                 if (!inGame)
                     //show level up notice
                     player.LevelUp(true);
+                //SaveState(true);
                 //make call only once only
                 SceneManager.sceneLoaded -= LoadState;
             }
@@ -383,6 +397,13 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    //request delete user account in database
+    public void RequestDeleteUserAccDb()
+    {
+        string playerId = anonymousAuthenticate.playerId;
+        connectBrowser.ReqDelUseAccUrl(playerId);
+    }
+
     public void ResetData()
     {
         //gameData.isSoundOn = true;
@@ -422,13 +443,17 @@ public class GameManager : MonoBehaviour
     //save game data
     public void SaveGameDataInCloud(bool isConditionSave)
     {
+        if (!isSuccesLogin)
+            return;
+        if (!isSuccessLoadCloud)
+            return;
         //gameData.savedDate = "";
-        Debug.Log("save : dateNow = " + gameData.dateNow + ", savedDate = " + gameData.savedDate);
+        Debug.Log("save : dateNow = " + System.DateTime.Now.ToString("MM/dd/yyyy") + ", savedDate = " + gameData.savedDate);
         //make it able to save disregard condition
         if (isConditionSave)
         {
             //save once a day
-            if (gameData.dateNow != gameData.savedDate || gameData.savedDate == "")
+            if (System.DateTime.Now.ToString("MM/dd/yyyy") != gameData.savedDate || gameData.savedDate == "")
             {
                 gameData.savedDate = gameData.dateNow;
                 cloudSave.SaveComplexDataCloud(gameData);
@@ -441,19 +466,27 @@ public class GameManager : MonoBehaviour
             gameData.savedDate = gameData.dateNow;
             cloudSave.SaveComplexDataCloud(gameData);
         }
+        SaveState(true, true);
     }
     //load game data
     public void LoadGameDataFromCloud()
     {
-        Debug.Log("load : dateNow = " + gameData.dateNow + ", savedDate = " + gameData.savedDate);
+        if (!isSuccesLogin)
+            return;
+        Debug.Log("load : dateNow = " + System.DateTime.Now.ToString("MM/dd/yyyy") + ", savedDate = " + gameData.savedDate);
         //load once a day
-        if (gameData.dateNow != gameData.savedDate)
+        if (System.DateTime.Now.ToString("MM/dd/yyyy") != gameData.savedDate)
         {
+            //reset bookAdsUsed
+            isBookAdsUsed = false;
             //laod all
             cloudSave.LoadComplexDataCloud();
         }
         else
+        {
             Debug.Log("falied load data from cloud due save duration");
+            isSuccessLoadCloud = false;
+        }
     }
     //---------------------------------------------------------------
 
@@ -467,7 +500,7 @@ public class GameManager : MonoBehaviour
             //reset start stage play
             isStartStagePlay = false;
             Debug.Log("OnSceneLoaded");
-            SaveState(true);
+            SaveState(true, false);
             //Debug.Log("OnSceneLoaded");
             gameSettings.MusicSystem();
             gameSettings.SoundSystem();
@@ -586,9 +619,22 @@ public class GameManager : MonoBehaviour
         if (passStageNo < inGame.currentStageNo)
             passStageNo = inGame.currentStageNo;
         else
-            //when pass next stage - save cloud
-            SaveState(false);
+        {
+            isBookAdsUsed = false;
+            //when pass new next stage - save cloud
+            SaveState(false, false);
+        }
 
+
+    }
+
+    //get book
+    public void GetBook()
+    {
+        isBookAdsUsed = true;
+        SaveState(true, false);
+        player.ReceiveBook();
+        mainMenuUI.PlayerInfoWindow();
     }
 
     //record playtime
@@ -614,7 +660,23 @@ public class GameManager : MonoBehaviour
     //use in load state and reset state
     public void SetGameData(Data data, bool isWantSave)
     {
-        gameData = data;
+        // gameData = data;
+        gameData.savedDate = data.savedDate;
+        gameData.bookNumCollect = data.bookNumCollect;
+        gameData.coin = data.coin;
+        gameData.isPremiumPlan = data.isPremiumPlan;
+        gameData.playTime = data.playTime;
+        gameData.passStageNo = data.passStageNo;
+        gameData.playerLevel = data.playerLevel;
+        gameData.musicVolume = data.musicVolume;
+        gameData.soundVolume = data.soundVolume;
+        gameData.isPremiumPlan = data.isPremiumPlan;
+        gameData.isBookAdsUsed = data.isBookAdsUsed;
+        gameData.isHasTutorial = data.isHasTutorial;
+        gameData.diamond = data.diamond;
+        gameData.skinIndexBought = data.skinIndexBought;
+        gameData.shieldBought = data.shieldBought;
+        gameData.charBought = data.charBought;
         //TODO - set data for all in game
         if (!isWantSave)
             SceneManager.sceneLoaded += LoadState;

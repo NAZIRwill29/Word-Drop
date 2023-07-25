@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Data
 {
@@ -21,4 +20,6 @@ public class Data
     public List<int> skinIndexBought;
     public int shieldBought;
     public int charBought;
+    //dont save at cloud----------------
+    public bool isBookAdsUsed;
 }

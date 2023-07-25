@@ -41,14 +41,16 @@ public class CloudSave : MonoBehaviour
             //convert data string to object
             var deserialized = JsonConvert.DeserializeObject<Data>(stringData);
             GameManager.instance.SetGameData(deserialized, false);
+            GameManager.instance.isSuccessLoadCloud = true;
         }
         catch (System.Exception e)
         {
             Debug.Log("error load data from cloud : " + e);
+            GameManager.instance.SaveState(true, false);
         }
     }
 
-    //delete
+    //delete data
     public async void DeleteDataCloud()
     {
         try

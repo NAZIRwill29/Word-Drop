@@ -8,6 +8,7 @@ public class GameSettings : MonoBehaviour
     public AudioClip mainCameraAudioClip;
     public float musicVolume = 1, soundVolume = 1;
     public bool isSoundOn = true, isMusicOn = true;
+    private bool isMusicTemp;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,24 @@ public class GameSettings : MonoBehaviour
         else
             mainCameraAudioSource.clip = mainCameraAudioClip;
         mainCameraAudioSource.Play();
+    }
+
+    //turn off/on when loading
+    public void TurnOnMusicDueLoading(bool isOn)
+    {
+        if (!isOn)
+        {
+            //store prev value
+            isMusicTemp = isMusicOn;
+            TurnOnMusicVolume(false);
+        }
+        else
+        {
+            if (isMusicTemp)
+                TurnOnMusicVolume(true);
+            else
+                TurnOnMusicVolume(false);
+        }
     }
 
     public void TurnOnMusicVolume(bool isOn)

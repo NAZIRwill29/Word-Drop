@@ -425,16 +425,16 @@ public class Player : MonoBehaviour
                 LevelUpEvent(10, 1, isShowOnly);
                 break;
             case 3:
-                LevelUpEvent(30, 3, isShowOnly);
+                LevelUpEvent(40, 3, isShowOnly);
                 break;
             case 4:
-                LevelUpEvent(55, 5, isShowOnly);
+                LevelUpEvent(65, 5, isShowOnly);
                 break;
             case 5:
-                LevelUpEvent(90, 8, isShowOnly);
+                LevelUpEvent(100, 8, isShowOnly);
                 break;
             case 6:
-                LevelUpEvent(140, 12, isShowOnly);
+                LevelUpEvent(150, 12, isShowOnly);
                 break;
             default:
                 break;
@@ -459,6 +459,7 @@ public class Player : MonoBehaviour
             GameManager.instance.AddCoin(-coinNeed);
             playerData.bookNum -= bookNeed;
             playerData.levelPlayer++;
+            GameManager.instance.SaveState(false, false);
         }
         ManagePlayerLevel();
     }

@@ -136,6 +136,7 @@ public class IronSourceDemoScript : MonoBehaviour
         IronSource.Agent.onApplicationPause(isPaused);
     }
 
+    [Obsolete]
     public void OnGUI()
     {
 
